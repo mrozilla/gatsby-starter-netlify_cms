@@ -1,0 +1,115 @@
+backend:
+  name: git-gateway
+  accept_roles:
+    - admin
+    - editor
+  squash_merges: true
+site_url: https://www.example.com
+media_folder: static/assets
+public_folder: assets
+# slug:
+#   encoding: "ascii"
+#   clean_accents: true
+
+development_overrides:
+  site_url: http://localhost:8000
+  backend:
+    name: file-system
+    api_root: "http://localhost:8000/api"
+
+collections:
+  - label: "Menus"
+    label_singular: "Menu"
+    name: menus
+    folder: src/content/cms/menus
+    create: true
+    extension: mdx
+    format: frontmatter
+    fields:
+      - name: title
+      - name: links
+        widget: list
+        types:
+          - name: link
+            fields:
+              - name: text
+              - name: url
+          - name: markdown
+            fields:
+              - name: title
+              - { name: mdx, widget: markdown }
+          - name: nested
+            fields:
+              - name: title
+              - name: links
+                widget: list
+                fields:
+                  - name: text
+                  - { name: url, required: false }
+          - name: button
+            fields:
+              - name: text
+              - name: url
+              - name: look
+                widget: select
+                options: ["primary", "secondary"]
+
+  - label: "Pages"
+    label_singular: "Page"
+    name: pages
+    folder: src/content/cms/pages
+    create: true
+    extension: mdx
+    format: frontmatter
+    fields:
+      - name: title
+      - { name: date, widget: date }
+      - name: meta
+        widget: object
+        fields:
+          - name: title
+          - name: description
+          - name: permalink
+          - { name: ogImage, widget: image, default: /assets/og.png }
+      - name: blocks
+        widget: list
+        types:
+          - name: hero
+            label: "Hero"
+            fields:
+              - name: title
+              - name: subtitle
+              - { name: body, required: false }
+              - { name: id, required: false }
+              - name: buttons
+                widget: list
+                fields:
+                  - name: title
+                  - name: url
+                  - name: look
+                    widget: select
+                    options: ["primary", "secondary"]
+              - { name: image, widget: image, required: false }
+              - { name: video, required: false }
+
+  - label: "Posts"
+    label_singular: "Blog post"
+    name: posts
+    folder: src/content/cms/posts
+    create: true
+    extension: mdx
+    format: frontmatter
+    fields:
+      - name: title
+      - { name: subtitle, required: false }
+      - { name: date, widget: date }
+      - name: meta
+        widget: object
+        fields:
+          - name: title
+          - name: description
+          - name: permalink
+          - { name: ogImage, widget: image }
+      - { name: tags, required: false }
+      - { name: highlighted, widget: boolean, default: false }
+      - { name: body, widget: markdown }
