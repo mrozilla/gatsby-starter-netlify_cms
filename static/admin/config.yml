@@ -34,10 +34,12 @@ collections:
             fields:
               - name: text
               - name: url
+
           - name: markdown
             fields:
               - name: title
               - { name: mdx, widget: markdown }
+
           - name: nested
             fields:
               - name: title
@@ -46,6 +48,7 @@ collections:
                 fields:
                   - name: text
                   - { name: url, required: false }
+
           - name: button
             fields:
               - name: text
@@ -82,7 +85,7 @@ collections:
                   - name: body
                 required: false
               - name: title
-              - name: subtitle
+              - { name: subtitle, required: false }
               - { name: body, required: false }
               - name: buttons
                 widget: list
@@ -94,6 +97,40 @@ collections:
                     options: ["primary", "secondary"]
               - { name: image, widget: image, required: false }
               - { name: video, required: false }
+
+          - name: sidekick
+            label: "Sidekick"
+            fields:
+              - name: title
+              - { name: subtitle, required: false }
+              - name: layout
+                widget: select
+                options: ["left", "right"]
+                default: left
+              - name: blocks
+                widget: list
+                types:
+                  - name: buttons
+                    label: "Buttons"
+                    fields:
+                      - name: buttons
+                        widget: list
+                        fields:
+                          - name: title
+                          - name: url
+                          - name: look
+                            widget: select
+                            options: ["primary", "secondary"]
+                  - name: body
+                    label: "Body"
+                    widget: markdown
+                  - name: list
+                    label: "List"
+                    fields:
+                      - name: list
+                        widget: list
+                        fields:
+                          - name: title
 
   - label: "Posts"
     label_singular: "Blog post"
