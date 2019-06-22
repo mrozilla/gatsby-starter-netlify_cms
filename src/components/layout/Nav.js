@@ -90,6 +90,7 @@ Nav.Toggle = styled.input`
   cursor: pointer;
   font-size: 2rem;
   line-height: 1;
+  color: var(--color-brand-primary);
 
   &:checked {
     transform: rotate(90deg);
