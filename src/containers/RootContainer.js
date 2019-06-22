@@ -18,14 +18,14 @@ import '~utils/style/index.css';
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-export default function RootContainer({ location, children }) {
+export default function RootContainer({ children }) {
   useInactiveTab();
 
   return (
     <MDXProvider components={{ a: props => <Link look="primary" {...props} />, pre: Pre }}>
-      <HeaderContainer location={location} />
+      <HeaderContainer />
       {children}
-      <FooterContainer location={location} />
+      <FooterContainer />
       {/* <CookieContainer /> */}
     </MDXProvider>
   );
