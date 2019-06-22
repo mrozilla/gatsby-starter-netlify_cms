@@ -22,6 +22,7 @@ export { Section } from './layout/Section';
 export { Table } from './layout/Table';
 export { default as Toast } from './layout/Toast';
 
+export { Icon } from './multimedia/Icon';
 export { default as Img } from './multimedia/Img';
 export { Logo } from './multimedia/Logo';
 export { default as Video } from './multimedia/Video';

@@ -9,7 +9,4 @@ import { View } from '~components/primitives/View';
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-export const Svg = styled(View)``;
-Svg.defaultProps = {
-  as: 'svg',
-};
+export const Icon = styled(View)``;
