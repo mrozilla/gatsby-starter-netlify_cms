@@ -3,9 +3,29 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import React from 'react';
-import { useStaticQuery, graphql } from 'gatsby';
+import { graphql, useStaticQuery } from 'gatsby';
 
 import { Header, H2, Link, Nav, Logo, Button } from '~components';
+
+// ─────────────────────────────────────────────────────────────────────────────
+// query
+// ─────────────────────────────────────────────────────────────────────────────
+
+export const fragment = graphql`
+  fragment HeaderFragment on MdxFrontmatter {
+    links {
+      title
+      text
+      url
+      links {
+        text
+        url
+      }
+      look
+      type
+    }
+  }
+`;
 
 // ─────────────────────────────────────────────────────────────────────────────
 // component

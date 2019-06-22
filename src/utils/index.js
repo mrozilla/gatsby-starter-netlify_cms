@@ -1,5 +1,4 @@
 export { default as mediaQuerise } from './mediaQuerise';
-export { default as renderBlocks } from './renderBlocks';
 
 export * from './style/animations';
 

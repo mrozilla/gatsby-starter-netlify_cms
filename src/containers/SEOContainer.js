@@ -8,6 +8,27 @@ import { graphql, useStaticQuery } from 'gatsby';
 import { shape, string } from 'prop-types';
 
 // ─────────────────────────────────────────────────────────────────────────────
+// query
+// ─────────────────────────────────────────────────────────────────────────────
+
+export const fragment = graphql`
+  fragment SEOFragment on MdxFrontmatter {
+    meta {
+      permalink
+      title
+      description
+      ogImage {
+        childImageSharp {
+          resize(width: 1200, height: 630) {
+            src
+          }
+        }
+      }
+    }
+  }
+`;
+
+// ─────────────────────────────────────────────────────────────────────────────
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
