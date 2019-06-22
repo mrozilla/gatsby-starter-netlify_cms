@@ -5,8 +5,14 @@
 :root {
   --hsl-brand-primary: 211, 100%, 50%;
   --color-brand-primary: hsl(var(--hsl-brand-primary));
-  --hsl-brand-secondary: 221, 100%, 50%;
+  --hsl-brand-secondary: 201, 100%, 50%;
   --color-brand-secondary: hsl(var(--hsl-brand-secondary));
+
+  --gradient-brand: linear-gradient(
+    45deg,
+    var(--color-brand-primary),
+    var(--color-brand-secondary)
+  );
 
   --hsl-bg: 0, 0%, 99%;
   --color-bg: hsl(var(--hsl-bg));
