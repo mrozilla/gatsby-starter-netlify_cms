@@ -74,10 +74,16 @@ collections:
           - name: hero
             label: "Hero"
             fields:
+              - name: kicker
+                widget: object
+                fields:
+                  - name: url
+                  - name: title
+                  - name: body
+                required: false
               - name: title
               - name: subtitle
               - { name: body, required: false }
-              - { name: id, required: false }
               - name: buttons
                 widget: list
                 fields:
