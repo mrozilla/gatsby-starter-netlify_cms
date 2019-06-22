@@ -79,7 +79,7 @@ module.exports = {
         background_color: '#ffffff',
         theme_color:      '#007bff', // TODO: update default
         display:          'minimal-ui',
-        icon:             'static/assets/favicon.png',
+        icon:             'static/assets/favicon.png', // TODO: update default
       },
     },
     {
