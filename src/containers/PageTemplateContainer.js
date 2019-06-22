@@ -6,7 +6,7 @@ import React, { Fragment } from 'react';
 import { graphql } from 'gatsby';
 import MDXRenderer from 'gatsby-mdx/mdx-renderer';
 
-import { RootContainer, SEOContainer, HeroContainer } from '~containers';
+import { RootContainer, SEOContainer, HeroContainer, SidekickContainer } from '~containers';
 import { Main } from '~components';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -20,6 +20,7 @@ export const query = graphql`
         ...SEOFragment
         blocks {
           ...HeroFragment
+          ...SidekickFragment
         }
       }
     }
@@ -38,6 +39,10 @@ function renderBlocks(blocks) {
   return blocks.map((block) => {
     if (block.type === 'hero') {
       return <HeroContainer key={block.title} {...block} />;
+    }
+
+    if (block.type === 'sidekick') {
+      return <SidekickContainer key={block.title} {...block} />;
     }
 
     if (block.type === 'mdx' || block.type === 'markdown') {
