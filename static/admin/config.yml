@@ -101,6 +101,7 @@ collections:
           - name: sidekick
             label: "Sidekick"
             fields:
+              - name: icon
               - name: title
               - { name: subtitle, required: false }
               - name: layout
@@ -110,6 +111,14 @@ collections:
               - name: blocks
                 widget: list
                 types:
+                  - name: list
+                    label: "List"
+                    fields:
+                      - name: list
+                        widget: list
+                        fields:
+                          - name: title
+
                   - name: buttons
                     label: "Buttons"
                     fields:
@@ -121,16 +130,10 @@ collections:
                           - name: look
                             widget: select
                             options: ["primary", "secondary"]
+
                   - name: body
                     label: "Body"
                     widget: markdown
-                  - name: list
-                    label: "List"
-                    fields:
-                      - name: list
-                        widget: list
-                        fields:
-                          - name: title
 
   - label: "Posts"
     label_singular: "Blog post"

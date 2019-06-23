@@ -3,11 +3,10 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import React from 'react';
-import { FaRegCheckCircle } from 'react-icons/fa';
 import { graphql } from 'gatsby';
 import { shape, string, arrayOf } from 'prop-types';
 
-import { H1, Section, P, Ul, Li, Icon, Button, Link, Video, Img, Text, View } from '~components';
+import { H1, Section, P, Ul, Li, Icon, Button, Link, Img, View } from '~components';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // query
@@ -16,6 +15,7 @@ import { H1, Section, P, Ul, Li, Icon, Button, Link, Video, Img, Text, View } fr
 export const fragment = graphql`
   fragment SidekickFragment on MdxFrontmatterBlocks {
     type
+    icon
     title
     subtitle
     layout
@@ -45,7 +45,7 @@ function renderBlocks(blocks) {
           {block.list.map(item => (
             <Li key={item.title} fontSize="2.5rem">
               <Icon
-                as={FaRegCheckCircle}
+                icon="FaRegCheckCircle"
                 fontSize="2rem"
                 margin="0 1rem 0 0"
                 color="var(--color-brand-primary)"
@@ -79,7 +79,7 @@ function renderBlocks(blocks) {
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-export default function SidekickContainer({ title, subtitle, layout, image, blocks }) {
+export default function SidekickContainer({ icon, title, subtitle, layout, image, blocks }) {
   return (
     <Section
       gridColumn="2"
@@ -124,6 +124,14 @@ export default function SidekickContainer({ title, subtitle, layout, image, bloc
       )}
       {
         <View gridColumn={layout === 'left' ? '1' : '2'}>
+          {icon && (
+            <Icon
+              icon={icon}
+              fontSize="4rem"
+              color="var(--color-brand-primary)"
+              margin="0 0 2rem"
+            />
+          )}
           <H1
             fontSize={{
               xs: '3rem',
@@ -157,22 +165,22 @@ export default function SidekickContainer({ title, subtitle, layout, image, bloc
 }
 
 SidekickContainer.propTypes = {
+  icon:     string,
   title:    string.isRequired,
   subtitle: string,
-  body:     string,
-  buttons:  arrayOf(
+  layout:   string,
+  blocks:   arrayOf(
     shape({
-      title: string.isRequired,
-      url:   string.isRequired,
-      look:  string.isRequired,
+      type: string.isRequired,
     }),
   ),
   image: string,
 };
 
 SidekickContainer.defaultProps = {
+  icon:     '',
   subtitle: '',
-  body:     '',
-  buttons:  [],
+  layout:   'left',
   image:    '',
+  blocks:   [],
 };
