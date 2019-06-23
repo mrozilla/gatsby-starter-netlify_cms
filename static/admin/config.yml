@@ -118,6 +118,11 @@ collections:
                         widget: list
                         fields:
                           - name: title
+                          - name: body
+                      - name: layout
+                        widget: select
+                        options: ["list", "grid"]
+                        default: list
 
                   - name: buttons
                     label: "Buttons"

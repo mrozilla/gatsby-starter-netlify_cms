@@ -6,7 +6,7 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import { shape, string, arrayOf } from 'prop-types';
 
-import { H1, Section, P, Ul, Li, Icon, Button, Link, Img, View } from '~components';
+import { H1, H2, Section, P, Ul, Li, Icon, Button, Link, Img, View } from '~components';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // query
@@ -23,7 +23,10 @@ export const fragment = graphql`
       type
       list {
         title
+        body
+        icon
       }
+      layout
       buttons {
         title
         url
@@ -41,16 +44,27 @@ function renderBlocks(blocks) {
   return blocks.map((block) => {
     if (block.type === 'list') {
       return (
-        <Ul key={block?.list[0]?.title} margin="2rem 0 0">
+        <Ul
+          key={block?.list[0]?.title}
+          gridTemplateColumns={block.layout === 'grid' && 'repeat(auto-fill, minmax(15ch, 1fr))'}
+          gridGap={block.layout === 'grid' ? '3rem 1rem' : '1rem'}
+          margin={block.layout === 'grid' ? '4rem 0 0' : '2rem 0 0'}
+          listStyle={block.layout === 'list' ? 'disc' : 'none'}
+          padding={block.layout === 'list' && '0 0 0 1em'}
+        >
           {block.list.map(item => (
-            <Li key={item.title} fontSize="2.5rem">
-              <Icon
-                icon="FaRegCheckCircle"
-                fontSize="2rem"
-                margin="0 1rem 0 0"
-                color="var(--color-brand-primary)"
-              />
-              {item.title}
+            <Li key={item.title}>
+              {item.icon && (
+                <Icon
+                  icon={item.icon}
+                  display="block"
+                  fontSize="4rem"
+                  lineHeight="1"
+                  color="var(--color-brand-primary)"
+                />
+              )}
+              {item.title && <H2 fontWeight="700">{item.title}</H2>}
+              {item.body && <P lineHeight="2.5rem">{item.body}</P>}
             </Li>
           ))}
         </Ul>
@@ -127,7 +141,7 @@ export default function SidekickContainer({ icon, title, subtitle, layout, image
           {icon && (
             <Icon
               icon={icon}
-              fontSize="4rem"
+              fontSize="6rem"
               color="var(--color-brand-primary)"
               margin="0 0 2rem"
             />
@@ -140,7 +154,6 @@ export default function SidekickContainer({ icon, title, subtitle, layout, image
             lineHeight="1"
             fontWeight="700"
             color={image && 'var(--color-inverse)'}
-            // margin="0 0 2rem"
           >
             {title}
           </H1>
