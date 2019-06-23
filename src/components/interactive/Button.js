@@ -116,6 +116,6 @@ export const Button = styled(Text)`
 Button.defaultProps = {
   as:           'button',
   display:      'inline-block',
-  padding:      '1.5rem 6rem',
+  padding:      '1.5rem 4rem',
   borderRadius: '0.5rem',
 };
