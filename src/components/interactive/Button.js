@@ -49,8 +49,6 @@ export const Button = styled(Text)`
         &:not(:disabled):hover,
         &:not(:disabled):focus {
           box-shadow: 0 0.5rem 0.5rem hsla(var(--hsl-text), 0.1);
-          /* box-shadow: inset 0 0 0 2px var(--color-info); */
-          /* color: var(--color-info); */
         }
       `;
     }
@@ -69,13 +67,13 @@ export const Button = styled(Text)`
 
         &:not(:disabled):hover,
         &:not(:disabled):focus {
-          box-shadow: none;
           background-image: linear-gradient(
             45deg,
             var(--color-brand-primary),
             var(--color-brand-secondary)
           );
           color: var(--color-inverse);
+          box-shadow: 0 0.5rem 0.5rem hsla(var(--hsl-text), 0.1);
         }
       `;
     }
@@ -117,6 +115,7 @@ export const Button = styled(Text)`
 
 Button.defaultProps = {
   as:           'button',
+  display:      'inline-block',
   padding:      '1.5rem 6rem',
   borderRadius: '0.5rem',
 };
