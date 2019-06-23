@@ -6,7 +6,7 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import { shape, string, arrayOf } from 'prop-types';
 
-import { H1, Section, P, Button, Link, Video, Img, Text } from '~components';
+import { H1, Section, P, Button, Link, Video, Img, Text, Ul, Li } from '~components';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // query
@@ -44,7 +44,6 @@ export default function HeroContainer({ kicker, title, subtitle, body, buttons, 
         lg: '15vh 25vw 10vh',
       }}
       textAlign="center"
-      boxShadow="0 1px 0 0 hsla(var(--hsl-text),0.1)"
     >
       {image && (
         <Img
@@ -107,7 +106,6 @@ export default function HeroContainer({ kicker, title, subtitle, body, buttons, 
         lineHeight="1"
         fontWeight="700"
         color={image && 'var(--color-inverse)'}
-        margin="0 0 2rem"
       >
         {title}
       </H1>
@@ -117,26 +115,27 @@ export default function HeroContainer({ kicker, title, subtitle, body, buttons, 
             xs: '2.5rem',
             lg: '3rem',
           }}
-          lineHeight="1"
+          lineHeight={{
+            xs: '2.5rem',
+            lg: '3rem',
+          }}
           color={image && 'var(--color-inverse)'}
-          margin="0 0 4rem"
+          margin="2rem 0 0"
         >
           {subtitle}
         </P>
       )}
-      {buttons.length > 0
-        && buttons.map(button => (
-          <Button
-            key={button.url}
-            as={Link}
-            to={button.url}
-            look={button.look}
-            display="inline-block"
-            grouped
-          >
-            {button.title}
-          </Button>
-        ))}
+      {buttons && (
+        <Ul margin="4rem -0.5rem 0" display="flex" flexWrap="wrap" justifyContent="center">
+          {buttons.map(button => (
+            <Li key={button.url} margin="0.5rem">
+              <Button key={button.url} as={Link} to={button.url} look={button.look}>
+                {button.title}
+              </Button>
+            </Li>
+          ))}
+        </Ul>
+      )}
     </Section>
   );
 }

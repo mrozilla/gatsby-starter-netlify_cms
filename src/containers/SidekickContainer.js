@@ -24,11 +24,11 @@ export const fragment = graphql`
       list {
         title
       }
-      # buttons {
-      #   title
-      #   url
-      #   look
-      # }
+      buttons {
+        title
+        url
+        look
+      }
     }
   }
 `;
@@ -41,9 +41,9 @@ function renderBlocks(blocks) {
   return blocks.map((block) => {
     if (block.type === 'list') {
       return (
-        <Ul>
+        <Ul key={block?.list[0]?.title} margin="2rem 0 0">
           {block.list.map(item => (
-            <Li fontSize="2.5rem">
+            <Li key={item.title} fontSize="2.5rem">
               <Icon
                 as={FaRegCheckCircle}
                 fontSize="2rem"
@@ -51,6 +51,20 @@ function renderBlocks(blocks) {
                 color="var(--color-brand-primary)"
               />
               {item.title}
+            </Li>
+          ))}
+        </Ul>
+      );
+    }
+
+    if (block.type === 'buttons') {
+      return (
+        <Ul key={block?.buttons[0]?.url} margin="2rem -0.5rem 0" display="flex" flexWrap="wrap">
+          {block.buttons.map(button => (
+            <Li key={button.url} margin="0.5rem">
+              <Button as={Link} to={button.url} look={button.look}>
+                {button.title}
+              </Button>
             </Li>
           ))}
         </Ul>
@@ -79,7 +93,7 @@ export default function SidekickContainer({ title, subtitle, layout, image, bloc
         md: '15vh 0 10vh',
         lg: '15vh 0 10vh',
       }}
-      boxShadow="0 1px 0 0 hsla(var(--hsl-text),0.1)"
+      boxShadow="0 -1px 0 0 hsla(var(--hsl-text),0.1)"
     >
       {image && (
         <Img
@@ -118,22 +132,19 @@ export default function SidekickContainer({ title, subtitle, layout, image, bloc
             lineHeight="1"
             fontWeight="700"
             color={image && 'var(--color-inverse)'}
-            margin="0 0 2rem"
+            // margin="0 0 2rem"
           >
             {title}
           </H1>
           {subtitle && (
             <P
-              fontSize={{
-                xs: '2rem',
-                lg: '2.5rem',
-              }}
+              fontSize="2.5rem"
               lineHeight={{
                 xs: '2.5rem',
                 lg: '3rem',
               }}
               color={image && 'var(--color-inverse)'}
-              margin="0 0 2rem"
+              margin="2rem 0 0"
             >
               {subtitle}
             </P>
