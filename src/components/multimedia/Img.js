@@ -81,6 +81,7 @@ export default function Img({
     onError: ({ target }) => {
       const placeholder = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E"; // use a transparent svg as a default image
       target.src = placeholder; // eslint-disable-line no-param-reassign
+      target.srcSet = ''; // eslint-disable-line no-param-reassign
     },
     onMouseMove: ({ nativeEvent: e }) => {
       if (imgProps.isZoom) {
@@ -119,7 +120,7 @@ export default function Img({
 }
 
 Img.propTypes = {
-  src:        string.isRequired,
+  src:        string,
   srcSet:     string,
   srcSetWebp: string,
   sizes:      string,
@@ -134,6 +135,7 @@ Img.propTypes = {
 };
 
 Img.defaultProps = {
+  src:        "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E",
   srcSet:     '',
   srcSetWebp: '',
   sizes:      '',
