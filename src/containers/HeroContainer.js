@@ -105,7 +105,7 @@ export default function HeroContainer({ kicker, title, subtitle, body, buttons, 
         }}
         lineHeight="1"
         fontWeight="700"
-        color={image && 'var(--color-inverse)'}
+        color={image ? 'var(--color-inverse)': ''}
       >
         {title}
       </H1>
@@ -119,7 +119,7 @@ export default function HeroContainer({ kicker, title, subtitle, body, buttons, 
             xs: '2.5rem',
             lg: '3rem',
           }}
-          color={image && 'var(--color-inverse)'}
+          color={image ? 'var(--color-inverse)' : ''}
           margin="2rem 0 0"
         >
           {subtitle}
