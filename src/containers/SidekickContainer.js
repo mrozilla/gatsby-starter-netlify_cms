@@ -18,6 +18,13 @@ export const fragment = graphql`
     icon
     title
     subtitle
+    image {
+      childImageSharp {
+        fluid(maxWidth: 600) {
+          ...GatsbyImageSharpFluid_withWebp
+        }
+      }
+    }
     layout
     blocks {
       type
@@ -45,8 +52,8 @@ function renderBlocks(blocks) {
     if (block.type === 'list') {
       return (
         <Ul
-          key={block?.list[0]?.title}
-          gridTemplateColumns={block.layout === 'grid' && 'repeat(auto-fill, minmax(15ch, 1fr))'}
+          key={`${block.type}-${block.layout}`}
+          gridTemplateColumns={block.layout === 'grid' && 'repeat(auto-fit, minmax(16ch, 1fr))'}
           gridGap={block.layout === 'grid' ? '3rem 1rem' : '1rem'}
           margin={block.layout === 'grid' ? '4rem 0 0' : '2rem 0 0'}
           listStyle={block.layout === 'list' ? 'disc' : 'none'}
@@ -73,7 +80,7 @@ function renderBlocks(blocks) {
 
     if (block.type === 'buttons') {
       return (
-        <Ul key={block?.buttons[0]?.url} margin="2rem -0.5rem 0" display="flex" flexWrap="wrap">
+        <Ul key={block?.buttons[0]?.url} margin="3rem -0.5rem 0" display="flex" flexWrap="wrap">
           {block.buttons.map(button => (
             <Li key={button.url} margin="0.5rem">
               <Button as={Link} to={button.url} look={button.look}>
@@ -93,15 +100,17 @@ function renderBlocks(blocks) {
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-export default function SidekickContainer({ icon, title, subtitle, layout, image, blocks }) {
+export default function SidekickContainer({ icon, title, subtitle, image, layout, blocks }) {
   return (
     <Section
       gridColumn="2"
       display="grid"
       gridTemplateColumns={{
         xs: '1fr',
-        lg: layout === 'left' ? '2fr 3fr' : '3fr 2fr',
+        lg: layout === 'left' ? '3fr 4fr' : '4fr 3fr',
       }}
+      gridGap="4rem 8rem"
+      alignItems="center"
       padding={{
         xs: '5rem 10vw',
         md: '15vh 0 10vh',
@@ -109,35 +118,18 @@ export default function SidekickContainer({ icon, title, subtitle, layout, image
       }}
       boxShadow="0 -1px 0 0 hsla(var(--hsl-text),0.1)"
     >
-      {image && (
-        <Img
-          {...image?.childImageSharp?.fluid}
-          position="absolute"
-          top="0"
-          left="0"
-          width="100%"
-          height="100%"
-          zIndex="-1"
-          role="presentation"
-          imgProps={{
-            objectPosition: 'top left',
-            mixBlendMode:   'luminosity',
-            opacity:        '0.1',
-          }}
-          after={{
-            content:         '""',
-            position:        'absolute',
-            width:           '100%',
-            height:          '100%',
-            top:             '0',
-            left:            '0',
-            zIndex:          '-1',
-            backgroundImage: 'var(--gradient-brand)',
-          }}
-        />
-      )}
+      <Img
+        {...image?.childImageSharp?.fluid}
+        ratio={2 / 3}
+        order={{
+          lg: layout === 'left' ? '2' : '',
+        }}
+        imgProps={{
+          objectFit: 'contain',
+        }}
+      />
       {
-        <View gridColumn={layout === 'left' ? '1' : '2'}>
+        <View>
           {icon && (
             <Icon
               icon={icon}
@@ -153,7 +145,6 @@ export default function SidekickContainer({ icon, title, subtitle, layout, image
             }}
             lineHeight="1"
             fontWeight="700"
-            color={image && 'var(--color-inverse)'}
           >
             {title}
           </H1>
@@ -164,7 +155,6 @@ export default function SidekickContainer({ icon, title, subtitle, layout, image
                 xs: '2.5rem',
                 lg: '3rem',
               }}
-              color={image && 'var(--color-inverse)'}
               margin="2rem 0 0"
             >
               {subtitle}

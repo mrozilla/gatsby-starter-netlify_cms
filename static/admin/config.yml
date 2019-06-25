@@ -104,6 +104,7 @@ collections:
               - name: icon
               - name: title
               - { name: subtitle, required: false }
+              - { name: image, widget: image, required: false }
               - name: layout
                 widget: select
                 options: ["left", "right"]
