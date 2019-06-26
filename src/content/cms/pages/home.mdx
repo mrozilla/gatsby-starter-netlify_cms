@@ -16,32 +16,50 @@ blocks:
       title: Hot
       url: /blog/
     subtitle: >-
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-    title: "Long headline that can wrap on two lines"
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua.
+    title: Long headline that can wrap on two lines
     type: hero
+  - logos:
+      - name: Doe Capital
+        image: /assets/logo.png
+        url: https://www.example.com
+      - name: Doe Capital
+        image: /assets/logo.png
+        url: https://www.example.com
+      - name: Doe Capital
+        image: /assets/logo.png
+        url: https://www.example.com
+      - name: Doe Capital
+        image: /assets/logo.png
+        url: https://www.example.com
+    subtitle: Long headline that can wrap on two lines
+    type: logos
   - blocks:
-      - list:
-          - title: Alpha
-            body: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+      - layout: grid
+        list:
+          - body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
             icon: FaAward
-          - title: Beta
-            body: Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
+            title: Alpha
+          - body: Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
             icon: FaTrophy
-        layout: grid
+            title: Beta
         type: list
-    layout: right
     icon: FaCreditCard
     image: /assets/illustration.png
-    subtitle: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    layout: right
+    subtitle: >-
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua.
     title: Longer headline that can wrap on two lines and perhaps even more
     type: sidekick
   - blocks:
-      - list:
+      - layout: list
+        list:
           - body: Lorem ipsum dolor sit amet
           - body: Consectetur adipiscing elit
           - body: Sed do eiusmod tempor incididunt
           - body: Ut labore et dolore magna aliqua
-        layout: list
         type: list
       - buttons:
           - look: primary
@@ -51,9 +69,35 @@ blocks:
             title: Secondary CTA
             url: /login/
         type: buttons
-    layout: left
     image: /assets/illustration.png
-    subtitle: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    layout: left
+    subtitle: >-
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua.
     title: Long headline that might wrap on two lines
     type: sidekick
+  - testimonials:
+      - company: Doe Capital
+        image: /assets/portrait.png
+        name: John Doe
+        position: CEO
+        testimonial: >-
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      - company: Smithsonian
+        image: /assets/portrait.png
+        name: Jane Smith
+        position: CEO
+        testimonial: >-
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      - company: Muster Master
+        image: /assets/portrait.png
+        name: Max Mustermann
+        position: CEO
+        testimonial: >-
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    subtitle: Long headline that can wrap on two lines
+    type: testimonials
 ---
