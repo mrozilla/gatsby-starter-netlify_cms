@@ -118,8 +118,10 @@ collections:
                       - name: list
                         widget: list
                         fields:
+                          - { name: icon, required: false }
                           - { name: title, required: false }
                           - { name: body, required: false }
+                          - { name: image, widget: image, required: false }
                       - name: layout
                         widget: select
                         options: ["list", "grid"]

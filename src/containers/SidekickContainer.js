@@ -29,9 +29,16 @@ export const fragment = graphql`
     blocks {
       type
       list {
+        icon
         title
         body
-        icon
+        image {
+          childImageSharp {
+            fluid(maxWidth: 300) {
+              ...GatsbyImageSharpFluid_withWebp
+            }
+          }
+        }
       }
       layout
       buttons {
@@ -47,14 +54,19 @@ export const fragment = graphql`
 // helpers
 // ─────────────────────────────────────────────────────────────────────────────
 
-function renderBlocks(blocks) {
+function renderBlocks(blocks, layout) {
   return blocks.map((block) => {
     if (block.type === 'list') {
       return (
         <Ul
           key={`${block.type}-${block.layout}`}
-          gridTemplateColumns={block.layout === 'grid' && 'repeat(auto-fit, minmax(16ch, 1fr))'}
-          gridGap={block.layout === 'grid' ? '3rem 1rem' : '1rem'}
+          gridTemplateColumns={
+            block.layout === 'grid'
+            && `repeat(auto-fit, minmax(${layout === 'full' ? '30rem' : '16ch'}, 1fr))`
+          }
+          gridGap={
+            block.layout === 'grid' ? `${layout === 'full' ? '3rem 4rem' : '3rem 1rem'}` : '1rem'
+          }
           margin={block.layout === 'grid' ? '4rem 0 0' : '2rem 0 0'}
           listStyle={block.layout === 'list' ? 'disc' : 'none'}
           padding={block.layout === 'list' && '0 0 0 1em'}
@@ -64,11 +76,13 @@ function renderBlocks(blocks) {
               {item.icon && (
                 <Icon
                   icon={item.icon}
-                  display="block"
                   fontSize="4rem"
                   lineHeight="1"
                   color="var(--color-brand-primary)"
                 />
+              )}
+              {item.image && (
+                <Img {...item.image?.childImageSharp?.fluid} alt={item.title} margin="0 25%" />
               )}
               {item.title && <H2 fontWeight="700">{item.title}</H2>}
               {item.body && <P lineHeight="2.5rem">{item.body}</P>}
@@ -101,13 +115,19 @@ function renderBlocks(blocks) {
 // ─────────────────────────────────────────────────────────────────────────────
 
 export default function SidekickContainer({ icon, title, subtitle, image, layout, blocks }) {
+  const gridTemplateColumns = {
+    left:  '3fr 4fr',
+    right: '4fr 3fr',
+    full:  '1fr',
+  };
+
   return (
     <Section
       gridColumn="2"
       display="grid"
       gridTemplateColumns={{
         xs: '1fr',
-        lg: layout === 'left' ? '3fr 4fr' : '4fr 3fr',
+        lg: gridTemplateColumns[layout],
       }}
       gridGap="4rem 8rem"
       alignItems="center"
@@ -117,17 +137,20 @@ export default function SidekickContainer({ icon, title, subtitle, image, layout
         lg: '15vh 0 10vh',
       }}
       boxShadow="0 -1px 0 0 hsla(var(--hsl-text),0.1)"
+      textAlign={layout === 'full' ? 'center' : ''}
     >
-      <Img
-        {...image?.childImageSharp?.fluid}
-        ratio={2 / 3}
-        order={{
-          lg: layout === 'left' ? '2' : '',
-        }}
-        imgProps={{
-          objectFit: 'contain',
-        }}
-      />
+      {image && (
+        <Img
+          {...image?.childImageSharp?.fluid}
+          ratio={2 / 3}
+          order={{
+            lg: layout === 'left' ? '2' : '',
+          }}
+          imgProps={{
+            objectFit: 'contain',
+          }}
+        />
+      )}
       {
         <View>
           {icon && (
@@ -145,6 +168,8 @@ export default function SidekickContainer({ icon, title, subtitle, image, layout
             }}
             lineHeight="1"
             fontWeight="700"
+            maxWidth="30ch"
+            margin="0 auto"
           >
             {title}
           </H1>
@@ -155,12 +180,13 @@ export default function SidekickContainer({ icon, title, subtitle, image, layout
                 xs: '2.5rem',
                 lg: '3rem',
               }}
-              margin="2rem 0 0"
+              maxWidth="50ch"
+              margin="2rem auto 0"
             >
               {subtitle}
             </P>
           )}
-          {blocks && renderBlocks(blocks)}
+          {blocks && renderBlocks(blocks, layout)}
         </View>
       }
     </Section>
