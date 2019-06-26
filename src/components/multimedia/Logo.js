@@ -10,5 +10,5 @@ import { H1 } from '~components/text/HX';
 // ─────────────────────────────────────────────────────────────────────────────
 
 export function Logo() {
-  return <H1 padding="2rem 0">Templatech</H1>;
+  return <H1 padding="2rem 0">Logo</H1>;
 }
