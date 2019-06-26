@@ -102,23 +102,19 @@ exports.createPages = ({ actions: { createPage }, graphql }) => {
   return graphql(`
     {
       pages: allMdx(filter: { fields: { sourceName: { eq: "pages" } } }) {
-        edges {
-          node {
-            frontmatter {
-              meta {
-                permalink
-              }
+        nodes {
+          frontmatter {
+            meta {
+              permalink
             }
           }
         }
       }
       posts: allMdx(filter: { fields: { sourceName: { eq: "posts" } } }) {
-        edges {
-          node {
-            frontmatter {
-              meta {
-                permalink
-              }
+        nodes {
+          frontmatter {
+            meta {
+              permalink
             }
           }
         }
@@ -129,14 +125,14 @@ exports.createPages = ({ actions: { createPage }, graphql }) => {
       return Promise.reject(result.errors);
     }
 
-    result.data.pages.edges.forEach(({ node }) => {
+    result.data.pages.nodes.forEach((node) => {
       createPage({
         path:      node.frontmatter.meta.permalink,
         component: PageTemplateContainer,
       });
     });
 
-    result.data.posts.edges.forEach(({ node }) => {
+    result.data.posts.nodes.forEach((node) => {
       createPage({
         path:      node.frontmatter.meta.permalink,
         component: PostTemplateContainer,
