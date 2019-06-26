@@ -83,18 +83,18 @@ export default function Img({
       target.src = placeholder; // eslint-disable-line no-param-reassign
       target.srcSet = ''; // eslint-disable-line no-param-reassign
     },
-    onMouseMove: ({ nativeEvent: e }) => {
+    onMouseMove: (event) => {
       if (imgProps.isZoom) {
-        const x = (e.offsetX / e.target.offsetWidth) * 100;
-        const y = (e.offsetY / e.target.offsetHeight) * 100;
-        e.target.style.transformOrigin = `${x}% ${y}%`;
+        const x = (event.offsetX / event.target.offsetWidth) * 100;
+        const y = (event.offsetY / event.target.offsetHeight) * 100;
+        event.target.style.transformOrigin = `${x}% ${y}%`;
       }
 
       if (imgProps.isTilt) {
-        const x = e.offsetX / e.target.offsetWidth - 0.5;
-        const y = e.offsetY / e.target.offsetHeight - 0.5;
+        const x = event.offsetX / event.target.offsetWidth - 0.5;
+        const y = event.offsetY / event.target.offsetHeight - 0.5;
         const transform = `perspective(500px) rotateY(${x * 5}deg) rotateX(${y * -5}deg)`;
-        e.target.parentNode.style.transform = transform;
+        event.target.parentNode.style.transform = transform;
       }
     },
     onLoad: () => setIsLoaded(true),
