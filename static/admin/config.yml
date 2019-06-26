@@ -101,7 +101,7 @@ collections:
           - name: sidekick
             label: "Sidekick"
             fields:
-              - name: icon
+              - { name: icon, required: false }
               - name: title
               - { name: subtitle, required: false }
               - { name: image, widget: image, required: false }
@@ -118,8 +118,8 @@ collections:
                       - name: list
                         widget: list
                         fields:
-                          - name: title
-                          - name: body
+                          - { name: title, required: false }
+                          - { name: body, required: false }
                       - name: layout
                         widget: select
                         options: ["list", "grid"]
@@ -140,6 +140,34 @@ collections:
                   - name: body
                     label: "Body"
                     widget: markdown
+
+          - name: testimonials
+            label: "Testimonials"
+            fields:
+              - { name: title, required: false }
+              - { name: subtitle, required: false }
+              - { name: body, required: false }
+              - name: testimonials
+                widget: list
+                fields:
+                  - name: name
+                  - { name: position, required: false }
+                  - { name: company, required: false }
+                  - { name: testimonial, required: false }
+                  - { name: image, widget: image, required: false }
+
+          - name: logos
+            label: "Logos"
+            fields:
+              - { name: title, required: false }
+              - { name: subtitle, required: false }
+              - { name: body, required: false }
+              - name: logos
+                widget: list
+                fields:
+                  - name: name
+                  - name: url
+                  - { name: image, widget: image }
 
   - label: "Posts"
     label_singular: "Blog post"
