@@ -31,7 +31,7 @@ export const fragment = graphql`
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-export default function HeaderContainer({ location }) {
+export default function HeaderContainer() {
   const { header } = useStaticQuery(graphql`
     query {
       header: mdx(
@@ -48,7 +48,7 @@ export default function HeaderContainer({ location }) {
   return (
     <Header>
       <Nav>
-        <Link to="/" padding="1rem">
+        <Link to="/" padding="2rem 1rem">
           <Logo />
         </Link>
         <Nav.Toggle top="2rem" />
@@ -63,7 +63,7 @@ export default function HeaderContainer({ location }) {
                     display="block"
                     padding={{
                       xs: '1rem',
-                      lg: '3rem 2rem',
+                      lg: '4rem 2rem',
                     }}
                   >
                     {item.text}
@@ -90,7 +90,7 @@ export default function HeaderContainer({ location }) {
                     outline="none"
                     padding={{
                       xs: '1rem',
-                      lg: '3rem 2rem',
+                      lg: '4rem 2rem',
                     }}
                     hover={{
                       color: 'var(--color-brand-primary)',

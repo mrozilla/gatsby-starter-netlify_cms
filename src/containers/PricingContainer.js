@@ -99,14 +99,14 @@ export default function PricingContainer({ title, subtitle, pricing }) {
         </Ul>
       )}
       {pricing && (
-        <Ul gridTemplateColumns="repeat(auto-fit, minmax(25ch, 1fr))" gridGap="8rem">
+        <Ul gridTemplateColumns="repeat(auto-fit, minmax(25ch, 1fr))" gridGap="2rem 8rem">
           {pricing.map(item => (
             <Li
               display="flex"
               flexDirection="column"
               padding="4rem 4rem 2rem"
               backgroundColor="var(--color-inverse)"
-              borderRadius="1rem"
+              borderRadius="0.5rem"
               boxShadow="inset 0 0 0 1px hsla(var(--hsl-text), 0.1)"
             >
               <H2 fontWeight="700" margin="0 0 4rem">
