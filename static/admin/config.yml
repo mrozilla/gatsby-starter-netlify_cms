@@ -171,6 +171,24 @@ collections:
                   - name: url
                   - { name: image, widget: image }
 
+          - name: pricing
+            label: "Pricing"
+            fields:
+              - { name: title, required: false }
+              - { name: subtitle, required: false }
+              - { name: body, required: false }
+              - name: pricing
+                widget: list
+                fields:
+                  - name: title
+                  - name: price
+                    widget: object
+                    fields:
+                      - { name: monthly, widget: number }
+                      - { name: yearly, widget: number }
+                  - name: currency
+                  - { name: mdx, widget: markdown, required: false }
+
   - label: "Posts"
     label_singular: "Blog post"
     name: posts

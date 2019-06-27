@@ -10,7 +10,9 @@ import { RootContainer,
   SEOContainer,
   HeroContainer,
   SidekickContainer,
-  TestimonialsContainer, LogosContainer } from '~containers';
+  TestimonialsContainer,
+  LogosContainer,
+  PricingContainer } from '~containers';
 import { Main } from '~components';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -27,6 +29,7 @@ export const query = graphql`
           ...SidekickFragment
           ...TestimonialsFragment
           ...LogosFragment
+          ...PricingFragment
         }
       }
     }
@@ -54,9 +57,13 @@ function renderBlocks(blocks) {
     if (block.type === 'testimonials') {
       return <TestimonialsContainer key={block.title} {...block} />;
     }
-    
+
     if (block.type === 'logos') {
       return <LogosContainer key={block.title} {...block} />;
+    }
+
+    if (block.type === 'pricing') {
+      return <PricingContainer key={block.title} {...block} />;
     }
 
     if (block.type === 'mdx' || block.type === 'markdown') {

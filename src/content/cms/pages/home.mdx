@@ -26,18 +26,18 @@ blocks:
           - body: >-
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            image: /assets/illustration.png
             title: Alpha
-            image: /assets/illustration.png
           - body: >-
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            image: /assets/illustration.png
             title: Beta
-            image: /assets/illustration.png
           - body: >-
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            title: Gamma
             image: /assets/illustration.png
+            title: Gamma
         type: list
     layout: full
     subtitle: >-
@@ -48,22 +48,22 @@ blocks:
   - logos:
       - image: /assets/logo.png
         name: Doe Capital
-        url: "https://www.example.com"
+        url: 'https://www.example.com'
       - image: /assets/logo.png
         name: Doe Capital
-        url: "https://www.example.com"
+        url: 'https://www.example.com'
       - image: /assets/logo.png
         name: Doe Capital
-        url: "https://www.example.com"
+        url: 'https://www.example.com'
       - image: /assets/logo.png
         name: Doe Capital
-        url: "https://www.example.com"
+        url: 'https://www.example.com'
     subtitle: Short headline that just fits
     type: logos
   - blocks:
       - layout: grid
         list:
-          - body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+          - body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit'
             icon: FaAward
             title: Alpha
           - body: Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
@@ -125,4 +125,41 @@ blocks:
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua.
     type: testimonials
+  - pricing:
+      - currency: EUR
+        mdx: |-
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+
+          - Lorem ipsum dolor sit amet
+          - Consectetur adipiscing elit
+        price:
+          monthly: 9
+          yearly: 99
+        title: Bronze
+      - currency: EUR
+        mdx: |-
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+
+          - Lorem ipsum dolor sit amet
+          - Consectetur adipiscing elit
+          - Sed do eiusmod tempor incididunt
+        price:
+          monthly: 19
+          yearly: 199
+        title: Silver
+      - currency: EUR
+        mdx: |-
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+
+          - Lorem ipsum dolor sit amet
+          - Consectetur adipiscing elit
+          - Sed do eiusmod tempor incididunt
+          - Ut labore et dolore magna aliqua
+        price:
+          monthly: 29
+          yearly: 299
+        title: Gold
+    title: Long headline that can wrap on two lines
+    type: pricing
 ---
+
