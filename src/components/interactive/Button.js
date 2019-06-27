@@ -19,7 +19,6 @@ export const Button = styled(Text)`
 
   cursor: pointer;
   line-height: 1em;
-  font-weight: 700;
   letter-spacing: 0.05em;
   transition: all 250ms;
 
@@ -116,6 +115,8 @@ export const Button = styled(Text)`
 Button.defaultProps = {
   as:           'button',
   display:      'inline-block',
+  fontWeight:   '700',
   padding:      '1.5rem 4rem',
   borderRadius: '0.5rem',
+  textAlign:    'center',
 };
