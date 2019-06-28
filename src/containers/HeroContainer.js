@@ -39,7 +39,7 @@ export default function HeroContainer({ kicker, title, subtitle, body, buttons, 
     <Section
       gridColumn="1 / -1"
       padding={{
-        xs: '5rem 10vw',
+        xs: '5rem var(--width-outside)',
         md: '15vh 20vw 10vh',
         lg: '15vh 25vw 10vh',
       }}

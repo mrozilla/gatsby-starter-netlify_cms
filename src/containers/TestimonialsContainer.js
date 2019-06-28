@@ -57,11 +57,12 @@ export default function TestimonialsContainer({ title, subtitle, testimonials })
       gridColumn="2"
       display="grid"
       padding={{
-        xs: '5rem 10vw',
+        xs: '5rem 0',
         md: '10vh 0',
       }}
       boxShadow="0 -1px 0 0 hsla(var(--hsl-text),0.1)"
       textAlign="center"
+      overflow="hidden" // TODO: see why the carousel UL stretches parent on mobile
     >
       {title && (
         <H1
@@ -101,7 +102,10 @@ export default function TestimonialsContainer({ title, subtitle, testimonials })
               : {}
           }
           isControls={testimonials.length > visibleItems}
-          margin="2rem 0 0"
+          margin={{
+            xs: '2rem 3rem 0',
+            lg: '2rem 0 0',
+          }}
         >
           {testimonials.map(item => (
             <>

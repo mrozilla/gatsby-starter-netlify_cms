@@ -132,7 +132,7 @@ export default function SidekickContainer({ icon, title, subtitle, image, layout
       gridGap="4rem 8rem"
       alignItems="center"
       padding={{
-        xs: '5rem 10vw',
+        xs: '5rem 0',
         md: '15vh 0 10vh',
         lg: '15vh 0 10vh',
       }}

@@ -42,7 +42,7 @@ export default function LogosContainer({ title, subtitle, logos }) {
       gridColumn="2"
       display="grid"
       padding={{
-        xs: '5rem 10vw',
+        xs: '5rem 0',
         md: '10vh 0',
       }}
       boxShadow="0 -1px 0 0 hsla(var(--hsl-text),0.1)"

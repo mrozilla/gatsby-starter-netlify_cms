@@ -43,7 +43,7 @@ export default function PricingContainer({ title, subtitle, pricing }) {
       gridColumn="2"
       display="grid"
       padding={{
-        xs: '5rem 10vw',
+        xs: '5rem 0',
         md: '10vh 0',
       }}
       boxShadow="0 -1px 0 0 hsla(var(--hsl-text),0.1)"
@@ -112,11 +112,7 @@ export default function PricingContainer({ title, subtitle, pricing }) {
               <H2 fontWeight="700" margin="0 0 4rem">
                 {item.title}
               </H2>
-              <P
-                padding="0 0 2rem"
-                margin="0 0 2rem"
-                boxShadow="inset 0 -1px hsla(var(--hsl-text), 0.1)"
-              >
+              <P margin="0 0 2rem">
                 <Text fontSize="6rem" fontWeight="700">
                   {new Intl.NumberFormat('en-GB', {
                     style:                 'currency',
