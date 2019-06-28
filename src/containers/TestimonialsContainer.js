@@ -2,7 +2,7 @@
 // import
 // ─────────────────────────────────────────────────────────────────────────────
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import { graphql } from 'gatsby';
 import { shape, string, arrayOf } from 'prop-types';
 
@@ -108,7 +108,7 @@ export default function TestimonialsContainer({ title, subtitle, testimonials })
           }}
         >
           {testimonials.map(item => (
-            <>
+            <Fragment key={item?.name}>
               {item?.testimonial && (
                 <Blockquote lineHeight="3rem" margin="0 0 2rem">
                   {item?.testimonial}
@@ -136,7 +136,7 @@ export default function TestimonialsContainer({ title, subtitle, testimonials })
                   {item?.company}
                 </P>
               )}
-            </>
+            </Fragment>
           ))}
         </Carousel>
       )}

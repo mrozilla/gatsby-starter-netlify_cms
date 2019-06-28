@@ -75,7 +75,7 @@ export default function LogosContainer({ title, subtitle, logos }) {
       {logos && (
         <Ul display="flex" flexWrap="wrap" justifyContent="center" margin="3rem -1rem -1rem">
           {logos.map(company => (
-            <Li flex="0 0 25rem" margin="1rem">
+            <Li key={company.url} flex="0 0 25rem" margin="1rem">
               <Link to={company.url}>
                 <Img
                   {...company?.image?.childImageSharp?.fluid}

@@ -47,23 +47,23 @@ function renderBlocks(blocks) {
 
   return blocks.map((block) => {
     if (block.type === 'hero') {
-      return <HeroContainer key={block.title} {...block} />;
+      return <HeroContainer key={`${block.type}-${block.title}`} {...block} />;
     }
 
     if (block.type === 'sidekick') {
-      return <SidekickContainer key={block.title} {...block} />;
+      return <SidekickContainer key={`${block.type}-${block.title}`} {...block} />;
     }
 
     if (block.type === 'testimonials') {
-      return <TestimonialsContainer key={block.title} {...block} />;
+      return <TestimonialsContainer key={`${block.type}-${block.title}`} {...block} />;
     }
 
     if (block.type === 'logos') {
-      return <LogosContainer key={block.title} {...block} />;
+      return <LogosContainer key={`${block.type}-${block.title}`} {...block} />;
     }
 
     if (block.type === 'pricing') {
-      return <PricingContainer key={block.title} {...block} />;
+      return <PricingContainer key={`${block.type}-${block.title}`} {...block} />;
     }
 
     if (block.type === 'mdx' || block.type === 'markdown') {

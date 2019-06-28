@@ -102,6 +102,7 @@ export default function PricingContainer({ title, subtitle, pricing }) {
         <Ul gridTemplateColumns="repeat(auto-fit, minmax(25ch, 1fr))" gridGap="2rem 8rem">
           {pricing.map(item => (
             <Li
+              key={item.title}
               display="flex"
               flexDirection="column"
               padding="4rem 4rem 2rem"

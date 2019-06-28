@@ -44,7 +44,7 @@ export default function FooterContainer() {
   const renderLinks = (item) => {
     if (item.type === 'markdown' || item.type === 'mdx') {
       return (
-        <Li fontSize="1.75rem">
+        <Li key={item.title} fontSize="1.75rem">
           <Link to="/" display="block" margin="0 0 2rem">
             <Logo fontSize="2rem" />
           </Link>

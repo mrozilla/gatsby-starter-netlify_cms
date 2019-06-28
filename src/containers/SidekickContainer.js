@@ -4,7 +4,7 @@
 
 import React from 'react';
 import { graphql } from 'gatsby';
-import { shape, string, arrayOf } from 'prop-types';
+import { shape, string, arrayOf, object } from 'prop-types';
 
 import { H1, H2, Section, P, Ul, Li, Icon, Button, Link, Img, View } from '~components';
 
@@ -72,7 +72,7 @@ function renderBlocks(blocks, layout) {
           padding={block.layout === 'list' && '0 0 0 1em'}
         >
           {block.list.map(item => (
-            <Li key={item.title}>
+            <Li key={item.title || item.icon || item.image || item.body}>
               {item.icon && (
                 <Icon
                   icon={item.icon}
@@ -142,6 +142,7 @@ export default function SidekickContainer({ icon, title, subtitle, image, layout
       {image && (
         <Img
           {...image?.childImageSharp?.fluid}
+          alt={title || subtitle}
           ratio={2 / 3}
           order={{
             lg: layout === 'left' ? '2' : '',
@@ -203,13 +204,15 @@ SidekickContainer.propTypes = {
       type: string.isRequired,
     }),
   ),
-  image: string,
+  image: shape({
+    childImageSharp: object,
+  }),
 };
 
 SidekickContainer.defaultProps = {
   icon:     '',
   subtitle: '',
   layout:   'left',
-  image:    '',
   blocks:   [],
+  image:    null,
 };

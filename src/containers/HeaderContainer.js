@@ -98,7 +98,7 @@ export default function HeaderContainer() {
                   >
                     {item.title}
                   </H2>
-                  <Nav.Toggle />
+                  <Nav.Toggle top="-1rem" />
                   <Nav.List>
                     {item.links.map(link => (
                       <Nav.List.Item key={link.url}>
