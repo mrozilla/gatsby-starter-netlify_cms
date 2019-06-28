@@ -3,41 +3,40 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import React from 'react';
-import { MDXProvider } from '@mdx-js/react';
-import { node } from 'prop-types';
 
-import HeaderContainer from './HeaderContainer';
-import FooterContainer from './FooterContainer';
-import CookieContainer from './CookieContainer';
-import { Link, Pre, Ul, P } from '~components';
-
-import { useInactiveTab } from '~utils';
-import '~utils/style/index.css';
+import { Toast, Link, Button } from '~components';
+import { useLocalStorage } from '~utils/';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-export default function RootContainer({ children }) {
-  useInactiveTab();
+export default function CookieContainer() {
+  const [isVisible, setIsVisible] = useLocalStorage('isShowCookies', true);
 
   return (
-    <MDXProvider
-      components={{
-        a:   props => <Link look="primary" {...props} />,
-        ul:  props => <Ul listStyle="disc" padding="0 0 0 1em" margin="0 0 2rem" {...props} />,
-        p:   props => <P margin="0 0 1rem" {...props} />,
-        pre: Pre,
+    <Toast
+      backgroundColor="var(--color-inverse)"
+      animation="none"
+      color="var(--color-text)"
+      fontSize="1.5rem"
+      bottom={{
+        xs: 'auto',
+        sm: '0',
       }}
+      top={{
+        xs: '0',
+        sm: 'auto',
+      }}
+      isVisible={isVisible}
     >
-      <HeaderContainer />
-      {children}
-      <FooterContainer />
-      <CookieContainer />
-    </MDXProvider>
+      This website uses cookies to improve the experience for you. There&apos;s even a <Link to="/legal/privacy/" look="primary">cookie policy</Link>
+      <Button look="secondary" margin="1rem 0 1rem 1rem" padding="1rem 2rem" onClick={() => setIsVisible(prev => !prev)}>
+        Accept{' '}
+        {/* <span role="img" aria-label="cookie">
+          🍪
+        </span> */}
+      </Button>
+    </Toast>
   );
 }
-
-RootContainer.propTypes = {
-  children: node.isRequired,
-};

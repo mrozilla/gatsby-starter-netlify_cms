@@ -91,7 +91,7 @@ export default function HeroContainer({ kicker, title, subtitle, body, buttons, 
             backgroundImage: 'var(--gradient-brand)',
             color:           'var(--color-inverse)',
             padding:         '0.25rem 0.5rem',
-            margin:          '0 0.5rem 0 0',
+            margin:          '0 1rem 0 0',
             borderRadius:    '999px',
           }}
         >
