@@ -48,10 +48,10 @@ export default function HeaderContainer() {
   return (
     <Header>
       <Nav>
-        <Link to="/" padding="2rem 1rem">
+        <Link to="/" padding="4rem 1rem">
           <Logo />
         </Link>
-        <Nav.Toggle top="2rem" />
+        <Nav.Toggle top="2.5rem" />
         <Nav.List>
           {header?.frontmatter?.links.map((item) => {
             if (item.type === 'link') {
