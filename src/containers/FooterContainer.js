@@ -88,10 +88,10 @@ export default function FooterContainer() {
         padding="8rem var(--width-outside) 16rem"
         textAlign={{
           xs: 'center',
-          lg: 'unset',
+          md: 'unset',
         }}
       >
-        <Ul gridAutoFlow={{ lg: 'column' }} gridAutoColumns="1fr" gridGap="4rem 8rem">
+        <Ul gridAutoFlow={{ md: 'column' }} gridAutoColumns="1fr" gridGap="4rem 8rem">
           {footer?.frontmatter?.links?.map(renderLinks)}
         </Ul>
       </Section>
