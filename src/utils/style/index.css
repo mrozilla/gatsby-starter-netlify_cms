@@ -35,12 +35,12 @@
   --hsl-warning: 40, 100%, 50%;
   --color-warning: hsl(var(--hsl-warning));
 
-  --width-outside: 1rem;
-
   --z-index-header: 1000;
   --z-index-tooltip: 1010;
   --z-index-toast: 1020;
   --z-index-modal: 1030;
+
+  --width-outside: 2rem;
 }
 
 @media screen and (min-width: 600px) {
