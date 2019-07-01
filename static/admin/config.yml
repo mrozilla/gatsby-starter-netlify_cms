@@ -206,7 +206,7 @@ collections:
           - name: title
           - name: description
           - name: permalink
-          - { name: ogImage, widget: image }
+          - { name: ogImage, widget: image, default: /assets/og.png }
       - { name: tags, required: false }
       - { name: highlighted, widget: boolean, default: false }
       - { name: body, widget: markdown }
