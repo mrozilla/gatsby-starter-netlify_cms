@@ -20,14 +20,8 @@ export default function CookieContainer() {
       animation="none"
       color="var(--color-text)"
       fontSize="1.5rem"
-      bottom={{
-        xs: 'auto',
-        sm: '0',
-      }}
-      top={{
-        xs: '0',
-        sm: 'auto',
-      }}
+      bottom="0"
+      top="auto"
       isVisible={isVisible}
     >
       This website uses cookies to improve the experience for you. There&apos;s even a <Link to="/legal/privacy/" look="primary">cookie policy</Link>
