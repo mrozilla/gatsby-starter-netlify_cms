@@ -20,8 +20,6 @@ export const Header = styled(View)`
   background-color: var(--color-inverse);
   box-shadow: inset 0 -1px hsla(var(--hsl-text), 0.1);
 
-  @media screen and (min-width: 900px) {
-    padding: 0 var(--width-outside);
-  }
+  padding: 0 var(--width-outside);
 `;
 Header.defaultProps = { as: 'header' };

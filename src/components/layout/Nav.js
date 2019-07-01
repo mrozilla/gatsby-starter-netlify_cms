@@ -84,7 +84,7 @@ Nav.Toggle = styled.input`
 
   position: absolute;
   top: ${({ top = 0 }) => top};
-  right: 0;
+  right: ${({ right = 0 }) => right};
   padding: 2rem;
 
   cursor: pointer;

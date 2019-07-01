@@ -48,10 +48,10 @@ export default function HeaderContainer() {
   return (
     <Header>
       <Nav>
-        <Link to="/" padding="4rem 1rem">
+        <Link to="/" padding="4rem 0">
           <Logo />
         </Link>
-        <Nav.Toggle top="2.5rem" />
+        <Nav.Toggle top="2.5rem" right="-2rem" />
         <Nav.List>
           {header?.frontmatter?.links.map((item) => {
             if (item.type === 'link') {
@@ -98,7 +98,7 @@ export default function HeaderContainer() {
                   >
                     {item.title}
                   </H2>
-                  <Nav.Toggle top="-1rem" />
+                  <Nav.Toggle top="-1rem" right="-2rem" />
                   <Nav.List>
                     {item.links.map(link => (
                       <Nav.List.Item key={link.url}>
