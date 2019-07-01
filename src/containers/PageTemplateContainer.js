@@ -12,7 +12,8 @@ import { RootContainer,
   SidekickContainer,
   TestimonialsContainer,
   LogosContainer,
-  PricingContainer } from '~containers';
+  PricingContainer,
+  BlogContainer, } from '~containers';
 import { Main } from '~components';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -64,6 +65,10 @@ function renderBlocks(blocks) {
 
     if (block.type === 'pricing') {
       return <PricingContainer key={`${block.type}-${block.title}`} {...block} />;
+    }
+
+    if (block.type === 'blog') {
+      return <BlogContainer key={`${block.type}-${block.title}`} {...block} />;
     }
 
     if (block.type === 'mdx' || block.type === 'markdown') {
