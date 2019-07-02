@@ -98,6 +98,17 @@ export const Button = styled(Text)`
       `;
     }
 
+    if (look === 'tertiary-inverse') {
+      return css`
+        color: var(--color-inverse);
+
+        &:not(:disabled):hover,
+        &:not(:disabled):focus {
+          color: var(--color-brand-primary);
+        }
+      `;
+    }
+
     return null;
   }};
 

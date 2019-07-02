@@ -16,24 +16,23 @@ export const Article = styled(View)`
   line-height: 4rem;
 
   & h1 {
-    font-size: 10rem;
-    font-weight: 400;
+    font-size: calc(6vh + 2rem);
+    font-weight: 700;
     line-height: 1;
-    letter-spacing: -0.025em;
   }
   & h2 {
     font-size: 4rem;
-    font-weight: 600;
+    font-weight: 700;
     line-height: 1;
-    margin: 8rem 0 1rem 0;
+    margin: 6rem 0 1rem 0;
   }
   & h3 {
     font-size: 3rem;
-    font-weight: 600;
+    font-weight: 700;
   }
   & h4 {
     font-size: 2.75rem;
-    font-weight: 600;
+    font-weight: 700;
   }
   & p {
     margin-bottom: 3rem;
@@ -73,3 +72,7 @@ export const Article = styled(View)`
     font-size: 1.75rem;
   }
 `;
+
+Article.defaultProps = {
+  as: 'article',
+};
