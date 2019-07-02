@@ -20,7 +20,7 @@ const query = graphql`
         frontmatter {
           title
           subtitle
-          date
+          date(formatString: "MMMM D, YYYY")
           meta {
             permalink
             ogImage {
@@ -84,23 +84,39 @@ export default function BlogContainer({ title, subtitle }) {
         </P>
       )}
       {posts && (
-        <Ul gridTemplateColumns="repeat(auto-fill, minmax(30ch, 1fr))" margin="4rem 0 0">
-          {posts.nodes.map(post => (
-            <Li key={post.frontmatter.meta.permalink}>
-              <Link to={post.frontmatter.meta.permalink}>
+        <Ul
+          gridTemplateColumns="repeat(auto-fill, minmax(30ch, 1fr))"
+          gridGap="8rem 4rem"
+          margin="8rem 0 0"
+        >
+          {posts.nodes.map((post, i) => (
+            <Li
+              key={post.frontmatter.meta.permalink}
+              gridColumn={i === 0 ? '1 / -1' : ''}
+            >
+              <Link
+                to={post.frontmatter.meta.permalink}
+                look="tertiary"
+                display={i === 0 ? 'grid' : ''}
+                gridTemplateColumns="2fr 1fr"
+                gridGap="0 2rem"
+              >
                 <Img
                   {...post.frontmatter.meta.ogImage?.childImageSharp?.fluid}
+                  imgProps={{
+                    borderRadius: '0.5rem',
+                    boxShadow:    'inset 0 0 0 1px hsla(var(--hsl-text),0.1)',
+                  }}
                   ratio={1 / 2}
-                  margin="0 0 2rem"
+                  gridRow="span 4"
+                  margin={i === 0 ? '' : '0 0 2rem'}
                 />
-                <H2 fontSize="3rem" fontWeight="700">{post.frontmatter.title}</H2>
-                {post.frontmatter.subtitle && <P margin="2rem 0 0">{post.frontmatter.subtitle}</P>}
-                <P fontSize="1.5rem" margin="1rem 0 0">
-                  {post.frontmatter.date && `${new Date(post.frontmatter.date).toLocaleDateString('en-US', {
-                    year:  'numeric',
-                    month: 'long',
-                    day:   'numeric',
-                  })} · `}{post.timeToRead} min read
+                <H2 fontSize="3rem" fontWeight="700" gridColumn="2">{post.frontmatter.title}</H2>
+                {post.frontmatter.subtitle && (
+                  <P margin="2rem 0 0" gridColumn="2">{post.frontmatter.subtitle}</P>
+                )}
+                <P fontSize="1.5rem" margin="1rem 0 0" gridColumn="2">
+                  {post.frontmatter.date && `${post.frontmatter.date} · `}{post.timeToRead} min read
                 </P>
               </Link>
             </Li>
