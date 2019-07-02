@@ -2,39 +2,35 @@
 // import
 // ─────────────────────────────────────────────────────────────────────────────
 
-import { graphql } from 'gatsby';
+import React from 'react';
+
+import { Toast, Link, Button } from '~components';
+import { useLocalStorage } from '~utils/';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-export const fragments = graphql`
-  fragment MetaFragment on MdxFrontmatter {
-    meta {
-      permalink
-      title
-      description
-      ogImage {
-        childImageSharp {
-          resize(width: 1200, height: 630) {
-            src
-          }
-        }
-      }
-    }
-  }
+export default function CookieContainer() {
+  const [isVisible, setIsVisible] = useLocalStorage('isShowCookies', true);
 
-  fragment HeaderFragment on MdxFrontmatter {
-    links {
-      title
-      text
-      url
-      links {
-        text
-        url
-      }
-      look
-      type
-    }
-  }
-`;
+  return (
+    <Toast
+      backgroundColor="var(--color-inverse)"
+      animation="none"
+      color="var(--color-text)"
+      fontSize="1.5rem"
+      bottom="0"
+      top="auto"
+      isVisible={isVisible}
+    >
+      This website uses cookies to improve the experience for you. There&apos;s even a <Link to="/legal/privacy/" look="primary">cookie policy</Link>
+      <Button look="secondary" margin="1rem 0 1rem 1rem" padding="1rem 2rem" onClick={() => setIsVisible(prev => !prev)}>
+        Accept{' '}
+        {/* <span role="img" aria-label="cookie">
+          🍪
+        </span> */}
+      </Button>
+    </Toast>
+  );
+}

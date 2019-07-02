@@ -2,24 +2,21 @@
 // import
 // ─────────────────────────────────────────────────────────────────────────────
 
-import styled from 'styled-components';
+import React from 'react';
+import { string } from 'prop-types';
 
-import { View } from '~components/primitives/View';
+import { Text } from '~components/primitives/Text';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-export const Header = styled(View)`
-  position: fixed;
-  z-index: var(--z-index-header);
-  top: 0;
-  width: 100%;
-  max-height: 100vh;
+export function Icon({ icon, ...rest }) {
+  const iconImport = require('react-icons/fa')[icon]; // eslint-disable-line global-require
 
-  background-color: var(--color-inverse);
-  box-shadow: inset 0 -1px hsla(var(--hsl-text), 0.1);
+  return <Text as={iconImport} {...rest} />;
+}
 
-  padding: 0 var(--width-outside);
-`;
-Header.defaultProps = { as: 'header' };
+Icon.propTypes = {
+  icon: string.isRequired,
+};

@@ -22,6 +22,7 @@ export { Section } from './layout/Section';
 export { Table } from './layout/Table';
 export { default as Toast } from './layout/Toast';
 
+export { Icon } from './multimedia/Icon';
 export { default as Img } from './multimedia/Img';
 export { Logo } from './multimedia/Logo';
 export { default as Video } from './multimedia/Video';
@@ -31,6 +32,7 @@ export { View } from './primitives/View';
 
 export { Alert } from './text/Alert';
 export { Article } from './text/Article';
+export { Blockquote } from './text/Blockquote';
 export { H1, H2, H3 } from './text/HX';
 export { Label } from './text/Label';
 export { Legend } from './text/Legend';

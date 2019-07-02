@@ -3,15 +3,35 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import React from 'react';
-import { useStaticQuery, graphql } from 'gatsby';
+import { graphql, useStaticQuery } from 'gatsby';
 
 import { Header, H2, Link, Nav, Logo, Button } from '~components';
+
+// ─────────────────────────────────────────────────────────────────────────────
+// query
+// ─────────────────────────────────────────────────────────────────────────────
+
+export const fragment = graphql`
+  fragment HeaderFragment on MdxFrontmatter {
+    links {
+      title
+      text
+      url
+      links {
+        text
+        url
+      }
+      look
+      type
+    }
+  }
+`;
 
 // ─────────────────────────────────────────────────────────────────────────────
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-export default function HeaderContainer({ location }) {
+export default function HeaderContainer() {
   const { header } = useStaticQuery(graphql`
     query {
       header: mdx(
@@ -28,10 +48,10 @@ export default function HeaderContainer({ location }) {
   return (
     <Header>
       <Nav>
-        <Link to="/" padding="1rem">
+        <Link to="/" padding="4rem 0">
           <Logo />
         </Link>
-        <Nav.Toggle top="2rem" />
+        <Nav.Toggle top="2.5rem" right="-2rem" />
         <Nav.List>
           {header?.frontmatter?.links.map((item) => {
             if (item.type === 'link') {
@@ -43,7 +63,7 @@ export default function HeaderContainer({ location }) {
                     display="block"
                     padding={{
                       xs: '1rem',
-                      lg: '3rem 2rem',
+                      lg: '4rem 2rem',
                     }}
                   >
                     {item.text}
@@ -70,7 +90,7 @@ export default function HeaderContainer({ location }) {
                     outline="none"
                     padding={{
                       xs: '1rem',
-                      lg: '3rem 2rem',
+                      lg: '4rem 2rem',
                     }}
                     hover={{
                       color: 'var(--color-brand-primary)',
@@ -78,7 +98,7 @@ export default function HeaderContainer({ location }) {
                   >
                     {item.title}
                   </H2>
-                  <Nav.Toggle />
+                  <Nav.Toggle top="-1rem" right="-2rem" />
                   <Nav.List>
                     {item.links.map(link => (
                       <Nav.List.Item key={link.url}>

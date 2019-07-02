@@ -12,38 +12,6 @@ const babel = require('@babel/core');
 const deepMap = require('deep-map');
 
 // ─────────────────────────────────────────────────────────────────────────────
-// types
-// ─────────────────────────────────────────────────────────────────────────────
-
-exports.sourceNodes = ({ actions }) => {
-  const { createTypes } = actions;
-  const typeDefs = `
-    type Test implements Node {
-      id: String
-    }
-    # type Mdx implements Node {
-    #   frontmatter: Frontmatter
-    # }
-    # type Frontmatter {
-    #   blocks: Blocks
-    # }
-    # type Blocks {
-    #   clients: Clients
-    # }
-    # type Clients {
-    #   company: Company
-    # }
-    # type Company {
-    #   image: File
-    # }
-    # type MdxFrontmatterBlocksClientsCompany implements Node {
-    #   image: File
-    # }
-  `;
-  createTypes(typeDefs); // TODO: resolve name clash
-};
-
-// ─────────────────────────────────────────────────────────────────────────────
 // babel
 // ─────────────────────────────────────────────────────────────────────────────
 

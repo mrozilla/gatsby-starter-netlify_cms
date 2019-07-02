@@ -81,19 +81,20 @@ export default function Img({
     onError: ({ target }) => {
       const placeholder = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E"; // use a transparent svg as a default image
       target.src = placeholder; // eslint-disable-line no-param-reassign
+      target.srcSet = ''; // eslint-disable-line no-param-reassign
     },
-    onMouseMove: ({ nativeEvent: e }) => {
+    onMouseMove: (event) => {
       if (imgProps.isZoom) {
-        const x = (e.offsetX / e.target.offsetWidth) * 100;
-        const y = (e.offsetY / e.target.offsetHeight) * 100;
-        e.target.style.transformOrigin = `${x}% ${y}%`;
+        const x = (event.offsetX / event.target.offsetWidth) * 100;
+        const y = (event.offsetY / event.target.offsetHeight) * 100;
+        event.target.style.transformOrigin = `${x}% ${y}%`;
       }
 
       if (imgProps.isTilt) {
-        const x = e.offsetX / e.target.offsetWidth - 0.5;
-        const y = e.offsetY / e.target.offsetHeight - 0.5;
+        const x = event.offsetX / event.target.offsetWidth - 0.5;
+        const y = event.offsetY / event.target.offsetHeight - 0.5;
         const transform = `perspective(500px) rotateY(${x * 5}deg) rotateX(${y * -5}deg)`;
-        e.target.parentNode.style.transform = transform;
+        event.target.parentNode.style.transform = transform;
       }
     },
     onLoad: () => setIsLoaded(true),
@@ -119,7 +120,7 @@ export default function Img({
 }
 
 Img.propTypes = {
-  src:        string.isRequired,
+  src:        string,
   srcSet:     string,
   srcSetWebp: string,
   sizes:      string,
@@ -134,6 +135,7 @@ Img.propTypes = {
 };
 
 Img.defaultProps = {
+  src:        "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E",
   srcSet:     '',
   srcSetWebp: '',
   sizes:      '',

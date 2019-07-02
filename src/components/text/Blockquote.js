@@ -4,22 +4,20 @@
 
 import styled from 'styled-components';
 
-import { View } from '~components/primitives/View';
+import { Text } from '~components/primitives/Text';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-export const Header = styled(View)`
-  position: fixed;
-  z-index: var(--z-index-header);
-  top: 0;
-  width: 100%;
-  max-height: 100vh;
+export const Blockquote = styled(Text)`
+  quotes: '“' '”' '‘' '’';
 
-  background-color: var(--color-inverse);
-  box-shadow: inset 0 -1px hsla(var(--hsl-text), 0.1);
-
-  padding: 0 var(--width-outside);
+  &::before {
+    content: open-quote;
+  }
+  &::after {
+    content: close-quote;
+  }
 `;
-Header.defaultProps = { as: 'header' };
+Blockquote.defaultProps = { as: 'blockquote' };

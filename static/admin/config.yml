@@ -34,10 +34,12 @@ collections:
             fields:
               - name: text
               - name: url
+
           - name: markdown
             fields:
               - name: title
               - { name: mdx, widget: markdown }
+
           - name: nested
             fields:
               - name: title
@@ -46,6 +48,7 @@ collections:
                 fields:
                   - name: text
                   - { name: url, required: false }
+
           - name: button
             fields:
               - name: text
@@ -74,10 +77,16 @@ collections:
           - name: hero
             label: "Hero"
             fields:
+              - name: kicker
+                widget: object
+                fields:
+                  - name: url
+                  - name: title
+                  - name: body
+                required: false
               - name: title
-              - name: subtitle
+              - { name: subtitle, required: false }
               - { name: body, required: false }
-              - { name: id, required: false }
               - name: buttons
                 widget: list
                 fields:
@@ -88,6 +97,97 @@ collections:
                     options: ["primary", "secondary"]
               - { name: image, widget: image, required: false }
               - { name: video, required: false }
+
+          - name: sidekick
+            label: "Sidekick"
+            fields:
+              - { name: icon, required: false }
+              - name: title
+              - { name: subtitle, required: false }
+              - { name: image, widget: image, required: false }
+              - name: layout
+                widget: select
+                options: ["left", "right"]
+                default: left
+              - name: blocks
+                widget: list
+                types:
+                  - name: list
+                    label: "List"
+                    fields:
+                      - name: list
+                        widget: list
+                        fields:
+                          - { name: icon, required: false }
+                          - { name: title, required: false }
+                          - { name: body, required: false }
+                          - { name: image, widget: image, required: false }
+                      - name: layout
+                        widget: select
+                        options: ["list", "grid"]
+                        default: list
+
+                  - name: buttons
+                    label: "Buttons"
+                    fields:
+                      - name: buttons
+                        widget: list
+                        fields:
+                          - name: title
+                          - name: url
+                          - name: look
+                            widget: select
+                            options: ["primary", "secondary"]
+
+                  - name: body
+                    label: "Body"
+                    widget: markdown
+
+          - name: testimonials
+            label: "Testimonials"
+            fields:
+              - { name: title, required: false }
+              - { name: subtitle, required: false }
+              - { name: body, required: false }
+              - name: testimonials
+                widget: list
+                fields:
+                  - name: name
+                  - { name: position, required: false }
+                  - { name: company, required: false }
+                  - { name: testimonial, required: false }
+                  - { name: image, widget: image, required: false }
+
+          - name: logos
+            label: "Logos"
+            fields:
+              - { name: title, required: false }
+              - { name: subtitle, required: false }
+              - { name: body, required: false }
+              - name: logos
+                widget: list
+                fields:
+                  - name: name
+                  - name: url
+                  - { name: image, widget: image }
+
+          - name: pricing
+            label: "Pricing"
+            fields:
+              - { name: title, required: false }
+              - { name: subtitle, required: false }
+              - { name: body, required: false }
+              - name: pricing
+                widget: list
+                fields:
+                  - name: title
+                  - name: price
+                    widget: object
+                    fields:
+                      - { name: monthly, widget: number }
+                      - { name: yearly, widget: number }
+                  - name: currency
+                  - { name: mdx, widget: markdown, required: false }
 
   - label: "Posts"
     label_singular: "Blog post"
@@ -106,7 +206,7 @@ collections:
           - name: title
           - name: description
           - name: permalink
-          - { name: ogImage, widget: image }
+          - { name: ogImage, widget: image, default: /assets/og.png }
       - { name: tags, required: false }
       - { name: highlighted, widget: boolean, default: false }
       - { name: body, widget: markdown }

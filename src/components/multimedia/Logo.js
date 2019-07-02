@@ -9,6 +9,10 @@ import { H1 } from '~components/text/HX';
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-export function Logo() {
-  return <H1 padding="2rem 0">Underbear</H1>;
+export function Logo({ ...rest }) {
+  return (
+    <H1 {...rest}>
+      Logo
+    </H1>
+  );
 }

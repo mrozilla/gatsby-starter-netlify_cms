@@ -24,20 +24,16 @@ const StyledLink = styled(Text)`
   ${({ look }) => {
     if (look === 'primary') {
       return css`
+        color: var(--color-brand-primary);
         text-decoration: underline var(--color-brand-primary);
-        &:hover,
-        &:focus,
-        &:active {
-          color: var(--color-brand-primary);
-        }
       `;
     }
     if (look === 'secondary') {
       return css`
+        color: var(--color-brand-primary);
         &:hover,
         &:focus,
         &:active {
-          color: var(--color-brand-primary);
           text-decoration: underline var(--color-brand-primary);
         }
       `;
@@ -90,7 +86,6 @@ Link.propTypes = {
   to:       string,
 };
 Link.defaultProps = {
-  href:       null,
-  to:         null,
-  fontWeight: 700,
+  href: null,
+  to:   null,
 };
