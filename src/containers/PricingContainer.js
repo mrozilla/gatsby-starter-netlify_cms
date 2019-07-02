@@ -71,7 +71,8 @@ export default function PricingContainer({ title, subtitle, pricing }) {
             lg: '3rem',
           }}
           textAlign="center"
-          margin="2rem 0 0"
+          maxWidth="50ch"
+          margin="2rem auto 0"
         >
           {subtitle}
         </P>

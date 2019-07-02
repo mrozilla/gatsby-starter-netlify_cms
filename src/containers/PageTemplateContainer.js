@@ -13,7 +13,7 @@ import { RootContainer,
   TestimonialsContainer,
   LogosContainer,
   PricingContainer,
-  BlogContainer, } from '~containers';
+  BlogContainer } from '~containers';
 import { Main } from '~components';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -86,7 +86,7 @@ function renderBlocks(blocks) {
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-export default function PageTemplate({
+export default function PageTemplateContainer({
   data: {
     page: {
       frontmatter: { meta, blocks },
