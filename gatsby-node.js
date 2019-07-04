@@ -38,6 +38,33 @@ exports.onCreateWebpackConfig = ({ actions }) => {
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
+// types
+// ─────────────────────────────────────────────────────────────────────────────
+
+exports.createSchemaCustomization = ({ actions: { createTypes } }) => {
+  const typeDefs = `
+    type Mdx implements Node {
+      frontmatter: MdxFrontmatter
+    }
+    type MdxFrontmatter {
+      links: [MdxFrontmatterLinks]
+    }
+
+    type MdxFrontmatterLinks {
+      title: String
+      mdx: String
+      links: [MdxFrontmatterLinksLinks]
+    }
+    type MdxFrontmatterLinksLinks {
+      text: String
+      url: String
+    }
+  `;
+
+  createTypes(typeDefs);
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
 // node transformations
 // ─────────────────────────────────────────────────────────────────────────────
 
