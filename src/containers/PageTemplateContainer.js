@@ -96,7 +96,12 @@ export default function PageTemplateContainer({
   return (
     <RootContainer>
       <SEOContainer meta={meta} />
-      <Main gridTemplateColumns="var(--width-outside) 1fr var(--width-outside)" padding="10rem 0 0">
+      <Main
+        css={`
+          grid-template-columns: var(--width-outside) 1fr var(--width-outside);
+          padding: 10rem 0 0;
+        `}
+      >
         {renderBlocks(blocks)}
       </Main>
     </RootContainer>

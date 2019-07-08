@@ -9,23 +9,18 @@ import styled from 'styled-components';
 // table
 // ─────────────────────────────────────────────────────────────────────────────
 
-const NativeTable = styled.table(({ width, tableLayout, whiteSpace, margin }) => ({
-  width,
-  '@media screen and (min-width: 1200px)': {
-    tableLayout,
-  },
-  whiteSpace,
-  margin,
-}));
-
-NativeTable.defaultProps = {
-  width:      '100%',
-  whiteSpace: 'pre',
-};
+const NativeTable = styled.table`
+  width: 100%;
+  white-space: pre;
+`;
 
 export function Table({ children, ...rest }) {
   return (
-    <div style={{ overflowX: 'auto' }}>
+    <div
+      css={`
+        overflow-x: auto;
+      `}
+    >
       <NativeTable {...rest}>{children}</NativeTable>
     </div>
   );
@@ -68,7 +63,6 @@ Table.Tr = styled.tr`
   --shadow: 0 1px 0 0 hsla(var(--hsl-text), 0.1);
 
   box-shadow: var(--shadow);
-  cursor: ${({ cursor }) => cursor};
 `;
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -82,6 +76,5 @@ Table.Th = styled.th``;
 // ─────────────────────────────────────────────────────────────────────────────
 
 Table.Td = styled.td`
-  padding: ${({ padding = '0.5rem' }) => padding};
-  opacity: ${({ opacity }) => opacity};
+  padding: 0.5rem;
 `;

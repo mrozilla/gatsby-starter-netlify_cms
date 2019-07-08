@@ -4,13 +4,11 @@
 
 import styled from 'styled-components';
 
-import { Text } from '~components/primitives/Text';
-
 // ─────────────────────────────────────────────────────────────────────────────
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-export const Blockquote = styled(Text)`
+export const Blockquote = styled.blockquote`
   quotes: '“' '”' '‘' '’';
 
   &::before {
@@ -20,4 +18,3 @@ export const Blockquote = styled(Text)`
     content: close-quote;
   }
 `;
-Blockquote.defaultProps = { as: 'blockquote' };

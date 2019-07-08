@@ -3,7 +3,6 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import React from 'react';
-import { FaTwitter, FaFacebook, FaFacebookMessenger } from 'react-icons/fa';
 import { graphql } from 'gatsby';
 import MDXRenderer from 'gatsby-mdx/mdx-renderer';
 
@@ -51,61 +50,137 @@ export default function PostTemplateContainer({
     <RootContainer>
       <SEOContainer meta={meta} />
       <Main
-        gridGap="4rem"
-        padding="20vh var(--width-outside) 10vh"
+        css={`
+          grid-gap: 4rem;
+          padding: 20vh var(--width-outside) 10vh;
+
+          @media screen and (min-width: 1200px) {
+            grid-template-columns: auto 1fr;
+          }
+        `}
       >
-        <Article
-          itemScope
-          itemType="http://schema.org/BlogPosting"
-          gridColumn={{
-            md: '2',
-          }}
-        >
-          <View as="header" margin="0 0 8rem">
-            <H1 itemProp="name" margin="0 0 3rem 0">
+        <Article itemScope itemType="http://schema.org/BlogPosting">
+          <View
+            as="header"
+            css={`
+              margin: 0 0 8rem;
+            `}
+          >
+            <H1
+              itemProp="name"
+              css={`
+                margin: 0 0 3rem 0;
+              `}
+            >
               <Link to={meta.permalink} itemProp="url" look="tertiary">
                 {title}
               </Link>
             </H1>
             {meta.description && (
-              <P fontSize="3rem">{meta.description}</P>
+              <P
+                css={`
+                  font-size: 3rem;
+                `}
+              >
+                {meta.description}
+              </P>
             )}
             <Text
               as="time"
               dateTime={new Date(date).toISOString()}
               itemProp="datePublished"
-              fontSize="2rem"
+              css={`
+                font-size: 2rem;
+              `}
             >
               {date}
             </Text>
             {' · '}
-            <Text fontSize="2rem">{timeToRead} min read</Text>
+            <Text
+              css={`
+                font-size: 2rem;
+              `}
+            >
+              {timeToRead} min read
+            </Text>
           </View>
           <MDXRenderer>{mdx.body}</MDXRenderer>
         </Article>
         <Aside
-          gridColumn="1"
-          gridRow={{
-            md: '1',
-          }}
-          position="sticky"
-          top="22vh"
-          alignSelf="start"
+          css={`
+            grid-column: 1;
+            position: sticky;
+            top: 22vh;
+            align-self: start;
+
+            @media screen and (min-width: 900px) {
+              grid-row: 1;
+            }
+          `}
         >
-          <Ul gridGap="1rem">
-            <Li lineHeight="3rem">
-              <Button look="tertiary" padding="0.5rem" onClick={() => share('twitter')}>
-                <Icon as={FaTwitter} fontSize="2.5rem" />
+          <Ul
+            css={`
+              grid-gap: 1rem;
+            `}
+          >
+            <Li
+              css={`
+                line-height: 3rem;
+              `}
+            >
+              <Button
+                look="tertiary"
+                css={`
+                  padding: 0.5rem;
+                `}
+                onClick={() => share('twitter')}
+              >
+                <Icon
+                  icon="FaTwitter"
+                  css={`
+                    font-size: 2.5rem;
+                  `}
+                />
               </Button>
             </Li>
-            <Li lineHeight="3rem">
-              <Button look="tertiary" padding="0.5rem" onClick={() => share('facebook')}>
-                <Icon as={FaFacebook} fontSize="2.5rem" />
+            <Li
+              css={`
+                line-height: 3rem;
+              `}
+            >
+              <Button
+                look="tertiary"
+                css={`
+                  padding: 0.5rem;
+                `}
+                onClick={() => share('facebook')}
+              >
+                <Icon
+                  icon="FaFacebook"
+                  css={`
+                    font-size: 2.5rem;
+                  `}
+                />
               </Button>
             </Li>
-            <Li lineHeight="3rem">
-              <Button look="tertiary" padding="0.5rem" onClick={() => share('messenger')}>
-                <Icon as={FaFacebookMessenger} fontSize="2.5rem" />
+            <Li
+              css={`
+                line-height: 3rem;
+              `}
+            >
+              <Button
+                look="tertiary"
+                css={`
+                  padding: 0.5rem;
+                `}
+                onClick={() => share('messenger')}
+              >
+                <Icon
+                  icon="FaFacebookMessenger"
+                  css={`
+                    font-size: 2.5rem;
+                  `}
+                />
               </Button>
             </Li>
           </Ul>

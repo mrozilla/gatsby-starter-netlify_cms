@@ -60,32 +60,56 @@ function renderBlocks(blocks, layout) {
       return (
         <Ul
           key={`${block.type}-${block.layout}`}
-          gridTemplateColumns={
-            block.layout === 'grid'
-            && `repeat(auto-fit, minmax(${layout === 'full' ? '30rem' : '16ch'}, 1fr))`
-          }
-          gridGap={
-            block.layout === 'grid' ? `${layout === 'full' ? '3rem 4rem' : '3rem 1rem'}` : '1rem'
-          }
-          margin={block.layout === 'grid' ? '4rem 0 0' : '2rem 0 0'}
-          listStyle={block.layout === 'list' ? 'disc' : 'none'}
-          padding={block.layout === 'list' && '0 0 0 1em'}
+          css={`
+            grid-template-columns: ${block.layout === 'grid'
+              && `repeat(auto-fit, minmax(${layout === 'full' ? '30rem' : '16ch'}, 1fr))`};
+            grid-gap: ${block.layout === 'grid'
+                ? `${layout === 'full' ? '3rem 4rem' : '3rem 1rem'}`
+                : '1rem'};
+            margin: ${block.layout === 'grid' ? '4rem 0 0' : '2rem 0 0'};
+            list-style: ${block.layout === 'list' ? 'disc' : 'none'};
+            padding: ${block.layout === 'list' && '0 0 0 1em'};
+          `}
         >
           {block.list.map(item => (
             <Li key={item.title || item.icon || item.image || item.body}>
               {item.icon && (
                 <Icon
                   icon={item.icon}
-                  fontSize="4rem"
-                  lineHeight="1"
-                  color="var(--color-brand-primary)"
+                  css={`
+                    font-size: 4rem;
+                    line-height: 1;
+                    color: var(--color-brand-primary);
+                  `}
                 />
               )}
               {item.image && (
-                <Img {...item.image?.childImageSharp?.fluid} alt={item.title} margin="0 25%" />
+                <Img
+                  {...item.image?.childImageSharp?.fluid}
+                  alt={item.title}
+                  css={`
+                    margin: 0 25%;
+                  `}
+                />
               )}
-              {item.title && <H2 fontWeight="700">{item.title}</H2>}
-              {item.body && <P lineHeight="2.5rem">{item.body}</P>}
+              {item.title && (
+                <H2
+                  css={`
+                    font-weight: 700;
+                  `}
+                >
+                  {item.title}
+                </H2>
+              )}
+              {item.body && (
+                <P
+                  css={`
+                    line-height: 2.5rem;
+                  `}
+                >
+                  {item.body}
+                </P>
+              )}
             </Li>
           ))}
         </Ul>
@@ -94,9 +118,21 @@ function renderBlocks(blocks, layout) {
 
     if (block.type === 'buttons') {
       return (
-        <Ul key={block?.buttons[0]?.url} margin="3rem -0.5rem 0" display="flex" flexWrap="wrap">
+        <Ul
+          key={block?.buttons[0]?.url}
+          css={`
+            margin: 3rem -0.5rem 0;
+            display: flex;
+            flex-wrap: wrap;
+          `}
+        >
           {block.buttons.map(button => (
-            <Li key={button.url} margin="0.5rem">
+            <Li
+              key={button.url}
+              css={`
+                margin: 0.5rem;
+              `}
+            >
               <Button as={Link} to={button.url} look={button.look}>
                 {button.title}
               </Button>
@@ -123,33 +159,36 @@ export default function SidekickContainer({ icon, title, subtitle, image, layout
 
   return (
     <Section
-      gridColumn="2"
-      display="grid"
-      gridTemplateColumns={{
-        xs: '1fr',
-        lg: gridTemplateColumns[layout],
-      }}
-      gridGap="4rem 8rem"
-      alignItems="center"
-      padding={{
-        xs: '5rem 0',
-        md: '15vh 0 10vh',
-        lg: '15vh 0 10vh',
-      }}
-      boxShadow="0 -1px 0 0 hsla(var(--hsl-text),0.1)"
-      textAlign={layout === 'full' ? 'center' : ''}
+      css={`
+        grid-column: 2;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-gap: 4rem 8rem;
+        align-items: center;
+
+        padding: var(--block-padding) 0;
+        box-shadow: 0 -1px 0 0 hsla(var(--hsl-text), 0.1);
+        text-align: ${layout === 'full' ? 'center' : ''};
+
+        @media screen and (min-width: 1200px) {
+          grid-template-columns: ${gridTemplateColumns[layout]};
+        }
+      `}
     >
       {image && (
         <Img
           {...image?.childImageSharp?.fluid}
           alt={title || subtitle}
           ratio={2 / 3}
-          order={{
-            lg: layout === 'left' ? '2' : '',
-          }}
-          imgProps={{
-            objectFit: 'contain',
-          }}
+          css={`
+            & > img {
+              object-fit: contain;
+            }
+
+            @media screen and (min-width: 1200px) {
+              order: ${layout === 'left' ? '2' : ''};
+            }
+          `}
         />
       )}
       {
@@ -157,32 +196,40 @@ export default function SidekickContainer({ icon, title, subtitle, image, layout
           {icon && (
             <Icon
               icon={icon}
-              fontSize="6rem"
-              color="var(--color-brand-primary)"
-              margin="0 0 2rem"
+              css={`
+                font-size: 6rem;
+                color: var(--color-brand-primary);
+                margin: 0 0 2rem;
+              `}
             />
           )}
           <H1
-            fontSize={{
-              xs: '3rem',
-              lg: '4rem',
-            }}
-            lineHeight="1"
-            fontWeight="700"
-            maxWidth="30ch"
-            margin="0 auto"
+            css={`
+              font-size: 3rem;
+              line-height: 1;
+              font-weight: 700;
+              max-width: 30ch;
+              margin: 0 auto;
+
+              @media screen and (min-width: 1200px) {
+                font-size: 4rem;
+              }
+            `}
           >
             {title}
           </H1>
           {subtitle && (
             <P
-              fontSize="2.5rem"
-              lineHeight={{
-                xs: '2.5rem',
-                lg: '3rem',
-              }}
-              maxWidth="50ch"
-              margin="2rem auto 0"
+              css={`
+                font-size: 2.5rem;
+                line-height: 2.5rem;
+                max-width: 50ch;
+                margin: 2rem auto 0;
+
+                @media screen and (min-width: 1200px) {
+                  line-height: 4rem;
+                }
+              `}
             >
               {subtitle}
             </P>

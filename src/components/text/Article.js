@@ -4,13 +4,11 @@
 
 import styled from 'styled-components';
 
-import { View } from '~components/primitives/View';
-
 // ─────────────────────────────────────────────────────────────────────────────
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-export const Article = styled(View)`
+export const Article = styled.article`
   min-width: 0;
   font-size: 2.5rem;
   line-height: 4rem;

@@ -4,21 +4,18 @@
 
 import styled from 'styled-components';
 
-import { View } from '~components/primitives/View';
-import { Text } from '~components/primitives/Text';
-
 // ─────────────────────────────────────────────────────────────────────────────
 // ul
 // ─────────────────────────────────────────────────────────────────────────────
 
-export const Ul = styled(View)`
-  list-style: ${({ listStyle = 'none' }) => listStyle};
+export const Ul = styled.ul`
+  display: grid;
+
+  list-style: none;
 `;
-Ul.defaultProps = { as: 'ul', display: 'grid' };
 
 // ─────────────────────────────────────────────────────────────────────────────
 // li
 // ─────────────────────────────────────────────────────────────────────────────
 
-export const Li = styled(Text)``;
-Li.defaultProps = { as: 'li' };
+export const Li = styled.li``;

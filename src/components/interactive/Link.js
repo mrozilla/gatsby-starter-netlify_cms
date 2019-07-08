@@ -8,13 +8,11 @@ import { Link as GatsbyLink } from 'gatsby';
 import { OutboundLink } from 'gatsby-plugin-google-analytics';
 import styled, { css } from 'styled-components';
 
-import { Text } from '~components/primitives/Text';
-
 // ─────────────────────────────────────────────────────────────────────────────
 // helpers
 // ─────────────────────────────────────────────────────────────────────────────
 
-const StyledLink = styled(Text)`
+const StyledLink = styled.a`
   outline: none;
 
   &[aria-current] {

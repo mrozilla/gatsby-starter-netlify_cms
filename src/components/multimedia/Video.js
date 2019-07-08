@@ -13,7 +13,7 @@ import { Aside } from '~components/layout/Aside';
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-export default function Video({ src, ...rest }) {
+export default function Video({ src, css, ...rest }) {
   const [isFullscreen, setIsFullscreen] = useState(false);
 
   useEffect(() => {
@@ -35,36 +35,46 @@ export default function Video({ src, ...rest }) {
   return (
     <>
       <Button
+        css={`
+          ${css};
+          padding: 0;
+          line-height: 0;
+        `}
         look="tertiary"
-        padding="0"
-        lineHeight="0"
         {...rest}
         onClick={() => setIsFullscreen(prev => !prev)}
       >
-        <FaPlayCircle fontSize="10rem" color="var(--color-inverse)" />
+        <FaPlayCircle
+          css={`
+            font-size: 10rem;
+            color: var(--color-inverse);
+          `}
+        />
       </Button>
       {isFullscreen && (
         <Aside
-          position="fixed"
-          top="0"
-          left="0"
-          width="100%"
-          height="100%"
-          display="grid"
-          gridTemplateColumns={{
-            xs: '1fr',
-            md: '50vw auto',
-          }}
-          gridGap="2rem"
-          gridTemplateRows={{
-            xs: 'auto 50vh',
-            md: '50vh',
-          }}
-          alignContent="center"
-          justifyContent="center"
-          padding="2rem"
-          backgroundColor="hsla(var(--hsl-dark),0.75)"
-          zIndex="var(--z-index-modal)"
+          css={`
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+
+            padding: 1rem;
+            background-color: hsla(var(--hsl-dark), 0.75);
+            z-index: var(--z-index-modal);
+
+            display: grid;
+            align-content: center;
+            justify-content: center;
+            grid-template-columns: 1fr;
+            grid-template-rows: auto 50vh;
+
+            @media screen and (min-width: 900px) {
+              grid-template-columns: 50vw auto;
+              grid-template-rows: 50vh;
+            }
+          `}
           onClick={handleBackgroundClick}
         >
           <iframe
@@ -82,17 +92,25 @@ export default function Video({ src, ...rest }) {
           />
           <Button
             look="tertiary"
-            alignSelf="start"
-            justifySelf="end"
-            padding="0"
-            lineHeight="0"
-            order={{
-              xs: '-1',
-              md: '2',
-            }}
+            css={`
+              align-self: start;
+              justify-self: end;
+              padding: 0;
+              line-height: 0;
+              order: -1;
+
+              @media screen and (min-width: 900px) {
+                order: 2;
+              }
+            `}
             onClick={() => setIsFullscreen(prev => !prev)}
           >
-            <FaTimesCircle fontSize="4rem" color="var(--color-inverse)" />
+            <FaTimesCircle
+              css={`
+                font-size: 4rem;
+                color: var(--color-inverse);
+              `}
+            />
           </Button>
         </Aside>
       )}
@@ -102,4 +120,9 @@ export default function Video({ src, ...rest }) {
 
 Video.propTypes = {
   src: string.isRequired,
+  css: string,
+};
+
+Video.defaultProps = {
+  css: '',
 };

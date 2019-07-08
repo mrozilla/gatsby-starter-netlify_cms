@@ -2,34 +2,39 @@
 // import
 // ─────────────────────────────────────────────────────────────────────────────
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 // import zxcvbn from 'zxcvbn';
 
 import { Input } from '~components/primitives/Input';
-// import Dots from '~components/interactive/Dots';
+import { Icon } from '~components/multimedia/Icon';
+import { Button } from '~components/interactive/Button';
+import Dots from '~components/interactive/Dots';
+
+// ─────────────────────────────────────────────────────────────────────────────
+// helpers
+// ─────────────────────────────────────────────────────────────────────────────
+
+const defaultColors = Array.from({ length: 4 }, () => 'hsla(var(--hsl-text), 0.25)');
 
 // ─────────────────────────────────────────────────────────────────────────────
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-const defaultColors = Array.from({ length: 4 }, () => 'hsla(var(--hsl-text), 0.25)');
-
 export default function TextInput({ onChange, type, ...rest }) {
+  const inputRef = useRef();
   const [isHidden, setIsHidden] = useState(type === 'password');
   const [colors, setColors] = useState(defaultColors);
 
   const handleChange = (event) => {
-    if (event.target.value === '') {
-      return setColors(defaultColors);
-    }
-
     // const { score } = zxcvbn(event.target.value);
 
     if (onChange) {
       onChange(event);
     }
 
-    return null;
+    // if (event.target.value === '') {
+    //   return setColors(defaultColors);
+    // }
 
     // return setColors(
     //   Array.from({ length: 4 }, (_, i) => {
@@ -42,17 +47,43 @@ export default function TextInput({ onChange, type, ...rest }) {
     // );
   };
 
+  const handleFocus = () => inputRef.current.focus();
+  const handleVisibility = () => {
+    handleFocus();
+    setIsHidden(prev => !prev);
+  };
+
   return (
     <>
-      <Input type={isHidden ? type : 'text'} onChange={handleChange} {...rest} />
+      <Input ref={inputRef} type={isHidden ? type : 'text'} onChange={handleChange} {...rest} />
+      <Button
+        type="button"
+        css={`
+          position: absolute;
+          top: 2.5rem;
+          right: 3rem;
+          cursor: pointer;
+          opacity: 0.5;
+          padding: 0;
+
+          &:hover {
+            opacity: 1;
+            fill: var(--color-brand-primary);
+          }
+        `}
+        onClick={handleVisibility}
+      >
+        <Icon icon={isHidden ? 'FaEyeSlash' : 'FaEye'} />
+      </Button>
       {/* <Dots
-        position="absolute"
-        top="2rem"
-        right="1rem"
         amount="4"
-        orientation="column"
-        pointerEvents="none"
         colors={colors}
+        css={`
+          position: absolute;
+          top: 2rem;
+          right: 1rem;
+          pointer-events: none;
+        `}
       /> */}
     </>
   );

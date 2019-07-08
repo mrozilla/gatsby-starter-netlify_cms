@@ -4,14 +4,13 @@
 
 import styled from 'styled-components';
 
-import { Text } from '~components/primitives/Text';
 import { Label } from '~components/text/Label';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-export const Select = styled(Text)`
+export const Select = styled.select`
   --shadow: inset 0 0 0 2px hsla(var(--hsl-text), 0.1);
 
   appearance: none;
@@ -23,28 +22,24 @@ export const Select = styled(Text)`
   background-color: hsla(var(--hsl-text), 0.05);
   line-height: 1.5em;
   cursor: pointer;
+  padding: 3rem 1rem 1rem;
+  border-radius: '0.5rem';
 
   &:hover {
     box-shadow: var(--shadow);
   }
 
   &:focus {
-    box-shadow: inset 0 0 0 2px var(--color-info);
+    box-shadow: inset 0 0 0 2px var(--color-brand-primary);
   }
 
   &:hover,
-  &:focus {
+  &:focus,
+  &:active {
     & ~ svg {
-      fill: var(--color-info);
+      opacity: 1;
+      fill: var(--color-brand-primary);
     }
-  }
-
-  & ~ svg {
-    position: absolute;
-    bottom: 2rem;
-    right: 1rem;
-    pointer-events: none;
-    fill: hsla(var(--hsl-text), 0.25);
   }
 
   & ~ ${Label} {
@@ -65,9 +60,3 @@ export const Select = styled(Text)`
     }
   }
 `;
-
-Select.defaultProps = {
-  as:           'select',
-  padding:      '3rem 1rem 1rem;',
-  borderRadius: '0.5rem',
-};

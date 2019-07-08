@@ -8,13 +8,13 @@ import styled from 'styled-components';
 
 import { Button } from '~components/interactive/Button';
 
-import { fadeUpAnimation } from '~utils';
+import { animation } from '~utils';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // helpers
 // ─────────────────────────────────────────────────────────────────────────────
 
-const ModalBackground = styled.div`
+const ModalBackground = styled.aside`
   position: fixed;
   top: 0;
   right: 0;
@@ -34,14 +34,24 @@ const ModalBackground = styled.div`
 `;
 
 const ModalWrapper = styled.div`
-  --shadow: 0 0 0 1px hsla(var(--hsl-text), 0.25);
+  --shadow: inset 0 0 0 2px hsla(var(--hsl-text), 0.1);
 
   position: relative;
 
-  border-radius: 0.25rem;
+  border-radius: 0.5rem;
   background-color: var(--color-inverse);
   box-shadow: var(--shadow);
-  animation: ${fadeUpAnimation} 500ms both;
+  animation: ${animation({
+    from: {
+      opacity:   '0',
+      transform: 'translateY(1vh)',
+    },
+    to: {
+      opacity:   '1',
+      transform: 'translateY(0)',
+    },
+    properties: '500ms both',
+  })};
 
   padding: ${({ padding }) => padding};
   min-width: ${({ minWidth }) => minWidth};
@@ -85,10 +95,28 @@ export default function Modal({
 
   if (isOpen) {
     return (
-      <ModalBackground onClick={handleClickBackground} padding={outerPadding}>
-        <ModalWrapper key={innerKey} padding={innerPadding} minWidth={innerMinWidth}>
+      <ModalBackground
+        onClick={handleClickBackground}
+        css={`
+          padding: ${outerPadding};
+        `}
+      >
+        <ModalWrapper
+          key={innerKey}
+          css={`
+            padding: ${innerPadding};
+            minwidth: ${innerMinWidth};
+          `}
+        >
           {children}
-          <Button position="absolute" top="0" right="0" tertiary onClick={onClickClose}>
+          <Button
+            css={`
+              position: absolute;
+              top: 0;
+              right: 0;
+            `}
+            onClick={onClickClose}
+          >
             ×
           </Button>
         </ModalWrapper>

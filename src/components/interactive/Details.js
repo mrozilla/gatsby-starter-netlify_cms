@@ -4,14 +4,11 @@
 
 import styled from 'styled-components';
 
-import { View } from '~components/primitives/View';
-import { Text } from '~components/primitives/Text';
-
 // ─────────────────────────────────────────────────────────────────────────────
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-export const Summary = styled(Text)`
+export const Summary = styled.summary`
   outline: none;
   list-style-image: none;
   ::-webkit-details-marker {
@@ -21,7 +18,7 @@ export const Summary = styled(Text)`
   cursor: pointer;
 
   &::before {
-    content: '${({ chevron }) => chevron}';
+    content: '▼';
     display: inline-block;
     margin: 0 0.5rem 0 0;
 
@@ -36,25 +33,16 @@ export const Summary = styled(Text)`
   &:focus,
   &:active {
     &::before {
-      color: var(--color-info);
+      color: var(--color-brand-primary);
     }
   }
 `;
 
-Summary.defaultProps = {
-  as:      'summary',
-  chevron: '▼',
-};
-
-export const Details = styled(View)`
+export const Details = styled.details`
   &[open] {
     & > ${Summary}::before {
       transform: rotate(0);
-      color: var(--color-info);
+      color: var(--color-brand-primary);
     }
   }
 `;
-
-Details.defaultProps = {
-  as: 'details',
-};
