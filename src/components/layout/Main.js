@@ -4,17 +4,24 @@
 
 import styled from 'styled-components';
 
-import { View } from '~components/primitives/View';
-import { fadeUpAnimation } from '~utils/style/animations';
+import { animation } from '~utils';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-export const Main = styled(View)`
-  grid-area: main;
+export const Main = styled.main`
   display: grid;
-
-  animation: ${fadeUpAnimation} 500ms;
+  grid-area: main;
+  animation: ${animation({
+    from: {
+      opacity:   0,
+      transform: 'translateY(1vh)',
+    },
+    to: {
+      opacity:   1,
+      transform: 'translateY(0)',
+    },
+    properties: '500ms',
+  })};
 `;
-Main.defaultProps = { as: 'main' };

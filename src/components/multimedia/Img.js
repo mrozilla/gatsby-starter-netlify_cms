@@ -6,14 +6,15 @@ import React, { useState } from 'react';
 import { string, number, shape, bool } from 'prop-types';
 
 import styled, { css } from 'styled-components';
-import { View } from '~components/primitives/View';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // helpers
 // ─────────────────────────────────────────────────────────────────────────────
 
-export const Picture = styled(View)`
+export const Picture = styled.picture`
   display: block;
+  position: relative;
+  overflow: hidden;
 
   &::before {
     content: '';
@@ -24,23 +25,16 @@ export const Picture = styled(View)`
   }
 `;
 
-Picture.defaultProps = {
-  as:       'picture',
-  overflow: 'hidden',
-  position: 'relative',
-};
+export const StyledImg = styled.img`
+  user-drag: none;
 
-export const StyledImg = styled(View)`
   position: absolute;
   display: block;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: ${({ objectFit }) => objectFit};
-  object-position: ${({ objectPosition }) => objectPosition};
-
-  user-drag: none;
+  object-fit: cover;
 
   ${({ isZoom }) => isZoom
     && css`
@@ -52,11 +46,6 @@ export const StyledImg = styled(View)`
       }
     `}
 `;
-
-StyledImg.defaultProps = {
-  as:        'img',
-  objectFit: 'cover',
-};
 
 // ─────────────────────────────────────────────────────────────────────────────
 // component
@@ -87,14 +76,14 @@ export default function Img({
       if (imgProps.isZoom) {
         const x = (event.offsetX / event.target.offsetWidth) * 100;
         const y = (event.offsetY / event.target.offsetHeight) * 100;
-        event.target.style.transformOrigin = `${x}% ${y}%`;
+        event.target.style.transformOrigin = `${x}% ${y}%`; // eslint-disable-line no-param-reassign
       }
 
       if (imgProps.isTilt) {
         const x = event.offsetX / event.target.offsetWidth - 0.5;
         const y = event.offsetY / event.target.offsetHeight - 0.5;
         const transform = `perspective(500px) rotateY(${x * 5}deg) rotateX(${y * -5}deg)`;
-        event.target.parentNode.style.transform = transform;
+        event.target.parentNode.style.transform = transform; // eslint-disable-line no-param-reassign
       }
     },
     onLoad: () => setIsLoaded(true),

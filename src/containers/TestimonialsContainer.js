@@ -54,36 +54,40 @@ export default function TestimonialsContainer({ title, subtitle, testimonials })
 
   return (
     <Section
-      gridColumn="2"
-      display="grid"
-      padding={{
-        xs: '5rem 0',
-        md: '10vh 0',
-      }}
-      boxShadow="0 -1px 0 0 hsla(var(--hsl-text),0.1)"
-      textAlign="center"
-      overflow="hidden" // TODO: see why the carousel UL stretches parent on mobile
+      css={`
+        grid-column: 2;
+        padding: var(--block-padding) 0;
+        box-shadow: 0 -1px 0 0 hsla(var(--hsl-text), 0.1);
+        text-align: center;
+        overflow: hidden; /* TODO: see why the carousel UL stretches parent on mobile */-
+      `}
     >
       {title && (
         <H1
-          fontSize={{
-            xs: '3rem',
-            lg: '4rem',
-          }}
-          lineHeight="1"
-          fontWeight="700"
+          css={`
+            font-size: 3rem;
+            line-height: 1;
+            font-weight: 700;
+
+            @media screen and (min-width: 1200px) {
+              font-size: 4rem;
+            }
+          `}
         >
           {title}
         </H1>
       )}
       {subtitle && (
         <P
-          fontSize="2.5rem"
-          lineHeight={{
-            xs: '2.5rem',
-            lg: '3rem',
-          }}
-          margin="2rem 0 0"
+          css={`
+            font-size: 2.5rem;
+            line-height: 2.5rem;
+            margin: 2rem 0 0;
+
+            @media screen and (min-width: 1200px) {
+              line-height: 3rem;
+            }
+          `}
         >
           {subtitle}
         </P>
@@ -91,9 +95,6 @@ export default function TestimonialsContainer({ title, subtitle, testimonials })
       {testimonials && (
         <Carousel
           visibleItems={Math.min(testimonials.length, visibleItems)}
-          itemProps={{
-            padding: '2rem',
-          }}
           loop={
             testimonials.length > visibleItems
               ? {
@@ -102,15 +103,27 @@ export default function TestimonialsContainer({ title, subtitle, testimonials })
               : {}
           }
           isControls={testimonials.length > visibleItems}
-          margin={{
-            xs: '2rem 3rem 0',
-            lg: '2rem 0 0',
-          }}
+          css={`
+            margin: 2rem 3rem 0;
+
+            & li {
+              padding: 2rem;
+            }
+
+            @media screen and (min-width: 1200px) {
+              2rem 0 0;
+            }
+          `}
         >
           {testimonials.map(item => (
             <Fragment key={item?.name}>
               {item?.testimonial && (
-                <Blockquote lineHeight="3rem" margin="0 0 2rem">
+                <Blockquote
+                  css={`
+                    line-height: 3rem;
+                    margin: 0 0 2rem;
+                  `}
+                >
                   {item?.testimonial}
                 </Blockquote>
               )}
@@ -118,19 +131,33 @@ export default function TestimonialsContainer({ title, subtitle, testimonials })
                 <Img
                   {...item?.image?.childImageSharp?.fluid}
                   alt={item?.name}
-                  maxWidth="8rem"
-                  margin="0 auto 1rem"
-                  backgroundColor="hsla(var(--hsl-text),0.05)"
-                  borderRadius="999px"
+                  css={`
+                    max-width: 8rem;
+                    margin: 0 auto 1rem;
+                    background-color: hsla(var(--hsl-text), 0.05);
+                    border-radius: 999px;
+                  `}
                 />
               )}
               {item?.name && (
-                <P lineHeight="2rem" fontSize="1.75rem" fontWeight="700">
+                <P
+                  css={`
+                    line-height: 2rem;
+                    font-size: 1.75rem;
+                    font-weight: 700;
+                  `}
+                >
                   {item?.name}
                 </P>
               )}
               {(item?.company || item?.name) && (
-                <P lineHeight="2rem" fontSize="1.75rem" margin="0.5rem 0 0">
+                <P
+                  css={`
+                    line-height: 2rem;
+                    font-size: 1.75rem;
+                    margin: 0.5rem 0 0;
+                  `}
+                >
                   {item?.position}
                   {item?.position && item?.company && ', '}
                   {item?.company}

@@ -20,6 +20,8 @@ import { Legend } from '~components/text/Legend';
 import { Tooltip } from '~components/text/Tooltip';
 import { Error } from '~components/text/Error';
 
+import { Icon } from '~components/multimedia/Icon';
+
 // ─────────────────────────────────────────────────────────────────────────────
 // component
 // ─────────────────────────────────────────────────────────────────────────────
@@ -44,6 +46,7 @@ export default forwardRef(
       readOnly,
       required,
       onChange,
+      css,
       ...rest
     },
     ref,
@@ -54,7 +57,13 @@ export default forwardRef(
           <>
             {label && <Legend>{label}</Legend>}
             {options.map(radio => (
-              <Label key={radio.value} htmlFor={radio.value} lineHeight="4rem">
+              <Label
+                key={radio.value}
+                htmlFor={radio.value}
+                css={`
+                  line-height: 4rem;
+                `}
+              >
                 <Radio
                   ref={ref}
                   id={radio.value}
@@ -79,7 +88,13 @@ export default forwardRef(
           <>
             {label && <Legend>{label}</Legend>}
             {options.map(checkbox => (
-              <Label key={checkbox.value} htmlFor={checkbox.value} lineHeight="4rem">
+              <Label
+                key={checkbox.value}
+                htmlFor={checkbox.value}
+                css={`
+                  line-height: 4rem;
+                `}
+              >
                 <Checkbox
                   ref={ref}
                   id={checkbox.value}
@@ -114,12 +129,27 @@ export default forwardRef(
                 ))}
               </optgroup>
             </Select>
-            <Label htmlFor={name} position="absolute" top="0" left="1rem">
+            <Label
+              htmlFor={name}
+              css={`
+                position: absolute;
+                top: 0;
+                left: 1rem;
+              `}
+            >
               {label}
             </Label>
-            <svg height="20" width="20" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
-              <path d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z" />
-            </svg>
+            <Icon
+              icon="FaChevronDown"
+              css={`
+                position: absolute;
+                top: 2.75rem;
+                right: 1rem;
+                pointer-events: none;
+                font-size: 1.75rem;
+                opacity: 0.25;
+              `}
+            />
             {description && <Tooltip>{description}</Tooltip>}
           </>
         );
@@ -136,7 +166,14 @@ export default forwardRef(
               autoComplete="off"
               {...{ name, value, placeholder, options, required, onChange }}
             />
-            <Label htmlFor={name} position="absolute" top="0" left="1rem">
+            <Label
+              htmlFor={name}
+              css={`
+                position: absolute;
+                top: 0;
+                left: 1rem;
+              `}
+            >
               {label}
             </Label>
             <datalist id={`datalist-${name}`}>
@@ -144,9 +181,17 @@ export default forwardRef(
                 <option key={option.name}>{option.name}</option>
               ))}
             </datalist>
-            <svg height="20" width="20" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
-              <path d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z" />
-            </svg>
+            <Icon
+              icon="FaChevronDown"
+              css={`
+                position: absolute;
+                top: 2.75rem;
+                right: 1rem;
+                pointer-events: none;
+                font-size: 1.75rem;
+                opacity: 0.25;
+              `}
+            />
             {error && <Error>{error}</Error>}
           </>
         );
@@ -168,7 +213,14 @@ export default forwardRef(
                 onChange,
               }}
             />
-            <Label htmlFor={name} position="absolute" top="0" left="1rem">
+            <Label
+              htmlFor={name}
+              css={`
+                position: absolute;
+                top: 0;
+                left: 1rem;
+              `}
+            >
               {label}
             </Label>
             {description && <Tooltip>{description}</Tooltip>}
@@ -198,7 +250,14 @@ export default forwardRef(
               }}
               {...rest}
             />
-            <Label htmlFor={name} position="absolute" top="0" left="1rem">
+            <Label
+              htmlFor={name}
+              css={`
+                position: absolute;
+                top: 0;
+                left: 1rem;
+              `}
+            >
               {label}
             </Label>
             {description && <Tooltip>{description}</Tooltip>}
@@ -227,7 +286,14 @@ export default forwardRef(
             }}
             {...rest}
           />
-          <Label htmlFor={name} position="absolute" top="0" left="1rem">
+          <Label
+            htmlFor={name}
+            css={`
+              position: absolute;
+              top: 0;
+              left: 1rem;
+            `}
+          >
             {label}
           </Label>
           {description && <Tooltip>{description}</Tooltip>}
@@ -237,11 +303,27 @@ export default forwardRef(
     };
 
     if (type === 'submit') {
-      return <Button as="input" type="submit" gridArea={name} value={label} />;
+      return (
+        <Button
+          as="input"
+          type="submit"
+          value={label}
+          look="primary"
+          css={`
+            grid-area: ${name};
+          `}
+        />
+      );
     }
 
     return (
-      <Fieldset gridArea={name} {...rest}>
+      <Fieldset
+        css={`
+          grid-area: ${name};
+          ${css}
+        `}
+        {...rest}
+      >
         {renderInput()}
       </Fieldset>
     );

@@ -24,9 +24,25 @@ export default function RootContainer({ children }) {
   return (
     <MDXProvider
       components={{
-        a:   props => <Link look="primary" {...props} />,
-        ul:  props => <Ul listStyle="disc" padding="0 0 0 1em" margin="0 0 2rem" {...props} />,
-        p:   props => <P margin="0 0 1rem" {...props} />,
+        a:  props => <Link look="primary" {...props} />,
+        ul: props => (
+          <Ul
+            css={`
+              list-style: disc;
+              padding: 0 0 0 1em;
+              margin: 0 0 2rem;
+            `}
+            {...props}
+          />
+        ),
+        p: props => (
+          <P
+            css={`
+              margin: 0 0 1rem;
+            `}
+            {...props}
+          />
+        ),
         pre: Pre,
       }}
     >

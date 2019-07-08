@@ -4,13 +4,11 @@
 
 import styled from 'styled-components';
 
-import { View } from '~components/primitives/View';
-
 // ─────────────────────────────────────────────────────────────────────────────
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-export const Header = styled(View)`
+export const Header = styled.header`
   position: fixed;
   z-index: var(--z-index-header);
   top: 0;
@@ -22,4 +20,3 @@ export const Header = styled(View)`
 
   padding: 0 var(--width-outside);
 `;
-Header.defaultProps = { as: 'header' };
