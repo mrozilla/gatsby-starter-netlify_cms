@@ -141,7 +141,8 @@ collections:
 
                   - name: body
                     label: "Body"
-                    widget: markdown
+                    fields:
+                      - { name: body, widget: markdown }
 
           - name: testimonials
             label: "Testimonials"
