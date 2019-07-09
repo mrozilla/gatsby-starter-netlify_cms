@@ -4,22 +4,27 @@
 
 import styled, { css } from 'styled-components';
 
-import { Text } from '~components/primitives/Text';
-
 // ─────────────────────────────────────────────────────────────────────────────
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-export const Button = styled(Text)`
+export const Button = styled.button`
   -webkit-appearance: none;
   border: none;
   outline: none;
   background-color: transparent;
   text-decoration: none !important; /* reset link buttons styling */
 
-  cursor: pointer;
+  display: inline-block;
+  padding: 1.5rem 4rem;
+
+  font-weight: 700;
+  text-align: center;
   line-height: 1em;
   letter-spacing: 0.05em;
+  border-radius: 0.5rem;
+  cursor: pointer;
+
   transition: all 250ms;
 
   &:disabled {
@@ -122,12 +127,3 @@ export const Button = styled(Text)`
       }
     `};
 `;
-
-Button.defaultProps = {
-  as:           'button',
-  display:      'inline-block',
-  fontWeight:   '700',
-  padding:      '1.5rem 4rem',
-  borderRadius: '0.5rem',
-  textAlign:    'center',
-};

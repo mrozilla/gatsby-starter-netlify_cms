@@ -27,6 +27,8 @@ export const Radio = styled.input.attrs({ type: 'radio' })`
   box-shadow: var(--shadow);
   border-radius: 50%;
 
+  transition: box-shadow 250ms;
+
   & ~ ${Text} {
     cursor: pointer;
     font-size: 2rem;
@@ -37,7 +39,7 @@ export const Radio = styled.input.attrs({ type: 'radio' })`
   &:not(:disabled) {
     &:hover,
     &:focus {
-      box-shadow: inset 0 0 0 2px var(--color-info);
+      box-shadow: inset 0 0 0 2px var(--color-brand-primary);
 
       & ~ ${Text} {
         color: var(--color-text);
@@ -45,10 +47,14 @@ export const Radio = styled.input.attrs({ type: 'radio' })`
     }
 
     &:checked {
-      box-shadow: inset 0 0 0 0.3em var(--color-info);
+      box-shadow: inset 0 0 0 0.3em var(--color-brand-primary);
 
       & ~ ${Text} {
         color: var(--color-text);
+      }
+
+      &:focus ~ ${Text} {
+        color: var(--color-brand-primary);
       }
     }
   }

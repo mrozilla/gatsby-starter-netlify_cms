@@ -5,9 +5,8 @@
 import React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 import MDXRenderer from 'gatsby-mdx/mdx-renderer';
-import { FaFacebookSquare, FaTwitterSquare, FaYoutubeSquare } from 'react-icons/fa';
 
-import { Footer, Section, H1, H2, P, Ul, Li, Link, Form, Input, Button, Logo } from '~components';
+import { Footer, Section, H2, Ul, Li, Link, Logo } from '~components';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // query
@@ -18,7 +17,6 @@ const query = graphql`
     footer: mdx(fields: { sourceName: { eq: "menus" } }, frontmatter: { title: { eq: "Footer" } }) {
       frontmatter {
         links {
-          # mdx
           type
           url
           title
@@ -37,20 +35,32 @@ const query = graphql`
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-
 export default function FooterContainer() {
   const { footer } = useStaticQuery(query);
 
   const renderLinks = (item) => {
     if (item.type === 'markdown' || item.type === 'mdx') {
       return (
-        <Li key={item.title} fontSize="1.75rem">
-          <Link to="/" display="block" margin="0 0 2rem">
-            <Logo fontSize="2rem" />
+        <Li
+          key={item.title}
+          css={`
+            font-size: 1.75rem;
+          `}
+        >
+          <Link
+            to="/"
+            css={`
+              display: block;
+              margin: 0 0 2rem;
+            `}
+          >
+            <Logo
+              css={`
+                font-size: 2rem;
+              `}
+            />
           </Link>
-          <MDXRenderer key={item.mdx}>
-            {item.mdx}
-          </MDXRenderer>
+          <MDXRenderer key={item.mdx}>{item.mdx}</MDXRenderer>
         </Li>
       );
     }
@@ -58,18 +68,39 @@ export default function FooterContainer() {
     if (item.type === 'nested') {
       return (
         <Li key={item.title}>
-          <H2 fontWeight="700" margin="0 0 2rem">
+          <H2
+            css={`
+              font-weight: 700;
+              margin: 0 0 2rem;
+            `}
+          >
             {item.title}
           </H2>
-          <Ul gridGap="1rem">
+          <Ul
+            css={`
+              grid-gap: 1rem;
+            `}
+          >
             {item.links.map(link => (
               <Li key={link.url || link.text}>
                 {link.url ? (
-                  <Link to={link.url} look="tertiary" fontSize="1.75rem">
+                  <Link
+                    to={link.url}
+                    look="tertiary"
+                    css={`
+                      font-size: 1.75rem;
+                    `}
+                  >
                     {link.text}
                   </Link>
                 ) : (
-                  <H2 fontWeight="700">{link.text}</H2>
+                  <H2
+                    css={`
+                      font-weight: 700;
+                    `}
+                  >
+                    {link.text}
+                  </H2>
                 )}
               </Li>
             ))}
@@ -85,13 +116,25 @@ export default function FooterContainer() {
     <Footer>
       <Section
         as="nav"
-        padding="8rem var(--width-outside) 16rem"
-        textAlign={{
-          xs: 'center',
-          md: 'unset',
-        }}
+        css={`
+          padding: var(--block-padding) var(--width-outside) calc(var(--block-padding));
+          text-align: center;
+
+          @media screen and (min-width: 900px) {
+            text-align: unset;
+          }
+        `}
       >
-        <Ul gridAutoFlow={{ md: 'column' }} gridAutoColumns="1fr" gridGap="4rem 8rem">
+        <Ul
+          css={`
+            grid-auto-columns: 1fr;
+            grid-gap: 4rem 8rem;
+
+            @media screen and (min-width: 900px) {
+              grid-auto-flow: column;
+            }
+          `}
+        >
           {footer?.frontmatter?.links?.map(renderLinks)}
         </Ul>
       </Section>

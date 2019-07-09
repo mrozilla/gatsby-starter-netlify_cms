@@ -39,51 +39,70 @@ export const fragment = graphql`
 export default function LogosContainer({ title, subtitle, logos }) {
   return (
     <Section
-      gridColumn="2"
-      display="grid"
-      padding={{
-        xs: '5rem 0',
-        md: '10vh 0',
-      }}
-      boxShadow="0 -1px 0 0 hsla(var(--hsl-text),0.1)"
-      textAlign="center"
+      css={`
+        grid-column: 2;
+        padding: 5rem 0;
+        box-shadow: 0 -1px 0 0 hsla(var(--hsl-text), 0.1);
+        text-align: center;
+      `}
     >
       {title && (
         <H1
-          fontSize={{
-            xs: '3rem',
-            lg: '4rem',
-          }}
-          lineHeight="1"
-          fontWeight="700"
+          css={`
+            font-size: 3rem;
+            line-height: 1;
+            font-size: 700;
+
+            @media screen and (min-width: 1200px) {
+              font-size: 4rem;
+            }
+          `}
         >
           {title}
         </H1>
       )}
       {subtitle && (
         <P
-          fontSize="2.5rem"
-          lineHeight={{
-            xs: '2.5rem',
-            lg: '3rem',
-          }}
-          margin="2rem 0 0"
+          css={`
+            font-size: 2.5rem;
+            line-height: 2.5rem;
+            margin: 2rem 0 0;
+
+            @media screen and (min-width: 1200px) {
+              line-height: 3rem;
+            }
+          `}
         >
           {subtitle}
         </P>
       )}
       {logos && (
-        <Ul display="flex" flexWrap="wrap" justifyContent="center" margin="3rem -1rem -1rem">
+        <Ul
+          css={`
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 3rem -1rem -1rem;
+          `}
+        >
           {logos.map(company => (
-            <Li key={company.url} flex="0 0 25rem" margin="1rem">
+            <Li
+              key={company.url}
+              css={`
+                flex: 0 0 25rem;
+                margin: 1rem;
+              `}
+            >
               <Link to={company.url}>
                 <Img
                   {...company?.image?.childImageSharp?.fluid}
                   alt={company.name}
                   ratio={1 / 3}
-                  imgProps={{
-                    objectFit: 'contain',
-                  }}
+                  css={`
+                    & > img {
+                      object-fit: contain;
+                    }
+                  `}
                 />
               </Link>
             </Li>

@@ -41,22 +41,26 @@
   --z-index-modal: 1030;
 
   --width-outside: 2rem;
+  --block-padding: 5rem;
 }
 
 @media screen and (min-width: 600px) {
   :root {
     --width-outside: 10rem;
+    --block-padding: 5vh;
   }
 }
 
 @media screen and (min-width: 900px) {
   :root {
     --width-outside: 20rem;
+    --block-padding: 10vh;
   }
 }
 @media screen and (min-width: 1200px) {
   :root {
     --width-outside: 30rem;
+    --block-padding: 15vh;
   }
 }
 

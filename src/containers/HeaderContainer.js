@@ -48,10 +48,20 @@ export default function HeaderContainer() {
   return (
     <Header>
       <Nav>
-        <Link to="/" padding="4rem 0">
+        <Link
+          to="/"
+          css={`
+            padding: 4rem 0;
+          `}
+        >
           <Logo />
         </Link>
-        <Nav.Toggle top="2.5rem" right="-2rem" />
+        <Nav.Toggle
+          css={`
+            top: 2.5rem;
+            right: -2rem;
+          `}
+        />
         <Nav.List>
           {header?.frontmatter?.links.map((item) => {
             if (item.type === 'link') {
@@ -60,11 +70,14 @@ export default function HeaderContainer() {
                   <Link
                     to={item.url}
                     look="tertiary"
-                    display="block"
-                    padding={{
-                      xs: '1rem',
-                      lg: '4rem 2rem',
-                    }}
+                    css={`
+                      display: block;
+                      padding: 1rem;
+
+                      @media screen and (min-width: 1200px) {
+                        4rem 2rem;
+                      }
+                    `}
                   >
                     {item.text}
                   </Link>
@@ -74,8 +87,20 @@ export default function HeaderContainer() {
 
             if (item.type === 'button') {
               return (
-                <Nav.List.Item key={item.url} padding="1rem 0">
-                  <Button as={Link} to={item.url} look={item.look} padding="1rem 4rem">
+                <Nav.List.Item
+                  key={item.url}
+                  css={`
+                    padding: 1rem 0;
+                  `}
+                >
+                  <Button
+                    as={Link}
+                    to={item.url}
+                    look={item.look}
+                    css={`
+                      padding: 1rem 4rem;
+                    `}
+                  >
                     {item.text}
                   </Button>
                 </Nav.List.Item>
@@ -87,29 +112,41 @@ export default function HeaderContainer() {
                 <Nav.List.Item key={item.title}>
                   <H2
                     tabIndex="0"
-                    outline="none"
-                    padding={{
-                      xs: '1rem',
-                      lg: '4rem 2rem',
-                    }}
-                    hover={{
-                      color: 'var(--color-brand-primary)',
-                    }}
+                    css={`
+                      outline: none;
+                      padding: 1rem;
+
+                      &:hover {
+                        color: var(--color-brand-primary);
+                      }
+
+                      @media screen and (min-width: 1200px) {
+                        padding: 4rem 2rem;
+                      }
+                    `}
                   >
                     {item.title}
                   </H2>
-                  <Nav.Toggle top="-1rem" right="-2rem" />
+                  <Nav.Toggle
+                    css={`
+                      top: -1rem;
+                      right: -2rem;
+                    `}
+                  />
                   <Nav.List>
                     {item.links.map(link => (
                       <Nav.List.Item key={link.url}>
                         <Link
                           to={link.url}
                           look="tertiary"
-                          display="block"
-                          padding={{
-                            xs: '1rem',
-                            lg: '1rem 4rem',
-                          }}
+                          css={`
+                            display: block;
+                            padding: 1rem;
+
+                            @media screen and (min-width: 1200px) {
+                              padding: 1rem 4rem;
+                            }
+                          `}
                         >
                           {link.text}
                         </Link>
