@@ -2,18 +2,20 @@
 // import
 // ─────────────────────────────────────────────────────────────────────────────
 
-const { onCreateBabelConfig } = require('./gatsby/onCreateBabelConfig');
-const { onCreateWebpackConfig } = require('./gatsby/onCreateWebpackConfig');
-const { onCreateNode } = require('./gatsby/onCreateNode');
-const { onCreateDevServer } = require('./gatsby/onCreateDevServer');
-const { createPages } = require('./gatsby/createPages');
+const path = require('path');
 
 // ─────────────────────────────────────────────────────────────────────────────
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-exports.onCreateBabelConfig = onCreateBabelConfig; // babel
-exports.onCreateWebpackConfig = onCreateWebpackConfig; // aliases
-exports.onCreateNode = onCreateNode; // node transformations
-exports.createPages = createPages; // automatic pages
-exports.onCreateDevServer = onCreateDevServer; // netlify CMS setup
+exports.onCreateWebpackConfig = ({ actions }) => {
+  actions.setWebpackConfig({
+    resolve: {
+      alias: {
+        '~components': path.resolve(__dirname, '../src/components'),
+        '~containers': path.resolve(__dirname, '../src/containers'),
+        '~utils':      path.resolve(__dirname, '../src/utils'),
+      },
+    },
+  });
+};
