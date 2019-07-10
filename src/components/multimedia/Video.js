@@ -2,12 +2,13 @@
 // import
 // ─────────────────────────────────────────────────────────────────────────────
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { FaPlayCircle, FaTimesCircle } from 'react-icons/fa';
 import { string } from 'prop-types';
 
 import { Button } from '~components/interactive/Button';
 import { Aside } from '~components/layout/Aside';
+import { useEventListener } from '~utils';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // component
@@ -16,15 +17,11 @@ import { Aside } from '~components/layout/Aside';
 export default function Video({ src, css, ...rest }) {
   const [isFullscreen, setIsFullscreen] = useState(false);
 
-  useEffect(() => {
-    const handleKeyDown = (event) => {
-      if (event.key === 'Escape') {
-        setIsFullscreen(false);
-      }
-    };
-    document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
-  }, []);
+  useEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      setIsFullscreen(false);
+    }
+  });
 
   const handleBackgroundClick = (event) => {
     if (event.target === event.currentTarget) {

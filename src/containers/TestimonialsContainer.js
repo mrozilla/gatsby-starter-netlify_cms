@@ -2,12 +2,13 @@
 // import
 // ─────────────────────────────────────────────────────────────────────────────
 
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, Fragment } from 'react';
 import { graphql } from 'gatsby';
 import MDXRenderer from 'gatsby-mdx/mdx-renderer';
 import { shape, string, arrayOf } from 'prop-types';
 
 import { H1, Section, P, Img, Carousel, Blockquote } from '~components';
+import { useEventListener } from '~utils';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // query
@@ -44,14 +45,9 @@ export default function TestimonialsContainer({ title, subtitle, mdx, testimonia
     document && document.body.clientWidth < 600 ? 1 : 3,
   );
 
-  const handleResize = () => {
+  useEventListener('resize', () => {
     setVisibleItems(document.body.clientWidth < 600 ? 1 : 3);
-  };
-
-  useEffect(() => {
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  });
 
   return (
     <Section

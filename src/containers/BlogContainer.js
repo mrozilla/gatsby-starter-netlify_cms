@@ -108,7 +108,6 @@ export default function BlogContainer({ title, subtitle }) {
             >
               <Link
                 to={post.frontmatter.meta.permalink}
-                // look="tertiary"
                 css={`
                   display: ${i === 0 ? 'grid' : ''};
                   grid-template-columns: 2fr 1fr;
@@ -127,6 +126,7 @@ export default function BlogContainer({ title, subtitle }) {
               >
                 <Img
                   {...post.frontmatter.meta.ogImage?.childImageSharp?.fluid}
+                  alt={post.frontmatter.title}
                   ratio={1 / 2}
                   css={`
                     grid-row: span 4;
