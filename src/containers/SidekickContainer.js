@@ -4,6 +4,7 @@
 
 import React from 'react';
 import { graphql } from 'gatsby';
+import MDXRenderer from 'gatsby-mdx/mdx-renderer';
 import { shape, string, arrayOf, object } from 'prop-types';
 
 import { H1, H2, Section, P, Ul, Li, Icon, Button, Link, Img, View } from '~components';
@@ -18,6 +19,7 @@ export const fragment = graphql`
     icon
     title
     subtitle
+    mdx
     image {
       childImageSharp {
         fluid(maxWidth: 600) {
@@ -28,10 +30,10 @@ export const fragment = graphql`
     layout
     blocks {
       type
-      list {
+      grid {
         icon
         title
-        body
+        mdx
         image {
           childImageSharp {
             fluid(maxWidth: 300) {
@@ -40,7 +42,6 @@ export const fragment = graphql`
           }
         }
       }
-      layout
       buttons {
         title
         url
@@ -50,29 +51,31 @@ export const fragment = graphql`
   }
 `;
 
+export function Test() {
+  return <p>Test</p>;
+}
+
 // ─────────────────────────────────────────────────────────────────────────────
 // helpers
 // ─────────────────────────────────────────────────────────────────────────────
 
 function renderBlocks(blocks, layout) {
   return blocks.map((block) => {
-    if (block.type === 'list') {
+    if (block.type === 'grid') {
       return (
         <Ul
           key={`${block.type}-${block.layout}`}
           css={`
-            grid-template-columns: ${block.layout === 'grid'
-              && `repeat(auto-fit, minmax(${layout === 'full' ? '30rem' : '16ch'}, 1fr))`};
-            grid-gap: ${block.layout === 'grid'
-                ? `${layout === 'full' ? '3rem 4rem' : '3rem 1rem'}`
-                : '1rem'};
-            margin: ${block.layout === 'grid' ? '4rem 0 0' : '2rem 0 0'};
-            list-style: ${block.layout === 'list' ? 'disc' : 'none'};
-            padding: ${block.layout === 'list' && '0 0 0 1em'};
+            grid-template-columns: repeat(
+              auto-fit,
+              minmax(${layout === 'full' ? '30rem' : '16ch'}, 1fr)
+            );
+            grid-gap: ${layout === 'full' ? '3rem 4rem' : '3rem 1rem'};
+            margin: 4rem 0 0;
           `}
         >
-          {block.list.map(item => (
-            <Li key={item.title || item.icon || item.image || item.body}>
+          {block.grid.map(item => (
+            <Li key={item.title || item.icon || item.image || item.mdx}>
               {item.icon && (
                 <Icon
                   icon={item.icon}
@@ -101,20 +104,74 @@ function renderBlocks(blocks, layout) {
                   {item.title}
                 </H2>
               )}
-              {item.body && (
-                <P
-                  css={`
-                    line-height: 2.5rem;
-                  `}
-                >
-                  {item.body}
-                </P>
-              )}
+              {item.mdx && <MDXRenderer>{item.mdx}</MDXRenderer>}
             </Li>
           ))}
         </Ul>
       );
     }
+
+    // if (block.type === 'list') {
+    //   return (
+    //     <Ul key={`${block.type}-${block.layout}`} css={`
+    //       grid-gap: 1rem;
+    //       margin: 2rem 0 0;
+    //       list-style: disc;
+    //       padding:
+    //     `}></Ul>
+    //   )
+    // }
+    // if (block.type === 'list') {
+    //   return (
+    //     <Ul
+    //       key={`${block.type}-${block.layout}`}
+    //       css={`
+    //         grid-template-columns: ${block.layout === 'grid'
+    //           && `repeat(auto-fit, minmax(${layout === 'full' ? '30rem' : '16ch'}, 1fr))`};
+    //         grid-gap: ${block.layout === 'grid'
+    //             ? `${layout === 'full' ? '3rem 4rem' : '3rem 1rem'}`
+    //             : '1rem'};
+    //         margin: ${block.layout === 'grid' ? '4rem 0 0' : '2rem 0 0'};
+    //         list-style: ${block.layout === 'list' ? 'disc' : 'none'};
+    //         padding: ${block.layout === 'list' && '0 0 0 1em'};
+    //       `}
+    //     >
+    //       {block.list.map(item => (
+    //         <Li key={item.title || item.icon || item.image || item.mdx}>
+    //           {item.icon && (
+    //             <Icon
+    //               icon={item.icon}
+    //               css={`
+    //                 font-size: 4rem;
+    //                 line-height: 1;
+    //                 color: var(--color-brand-primary);
+    //               `}
+    //             />
+    //           )}
+    //           {item.image && (
+    //             <Img
+    //               {...item.image?.childImageSharp?.fluid}
+    //               alt={item.title}
+    //               css={`
+    //                 margin: 0 25%;
+    //               `}
+    //             />
+    //           )}
+    //           {item.title && (
+    //             <H2
+    //               css={`
+    //                 font-weight: 700;
+    //               `}
+    //             >
+    //               {item.title}
+    //             </H2>
+    //           )}
+    //           {item.mdx && <MDXRenderer>{item.mdx}</MDXRenderer>}
+    //         </Li>
+    //       ))}
+    //     </Ul>
+    //   );
+    // }
 
     if (block.type === 'buttons') {
       return (
@@ -150,7 +207,7 @@ function renderBlocks(blocks, layout) {
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-export default function SidekickContainer({ icon, title, subtitle, image, layout, blocks }) {
+export default function SidekickContainer({ icon, title, subtitle, mdx, image, layout, blocks }) {
   const gridTemplateColumns = {
     left:  '3fr 4fr',
     right: '4fr 3fr',
@@ -224,7 +281,7 @@ export default function SidekickContainer({ icon, title, subtitle, image, layout
                 font-size: 2.5rem;
                 line-height: 2.5rem;
                 max-width: 50ch;
-                margin: 2rem auto 0;
+                margin: 2rem auto;
 
                 @media screen and (min-width: 1200px) {
                   line-height: 4rem;
@@ -234,6 +291,7 @@ export default function SidekickContainer({ icon, title, subtitle, image, layout
               {subtitle}
             </P>
           )}
+          {mdx && <MDXRenderer>{mdx}</MDXRenderer>}
           {blocks && renderBlocks(blocks, layout)}
         </View>
       }
@@ -243,8 +301,9 @@ export default function SidekickContainer({ icon, title, subtitle, image, layout
 
 SidekickContainer.propTypes = {
   icon:     string,
-  title:    string.isRequired,
+  title:    string,
   subtitle: string,
+  mdx:      string,
   layout:   string,
   blocks:   arrayOf(
     shape({
@@ -258,7 +317,9 @@ SidekickContainer.propTypes = {
 
 SidekickContainer.defaultProps = {
   icon:     '',
+  title:    '',
   subtitle: '',
+  mdx:      '',
   layout:   'left',
   blocks:   [],
   image:    null,

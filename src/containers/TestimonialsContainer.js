@@ -4,6 +4,7 @@
 
 import React, { useState, useEffect, Fragment } from 'react';
 import { graphql } from 'gatsby';
+import MDXRenderer from 'gatsby-mdx/mdx-renderer';
 import { shape, string, arrayOf } from 'prop-types';
 
 import { H1, Section, P, Img, Carousel, Blockquote } from '~components';
@@ -17,7 +18,7 @@ export const fragment = graphql`
     type
     title
     subtitle
-    # body
+    mdx
     testimonials {
       name
       position
@@ -38,7 +39,7 @@ export const fragment = graphql`
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-export default function TestimonialsContainer({ title, subtitle, testimonials }) {
+export default function TestimonialsContainer({ title, subtitle, mdx, testimonials }) {
   const [visibleItems, setVisibleItems] = useState(
     document && document.body.clientWidth < 600 ? 1 : 3,
   );
@@ -82,7 +83,7 @@ export default function TestimonialsContainer({ title, subtitle, testimonials })
           css={`
             font-size: 2.5rem;
             line-height: 2.5rem;
-            margin: 2rem 0 0;
+            margin: 2rem 0;
 
             @media screen and (min-width: 1200px) {
               line-height: 3rem;
@@ -92,6 +93,7 @@ export default function TestimonialsContainer({ title, subtitle, testimonials })
           {subtitle}
         </P>
       )}
+      {mdx && <MDXRenderer>{mdx}</MDXRenderer>}
       {testimonials && (
         <Carousel
           visibleItems={Math.min(testimonials.length, visibleItems)}
@@ -174,6 +176,7 @@ export default function TestimonialsContainer({ title, subtitle, testimonials })
 TestimonialsContainer.propTypes = {
   title:        string,
   subtitle:     string,
+  mdx:          string,
   testimonials: arrayOf(
     shape({
       name:         string,
@@ -188,5 +191,6 @@ TestimonialsContainer.propTypes = {
 TestimonialsContainer.defaultProps = {
   title:        '',
   subtitle:     '',
+  mdx:          '',
   testimonials: [],
 };

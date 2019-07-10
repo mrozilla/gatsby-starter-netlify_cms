@@ -4,6 +4,7 @@
 
 import React from 'react';
 import { graphql } from 'gatsby';
+import MDXRenderer from 'gatsby-mdx/mdx-renderer';
 import { shape, string, arrayOf } from 'prop-types';
 
 import { H1, Section, P, Ul, Li, Link, Img } from '~components';
@@ -17,7 +18,7 @@ export const fragment = graphql`
     type
     title
     subtitle
-    # body
+    mdx
     logos {
       name
       url
@@ -36,7 +37,7 @@ export const fragment = graphql`
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-export default function LogosContainer({ title, subtitle, logos }) {
+export default function LogosContainer({ title, subtitle, mdx, logos }) {
   return (
     <Section
       css={`
@@ -51,7 +52,7 @@ export default function LogosContainer({ title, subtitle, logos }) {
           css={`
             font-size: 3rem;
             line-height: 1;
-            font-size: 700;
+            font-weight: 700;
 
             @media screen and (min-width: 1200px) {
               font-size: 4rem;
@@ -66,7 +67,7 @@ export default function LogosContainer({ title, subtitle, logos }) {
           css={`
             font-size: 2.5rem;
             line-height: 2.5rem;
-            margin: 2rem 0 0;
+            margin: 2rem 0;
 
             @media screen and (min-width: 1200px) {
               line-height: 3rem;
@@ -76,6 +77,7 @@ export default function LogosContainer({ title, subtitle, logos }) {
           {subtitle}
         </P>
       )}
+      {mdx && <MDXRenderer>{mdx}</MDXRenderer>}
       {logos && (
         <Ul
           css={`
@@ -116,6 +118,7 @@ export default function LogosContainer({ title, subtitle, logos }) {
 LogosContainer.propTypes = {
   title:    string,
   subtitle: string,
+  mdx:      string,
   logos:    arrayOf(
     shape({
       name: string,
@@ -128,5 +131,6 @@ LogosContainer.propTypes = {
 LogosContainer.defaultProps = {
   title:    '',
   subtitle: '',
+  mdx:      '',
   logos:    [],
 };

@@ -75,7 +75,7 @@ export default function HeaderContainer() {
                       padding: 1rem;
 
                       @media screen and (min-width: 1200px) {
-                        4rem 2rem;
+                        padding: 4rem 2rem;
                       }
                     `}
                   >

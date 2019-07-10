@@ -21,24 +21,23 @@ blocks:
     title: Long headline that can wrap on two lines
     type: hero
   - blocks:
-      - layout: grid
-        list:
-          - body: >-
+      - grid:
+          - mdx: >-
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua.
             image: /assets/illustration.png
             title: Alpha
-          - body: >-
+          - mdx: >-
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua.
             image: /assets/illustration.png
             title: Beta
-          - body: >-
+          - mdx: >-
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua.
             image: /assets/illustration.png
             title: Gamma
-        type: list
+        type: grid
     layout: full
     subtitle: >-
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
@@ -58,18 +57,17 @@ blocks:
       - image: /assets/logo.png
         name: Doe Capital
         url: "https://www.example.com"
-    subtitle: Short headline that just fits
+    title: Short headline that just fits
     type: logos
   - blocks:
-      - layout: grid
-        list:
-          - body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+      - grid:
+          - mdx: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
             icon: FaAward
             title: Alpha
-          - body: Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
+          - mdx: Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
             icon: FaTrophy
             title: Beta
-        type: list
+        type: grid
     icon: FaCreditCard
     image: /assets/illustration.png
     layout: right
@@ -79,13 +77,6 @@ blocks:
     title: Longer headline that can wrap on two lines and perhaps even more
     type: sidekick
   - blocks:
-      - layout: list
-        list:
-          - body: Lorem ipsum dolor sit amet
-          - body: Consectetur adipiscing elit
-          - body: Sed do eiusmod tempor incididunt
-          - body: Ut labore et dolore magna aliqua
-        type: list
       - buttons:
           - look: primary
             title: Primary CTA
@@ -95,6 +86,14 @@ blocks:
             url: /login/
         type: buttons
     image: /assets/illustration.png
+    mdx: >-
+      - Lorem ipsum dolor ist amet
+
+      - Consectetur adipiscing elit
+
+      - Sed do eiusmod tempor incididunt
+
+      - Ut labore et dolor magna aliqua
     layout: left
     subtitle: >-
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
@@ -129,7 +128,6 @@ blocks:
       - currency: EUR
         mdx: |-
           Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-
           - Lorem ipsum dolor sit amet
           - Consectetur adipiscing elit
         price:
@@ -139,7 +137,6 @@ blocks:
       - currency: EUR
         mdx: |-
           Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-
           - Lorem ipsum dolor sit amet
           - Consectetur adipiscing elit
           - Sed do eiusmod tempor incididunt
@@ -150,7 +147,6 @@ blocks:
       - currency: EUR
         mdx: |-
           Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-
           - Lorem ipsum dolor sit amet
           - Consectetur adipiscing elit
           - Sed do eiusmod tempor incididunt

@@ -86,7 +86,7 @@ collections:
                 required: false
               - name: title
               - { name: subtitle, required: false }
-              - { name: body, required: false }
+              - { name: mdx, required: false }
               - name: buttons
                 widget: list
                 fields:
@@ -107,25 +107,21 @@ collections:
               - { name: image, widget: image, required: false }
               - name: layout
                 widget: select
-                options: ["left", "right"]
+                options: ["left", "right", "full"]
                 default: left
               - name: blocks
                 widget: list
                 types:
-                  - name: list
-                    label: "List"
+                  - name: grid
+                    label: "Grid"
                     fields:
-                      - name: list
+                      - name: grid
                         widget: list
                         fields:
                           - { name: icon, required: false }
                           - { name: title, required: false }
-                          - { name: body, required: false }
+                          - { name: mdx, required: false }
                           - { name: image, widget: image, required: false }
-                      - name: layout
-                        widget: select
-                        options: ["list", "grid"]
-                        default: list
 
                   - name: buttons
                     label: "Buttons"
@@ -142,14 +138,14 @@ collections:
                   - name: body
                     label: "Body"
                     fields:
-                      - { name: body, widget: markdown }
+                      - { name: mdx, widget: markdown }
 
           - name: testimonials
             label: "Testimonials"
             fields:
               - { name: title, required: false }
               - { name: subtitle, required: false }
-              - { name: body, required: false }
+              - { name: mdx, required: false }
               - name: testimonials
                 widget: list
                 fields:
@@ -164,7 +160,7 @@ collections:
             fields:
               - { name: title, required: false }
               - { name: subtitle, required: false }
-              - { name: body, required: false }
+              - { name: mdx, required: false }
               - name: logos
                 widget: list
                 fields:
@@ -177,7 +173,7 @@ collections:
             fields:
               - { name: title, required: false }
               - { name: subtitle, required: false }
-              - { name: body, required: false }
+              - { name: mdx, required: false }
               - name: pricing
                 widget: list
                 fields:
@@ -210,4 +206,4 @@ collections:
           - { name: ogImage, widget: image, default: /assets/og.png }
       - { name: tags, required: false }
       - { name: highlighted, widget: boolean, default: false }
-      - { name: body, widget: markdown }
+      - { name: mdx, widget: markdown }
