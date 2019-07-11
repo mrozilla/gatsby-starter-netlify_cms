@@ -131,7 +131,7 @@ export default function BlogContainer({ title, subtitle }) {
                   css={`
                     grid-row: span 4;
                     margin: ${i === 0 ? '' : '0 0 2rem'};
-                    box-shadow: inset 0 0 0 1px hsla(var(--hsl-text), 0.1);
+                    box-shadow: inset 0 0 0 2px hsla(var(--hsl-text), 0.05);
                     border-radius: 0.5rem;
 
                     & > img {

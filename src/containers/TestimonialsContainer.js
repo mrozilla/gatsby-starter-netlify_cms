@@ -54,7 +54,7 @@ export default function TestimonialsContainer({ title, subtitle, mdx, testimonia
       css={`
         grid-column: 2;
         padding: var(--block-padding) 0;
-        box-shadow: 0 -1px 0 0 hsla(var(--hsl-text), 0.1);
+        box-shadow: inset 0 2px 0 0 hsla(var(--hsl-text), 0.05);
         text-align: center;
         overflow: hidden; /* TODO: see why the carousel UL stretches parent on mobile */-
       `}
