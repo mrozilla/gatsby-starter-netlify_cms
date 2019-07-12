@@ -9,7 +9,6 @@ import { useRef, useEffect } from 'react';
 // ─────────────────────────────────────────────────────────────────────────────
 
 export default function useEventListener(eventName, handler, element = window) {
-  // Create a ref that stores handler
   const savedHandler = useRef();
 
   // Update ref.current value if handler changes.
@@ -23,9 +22,7 @@ export default function useEventListener(eventName, handler, element = window) {
   useEffect(
     () => {
       // Make sure element supports addEventListener
-      // On
-      const isSupported = element && element.addEventListener;
-      if (!isSupported) {
+      if (!(element && element.addEventListener)) {
         return undefined;
       }
 
@@ -35,7 +32,6 @@ export default function useEventListener(eventName, handler, element = window) {
       // Add event listener
       element.addEventListener(eventName, eventListener);
 
-      // Remove event listener on cleanup
       return () => {
         element.removeEventListener(eventName, eventListener);
       };
