@@ -8,6 +8,7 @@ import MDXRenderer from 'gatsby-mdx/mdx-renderer';
 import { shape, string, arrayOf } from 'prop-types';
 
 import { H1, Section, P, Ul, Li, Link, Img } from '~components';
+import { useOnScreen } from '~utils';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // query
@@ -38,12 +39,15 @@ export const fragment = graphql`
 // ─────────────────────────────────────────────────────────────────────────────
 
 export default function LogosContainer({ title, subtitle, mdx, logos }) {
+  const [ref, isIntersecting] = useOnScreen({ rootMargin: '-25%' });
+
   return (
     <Section
+      ref={ref}
       css={`
         grid-column: 2;
         padding: 5rem 0;
-        box-shadow: 0 -1px 0 0 hsla(var(--hsl-text), 0.1);
+        box-shadow: inset 0 2px 0 0 hsla(var(--hsl-text), 0.05);
         text-align: center;
       `}
     >
@@ -87,19 +91,24 @@ export default function LogosContainer({ title, subtitle, mdx, logos }) {
             margin: 3rem -1rem -1rem;
           `}
         >
-          {logos.map(company => (
+          {logos.map((company, i) => (
             <Li
               key={company.url}
               css={`
                 flex: 0 0 25rem;
                 margin: 1rem;
+
+                opacity: ${isIntersecting ? '1' : '0'};
+                transform: scale(${isIntersecting ? '1' : '0.9'});
+                transition: opacity 250ms, transform 250ms;
+                transition-delay: calc(100ms * ${i});
               `}
             >
               <Link to={company.url}>
                 <Img
                   {...company?.image?.childImageSharp?.fluid}
                   alt={company.name}
-                  ratio={1 / 3}
+                  ratio={3 / 1}
                   css={`
                     & > img {
                       object-fit: contain;
