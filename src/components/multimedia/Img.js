@@ -20,8 +20,7 @@ export const Picture = styled.picture`
     content: '';
 
     display: block;
-
-    padding-bottom: ${({ ratio }) => ratio * 100}%;
+    padding-bottom: ${({ ratio }) => `calc(${ratio ** -1} * 100%)`};
   }
 `;
 
