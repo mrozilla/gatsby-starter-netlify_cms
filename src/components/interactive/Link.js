@@ -15,9 +15,11 @@ import styled, { css } from 'styled-components';
 const StyledLink = styled.a`
   outline: none;
 
-  &[aria-current] {
-    font-weight: 700;
-  }
+  transition: color 250ms;
+  
+  /* &[aria-current] {
+    font-weight: 700; /* TODO: investigate if better styling
+  } */
 
   ${({ look }) => {
     if (look === 'primary') {
