@@ -5,10 +5,16 @@
 import styled from 'styled-components';
 
 // ─────────────────────────────────────────────────────────────────────────────
-// ul
+// ul + ol
 // ─────────────────────────────────────────────────────────────────────────────
 
 export const Ul = styled.ul`
+  display: grid;
+
+  list-style: none;
+`;
+
+export const Ol = styled.ol`
   display: grid;
 
   list-style: none;

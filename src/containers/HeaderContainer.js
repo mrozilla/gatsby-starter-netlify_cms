@@ -51,7 +51,7 @@ export default function HeaderContainer() {
         <Link
           to="/"
           css={`
-            padding: 4rem 0;
+            padding: 3.5rem 0;
           `}
         >
           <Logo />
@@ -75,7 +75,7 @@ export default function HeaderContainer() {
                       padding: 1rem;
 
                       @media screen and (min-width: 1200px) {
-                        padding: 4rem 2rem;
+                        padding: 3.5rem 2rem;
                       }
                     `}
                   >
@@ -121,7 +121,7 @@ export default function HeaderContainer() {
                       }
 
                       @media screen and (min-width: 1200px) {
-                        padding: 4rem 2rem;
+                        padding: 3.5rem 2rem;
                       }
                     `}
                   >
