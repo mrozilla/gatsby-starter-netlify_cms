@@ -8,6 +8,7 @@ import MDXRenderer from 'gatsby-mdx/mdx-renderer';
 
 import { RootContainer,
   SEOContainer,
+  BreadcrumbsContainer,
   HeroContainer,
   SidekickContainer,
   TestimonialsContainer,
@@ -97,6 +98,7 @@ export default function PageTemplateContainer({
       frontmatter: { meta, blocks },
     },
   },
+  location,
 }) {
   return (
     <RootContainer>
@@ -104,9 +106,9 @@ export default function PageTemplateContainer({
       <Main
         css={`
           grid-template-columns: var(--width-outside) 1fr var(--width-outside);
-          padding: 10rem 0 0;
         `}
       >
+        <BreadcrumbsContainer location={location} />
         {renderBlocks(blocks)}
       </Main>
     </RootContainer>
