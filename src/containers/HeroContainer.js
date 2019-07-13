@@ -16,7 +16,14 @@ import { H1, Section, P, Button, Link, Video, Img, Text, Ul, Li } from '~compone
 export const fragment = graphql`
   fragment HeroFragment on MdxFrontmatterBlocks {
     type
-    kicker {
+    backgroundImage {
+      childImageSharp {
+        fluid(maxWidth: 1200) {
+          ...GatsbyImageSharpFluid_withWebp
+        }
+      }
+    }
+    announcement {
       url
       title
       body
@@ -36,7 +43,15 @@ export const fragment = graphql`
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-export default function HeroContainer({ kicker, title, subtitle, mdx, buttons, image, video }) {
+export default function HeroContainer({
+  backgroundImage,
+  announcement,
+  title,
+  subtitle,
+  mdx,
+  buttons,
+  video,
+}) {
   return (
     <Section
       css={`
@@ -44,12 +59,12 @@ export default function HeroContainer({ kicker, title, subtitle, mdx, buttons, i
         position: relative;
         text-align: center;
         padding: var(--block-padding) var(--width-outside);
-        color: ${image && 'var(--color-inverse)'};
+        color: ${backgroundImage && 'var(--color-inverse)'};
       `}
     >
-      {image && (
+      {backgroundImage && (
         <Img
-          {...image?.childImageSharp?.fluid}
+          {...backgroundImage?.childImageSharp?.fluid}
           role="presentation"
           alt=""
           css={`
@@ -80,11 +95,11 @@ export default function HeroContainer({ kicker, title, subtitle, mdx, buttons, i
         />
       )}
       {video && <Video src={video} />}
-      {kicker && (
+      {announcement && (
         <Link
-          to={kicker.url}
+          to={announcement.url}
           css={`
-            background-color: hsla(var(${image ? '--hsl-inverse' : '--hsl-brand-primary'}), 0.05);
+            background-color: hsla(var(${backgroundImage ? '--hsl-inverse' : '--hsl-brand-primary'}), 0.05);
             border-radius: 999px;
             padding: 0.25rem 1rem 0.25rem 0.25rem;
             display: inline-flex;
@@ -93,7 +108,7 @@ export default function HeroContainer({ kicker, title, subtitle, mdx, buttons, i
             margin: 0 0 4rem;
 
             &::before {
-              content: "${kicker.title}";
+              content: "${announcement.title}";
               font-size: 1.5rem;
               font-weight: 700;
               text-transform: uppercase;
@@ -107,10 +122,10 @@ export default function HeroContainer({ kicker, title, subtitle, mdx, buttons, i
         >
           <Text
             css={`
-              color: var(${image ? '--color-inverse' : '--color-brand-primary'});
+              color: var(${backgroundImage ? '--color-inverse' : '--color-brand-primary'});
             `}
           >
-            {kicker.body}
+            {announcement.body}
           </Text>
         </Link>
       )}
@@ -174,7 +189,7 @@ export default function HeroContainer({ kicker, title, subtitle, mdx, buttons, i
 }
 
 HeroContainer.propTypes = {
-  kicker: shape({
+  announcement: shape({
     url:   string.isRequired,
     title: string.isRequired,
     body:  string.isRequired,
@@ -189,15 +204,15 @@ HeroContainer.propTypes = {
       look:  string.isRequired,
     }),
   ),
-  // image: string, // TODO:
+  // backgroundImage: string, // TODO:
   video: string,
 };
 
 HeroContainer.defaultProps = {
-  kicker:   null,
-  subtitle: '',
-  mdx:      '',
-  buttons:  [],
-  // image:    '',
-  video:    '',
+  announcement: null,
+  subtitle:     '',
+  mdx:          '',
+  buttons:      [],
+  // backgroundImage:    '',
+  video:        '',
 };

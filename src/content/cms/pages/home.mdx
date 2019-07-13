@@ -7,117 +7,176 @@ meta:
   permalink: /
   title: Home
 blocks:
-  - buttons:
-      - look: primary
-        title: Primary CTA
-        url: /signup/
-    kicker:
+  - announcement:
       body: Lorem ipsum dolor sit amet
       title: Hot
       url: /blog/
+    buttons:
+      - look: primary
+        title: Primary CTA
+        url: /signup/
     subtitle: >-
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
       tempor incididunt ut labore et dolore magna aliqua.
     title: Long headline that can wrap on two lines
     type: hero
-  - blocks:
-      - grid:
+  - columns:
+      - blocks:
+          - image:
+              src: /assets/illustration.png
+              ratio: 3/2
+              alt: Illustration
+            type: image
+          - title: Alpha
+            type: title
           - mdx: >-
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            image: /assets/illustration.png
-            title: Alpha
+            type: mdx
+        width: 1fr
+      - blocks:
+          - image:
+              src: /assets/illustration.png
+              ratio: 1/1
+              alt: Illustration
+            type: image
+          - title: Beta
+            type: title
           - mdx: >-
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            image: /assets/illustration.png
-            title: Beta
+            type: mdx
+        width: 1fr
+      - blocks:
+          - image:
+              src: /assets/illustration.png
+              ratio: 3/2
+              alt: Illustration
+            type: image
+          - title: Gamma
+            type: title
           - mdx: >-
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            image: /assets/illustration.png
-            title: Gamma
-        type: grid
-    layout: full
+            type: mdx
+        width: 1fr
     subtitle: >-
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
       tempor incididunt ut labore et dolore magna aliqua.
     title: Long headline that could wrap on two lines
     type: sidekick
   - logos:
-      - image: /assets/logo.png
+      - image:
+          src: /assets/logo.png
+          ratio: 3/1
+          alt: Illustration
         name: Doe Capital
-        url: "https://www.example.com"
-      - image: /assets/logo.png
+        url: "https://www.example.com/1/"
+      - image:
+          src: /assets/logo.png
+          ratio: 3/1
+          alt: Illustration
         name: Doe Capital
-        url: "https://www.example.com"
-      - image: /assets/logo.png
+        url: "https://www.example.com/2/"
+      - image:
+          src: /assets/logo.png
+          ratio: 3/1
+          alt: Illustration
         name: Doe Capital
-        url: "https://www.example.com"
-      - image: /assets/logo.png
+        url: "https://www.example.com/3/"
+      - image:
+          src: /assets/logo.png
+          ratio: 3/1
+          alt: Illustration
         name: Doe Capital
-        url: "https://www.example.com"
+        url: "https://www.example.com/4/"
     title: Short headline that just fits
     type: logos
-  - blocks:
-      - grid:
-          - mdx: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
-            icon: FaAward
-            title: Alpha
-          - mdx: Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
-            icon: FaTrophy
-            title: Beta
-        type: grid
-    icon: FaCreditCard
-    image: /assets/illustration.png
-    layout: right
-    subtitle: >-
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua.
-    title: Longer headline that can wrap on two lines and perhaps even more
+  - columns:
+      - blocks:
+          - image:
+              src: /assets/illustration.png
+              ratio: 1/1
+              alt: Illustration
+            type: image
+        width: 1fr
+      - blocks:
+          - icon: FaCreditCard
+            type: icon
+          - title: Longer headline that can wrap on two lines and perhaps even more
+            type: title
+          - subtitle: >-
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            type: subtitle
+          - grid:
+              - icon: FaAward
+                mdx: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+                title: Alpha
+              - icon: FaTrophy
+                mdx: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+                title: Beta
+            type: grid
+        width: 1fr
     type: sidekick
-  - blocks:
-      - buttons:
-          - look: primary
-            title: Primary CTA
-            url: /signup/
-          - look: secondary
-            title: Secondary CTA
-            url: /login/
-        type: buttons
-    image: /assets/illustration.png
-    mdx: >-
-      - Lorem ipsum dolor ist amet
-
-      - Consectetur adipiscing elit
-
-      - Sed do eiusmod tempor incididunt
-
-      - Ut labore et dolor magna aliqua
-    layout: left
-    subtitle: >-
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua.
-    title: Long headline that might wrap on two lines
+  - columns:
+      - blocks:
+          - title: Long headline that might wrap on two lines
+            type: title
+          - subtitle: >-
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            type: subtitle
+          - mdx: |-
+              - Lorem ipsum dolor ist amet
+              - Consectetur adipiscing elit
+              - Sed do eiusmod tempor incididunt
+              - Ut labore et dolor magna aliqua
+            type: mdx
+          - buttons:
+              - look: primary
+                title: Primary
+                url: /signup/
+              - look: secondary
+                title: Secondary
+                url: /login/
+            type: buttons
+        width: 1fr
+      - blocks:
+          - image:
+              src: /assets/illustration.png
+              ratio: 1/1
+              alt: Illustration
+            type: image
+        width: 1fr
     type: sidekick
-  - subtitle: Short headline that just fits
+  - title: Short headline that just fits
     testimonials:
       - company: Doe Capital
-        image: /assets/portrait.png
+        image:
+          src: /assets/portrait.png
+          ratio: 1/1
+          alt: John Doe
         name: John Doe
         position: CEO
         testimonial: >-
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua.
       - company: Smithsonian
-        image: /assets/portrait.png
+        image:
+          src: /assets/portrait.png
+          ratio: 1/1
+          alt: Jane Smitch
         name: Jane Smith
         position: CEO
         testimonial: >-
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua.
       - company: Muster Master
-        image: /assets/portrait.png
+        image:
+          src: /assets/portrait.png
+          ratio: 1/1
+          alt: Max Mustermann
         name: Max Mustermann
         position: CEO
         testimonial: >-

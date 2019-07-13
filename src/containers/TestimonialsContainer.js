@@ -26,11 +26,15 @@ export const fragment = graphql`
       company
       testimonial
       image {
-        childImageSharp {
-          fluid(maxWidth: 300) {
-            ...GatsbyImageSharpFluid_withWebp
+        src {
+          childImageSharp {
+            fluid(maxWidth: 300) {
+              ...GatsbyImageSharpFluid_withWebp
+            }
           }
         }
+        ratio
+        alt
       }
     }
   }
@@ -114,7 +118,7 @@ export default function TestimonialsContainer({ title, subtitle, mdx, testimonia
           `}
         >
           {testimonials.map(item => (
-            <Fragment key={item?.name}>
+            <Fragment key={item.name}>
               {item?.testimonial && (
                 <Blockquote
                   css={`
@@ -125,10 +129,11 @@ export default function TestimonialsContainer({ title, subtitle, mdx, testimonia
                   {item?.testimonial}
                 </Blockquote>
               )}
-              {item?.image && (
+              {item.image && (
                 <Img
-                  {...item?.image?.childImageSharp?.fluid}
-                  alt={item?.name}
+                  {...item.image?.src?.childImageSharp?.fluid}
+                  alt={item.name || item.image?.src}
+                  ratio={item.image?.ratio}
                   css={`
                     max-width: 8rem;
                     margin: 0 auto 1rem;
@@ -137,7 +142,7 @@ export default function TestimonialsContainer({ title, subtitle, mdx, testimonia
                   `}
                 />
               )}
-              {item?.name && (
+              {item.name && (
                 <P
                   css={`
                     line-height: 2rem;
@@ -145,10 +150,10 @@ export default function TestimonialsContainer({ title, subtitle, mdx, testimonia
                     font-weight: 700;
                   `}
                 >
-                  {item?.name}
+                  {item.name}
                 </P>
               )}
-              {(item?.company || item?.name) && (
+              {(item.company || item.name) && (
                 <P
                   css={`
                     line-height: 2rem;
@@ -156,9 +161,9 @@ export default function TestimonialsContainer({ title, subtitle, mdx, testimonia
                     margin: 0.5rem 0 0;
                   `}
                 >
-                  {item?.position}
-                  {item?.position && item?.company && ', '}
-                  {item?.company}
+                  {item.position}
+                  {item.position && item.company && ', '}
+                  {item.company}
                 </P>
               )}
             </Fragment>

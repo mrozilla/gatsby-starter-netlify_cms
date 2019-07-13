@@ -24,11 +24,15 @@ export const fragment = graphql`
       name
       url
       image {
-        childImageSharp {
-          fluid(maxWidth: 300) {
-            ...GatsbyImageSharpFluid_withWebp
+        src {
+          childImageSharp {
+            fluid(maxWidth: 300) {
+              ...GatsbyImageSharpFluid_withWebp
+            }
           }
         }
+        ratio
+        alt
       }
     }
   }
@@ -106,9 +110,9 @@ export default function LogosContainer({ title, subtitle, mdx, logos }) {
             >
               <Link to={company.url}>
                 <Img
-                  {...company?.image?.childImageSharp?.fluid}
-                  alt={company.name}
-                  ratio={3 / 1}
+                  {...company.image?.src?.childImageSharp?.fluid}
+                  alt={company.name || company.image?.alt}
+                  ratio={company.image?.ratio}
                   css={`
                     & > img {
                       object-fit: contain;

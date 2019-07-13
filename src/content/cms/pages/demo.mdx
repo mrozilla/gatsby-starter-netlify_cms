@@ -7,37 +7,55 @@ meta:
   permalink: /demo/
   title: Demo
 blocks:
-  - mdx: Lorem ipsum dolor sit amet
+  - announcement:
+      body: Lorem ipsum dolor sit amet
+      title: Demo
+      url: /demo/
     buttons:
       - look: primary
         title: Demo
         url: /demo/
-    image: /assets/illustration.png
-    kicker:
-      body: Lorem ipsum dolor sit amet
-      title: Demo
-      url: /demo/
+    backgroundImage: /assets/illustration.png
+    mdx: Lorem ipsum dolor sit amet
     subtitle: Demo
     title: Demo
     type: hero
     video: /demo/
-  - blocks:
-      - grid:
+  - columns:
+      - blocks:
+          - icon: FaEye
+            type: icon
+          - tagline: Demo
+            type: tagline
+          - title: Demo
+            type: title
+          - subtitle: Demo
+            type: subtitle
           - mdx: Demo
-            icon: Demo
-            image: /assets/illustration.png
-            title: Demo
-        type: grid
-      - buttons:
-          - look: primary
-            title: Demo
-            url: /demo/
-        type: buttons
-      - mdx: Demo
-        type: body
-    icon: Demo
-    image: /assets/illustration.png
-    layout: left
+            type: mdx
+          - image:
+              src: /assets/illustration.png
+              ratio: 1/1
+              alt: Demo
+            type: image
+          - grid:
+              - icon: FaEye
+                image:
+                  src: /assets/illustration.png
+                  ratio: 1/1
+                  alt: Demo
+                mdx: Demo
+                title: Demo
+            type: grid
+          - buttons:
+              - look: primary
+                title: Demo
+                url: /demo/
+            type: buttons
+        width: 1fr
+    icon: FaEye
+    tagline: Demo
+    mdx: Demo
     subtitle: Demo
     title: Demo
     type: sidekick
@@ -45,17 +63,23 @@ blocks:
     subtitle: Demo
     testimonials:
       - company: Demo
-        image: /assets/portrait.png
+        image:
+          src: /assets/portrait.png
+          ratio: 1/1
+          alt: Demo
         name: Demo
         position: Demo
         testimonial: Demo
     title: Demo
     type: testimonials
-  - mdx: Demo
-    logos:
-      - image: /assets/logo.png
+  - logos:
+      - image:
+          src: /assets/logo.png
+          ratio: 3/1
+          alt: Demo
         name: Demo
         url: Demo
+    mdx: Demo
     subtitle: Demo
     title: Demo
     type: logos

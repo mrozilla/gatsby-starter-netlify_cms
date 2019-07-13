@@ -72,12 +72,14 @@ collections:
           - name: permalink
           - { name: ogImage, widget: image, default: /assets/og.png }
       - name: blocks
+        label: "Blocks"
+        label_singular: "Block"
         widget: list
         types:
           - name: hero
             label: "Hero"
             fields:
-              - name: kicker
+              - name: announcement
                 widget: object
                 fields:
                   - name: url
@@ -86,7 +88,7 @@ collections:
                 required: false
               - name: title
               - { name: subtitle, required: false }
-              - { name: mdx, required: false }
+              - { name: mdx, widget: markdown, required: false }
               - name: buttons
                 widget: list
                 fields:
@@ -95,57 +97,99 @@ collections:
                   - name: look
                     widget: select
                     options: ["primary", "secondary"]
-              - { name: image, widget: image, required: false }
+              - { name: backgroundImage, widget: image, required: false }
               - { name: video, required: false }
 
           - name: sidekick
             label: "Sidekick"
             fields:
               - { name: icon, required: false }
-              - name: title
+              - { name: tagline, required: false }
+              - { name: title, required: false }
               - { name: subtitle, required: false }
-              - { name: image, widget: image, required: false }
-              - name: layout
-                widget: select
-                options: ["left", "right", "full"]
-                default: left
-              - name: blocks
+              - { name: mdx, widget: markdown, required: false }
+              - name: columns
+                label: "Columns"
+                label_singular: "Column"
                 widget: list
-                types:
-                  - name: grid
-                    label: "Grid"
-                    fields:
-                      - name: grid
-                        widget: list
+                fields:
+                  - { name: width, default: "1fr" }
+                  - name: blocks
+                    label: "Blocks"
+                    label_singular: "Block"
+                    widget: list
+                    types:
+                      - name: icon
+                        label: "Icon"
                         fields:
-                          - { name: icon, required: false }
-                          - { name: title, required: false }
-                          - { name: mdx, required: false }
-                          - { name: image, widget: image, required: false }
-
-                  - name: buttons
-                    label: "Buttons"
-                    fields:
-                      - name: buttons
-                        widget: list
+                          - name: icon
+                      - name: tagline
+                        label: "Tagline"
+                        fields:
+                          - name: tagline
+                      - name: title
+                        label: "Title"
                         fields:
                           - name: title
-                          - name: url
-                          - name: look
-                            widget: select
-                            options: ["primary", "secondary"]
-
-                  - name: body
-                    label: "Body"
-                    fields:
-                      - { name: mdx, widget: markdown }
+                      - name: subtitle
+                        label: "Subtitle"
+                        fields:
+                          - name: subtitle
+                      - name: mdx
+                        label: "Mdx"
+                        fields:
+                          - { name: mdx, widget: markdown }
+                      - name: image
+                        label: "Image"
+                        fields:
+                          - {
+                              name: image,
+                              widget: object,
+                              fields:
+                                [
+                                  { name: src, widget: image },
+                                  name: alt,
+                                  name: ratio,
+                                ],
+                            }
+                      - name: grid
+                        label: "Grid"
+                        fields:
+                          - name: grid
+                            widget: list
+                            fields:
+                              - { name: icon, required: false }
+                              - { name: title, required: false }
+                              - { name: mdx, widget: markdown, required: false }
+                              - {
+                                  name: image,
+                                  widget: object,
+                                  fields:
+                                    [
+                                      { name: src, widget: image },
+                                      name: alt,
+                                      name: ratio,
+                                    ],
+                                  required: false,
+                                }
+                      - name: buttons
+                        label: "Buttons"
+                        fields:
+                          - name: buttons
+                            widget: list
+                            fields:
+                              - name: title
+                              - name: url
+                              - name: look
+                                widget: select
+                                options: ["primary", "secondary"]
 
           - name: testimonials
             label: "Testimonials"
             fields:
               - { name: title, required: false }
               - { name: subtitle, required: false }
-              - { name: mdx, required: false }
+              - { name: mdx, widget: markdown, required: false }
               - name: testimonials
                 widget: list
                 fields:
@@ -153,27 +197,38 @@ collections:
                   - { name: position, required: false }
                   - { name: company, required: false }
                   - { name: testimonial, required: false }
-                  - { name: image, widget: image, required: false }
+                  - {
+                      name: image,
+                      widget: object,
+                      fields:
+                        [{ name: src, widget: image }, name: alt, name: ratio],
+                      required: false,
+                    }
 
           - name: logos
             label: "Logos"
             fields:
               - { name: title, required: false }
               - { name: subtitle, required: false }
-              - { name: mdx, required: false }
+              - { name: mdx, widget: markdown, required: false }
               - name: logos
                 widget: list
                 fields:
                   - name: name
                   - name: url
-                  - { name: image, widget: image }
+                  - {
+                      name: image,
+                      widget: object,
+                      fields:
+                        [{ name: src, widget: image }, name: alt, name: ratio],
+                    }
 
           - name: pricing
             label: "Pricing"
             fields:
               - { name: title, required: false }
               - { name: subtitle, required: false }
-              - { name: mdx, required: false }
+              - { name: mdx, widget: markdown, required: false }
               - name: pricing
                 widget: list
                 fields:
@@ -206,4 +261,4 @@ collections:
           - { name: ogImage, widget: image, default: /assets/og.png }
       - { name: tags, required: false }
       - { name: highlighted, widget: boolean, default: false }
-      - { name: mdx, widget: markdown }
+      - { name: body, widget: markdown }
