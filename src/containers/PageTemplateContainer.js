@@ -46,29 +46,31 @@ function renderBlocks(blocks) {
     return null;
   }
 
-  return blocks.map((block) => {
+  return blocks.map((block, i) => {
+    /* eslint-disable react/no-array-index-key */
+
     if (block.type === 'hero') {
-      return <HeroContainer key={`${block.type}-${block.title}`} {...block} />;
+      return <HeroContainer key={i} {...block} />;
     }
 
     if (block.type === 'sidekick') {
-      return <SidekickContainer key={`${block.type}-${block.title}`} {...block} />;
+      return <SidekickContainer key={i} {...block} />;
     }
 
     if (block.type === 'testimonials') {
-      return <TestimonialsContainer key={`${block.type}-${block.title}`} {...block} />;
+      return <TestimonialsContainer key={i} {...block} />;
     }
 
     if (block.type === 'logos') {
-      return <LogosContainer key={`${block.type}-${block.title}`} {...block} />;
+      return <LogosContainer key={i} {...block} />;
     }
 
     if (block.type === 'pricing') {
-      return <PricingContainer key={`${block.type}-${block.title}`} {...block} />;
+      return <PricingContainer key={i} {...block} />;
     }
 
     if (block.type === 'blog') {
-      return <BlogContainer key={`${block.type}-${block.title}`} {...block} />;
+      return <BlogContainer key={i} {...block} />;
     }
 
     if (block.type === 'mdx' || block.type === 'markdown') {
@@ -78,7 +80,10 @@ function renderBlocks(blocks) {
         </MDXRenderer>
       );
     }
+
     return null;
+
+    /* eslint-enable */
   });
 }
 

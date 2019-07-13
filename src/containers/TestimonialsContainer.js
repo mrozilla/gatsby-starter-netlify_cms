@@ -2,11 +2,13 @@
 // import
 // ─────────────────────────────────────────────────────────────────────────────
 
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, Fragment } from 'react';
 import { graphql } from 'gatsby';
+import MDXRenderer from 'gatsby-mdx/mdx-renderer';
 import { shape, string, arrayOf } from 'prop-types';
 
 import { H1, Section, P, Img, Carousel, Blockquote } from '~components';
+import { useEventListener } from '~utils';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // query
@@ -17,18 +19,22 @@ export const fragment = graphql`
     type
     title
     subtitle
-    # body
+    mdx
     testimonials {
       name
       position
       company
       testimonial
       image {
-        childImageSharp {
-          fluid(maxWidth: 300) {
-            ...GatsbyImageSharpFluid_withWebp
+        src {
+          childImageSharp {
+            fluid(maxWidth: 300) {
+              ...GatsbyImageSharpFluid_withWebp
+            }
           }
         }
+        ratio
+        alt
       }
     }
   }
@@ -38,26 +44,21 @@ export const fragment = graphql`
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-export default function TestimonialsContainer({ title, subtitle, testimonials }) {
+export default function TestimonialsContainer({ title, subtitle, mdx, testimonials }) {
   const [visibleItems, setVisibleItems] = useState(
     document && document.body.clientWidth < 600 ? 1 : 3,
   );
 
-  const handleResize = () => {
+  useEventListener('resize', () => {
     setVisibleItems(document.body.clientWidth < 600 ? 1 : 3);
-  };
-
-  useEffect(() => {
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  });
 
   return (
     <Section
       css={`
         grid-column: 2;
         padding: var(--block-padding) 0;
-        box-shadow: 0 -1px 0 0 hsla(var(--hsl-text), 0.1);
+        box-shadow: inset 0 2px 0 0 hsla(var(--hsl-text), 0.05);
         text-align: center;
         overflow: hidden; /* TODO: see why the carousel UL stretches parent on mobile */-
       `}
@@ -82,7 +83,7 @@ export default function TestimonialsContainer({ title, subtitle, testimonials })
           css={`
             font-size: 2.5rem;
             line-height: 2.5rem;
-            margin: 2rem 0 0;
+            margin: 2rem 0;
 
             @media screen and (min-width: 1200px) {
               line-height: 3rem;
@@ -92,6 +93,7 @@ export default function TestimonialsContainer({ title, subtitle, testimonials })
           {subtitle}
         </P>
       )}
+      {mdx && <MDXRenderer>{mdx}</MDXRenderer>}
       {testimonials && (
         <Carousel
           visibleItems={Math.min(testimonials.length, visibleItems)}
@@ -116,7 +118,7 @@ export default function TestimonialsContainer({ title, subtitle, testimonials })
           `}
         >
           {testimonials.map(item => (
-            <Fragment key={item?.name}>
+            <Fragment key={item.name}>
               {item?.testimonial && (
                 <Blockquote
                   css={`
@@ -127,10 +129,11 @@ export default function TestimonialsContainer({ title, subtitle, testimonials })
                   {item?.testimonial}
                 </Blockquote>
               )}
-              {item?.image && (
+              {item.image && (
                 <Img
-                  {...item?.image?.childImageSharp?.fluid}
-                  alt={item?.name}
+                  {...item.image?.src?.childImageSharp?.fluid}
+                  alt={item.name || item.image?.src}
+                  ratio={item.image?.ratio}
                   css={`
                     max-width: 8rem;
                     margin: 0 auto 1rem;
@@ -139,7 +142,7 @@ export default function TestimonialsContainer({ title, subtitle, testimonials })
                   `}
                 />
               )}
-              {item?.name && (
+              {item.name && (
                 <P
                   css={`
                     line-height: 2rem;
@@ -147,10 +150,10 @@ export default function TestimonialsContainer({ title, subtitle, testimonials })
                     font-weight: 700;
                   `}
                 >
-                  {item?.name}
+                  {item.name}
                 </P>
               )}
-              {(item?.company || item?.name) && (
+              {(item.company || item.name) && (
                 <P
                   css={`
                     line-height: 2rem;
@@ -158,9 +161,9 @@ export default function TestimonialsContainer({ title, subtitle, testimonials })
                     margin: 0.5rem 0 0;
                   `}
                 >
-                  {item?.position}
-                  {item?.position && item?.company && ', '}
-                  {item?.company}
+                  {item.position}
+                  {item.position && item.company && ', '}
+                  {item.company}
                 </P>
               )}
             </Fragment>
@@ -174,6 +177,7 @@ export default function TestimonialsContainer({ title, subtitle, testimonials })
 TestimonialsContainer.propTypes = {
   title:        string,
   subtitle:     string,
+  mdx:          string,
   testimonials: arrayOf(
     shape({
       name:         string,
@@ -188,5 +192,6 @@ TestimonialsContainer.propTypes = {
 TestimonialsContainer.defaultProps = {
   title:        '',
   subtitle:     '',
+  mdx:          '',
   testimonials: [],
 };

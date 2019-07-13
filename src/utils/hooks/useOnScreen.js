@@ -1,29 +1,34 @@
 // ─────────────────────────────────────────────────────────────────────────────
-//  import
+// import
 // ─────────────────────────────────────────────────────────────────────────────
 
-import { useState } from 'react';
-
-import useEventListener from './useEventListener';
+import { useRef, useState, useEffect } from 'react';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-export default function useSelection() {
-  const [selectedText, setSelectedText] = useState('');
-  const [selectedTextPosition, setSelectedTextPosition] = useState({});
+export default function useOnScreen({ rootMargin = '0px', triggerOnce } = {}) {
+  const ref = useRef();
+  const [isIntersecting, setIntersecting] = useState(false);
 
-  useEventListener('mouseup', () => {
-    const selection = document.getSelection();
-    if (selection && selection.rangeCount > 0) {
-      const range = selection.getRangeAt(0);
-      if (range) {
-        setSelectedTextPosition(range.getBoundingClientRect());
-        setSelectedText(document.getSelection().toString());
-      }
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIntersecting(entry.isIntersecting);
+      },
+      {
+        rootMargin,
+        triggerOnce,
+      },
+    );
+    if (ref.current) {
+      observer.observe(ref.current);
     }
-  });
+    return () => {
+      observer.unobserve(ref.current);
+    };
+  }, []);
 
-  return [selectedText, selectedTextPosition];
+  return [ref, isIntersecting];
 }

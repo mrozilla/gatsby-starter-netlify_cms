@@ -60,7 +60,7 @@ Table.Tfoot = styled.tfoot``;
 // ─────────────────────────────────────────────────────────────────────────────
 
 Table.Tr = styled.tr`
-  --shadow: 0 1px 0 0 hsla(var(--hsl-text), 0.1);
+  --shadow: 0 2px 0 0 hsla(var(--hsl-text), 0.05);
 
   box-shadow: var(--shadow);
 `;

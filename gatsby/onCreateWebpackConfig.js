@@ -1,29 +1,21 @@
 // ─────────────────────────────────────────────────────────────────────────────
-//  import
+// import
 // ─────────────────────────────────────────────────────────────────────────────
 
-import { useState } from 'react';
-
-import useEventListener from './useEventListener';
+const path = require('path');
 
 // ─────────────────────────────────────────────────────────────────────────────
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-export default function useSelection() {
-  const [selectedText, setSelectedText] = useState('');
-  const [selectedTextPosition, setSelectedTextPosition] = useState({});
-
-  useEventListener('mouseup', () => {
-    const selection = document.getSelection();
-    if (selection && selection.rangeCount > 0) {
-      const range = selection.getRangeAt(0);
-      if (range) {
-        setSelectedTextPosition(range.getBoundingClientRect());
-        setSelectedText(document.getSelection().toString());
-      }
-    }
+exports.onCreateWebpackConfig = ({ actions }) => {
+  actions.setWebpackConfig({
+    resolve: {
+      alias: {
+        '~components': path.resolve(__dirname, '../src/components'),
+        '~containers': path.resolve(__dirname, '../src/containers'),
+        '~utils':      path.resolve(__dirname, '../src/utils'),
+      },
+    },
   });
-
-  return [selectedText, selectedTextPosition];
-}
+};

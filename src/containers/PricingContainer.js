@@ -18,7 +18,7 @@ export const fragment = graphql`
     type
     title
     subtitle
-    # body
+    mdx
     pricing {
       title
       price {
@@ -35,7 +35,7 @@ export const fragment = graphql`
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-export default function PricingContainer({ title, subtitle, pricing }) {
+export default function PricingContainer({ title, subtitle, mdx, pricing }) {
   const [frequency, setFrequency] = useState('monthly');
 
   return (
@@ -44,7 +44,8 @@ export default function PricingContainer({ title, subtitle, pricing }) {
         grid-column: 2;
         display: grid;
         padding: var(--block-padding) 0;
-        box-shadow: 0 -1px 0 0 hsla(var(--hsl-text), 0.1);
+        box-shadow: inset 0 2px 0 0 hsla(var(--hsl-text), 0.05);
+        text-align: center;
       `}
     >
       {title && (
@@ -53,7 +54,6 @@ export default function PricingContainer({ title, subtitle, pricing }) {
             font-size: 3rem;
             line-height: 1;
             font-weight: 700;
-            text-align: center;
             max-width: 20ch;
             margin: 0 auto;
 
@@ -70,9 +70,8 @@ export default function PricingContainer({ title, subtitle, pricing }) {
           css={`
             font-size: 2.5rem;
             line-height: 2.5rem;
-            text-align: center;
             max-width: 50ch;
-            margin: 2rem auto 0;
+            margin: 2rem auto 2rem;
 
             @media screen and (min-width: 1200px) {
               line-height: 3rem;
@@ -82,6 +81,7 @@ export default function PricingContainer({ title, subtitle, pricing }) {
           {subtitle}
         </P>
       )}
+      {mdx && <MDXRenderer>{mdx}</MDXRenderer>}
       {pricing && (
         <Ul
           css={`
@@ -119,6 +119,7 @@ export default function PricingContainer({ title, subtitle, pricing }) {
           css={`
             grid-template-columns: repeat(auto-fit, minmax(25ch, 1fr));
             grid-gap: 2rem 8rem;
+            text-align: initial;
           `}
         >
           {pricing.map(item => (
@@ -130,7 +131,7 @@ export default function PricingContainer({ title, subtitle, pricing }) {
                 padding: 4rem 4rem 2rem;
                 background-color: var(--color-inverse);
                 border-radius: 0.5rem;
-                box-shadow: inset 0 0 0 1px hsla(var(--hsl-text), 0.1);
+                box-shadow: inset 0 0 0 2px hsla(var(--hsl-text), 0.05);
               `}
             >
               <H2
@@ -184,6 +185,7 @@ export default function PricingContainer({ title, subtitle, pricing }) {
 PricingContainer.propTypes = {
   title:    string,
   subtitle: string,
+  mdx:      string,
   pricing:  arrayOf(
     shape({
       name: string,
@@ -196,5 +198,6 @@ PricingContainer.propTypes = {
 PricingContainer.defaultProps = {
   title:    '',
   subtitle: '',
+  mdx:      '',
   pricing:  [],
 };

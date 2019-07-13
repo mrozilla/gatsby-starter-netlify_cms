@@ -4,9 +4,11 @@
 
 import React from 'react';
 import { graphql } from 'gatsby';
+import MDXRenderer from 'gatsby-mdx/mdx-renderer';
 import { shape, string, arrayOf } from 'prop-types';
 
 import { H1, Section, P, Ul, Li, Link, Img } from '~components';
+import { useOnScreen } from '~utils';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // query
@@ -17,16 +19,20 @@ export const fragment = graphql`
     type
     title
     subtitle
-    # body
+    mdx
     logos {
       name
       url
       image {
-        childImageSharp {
-          fluid(maxWidth: 300) {
-            ...GatsbyImageSharpFluid_withWebp
+        src {
+          childImageSharp {
+            fluid(maxWidth: 300) {
+              ...GatsbyImageSharpFluid_withWebp
+            }
           }
         }
+        ratio
+        alt
       }
     }
   }
@@ -36,13 +42,16 @@ export const fragment = graphql`
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-export default function LogosContainer({ title, subtitle, logos }) {
+export default function LogosContainer({ title, subtitle, mdx, logos }) {
+  const [ref, isIntersecting] = useOnScreen({ rootMargin: '-25%' });
+
   return (
     <Section
+      ref={ref}
       css={`
         grid-column: 2;
         padding: 5rem 0;
-        box-shadow: 0 -1px 0 0 hsla(var(--hsl-text), 0.1);
+        box-shadow: inset 0 2px 0 0 hsla(var(--hsl-text), 0.05);
         text-align: center;
       `}
     >
@@ -51,7 +60,7 @@ export default function LogosContainer({ title, subtitle, logos }) {
           css={`
             font-size: 3rem;
             line-height: 1;
-            font-size: 700;
+            font-weight: 700;
 
             @media screen and (min-width: 1200px) {
               font-size: 4rem;
@@ -66,7 +75,7 @@ export default function LogosContainer({ title, subtitle, logos }) {
           css={`
             font-size: 2.5rem;
             line-height: 2.5rem;
-            margin: 2rem 0 0;
+            margin: 2rem 0;
 
             @media screen and (min-width: 1200px) {
               line-height: 3rem;
@@ -76,6 +85,7 @@ export default function LogosContainer({ title, subtitle, logos }) {
           {subtitle}
         </P>
       )}
+      {mdx && <MDXRenderer>{mdx}</MDXRenderer>}
       {logos && (
         <Ul
           css={`
@@ -85,19 +95,24 @@ export default function LogosContainer({ title, subtitle, logos }) {
             margin: 3rem -1rem -1rem;
           `}
         >
-          {logos.map(company => (
+          {logos.map((company, i) => (
             <Li
               key={company.url}
               css={`
                 flex: 0 0 25rem;
                 margin: 1rem;
+
+                opacity: ${isIntersecting ? '1' : '0'};
+                transform: scale(${isIntersecting ? '1' : '0.9'});
+                transition: opacity 250ms, transform 250ms;
+                transition-delay: calc(100ms * ${i});
               `}
             >
               <Link to={company.url}>
                 <Img
-                  {...company?.image?.childImageSharp?.fluid}
-                  alt={company.name}
-                  ratio={1 / 3}
+                  {...company.image?.src?.childImageSharp?.fluid}
+                  alt={company.name || company.image?.alt}
+                  ratio={company.image?.ratio}
                   css={`
                     & > img {
                       object-fit: contain;
@@ -116,6 +131,7 @@ export default function LogosContainer({ title, subtitle, logos }) {
 LogosContainer.propTypes = {
   title:    string,
   subtitle: string,
+  mdx:      string,
   logos:    arrayOf(
     shape({
       name: string,
@@ -128,5 +144,6 @@ LogosContainer.propTypes = {
 LogosContainer.defaultProps = {
   title:    '',
   subtitle: '',
+  mdx:      '',
   logos:    [],
 };

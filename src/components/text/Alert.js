@@ -14,7 +14,7 @@ export const Alert = styled.span`
   line-height: 3rem;
   padding: 1rem 2rem;
   margin: 0 0 1rem 0;
-  box-shadow: 0 0 0 1px;
+  box-shadow: 0 0 0 2px;
   border-radius: 0.25rem;
 
   ${({ type }) => type

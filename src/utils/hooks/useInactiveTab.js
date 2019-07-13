@@ -2,7 +2,7 @@
 // import
 // ─────────────────────────────────────────────────────────────────────────────
 
-import { useEffect } from 'react';
+import useEventListener from './useEventListener';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // component
@@ -19,8 +19,5 @@ export default function useInactiveTab() {
     }
   };
 
-  useEffect(() => {
-    document.addEventListener('visibilitychange', handleInactiveTab);
-    return () => document.removeEventListener('visibilitychange', handleInactiveTab);
-  });
+  useEventListener('visibilitychange', handleInactiveTab);
 }

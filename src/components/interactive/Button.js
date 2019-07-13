@@ -34,7 +34,7 @@ export const Button = styled.button`
 
   &:not(:disabled):hover,
   &:not(:disabled):focus {
-    transform: translateY(-1px);
+    transform: translateY(-2px);
   }
   &:not(:disabled):active {
     transform: translateY(1px);

@@ -16,12 +16,13 @@ export const Main = styled.main`
   animation: ${animation({
     from: {
       opacity:   0,
-      transform: 'translateY(1vh)',
+      transform: 'scale(0.99)',
     },
     to: {
       opacity:   1,
-      transform: 'translateY(0)',
+      transform: 'scale(1)',
     },
     properties: '500ms',
   })};
+  transform-origin: top center;
 `;

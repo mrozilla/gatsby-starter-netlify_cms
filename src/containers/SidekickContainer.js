@@ -2,11 +2,12 @@
 // import
 // ─────────────────────────────────────────────────────────────────────────────
 
-import React from 'react';
+import React, { Fragment } from 'react';
 import { graphql } from 'gatsby';
-import { shape, string, arrayOf, object } from 'prop-types';
+import MDXRenderer from 'gatsby-mdx/mdx-renderer';
+import { shape, string, arrayOf } from 'prop-types';
 
-import { H1, H2, Section, P, Ul, Li, Icon, Button, Link, Img, View } from '~components';
+import { H1, H2, Section, P, Ul, Li, Icon, Button, Link, Img } from '~components';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // query
@@ -16,35 +17,51 @@ export const fragment = graphql`
   fragment SidekickFragment on MdxFrontmatterBlocks {
     type
     icon
+    tagline
     title
     subtitle
-    image {
-      childImageSharp {
-        fluid(maxWidth: 600) {
-          ...GatsbyImageSharpFluid_withWebp
-        }
-      }
-    }
-    layout
-    blocks {
-      type
-      list {
+    mdx
+    columns {
+      width
+      blocks {
+        type
         icon
+        tagline
         title
-        body
+        subtitle
+        mdx
         image {
-          childImageSharp {
-            fluid(maxWidth: 300) {
-              ...GatsbyImageSharpFluid_withWebp
+          src {
+            childImageSharp {
+              fluid(maxWidth: 600) {
+                ...GatsbyImageSharpFluid_withWebp
+              }
             }
           }
+          ratio
+          alt
         }
-      }
-      layout
-      buttons {
-        title
-        url
-        look
+        grid {
+          icon
+          title
+          mdx
+          image {
+            src {
+              childImageSharp {
+                fluid(maxWidth: 300) {
+                  ...GatsbyImageSharpFluid_withWebp
+                }
+              }
+            }
+            ratio
+            alt
+          }
+        }
+        buttons {
+          title
+          url
+          look
+        }
       }
     }
   }
@@ -54,212 +71,270 @@ export const fragment = graphql`
 // helpers
 // ─────────────────────────────────────────────────────────────────────────────
 
-function renderBlocks(blocks, layout) {
-  return blocks.map((block) => {
-    if (block.type === 'list') {
-      return (
-        <Ul
-          key={`${block.type}-${block.layout}`}
-          css={`
-            grid-template-columns: ${block.layout === 'grid'
-              && `repeat(auto-fit, minmax(${layout === 'full' ? '30rem' : '16ch'}, 1fr))`};
-            grid-gap: ${block.layout === 'grid'
-                ? `${layout === 'full' ? '3rem 4rem' : '3rem 1rem'}`
-                : '1rem'};
-            margin: ${block.layout === 'grid' ? '4rem 0 0' : '2rem 0 0'};
-            list-style: ${block.layout === 'list' ? 'disc' : 'none'};
-            padding: ${block.layout === 'list' && '0 0 0 1em'};
-          `}
-        >
-          {block.list.map(item => (
-            <Li key={item.title || item.icon || item.image || item.body}>
-              {item.icon && (
+function renderColumn(column, i) {
+  /* eslint-disable react/no-array-index-key */
+
+  if (column.blocks) {
+    return (
+      <Li key={i}>
+        {column.blocks.map(
+          ({ icon, tagline, title, subtitle, mdx, image, grid, buttons }, j) => (
+            <Fragment key={j}>
+              {icon && (
                 <Icon
-                  icon={item.icon}
+                  icon={icon}
                   css={`
-                    font-size: 4rem;
-                    line-height: 1;
+                    margin: 0 0 1rem;
+                    font-size: 5rem;
                     color: var(--color-brand-primary);
                   `}
                 />
               )}
-              {item.image && (
-                <Img
-                  {...item.image?.childImageSharp?.fluid}
-                  alt={item.title}
+              {tagline && (
+                <P
                   css={`
-                    margin: 0 25%;
-                  `}
-                />
-              )}
-              {item.title && (
-                <H2
-                  css={`
+                    text-transform: uppercase;
+                    letter-spacing: 0.1em;
+                    font-size: 1.5rem;
                     font-weight: 700;
                   `}
                 >
-                  {item.title}
-                </H2>
-              )}
-              {item.body && (
-                <P
-                  css={`
-                    line-height: 2.5rem;
-                  `}
-                >
-                  {item.body}
+                  {tagline}
                 </P>
               )}
-            </Li>
-          ))}
-        </Ul>
-      );
-    }
+              {title && (
+                <H2
+                  css={`
+                    margin: 1rem 0;
+                    max-width: 30ch;
 
-    if (block.type === 'buttons') {
-      return (
-        <Ul
-          key={block?.buttons[0]?.url}
-          css={`
-            margin: 3rem -0.5rem 0;
-            display: flex;
-            flex-wrap: wrap;
-          `}
-        >
-          {block.buttons.map(button => (
-            <Li
-              key={button.url}
-              css={`
-                margin: 0.5rem;
-              `}
-            >
-              <Button as={Link} to={button.url} look={button.look}>
-                {button.title}
-              </Button>
-            </Li>
-          ))}
-        </Ul>
-      );
-    }
+                    font-size: 3rem;
+                    line-height: 1;
+                    font-weight: 700;
 
-    return null;
-  });
+                    @media screen and (min-width: 1200px) {
+                      font-size: 4rem;
+                    }
+                  `}
+                >
+                  {title}
+                </H2>
+              )}
+              {subtitle && (
+                <P
+                  css={`
+                    margin: 2rem 0;
+                    max-width: 50ch;
+
+                    font-size: 2.5rem;
+                    line-height: 3rem;
+                  `}
+                >
+                  {subtitle}
+                </P>
+              )}
+              {mdx && <MDXRenderer>{mdx}</MDXRenderer>}
+              {image && (
+                <Img
+                  {...image.src?.childImageSharp?.fluid}
+                  alt={image.alt}
+                  ratio={image.ratio.split('/').reduce((p, c) => p / c)}
+                  css={`
+                    margin: 0 0 2rem;
+                  `}
+                />
+              )}
+              {grid && (
+                <Ul
+                  css={`
+                    grid-template-columns: repeat(auto-fit, minmax(20ch, 1fr));
+                    grid-gap: 2rem;
+                    margin: 4rem 0 0;
+                  `}
+                >
+                  {grid.map(item => (
+                    <Li key={item.title || item.icon || item.image || item.mdx}>
+                      {item.icon && (
+                        <Icon
+                          icon={item.icon}
+                          css={`
+                            font-size: 4rem;
+                            line-height: 1;
+                            color: var(--color-brand-primary);
+                          `}
+                        />
+                      )}
+                      {item.image && (
+                        <Img
+                          {...item.image?.src?.childImageSharp?.fluid}
+                          alt={item.title}
+                          ratio={image.ratio.split('/').reduce((p, c) => p / c)}
+                          css={`
+                            margin: 0 25%;
+                          `}
+                        />
+                      )}
+                      {item.title && (
+                        <H2
+                          css={`
+                            font-weight: 700;
+                          `}
+                        >
+                          {item.title}
+                        </H2>
+                      )}
+                      {item.mdx && <MDXRenderer>{item.mdx}</MDXRenderer>}
+                    </Li>
+                  ))}
+                </Ul>
+              )}
+              {buttons && (
+                <Ul
+                  css={`
+                    margin: 3rem -0.5rem 0;
+                    display: flex;
+                    flex-wrap: wrap;
+                  `}
+                >
+                  {buttons.map(button => (
+                    <Li
+                      key={button.url}
+                      css={`
+                        margin: 0.5rem;
+                      `}
+                    >
+                      <Button as={Link} to={button.url} look={button.look}>
+                        {button.title}
+                      </Button>
+                    </Li>
+                  ))}
+                </Ul>
+              )}
+            </Fragment>
+          ),
+        )}
+      </Li>
+    );
+  }
+
+  return null;
+
+  /* eslint-enable */
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-export default function SidekickContainer({ icon, title, subtitle, image, layout, blocks }) {
-  const gridTemplateColumns = {
-    left:  '3fr 4fr',
-    right: '4fr 3fr',
-    full:  '1fr',
-  };
-
+export default function SidekickContainer({ icon, tagline, title, subtitle, mdx, columns }) {
   return (
     <Section
       css={`
         grid-column: 2;
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-gap: 4rem 8rem;
-        align-items: center;
-
         padding: var(--block-padding) 0;
-        box-shadow: 0 -1px 0 0 hsla(var(--hsl-text), 0.1);
-        text-align: ${layout === 'full' ? 'center' : ''};
-
-        @media screen and (min-width: 1200px) {
-          grid-template-columns: ${gridTemplateColumns[layout]};
-        }
+        text-align: center;
+        box-shadow: inset 0 2px 0 0 hsla(var(--hsl-text), 0.05);
       `}
     >
-      {image && (
-        <Img
-          {...image?.childImageSharp?.fluid}
-          alt={title || subtitle}
-          ratio={2 / 3}
+      {icon && (
+        <Icon
+          icon={icon}
           css={`
-            & > img {
-              object-fit: contain;
-            }
+            display: block;
+            margin: 0 auto 2rem;
 
-            @media screen and (min-width: 1200px) {
-              order: ${layout === 'left' ? '2' : ''};
-            }
+            font-size: 6rem;
+            color: var(--color-brand-primary);
           `}
         />
       )}
-      {
-        <View>
-          {icon && (
-            <Icon
-              icon={icon}
-              css={`
-                font-size: 6rem;
-                color: var(--color-brand-primary);
-                margin: 0 0 2rem;
-              `}
-            />
-          )}
-          <H1
-            css={`
-              font-size: 3rem;
-              line-height: 1;
-              font-weight: 700;
-              max-width: 30ch;
-              margin: 0 auto;
+      {tagline && (
+        <P
+          css={`
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 1.5rem;
+            font-weight: 700;
+          `}
+        >
+          {tagline}
+        </P>
+      )}
+      {title && (
+        <H1
+          css={`
+            margin: 1rem auto 0;
+            max-width: 30ch;
 
-              @media screen and (min-width: 1200px) {
-                font-size: 4rem;
-              }
-            `}
-          >
-            {title}
-          </H1>
-          {subtitle && (
-            <P
-              css={`
-                font-size: 2.5rem;
-                line-height: 2.5rem;
-                max-width: 50ch;
-                margin: 2rem auto 0;
+            font-size: 3rem;
+            line-height: 1;
+            font-weight: 700;
 
-                @media screen and (min-width: 1200px) {
-                  line-height: 4rem;
-                }
-              `}
-            >
-              {subtitle}
-            </P>
-          )}
-          {blocks && renderBlocks(blocks, layout)}
-        </View>
-      }
+            @media screen and (min-width: 1200px) {
+              font-size: 4rem;
+            }
+          `}
+        >
+          {title}
+        </H1>
+      )}
+      {subtitle && (
+        <P
+          css={`
+            margin: 2rem auto;
+            max-width: 50ch;
+
+            font-size: 2.5rem;
+            line-height: 3rem;
+          `}
+        >
+          {subtitle}
+        </P>
+      )}
+      {mdx && <MDXRenderer>{mdx}</MDXRenderer>}
+      {columns && (
+        <Ul
+          css={`
+            text-align: initial;
+
+            grid-gap: 8rem;
+            align-items: center;
+            margin: ${(icon || tagline || title || subtitle || mdx) && '8rem 0 0'};
+
+            @media screen and (min-width: 900px) {
+              grid-template-columns: ${columns.map(column => column.width).join(' ')};
+            }
+          `}
+        >
+          {columns.map(renderColumn)}
+        </Ul>
+      )}
     </Section>
   );
 }
 
 SidekickContainer.propTypes = {
   icon:     string,
-  title:    string.isRequired,
+  tagline:  string,
+  title:    string,
   subtitle: string,
-  layout:   string,
-  blocks:   arrayOf(
+  mdx:      string,
+  columns:  arrayOf(
     shape({
-      type: string.isRequired,
+      blocks: arrayOf(
+        shape({
+          type: string.isRequired,
+        }),
+      ),
     }),
   ),
-  image: shape({
-    childImageSharp: object,
-  }),
 };
 
 SidekickContainer.defaultProps = {
   icon:     '',
+  tagline:  '',
+  title:    '',
   subtitle: '',
-  layout:   'left',
-  blocks:   [],
-  image:    null,
+  mdx:      '',
+  columns:  [],
 };

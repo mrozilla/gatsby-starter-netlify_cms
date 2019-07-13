@@ -4,6 +4,7 @@
 
 import React from 'react';
 import { graphql } from 'gatsby';
+import MDXRenderer from 'gatsby-mdx/mdx-renderer';
 import { shape, string, arrayOf } from 'prop-types';
 
 import { H1, Section, P, Button, Link, Video, Img, Text, Ul, Li } from '~components';
@@ -15,13 +16,21 @@ import { H1, Section, P, Button, Link, Video, Img, Text, Ul, Li } from '~compone
 export const fragment = graphql`
   fragment HeroFragment on MdxFrontmatterBlocks {
     type
-    kicker {
+    backgroundImage {
+      childImageSharp {
+        fluid(maxWidth: 1200) {
+          ...GatsbyImageSharpFluid_withWebp
+        }
+      }
+    }
+    announcement {
       url
       title
       body
     }
     title
     subtitle
+    mdx
     buttons {
       title
       url
@@ -34,26 +43,37 @@ export const fragment = graphql`
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-export default function HeroContainer({ kicker, title, subtitle, body, buttons, image, video }) {
+export default function HeroContainer({
+  backgroundImage,
+  announcement,
+  title,
+  subtitle,
+  mdx,
+  buttons,
+  video,
+}) {
   return (
     <Section
       css={`
         grid-column: 1 / -1;
+        position: relative;
         text-align: center;
         padding: var(--block-padding) var(--width-outside);
+        color: ${backgroundImage && 'var(--color-inverse)'};
       `}
     >
-      {image && (
+      {backgroundImage && (
         <Img
-          {...image?.childImageSharp?.fluid}
+          {...backgroundImage?.childImageSharp?.fluid}
           role="presentation"
+          alt=""
           css={`
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            zindex: -1;
+            z-index: -1;
 
             &::after {
               content: '';
@@ -62,8 +82,8 @@ export default function HeroContainer({ kicker, title, subtitle, body, buttons, 
               height: 100%;
               top: 0;
               left: 0;
-              zindex: -1;
-              backgroundimage: var(--gradient-brand);
+              z-index: -1;
+              background-image: var(--gradient-brand);
             }
 
             & > img {
@@ -75,11 +95,11 @@ export default function HeroContainer({ kicker, title, subtitle, body, buttons, 
         />
       )}
       {video && <Video src={video} />}
-      {kicker && (
+      {announcement && (
         <Link
-          to={kicker.url}
+          to={announcement.url}
           css={`
-            background-color: hsla(var(--hsl-brand-primary), 0.05);
+            background-color: hsla(var(${backgroundImage ? '--hsl-inverse' : '--hsl-brand-primary'}), 0.05);
             border-radius: 999px;
             padding: 0.25rem 1rem 0.25rem 0.25rem;
             display: inline-flex;
@@ -88,7 +108,7 @@ export default function HeroContainer({ kicker, title, subtitle, body, buttons, 
             margin: 0 0 4rem;
 
             &::before {
-              content: "${kicker.title}";
+              content: "${announcement.title}";
               font-size: 1.5rem;
               font-weight: 700;
               text-transform: uppercase;
@@ -102,10 +122,10 @@ export default function HeroContainer({ kicker, title, subtitle, body, buttons, 
         >
           <Text
             css={`
-              color: var(--color-brand-primary);
+              color: var(${backgroundImage ? '--color-inverse' : '--color-brand-primary'});
             `}
           >
-            {kicker.body}
+            {announcement.body}
           </Text>
         </Link>
       )}
@@ -114,7 +134,6 @@ export default function HeroContainer({ kicker, title, subtitle, body, buttons, 
           font-size: 4rem;
           line-height: 1;
           font-weight: 700;
-          color: ${image ? 'var(--color-inverse)' : ''};
           max-width: 20ch;
           margin: 0 auto;
 
@@ -130,9 +149,8 @@ export default function HeroContainer({ kicker, title, subtitle, body, buttons, 
           css={`
             font-size: 2.5rem;
             line-height: 1;
-            color: ${image ? 'var(--color-inverse)' : ''};
             max-width: 50ch;
-            margin: 2rem auto 0;
+            margin: 2rem auto;
 
             @media screen and (min-width: 1200px) {
               font-size: 3rem;
@@ -142,6 +160,7 @@ export default function HeroContainer({ kicker, title, subtitle, body, buttons, 
           {subtitle}
         </P>
       )}
+      {mdx && <MDXRenderer>{mdx}</MDXRenderer>}
       {buttons && (
         <Ul
           css={`
@@ -170,14 +189,14 @@ export default function HeroContainer({ kicker, title, subtitle, body, buttons, 
 }
 
 HeroContainer.propTypes = {
-  kicker: shape({
+  announcement: shape({
     url:   string.isRequired,
     title: string.isRequired,
     body:  string.isRequired,
   }),
   title:    string.isRequired,
   subtitle: string,
-  body:     string,
+  mdx:      string,
   buttons:  arrayOf(
     shape({
       title: string.isRequired,
@@ -185,15 +204,15 @@ HeroContainer.propTypes = {
       look:  string.isRequired,
     }),
   ),
-  image: string,
+  // backgroundImage: string, // TODO:
   video: string,
 };
 
 HeroContainer.defaultProps = {
-  kicker:   null,
-  subtitle: '',
-  body:     '',
-  buttons:  [],
-  image:    '',
-  video:    '',
+  announcement: null,
+  subtitle:     '',
+  mdx:          '',
+  buttons:      [],
+  // backgroundImage:    '',
+  video:        '',
 };
