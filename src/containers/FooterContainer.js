@@ -4,7 +4,7 @@
 
 import React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
-import MDXRenderer from 'gatsby-mdx/mdx-renderer';
+import { MDXRenderer } from 'gatsby-plugin-mdx';
 
 import { Footer, Section, H2, Ul, Li, Link, Logo } from '~components';
 

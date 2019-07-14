@@ -4,7 +4,7 @@
 
 import React from 'react';
 import { graphql } from 'gatsby';
-import MDXRenderer from 'gatsby-mdx/mdx-renderer';
+import { MDXRenderer } from 'gatsby-plugin-mdx';
 
 import { RootContainer, SEOContainer, HighlightShareContainer } from '~containers';
 import { Main, Article, Aside, Link, H1, P, Ul, Li, Button, Icon, View, Text } from '~components';
@@ -23,9 +23,7 @@ export const query = graphql`
         title
         date(formatString: "MMMM D, YYYY")
       }
-      mdx: code {
-        body
-      }
+      body
     }
   }
 `;
@@ -40,7 +38,7 @@ export default function PostTemplateContainer({
     article: {
       timeToRead,
       frontmatter: { title, date, meta },
-      mdx,
+      body,
     },
   },
 }) {
@@ -104,7 +102,7 @@ export default function PostTemplateContainer({
               {timeToRead} min read
             </Text>
           </View>
-          <MDXRenderer>{mdx.body}</MDXRenderer>
+          <MDXRenderer>{body}</MDXRenderer>
         </Article>
         <Aside
           css={`
