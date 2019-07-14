@@ -50,7 +50,7 @@ export default function PostTemplateContainer({
       <Main
         css={`
           grid-gap: 4rem;
-          padding: 20vh var(--width-outside) 10vh;
+          padding: 16rem var(--width-outside) 16rem;
 
           @media screen and (min-width: 1200px) {
             grid-template-columns: auto 1fr;
