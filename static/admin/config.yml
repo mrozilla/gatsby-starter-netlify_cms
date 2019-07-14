@@ -184,6 +184,13 @@ collections:
                                 widget: select
                                 options: ["primary", "secondary"]
 
+                      - name: appStores
+                        label: "App Stores"
+                        fields:
+                          - name: appStores
+                            widget: object
+                            fields: [name: ios, name: android]
+
           - name: testimonials
             label: "Testimonials"
             fields:

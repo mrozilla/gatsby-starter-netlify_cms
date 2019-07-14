@@ -7,7 +7,7 @@ import { graphql } from 'gatsby';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { shape, string, arrayOf } from 'prop-types';
 
-import { H1, H2, Section, P, Ul, Li, Icon, Button, Link, Img } from '~components';
+import { H1, H2, Section, P, Ul, Li, Icon, Button, Link, Img, AppStore } from '~components';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // query
@@ -62,6 +62,10 @@ export const fragment = graphql`
           url
           look
         }
+        appStores {
+          ios
+          android
+        }
       }
     }
   }
@@ -78,7 +82,7 @@ function renderColumn(column, i) {
     return (
       <Li key={i}>
         {column.blocks.map(
-          ({ icon, tagline, title, subtitle, mdx, image, grid, buttons }, j) => (
+          ({ icon, tagline, title, subtitle, mdx, image, grid, buttons, appStores }, j) => (
             <Fragment key={j}>
               {icon && (
                 <Icon
@@ -208,6 +212,31 @@ function renderColumn(column, i) {
                       </Button>
                     </Li>
                   ))}
+                </Ul>
+              )}
+              {appStores && (
+                <Ul 
+                  css={`
+                    margin: 4rem 0 0;
+
+                    grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+                    grid-gap: 1rem;
+                  `}
+                >
+                  {appStores.ios && (
+                    <Li>
+                      <Link to={appStores.ios}>
+                        <AppStore os="ios" />
+                      </Link>
+                    </Li>
+                  )}
+                  {appStores.android && (
+                    <Li>
+                      <Link to={appStores.android}>
+                        <AppStore os="android" />
+                      </Link>
+                    </Li>
+                  )}
                 </Ul>
               )}
             </Fragment>
