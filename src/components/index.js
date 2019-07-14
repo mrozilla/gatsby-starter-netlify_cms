@@ -33,6 +33,7 @@ export { View } from './primitives/View';
 
 export { Alert } from './text/Alert';
 export { Article } from './text/Article';
+export { Badge } from './text/Badge';
 export { Blockquote } from './text/Blockquote';
 export { H1, H2, H3 } from './text/HX';
 export { Label } from './text/Label';
