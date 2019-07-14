@@ -34,6 +34,7 @@ collections:
             fields:
               - name: text
               - name: url
+              - { name: badge, required: false }
 
           - name: markdown
             fields:
@@ -48,6 +49,7 @@ collections:
                 fields:
                   - name: text
                   - { name: url, required: false }
+                  - { name: badge, required: false }
 
           - name: button
             fields:
