@@ -4,7 +4,7 @@
 
 import React, { useState } from 'react';
 import { graphql } from 'gatsby';
-import MDXRenderer from 'gatsby-mdx/mdx-renderer';
+import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { shape, string, arrayOf } from 'prop-types';
 
 import { H1, Section, P, Ul, Li, Link, H2, Text, Button } from '~components';

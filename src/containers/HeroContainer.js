@@ -4,7 +4,7 @@
 
 import React from 'react';
 import { graphql } from 'gatsby';
-import MDXRenderer from 'gatsby-mdx/mdx-renderer';
+import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { shape, string, arrayOf } from 'prop-types';
 
 import { H1, Section, P, Button, Link, Video, Img, Text, Ul, Li } from '~components';

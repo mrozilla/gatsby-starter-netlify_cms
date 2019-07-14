@@ -4,7 +4,7 @@
 
 import React, { Fragment } from 'react';
 import { graphql } from 'gatsby';
-import MDXRenderer from 'gatsby-mdx/mdx-renderer';
+import { MDXRenderer } from 'gatsby-plugin-mdx';
 
 import { RootContainer,
   SEOContainer,
