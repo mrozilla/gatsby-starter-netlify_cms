@@ -133,7 +133,7 @@ export default function TestimonialsContainer({ title, subtitle, mdx, testimonia
                 <Img
                   {...item.image?.src?.childImageSharp?.fluid}
                   alt={item.name || item.image?.src}
-                  ratio={item.image?.ratio}
+                  ratio={item.image?.ratio.split('/').reduce((p, c) => p / c)}
                   css={`
                     max-width: 8rem;
                     margin: 0 auto 1rem;
