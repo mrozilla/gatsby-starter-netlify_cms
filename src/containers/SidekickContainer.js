@@ -27,6 +27,17 @@ export const fragment = graphql`
         url
         look
       }
+      image {
+        src {
+          childImageSharp {
+            fluid(maxWidth: 900) {
+              ...GatsbyImageSharpFluid_withWebp
+            }
+          }
+        }
+        ratio
+        alt
+      }
       appStores {
         ios
         android
@@ -34,6 +45,7 @@ export const fragment = graphql`
     }
     columns {
       width
+      textAlign
       blocks {
         type
         icon
@@ -148,6 +160,16 @@ function renderHeader(item, i) {
         </P>
       )}
       {item.mdx && <MDXRenderer>{item.mdx}</MDXRenderer>}
+      {item.image && (
+        <Img
+          {...item.image.src?.childImageSharp?.fluid}
+          alt={item.image.alt}
+          ratio={item.image.ratio.split('/').reduce((p, c) => p / c)}
+          css={`
+            margin: 0 0 2rem;
+          `}
+        />
+      )}
       {item.buttons && (
         <Ul
           css={`
@@ -213,7 +235,12 @@ function renderColumn(column, i) {
 
   if (column.blocks) {
     return (
-      <Li key={i}>
+      <Li
+        key={i}
+        css={`
+          text-align: ${column.textAlign};
+        `}
+      >
         {column.blocks.map(
           ({ icon, tagline, title, subtitle, mdx, image, grid, buttons, appStores }, j) => (
             <Fragment key={j}>
@@ -436,7 +463,9 @@ export default function SidekickContainer({ header, columns }) {
             margin: ${header?.length > 0 && '8rem 0 0'};
 
             @media screen and (min-width: 900px) {
-              grid-template-columns: ${columns.map(column => column.width).join(' ')};
+              grid-template-columns: ${columns.length > 4
+            ? 'repeat(auto-fit, minmax(30ch, 1fr))'
+            : columns.map(column => column.width).join(' ')};
             }
           `}
         >

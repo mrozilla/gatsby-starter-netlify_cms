@@ -229,6 +229,7 @@ collections:
                           - name: appStores
                             widget: object
                             fields: [name: ios, name: android]
+                  - { name: textAlign, required: false }
 
           - name: testimonials
             label: "Testimonials"
