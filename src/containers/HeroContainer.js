@@ -58,7 +58,9 @@ export default function HeroContainer({
         grid-column: 1 / -1;
         position: relative;
         text-align: center;
-        padding: var(--block-padding) var(--width-outside);
+        padding: var(--block-padding);
+        padding-left: var(--width-outside);
+        padding-right: var(--width-outside);
         color: ${backgroundImage && 'var(--color-inverse)'};
       `}
     >
@@ -99,7 +101,9 @@ export default function HeroContainer({
         <Link
           to={announcement.url}
           css={`
-            background-color: hsla(var(${backgroundImage ? '--hsl-inverse' : '--hsl-brand-primary'}), 0.05);
+            background-color: hsla(var(${
+              backgroundImage ? '--hsl-inverse' : '--hsl-brand-primary'
+            }), 0.05);
             border-radius: 999px;
             padding: 0.25rem 1rem 0.25rem 0.25rem;
             display: inline-flex;
@@ -139,6 +143,11 @@ export default function HeroContainer({
 
           @media screen and (min-width: 1200px) {
             font-size: 6rem;
+          }
+
+          & ~ p {
+            margin: 2rem auto 0;
+            max-width: 60ch;
           }
         `}
       >

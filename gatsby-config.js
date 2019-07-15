@@ -10,7 +10,7 @@ const proxy = require('http-proxy-middleware');
 
 const {
   NODE_ENV,
-  URL: NETLIFY_PRODUCTION_URL = 'https://www.napadroku.cz', // TODO: update default
+  URL: NETLIFY_PRODUCTION_URL = 'https://www.gatsby-starter-netlify_cms.netlify.com', // TODO: update default
   DEPLOY_PRIME_URL: NETLIFY_DEPLOY_URL = NETLIFY_PRODUCTION_URL,
   CONTEXT: NETLIFY_ENV = NODE_ENV,
 } = process.env;

@@ -44,7 +44,7 @@ export default function PricingContainer({ title, subtitle, mdx, pricing }) {
         grid-column: 2;
         display: grid;
         padding: var(--block-padding) 0;
-        box-shadow: inset 0 2px 0 0 hsla(var(--hsl-text), 0.05);
+        box-shadow: var(--block-box-shadow);
         text-align: center;
       `}
     >

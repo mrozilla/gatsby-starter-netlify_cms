@@ -15,8 +15,8 @@ import styled, { css } from 'styled-components';
 const StyledLink = styled.a`
   outline: none;
 
-  transition: color 250ms;
-  
+  transition: all 250ms;
+
   /* &[aria-current] {
     font-weight: 700; /* TODO: investigate if better styling
   } */
@@ -59,6 +59,7 @@ const StyledLink = styled.a`
 
 export default function Link({ href, to, children, ...rest }) {
   const link = href || to || '';
+
   if (['http', 'mailto:', 'tel:', 'www.'].some(t => link.includes(t))) {
     const externalLink = link.startsWith('www.') ? `https://${link}` : link;
     return (

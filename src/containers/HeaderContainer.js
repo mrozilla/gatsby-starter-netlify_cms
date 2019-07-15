@@ -5,7 +5,7 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 
-import { Header, H2, Link, Nav, Logo, Button } from '~components';
+import { Header, H2, Link, Nav, Logo, Button, Badge } from '~components';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // query
@@ -17,9 +17,11 @@ export const fragment = graphql`
       title
       text
       url
+      badge
       links {
         text
         url
+        badge
       }
       look
       type
@@ -80,6 +82,7 @@ export default function HeaderContainer() {
                     `}
                   >
                     {item.text}
+                    {item.badge && <Badge>{item.badge}</Badge>}
                   </Link>
                 </Nav.List.Item>
               );
@@ -149,6 +152,7 @@ export default function HeaderContainer() {
                           `}
                         >
                           {link.text}
+                          {link.badge && <Badge>{link.badge}</Badge>}
                         </Link>
                       </Nav.List.Item>
                     ))}

@@ -34,6 +34,7 @@ collections:
             fields:
               - name: text
               - name: url
+              - { name: badge, required: false }
 
           - name: markdown
             fields:
@@ -48,6 +49,7 @@ collections:
                 fields:
                   - name: text
                   - { name: url, required: false }
+                  - { name: badge, required: false }
 
           - name: button
             fields:
@@ -82,10 +84,9 @@ collections:
               - name: announcement
                 widget: object
                 fields:
-                  - name: url
-                  - name: title
-                  - name: body
-                required: false
+                  - { name: url, required: false }
+                  - { name: title, required: false }
+                  - { name: body, required: false }
               - name: title
               - { name: subtitle, required: false }
               - { name: mdx, widget: markdown, required: false }
@@ -96,18 +97,67 @@ collections:
                   - name: url
                   - name: look
                     widget: select
-                    options: ["primary", "secondary"]
+                    options: ["primary", "secondary", "tertiary"]
               - { name: backgroundImage, widget: image, required: false }
               - { name: video, required: false }
 
           - name: sidekick
             label: "Sidekick"
             fields:
-              - { name: icon, required: false }
-              - { name: tagline, required: false }
-              - { name: title, required: false }
-              - { name: subtitle, required: false }
-              - { name: mdx, widget: markdown, required: false }
+              - name: header
+                label: "Header"
+                widget: list
+                types:
+                  - name: icon
+                    label: "Icon"
+                    fields:
+                      - name: icon
+                  - name: tagline
+                    label: "Tagline"
+                    fields:
+                      - name: tagline
+                  - name: title
+                    label: "Title"
+                    fields:
+                      - name: title
+                  - name: subtitle
+                    label: "Subtitle"
+                    fields:
+                      - name: subtitle
+                  - name: mdx
+                    label: "Mdx"
+                    fields:
+                      - { name: mdx, widget: markdown }
+                  - name: image
+                    label: "Image"
+                    fields:
+                      - {
+                          name: image,
+                          widget: object,
+                          fields:
+                            [
+                              { name: src, widget: image },
+                              name: alt,
+                              name: ratio,
+                            ],
+                        }
+                  - name: buttons
+                    label: "Buttons"
+                    fields:
+                      - name: buttons
+                        widget: list
+                        fields:
+                          - name: title
+                          - name: url
+                          - name: look
+                            widget: select
+                            options: ["primary", "secondary", "tertiary"]
+                  - name: appStores
+                    label: "App Stores"
+                    fields:
+                      - name: appStores
+                        widget: object
+                        fields: [name: ios, name: android]
               - name: columns
                 label: "Columns"
                 label_singular: "Column"
@@ -161,17 +211,6 @@ collections:
                               - { name: icon, required: false }
                               - { name: title, required: false }
                               - { name: mdx, widget: markdown, required: false }
-                              - {
-                                  name: image,
-                                  widget: object,
-                                  fields:
-                                    [
-                                      { name: src, widget: image },
-                                      name: alt,
-                                      name: ratio,
-                                    ],
-                                  required: false,
-                                }
                       - name: buttons
                         label: "Buttons"
                         fields:
@@ -182,14 +221,14 @@ collections:
                               - name: url
                               - name: look
                                 widget: select
-                                options: ["primary", "secondary"]
-
+                                options: ["primary", "secondary", "tertiary"]
                       - name: appStores
                         label: "App Stores"
                         fields:
                           - name: appStores
                             widget: object
                             fields: [name: ios, name: android]
+                  - { name: textAlign, required: false }
 
           - name: testimonials
             label: "Testimonials"

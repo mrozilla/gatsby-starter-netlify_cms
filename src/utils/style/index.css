@@ -41,26 +41,26 @@
   --z-index-modal: 1030;
 
   --width-outside: 2rem;
-  --block-padding: 5rem;
+  --block-padding: 10vw 0;
+  /* --block-margin: 2rem 0; */
+  /* --block-background-color: var(--color-inverse); */
+  --block-box-shadow: inset 0 2px 0 0 hsla(var(--hsl-text), 0.05);
 }
 
 @media screen and (min-width: 600px) {
   :root {
     --width-outside: 10rem;
-    --block-padding: 5vh;
   }
 }
 
 @media screen and (min-width: 900px) {
   :root {
     --width-outside: 20rem;
-    --block-padding: 10vh;
   }
 }
 @media screen and (min-width: 1200px) {
   :root {
     --width-outside: 30rem;
-    --block-padding: 15vh;
   }
 }
 
