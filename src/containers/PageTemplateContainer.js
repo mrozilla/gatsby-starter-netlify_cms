@@ -14,7 +14,8 @@ import { RootContainer,
   TestimonialsContainer,
   LogosContainer,
   PricingContainer,
-  BlogContainer } from '~containers';
+  BlogContainer,
+  FAQContainer } from '~containers';
 import { Main } from '~components';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -32,6 +33,7 @@ export const query = graphql`
           ...TestimonialsFragment
           ...LogosFragment
           ...PricingFragment
+          ...FAQFragment
         }
       }
     }
@@ -72,6 +74,10 @@ function renderBlocks(blocks) {
 
     if (block.type === 'blog') {
       return <BlogContainer key={i} {...block} />;
+    }
+
+    if (block.type === 'faq') {
+      return <FAQContainer key={i} {...block} />;
     }
 
     if (block.type === 'mdx' || block.type === 'markdown') {

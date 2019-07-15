@@ -13,3 +13,4 @@ export { default as TestimonialsContainer } from './TestimonialsContainer';
 export { default as LogosContainer } from './LogosContainer';
 export { default as PricingContainer } from './PricingContainer';
 export { default as BlogContainer } from './BlogContainer';
+export { default as FAQContainer } from './FAQContainer';
