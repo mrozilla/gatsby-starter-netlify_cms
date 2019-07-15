@@ -16,11 +16,13 @@ export const Summary = styled.summary`
   }
 
   cursor: pointer;
+  display: flex;
+  align-items: center;
 
   &::before {
     content: '▼';
     display: inline-block;
-    margin: 0 0.5rem 0 0;
+    margin: 0 1rem 0 0;
 
     font-size: 2rem;
     color: hsla(var(--hsl-text), 0.25);

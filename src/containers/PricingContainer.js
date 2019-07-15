@@ -43,7 +43,7 @@ export default function PricingContainer({ title, subtitle, mdx, pricing }) {
       css={`
         grid-column: 2;
         display: grid;
-        padding: var(--block-padding) 0;
+        padding: var(--block-padding);
         box-shadow: var(--block-box-shadow);
         text-align: center;
       `}
