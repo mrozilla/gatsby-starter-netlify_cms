@@ -96,6 +96,7 @@ function renderColumn(column, i) {
               )}
               {tagline && (
                 <P
+                  as="span"
                   css={`
                     text-transform: uppercase;
                     letter-spacing: 0.1em;
@@ -116,6 +117,10 @@ function renderColumn(column, i) {
                     line-height: 1;
                     font-weight: 700;
 
+                    &:not(:first-of-type) {
+                      margin: 6rem 0 1rem;
+                    }
+
                     @media screen and (min-width: 1200px) {
                       font-size: 4rem;
                     }
@@ -132,6 +137,10 @@ function renderColumn(column, i) {
 
                     font-size: 2.5rem;
                     line-height: 3rem;
+
+                    &:not(:first-of-type) {
+                      margin: 6rem 0 2rem;
+                    }
                   `}
                 >
                   {subtitle}
@@ -279,6 +288,7 @@ export default function SidekickContainer({ icon, tagline, title, subtitle, mdx,
       )}
       {tagline && (
         <P
+          as="span"
           css={`
             text-transform: uppercase;
             letter-spacing: 0.1em;
