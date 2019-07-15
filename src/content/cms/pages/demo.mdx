@@ -57,11 +57,26 @@ blocks:
               ios: "https://example.com/ios/"
             type: appStores
         width: 1fr
-    icon: FaEye
-    tagline: Demo
-    mdx: Demo
-    subtitle: Demo
-    title: Demo
+    header:
+      - icon: FaEye
+        type: icon
+      - tagline: Demo
+        type: tagline
+      - title: Demo
+        type: title
+      - subtitle: Demo
+        type: subtitle
+      - mdx: Demo
+        type: mdx
+      - buttons:
+          - look: primary
+            title: Demo
+            url: /demo/
+        type: buttons
+      - appStores:
+          android: "https://example.com/android/"
+          ios: "https://example.com/ios/"
+        type: appStores 
     type: sidekick
   - mdx: Demo
     subtitle: Demo
