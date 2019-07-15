@@ -16,7 +16,7 @@ const StyledLink = styled.a`
   outline: none;
 
   transition: all 250ms;
-  
+
   /* &[aria-current] {
     font-weight: 700; /* TODO: investigate if better styling
   } */

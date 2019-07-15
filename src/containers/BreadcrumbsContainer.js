@@ -19,10 +19,10 @@ export default function BreadcrumbsContainer({ location, separator }) {
 
   const { pages } = useStaticQuery(graphql`
     query {
-      pages: allMdx(filter: {fields: {sourceName: {eq: "pages"}}}) {
+      pages: allMdx(filter: { fields: { sourceName: { eq: "pages" } } }) {
         nodes {
           frontmatter {
-            meta{
+            meta {
               title
               permalink
             }
@@ -32,21 +32,30 @@ export default function BreadcrumbsContainer({ location, separator }) {
     }
   `);
 
-  const breadcrumbs = location.pathname.split('/').reduce((acc, item, i) => {
-    if (item === '') {
-      return acc;
-    }
+  const breadcrumbs = location.pathname.split('/').reduce(
+    (acc, item, i) => {
+      if (item === '') {
+        return acc;
+      }
 
-    const pathname = `${acc[i - 1].url}${item}${item === '/' ? '' : '/'}`;
-    const title = pages.nodes.find(page => page.frontmatter.meta.permalink === pathname)?.frontmatter.meta.title;
-    return [...acc, {
-      url: pathname,
-      title,
-    }];
-  }, [{
-    url:   '/',
-    title: 'Home',
-  }]);
+      const pathname = `${acc[i - 1].url}${item}${item === '/' ? '' : '/'}`;
+      const title = pages.nodes.find(page => page.frontmatter.meta.permalink === pathname)
+        ?.frontmatter.meta.title;
+      return [
+        ...acc,
+        {
+          url: pathname,
+          title,
+        },
+      ];
+    },
+    [
+      {
+        url:   '/',
+        title: 'Home',
+      },
+    ],
+  );
 
   return (
     <View
@@ -59,20 +68,21 @@ export default function BreadcrumbsContainer({ location, separator }) {
         z-index: 1;
       `}
     >
-      <Ol css={`
-        grid-auto-flow: column;
-        grid-auto-columns: max-content;
-        grid-gap: 1rem;
+      <Ol
+        css={`
+          grid-auto-flow: column;
+          grid-auto-columns: max-content;
+          grid-gap: 1rem;
 
-        padding: 1rem 0;
-        font-size: 1.5rem;
-      `}
+          padding: 1rem 0;
+          font-size: 1.5rem;
+        `}
       >
-        {breadcrumbs.map(page => (
-          page.title && (
-            <Li
-              key={page.url}
-              css={`
+        {breadcrumbs.map(
+          page => page.title && (
+          <Li
+            key={page.url}
+            css={`
               transition: opacity 250ms;
 
               &:not(:last-child) {
@@ -89,13 +99,17 @@ export default function BreadcrumbsContainer({ location, separator }) {
                 opacity: 1;
               }
             `}
-            >
-              {page.url === location.pathname ? page.title : (
-                <Link to={`${page.url}/`} look="tertiary">{page.title}</Link>
-              )}
-            </Li>
-          )
-        ))}
+          >
+            {page.url === location.pathname ? (
+              page.title
+            ) : (
+              <Link to={`${page.url}`} look="tertiary">
+                {page.title}
+              </Link>
+            )}
+          </Li>
+          ),
+        )}
       </Ol>
     </View>
   );

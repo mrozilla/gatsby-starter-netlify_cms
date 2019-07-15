@@ -112,7 +112,7 @@ export default function LogosContainer({ title, subtitle, mdx, logos }) {
                 <Img
                   {...company.image?.src?.childImageSharp?.fluid}
                   alt={company.name || company.image?.alt}
-                  ratio={company.image?.ratio}
+                  ratio={company.image?.ratio.split('/').reduce((p, c) => p / c)}
                   css={`
                     & > img {
                       object-fit: contain;
