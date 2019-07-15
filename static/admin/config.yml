@@ -84,10 +84,9 @@ collections:
               - name: announcement
                 widget: object
                 fields:
-                  - name: url
-                  - name: title
-                  - name: body
-                required: false
+                  - { name: url, required: false }
+                  - { name: title, required: false }
+                  - { name: body, required: false }
               - name: title
               - { name: subtitle, required: false }
               - { name: mdx, widget: markdown, required: false }
