@@ -287,6 +287,18 @@ collections:
                   - name: currency
                   - { name: mdx, widget: markdown, required: false }
 
+          - name: faq
+            label: "FAQ"
+            fields:
+              - { name: title, required: false }
+              - { name: subtitle, required: false }
+              - { name: mdx, widget: markdown, required: false }
+              - name: faq
+                widget: list
+                fields:
+                  - { name: title, label: "Question" }
+                  - { name: mdx, label: "Answer", widget: markdown }
+
   - label: "Posts"
     label_singular: "Blog post"
     name: posts

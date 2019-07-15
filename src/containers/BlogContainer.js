@@ -127,7 +127,7 @@ export default function BlogContainer({ title, subtitle }) {
                 <Img
                   {...post.frontmatter.meta.ogImage?.childImageSharp?.fluid}
                   alt={post.frontmatter.title}
-                  ratio={1 / 2}
+                  ratio={2 / 1}
                   css={`
                     grid-row: span 4;
                     margin: ${i === 0 ? '' : '0 0 2rem'};
