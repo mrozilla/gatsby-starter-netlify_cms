@@ -119,7 +119,7 @@ export default function FooterContainer() {
       <Section
         as="nav"
         css={`
-          padding: var(--block-padding) var(--width-outside) calc(var(--block-padding));
+          padding: 10rem var(--width-outside);
           text-align: center;
 
           @media screen and (min-width: 900px) {

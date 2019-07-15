@@ -119,6 +119,7 @@ function renderHeader(item, i) {
         <P
           as="span"
           css={`
+            color: var(--color-brand-primary);
             text-transform: uppercase;
             letter-spacing: 0.1em;
             font-size: 1.5rem;
@@ -166,7 +167,9 @@ function renderHeader(item, i) {
           alt={item.image.alt}
           ratio={item.image.ratio.split('/').reduce((p, c) => p / c)}
           css={`
-            margin: 0 0 2rem;
+            &:not(:last-child) {
+              margin: 0 0 2rem;
+            }
           `}
         />
       )}
@@ -258,6 +261,7 @@ function renderColumn(column, i) {
                 <P
                   as="span"
                   css={`
+                    color: var(--color-brand-primary);
                     text-transform: uppercase;
                     letter-spacing: 0.1em;
                     font-size: 1.5rem;
@@ -313,7 +317,9 @@ function renderColumn(column, i) {
                   alt={image.alt}
                   ratio={image.ratio.split('/').reduce((p, c) => p / c)}
                   css={`
-                    margin: 0 0 2rem;
+                    &:not(:last-child) {
+                      margin: 0 0 2rem;
+                    }
                   `}
                 />
               )}
@@ -367,6 +373,9 @@ function renderColumn(column, i) {
                     margin: 3rem -0.5rem 0;
                     display: flex;
                     flex-wrap: wrap;
+                    justify-content: ${column.textAlign === 'center'
+                    ? column.textAlign
+                    : `flex-${column.textAlign}`};
                   `}
                 >
                   {buttons.map(button => (
@@ -390,6 +399,9 @@ function renderColumn(column, i) {
 
                     display: flex;
                     flex-wrap: wrap;
+                    justify-content: ${column.textAlign === 'center'
+                    ? column.textAlign
+                    : `flex-${column.textAlign}`};
 
                     & > li {
                       margin: 0 0.5rem;
@@ -435,9 +447,12 @@ export default function SidekickContainer({ header, columns }) {
     <Section
       css={`
         grid-column: 2;
-        padding: var(--block-padding) 0;
         text-align: center;
-        box-shadow: inset 0 2px 0 0 hsla(var(--hsl-text), 0.05);
+
+        box-shadow: var(--block-box-shadow);
+        background-color: var(--block-background-color);
+        margin: var(--block-margin);
+        padding: var(--block-padding);
       `}
     >
       {header && (

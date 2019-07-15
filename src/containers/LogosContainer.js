@@ -51,7 +51,7 @@ export default function LogosContainer({ title, subtitle, mdx, logos }) {
       css={`
         grid-column: 2;
         padding: 5rem 0;
-        box-shadow: inset 0 2px 0 0 hsla(var(--hsl-text), 0.05);
+        box-shadow: var(--block-box-shadow);
         text-align: center;
       `}
     >
