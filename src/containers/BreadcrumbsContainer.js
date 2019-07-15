@@ -37,7 +37,7 @@ export default function BreadcrumbsContainer({ location, separator }) {
       return acc;
     }
 
-    const pathname = `${acc[i - 1].url}${item}/`;
+    const pathname = `${acc[i - 1].url}${item}${item === '/' ? '' : '/'}`;
     const title = pages.nodes.find(page => page.frontmatter.meta.permalink === pathname)?.frontmatter.meta.title;
     return [...acc, {
       url: pathname,
