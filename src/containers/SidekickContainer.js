@@ -254,6 +254,8 @@ function renderColumn(column, i) {
                     margin: 0 0 1rem;
                     font-size: 5rem;
                     color: var(--color-brand-primary);
+
+                    // background-image: radial-gradient(circle closest-side, var(--color-brand-primary) 100%, transparent);
                   `}
                 />
               )}
