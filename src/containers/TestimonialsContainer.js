@@ -57,7 +57,7 @@ export default function TestimonialsContainer({ title, subtitle, mdx, testimonia
     <Section
       css={`
         grid-column: 2;
-        padding: var(--block-padding) 0;
+        padding: var(--block-padding);
         box-shadow: var(--block-box-shadow);
         text-align: center;
         overflow: hidden; /* TODO: see why the carousel UL stretches parent on mobile */-
@@ -132,7 +132,7 @@ export default function TestimonialsContainer({ title, subtitle, mdx, testimonia
               {item.image && (
                 <Img
                   {...item.image?.src?.childImageSharp?.fluid}
-                  alt={item.name || item.image?.src}
+                  alt={item.name || item.image?.alt}
                   ratio={item.image?.ratio.split('/').reduce((p, c) => p / c)}
                   css={`
                     max-width: 8rem;
