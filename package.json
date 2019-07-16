@@ -8,9 +8,9 @@
   "bugs": "https://github.com/mrozilla/gatsby-starter-netlify_cms/issues",
   "author": "Jan Hruby <jan@mrozilla.cz>",
   "dependencies": {
-    "@mdx-js/mdx": "^1.0.27",
+    "@mdx-js/mdx": "^1.1.0",
     "@mdx-js/react": "^1.0.27",
-    "gatsby": "2.13.21",
+    "gatsby": "2.13.23",
     "gatsby-plugin-google-analytics": "2.1.4",
     "gatsby-plugin-manifest": "2.2.3",
     "gatsby-plugin-mdx": "^1.0.13",
