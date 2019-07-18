@@ -189,16 +189,17 @@ collections:
                           - name: image
                             widget: object
                             fields:
-                              [
-                                { name: src, widget: image },
-                                name: alt,
-                                name: ratio,
-                              ]
+                              - { name: src, widget: image }
+                              - name: alt
+                              - name: ratio
                       - name: map
                         label: "Map"
                         fields:
                           - name: map
-                            widget: map
+                            widget: object
+                            fields:
+                              - { name: geo, widget: map }
+                              - name: zoom
                       - name: grid
                         label: "Grid"
                         fields:

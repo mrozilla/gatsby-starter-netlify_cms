@@ -55,5 +55,5 @@ Map.propTypes = {
 };
 
 Map.defaultProps = {
-  zoom: '10',
+  zoom: '15',
 };

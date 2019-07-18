@@ -76,7 +76,10 @@ export const fragment = graphql`
           ratio
           alt
         }
-        map
+        map {
+          geo
+          zoom
+        }
         grid {
           icon
           title
@@ -338,7 +341,7 @@ function renderColumn(column, i) {
                   `}
                 />
               )}
-              {map && <Map center={JSON.parse(map)?.coordinates?.reverse()?.join(',')} />}
+              {map && <Map center={JSON.parse(map?.geo)?.coordinates?.reverse()?.join(',')} zoom={map.zoom} />}
               {grid && (
                 <Ul
                   css={`
