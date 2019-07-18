@@ -7,7 +7,19 @@ import { graphql } from 'gatsby';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { shape, string, arrayOf } from 'prop-types';
 
-import { H1, H2, Section, P, Ul, Li, Icon, Button, Link, Img, AppStore, View } from '~components';
+import { H1,
+  H2,
+  Section,
+  P,
+  Ul,
+  Li,
+  Icon,
+  Button,
+  Link,
+  Img,
+  AppStore,
+  View,
+  Map } from '~components';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // query
@@ -64,6 +76,7 @@ export const fragment = graphql`
           ratio
           alt
         }
+        map
         grid {
           icon
           title
@@ -245,7 +258,7 @@ function renderColumn(column, i) {
         `}
       >
         {column.blocks.map(
-          ({ icon, tagline, title, subtitle, mdx, image, grid, buttons, appStores }, j) => (
+          ({ icon, tagline, title, subtitle, mdx, image, map, grid, buttons, appStores }, j) => (
             <Fragment key={j}>
               {icon && (
                 <Icon
@@ -325,6 +338,7 @@ function renderColumn(column, i) {
                   `}
                 />
               )}
+              {map && <Map center={JSON.parse(map)?.coordinates?.reverse()?.join(',')} />}
               {grid && (
                 <Ul
                   css={`
