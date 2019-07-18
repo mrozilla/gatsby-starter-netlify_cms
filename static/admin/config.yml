@@ -131,16 +131,10 @@ collections:
                   - name: image
                     label: "Image"
                     fields:
-                      - {
-                          name: image,
-                          widget: object,
-                          fields:
-                            [
-                              { name: src, widget: image },
-                              name: alt,
-                              name: ratio,
-                            ],
-                        }
+                      - name: image
+                        widget: object
+                        fields:
+                          [{ name: src, widget: image }, name: alt, name: ratio]
                   - name: buttons
                     label: "Buttons"
                     fields:
@@ -192,16 +186,20 @@ collections:
                       - name: image
                         label: "Image"
                         fields:
-                          - {
-                              name: image,
-                              widget: object,
-                              fields:
-                                [
-                                  { name: src, widget: image },
-                                  name: alt,
-                                  name: ratio,
-                                ],
-                            }
+                          - name: image
+                            widget: object
+                            fields:
+                              - { name: src, widget: image }
+                              - name: alt
+                              - name: ratio
+                      - name: map
+                        label: "Map"
+                        fields:
+                          - name: map
+                            widget: object
+                            fields:
+                              - { name: geo, widget: map }
+                              - name: zoom
                       - name: grid
                         label: "Grid"
                         fields:
@@ -243,13 +241,11 @@ collections:
                   - { name: position, required: false }
                   - { name: company, required: false }
                   - { name: testimonial, required: false }
-                  - {
-                      name: image,
-                      widget: object,
-                      fields:
-                        [{ name: src, widget: image }, name: alt, name: ratio],
-                      required: false,
-                    }
+                  - name: image
+                    widget: object
+                    fields:
+                      [{ name: src, widget: image }, name: alt, name: ratio]
+                    required: false
 
           - name: logos
             label: "Logos"
@@ -262,12 +258,11 @@ collections:
                 fields:
                   - name: name
                   - name: url
-                  - {
-                      name: image,
-                      widget: object,
-                      fields:
-                        [{ name: src, widget: image }, name: alt, name: ratio],
-                    }
+                  - name: image
+                    widget: object
+                    fields:
+                      [{ name: src, widget: image }, name: alt, name: ratio]
+                    required: false
 
           - name: pricing
             label: "Pricing"
@@ -298,6 +293,33 @@ collections:
                 fields:
                   - { name: title, label: "Question" }
                   - { name: mdx, label: "Answer", widget: markdown }
+
+          - name: people
+            label: "People"
+            fields:
+              - { name: title, required: false }
+              - { name: subtitle, required: false }
+              - { name: mdx, widget: markdown, required: false }
+              - name: people
+                widget: list
+                fields:
+                  - name: name
+                  - { name: position, required: false }
+                  - { name: company, required: false }
+                  - name: mdx
+                    label: "Description"
+                    widget: markdown
+                    required: false
+                  - name: image
+                    widget: object
+                    fields:
+                      [{ name: src, widget: image }, name: alt, name: ratio]
+                    required: false
+                  - name: contact
+                    widget: list
+                    fields:
+                      - name: icon
+                      - name: url
 
   - label: "Posts"
     label_singular: "Blog post"

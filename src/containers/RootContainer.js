@@ -9,7 +9,7 @@ import { node } from 'prop-types';
 import HeaderContainer from './HeaderContainer';
 import FooterContainer from './FooterContainer';
 import CookieContainer from './CookieContainer';
-import { Link, Pre, Ul, P } from '~components';
+import { Link, Pre, Ul, P, H3 } from '~components';
 
 import { useInactiveTab } from '~utils';
 import '~utils/style/index.css';
@@ -25,6 +25,16 @@ export default function RootContainer({ children }) {
     <MDXProvider
       components={{
         a:  props => <Link look="primary" {...props} />,
+        h3: props => (
+          <H3
+            css={`
+              font-size: 2.5rem;
+              font-weight: 600;
+              margin: 4rem 0 0;
+            `}
+            {...props}
+          />
+        ),
         ul: props => (
           <Ul
             css={`

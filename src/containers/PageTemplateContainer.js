@@ -5,6 +5,7 @@
 import React, { Fragment } from 'react';
 import { graphql } from 'gatsby';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
+import { shape, string, arrayOf } from 'prop-types';
 
 import { RootContainer,
   SEOContainer,
@@ -15,7 +16,8 @@ import { RootContainer,
   LogosContainer,
   PricingContainer,
   BlogContainer,
-  FAQContainer } from '~containers';
+  FAQContainer,
+  PeopleContainer } from '~containers';
 import { Main } from '~components';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -34,6 +36,7 @@ export const query = graphql`
           ...LogosFragment
           ...PricingFragment
           ...FAQFragment
+          ...PeopleFragment
         }
       }
     }
@@ -80,6 +83,10 @@ function renderBlocks(blocks) {
       return <FAQContainer key={i} {...block} />;
     }
 
+    if (block.type === 'people') {
+      return <PeopleContainer key={i} {...block} />;
+    }
+
     if (block.type === 'mdx' || block.type === 'markdown') {
       return (
         <MDXRenderer key={block.mdx} components={{ wrapper: Fragment }}>
@@ -120,3 +127,23 @@ export default function PageTemplateContainer({
     </RootContainer>
   );
 }
+
+PageTemplateContainer.propTypes = {
+  data: shape({
+    page: shape({
+      frontmatter: shape({
+        meta: shape({
+          permalink: string,
+        }),
+        blocks: arrayOf(
+          shape({
+            type: string,
+          }),
+        ),
+      }),
+    }),
+  }).isRequired,
+  location: shape({
+    pathname: string,
+  }).isRequired,
+};

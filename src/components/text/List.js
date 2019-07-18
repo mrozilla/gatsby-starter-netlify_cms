@@ -12,12 +12,20 @@ export const Ul = styled.ul`
   display: grid;
 
   list-style: none;
+
+  & > li::marker {
+    color: var(--color-brand-primary);
+  }
 `;
 
 export const Ol = styled.ol`
   display: grid;
 
   list-style: none;
+
+  & > li::marker {
+    color: var(--color-brand-primary);
+  }
 `;
 
 // ─────────────────────────────────────────────────────────────────────────────

@@ -2,29 +2,28 @@
 // import
 // ─────────────────────────────────────────────────────────────────────────────
 
-import React, { useState, Fragment } from 'react';
+import React from 'react';
 import { graphql } from 'gatsby';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { shape, string, arrayOf } from 'prop-types';
 
-import { H1, Section, P, Img, Carousel, Blockquote } from '~components';
-import { useEventListener } from '~utils';
+import { H1, Section, P, Ul, Li, Img, Link, Icon } from '~components';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // query
 // ─────────────────────────────────────────────────────────────────────────────
 
 export const fragment = graphql`
-  fragment TestimonialsFragment on MdxFrontmatterBlocks {
+  fragment PeopleFragment on MdxFrontmatterBlocks {
     type
     title
     subtitle
     mdx
-    testimonials {
+    people {
       name
       position
       company
-      testimonial
+      mdx
       image {
         src {
           childImageSharp {
@@ -36,6 +35,10 @@ export const fragment = graphql`
         ratio
         alt
       }
+      contact {
+        icon
+        url
+      }
     }
   }
 `;
@@ -44,15 +47,7 @@ export const fragment = graphql`
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-export default function TestimonialsContainer({ title, subtitle, mdx, testimonials }) {
-  const [visibleItems, setVisibleItems] = useState(
-    document && document.body.clientWidth < 600 ? 1 : 3,
-  );
-
-  useEventListener('resize', () => {
-    setVisibleItems(document.body.clientWidth < 600 ? 1 : 3);
-  });
-
+export default function PeopleContainer({ title, subtitle, mdx, people }) {
   return (
     <Section
       css={`
@@ -60,7 +55,6 @@ export default function TestimonialsContainer({ title, subtitle, mdx, testimonia
         padding: var(--block-padding);
         box-shadow: var(--block-box-shadow);
         text-align: center;
-        overflow: hidden; /* TODO: see why the carousel UL stretches parent on mobile */
       `}
     >
       {title && (
@@ -69,6 +63,13 @@ export default function TestimonialsContainer({ title, subtitle, mdx, testimonia
             font-size: 3rem;
             line-height: 1;
             font-weight: 700;
+            max-width: 20ch;
+            margin: 0 auto;
+
+            & ~ p {
+              margin: 2rem auto 0;
+              max-width: 60ch;
+            }
 
             @media screen and (min-width: 1200px) {
               font-size: 4rem;
@@ -94,55 +95,37 @@ export default function TestimonialsContainer({ title, subtitle, mdx, testimonia
         </P>
       )}
       {mdx && <MDXRenderer>{mdx}</MDXRenderer>}
-      {testimonials && (
-        <Carousel
-          visibleItems={Math.min(testimonials.length, visibleItems)}
-          loop={
-            testimonials.length > visibleItems
-              ? {
-                interval: 5000,
-              }
-              : {}
-          }
-          isControls={testimonials.length > visibleItems}
+      {people && (
+        <Ul
           css={`
-            margin: 2rem 3rem 0;
+            margin: 8rem auto 0;
+            grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+            grid-gap: 4rem;
 
-            & li {
-              padding: 2rem;
-            }
-
-            @media screen and (min-width: 1200px) {
-              2rem 0 0;
-            }
+            max-width: 100rem;
           `}
         >
-          {testimonials.map(item => (
-            <Fragment key={item.name}>
-              {item?.testimonial && (
-                <Blockquote
-                  css={`
-                    line-height: 3rem;
-                    margin: 0 0 2rem;
-                  `}
-                >
-                  {item?.testimonial}
-                </Blockquote>
-              )}
-              {item.image && (
+          {people.map(person => (
+            <Li
+              css={`
+                font-size: 1.5rem;
+                line-height: 2rem;
+              `}
+            >
+              {person.image && (
                 <Img
-                  {...item.image?.src?.childImageSharp?.fluid}
-                  alt={item.name || item.image?.alt}
-                  ratio={item.image?.ratio.split('/').reduce((p, c) => p / c)}
+                  {...person.image?.src?.childImageSharp?.fluid}
+                  alt={person.name || person.image?.alt}
+                  ratio={person.image?.ratio.split('/').reduce((p, c) => p / c)}
                   css={`
-                    max-width: 8rem;
+                    max-width: 16rem;
                     margin: 0 auto 1rem;
                     background-color: hsla(var(--hsl-text), 0.05);
                     border-radius: 999px;
                   `}
                 />
               )}
-              {item.name && (
+              {person.name && (
                 <P
                   css={`
                     line-height: 2rem;
@@ -150,48 +133,72 @@ export default function TestimonialsContainer({ title, subtitle, mdx, testimonia
                     font-weight: 700;
                   `}
                 >
-                  {item.name}
+                  {person.name}
                 </P>
               )}
-              {(item.company || item.name) && (
+              {(person.company || person.name) && (
                 <P
                   css={`
                     line-height: 2rem;
                     font-size: 1.75rem;
-                    margin: 0.5rem 0 0;
+                    margin: 0.5rem 0;
                   `}
                 >
-                  {item.position}
-                  {item.position && item.company && ', '}
-                  {item.company}
+                  {person.position}
+                  {person.position && person.company && ', '}
+                  {person.company}
                 </P>
               )}
-            </Fragment>
+              {person.contact && (
+                <Ul
+                  css={`
+                    grid-auto-flow: column;
+                    grid-auto-columns: max-content;
+                    justify-content: center;
+                    grid-gap: 0.5rem;
+                  `}
+                >
+                  {person.contact.map(contact => (
+                    <Li>
+                      <Link look="primary" to={contact.url}>
+                        <Icon icon={contact.icon} />
+                      </Link>
+                    </Li>
+                  ))}
+                </Ul>
+              )}
+              {person.mdx && <MDXRenderer>{person.mdx}</MDXRenderer>}
+            </Li>
           ))}
-        </Carousel>
+        </Ul>
       )}
     </Section>
   );
 }
 
-TestimonialsContainer.propTypes = {
-  title:        string,
-  subtitle:     string,
-  mdx:          string,
-  testimonials: arrayOf(
+PeopleContainer.propTypes = {
+  title:    string,
+  subtitle: string,
+  mdx:      string,
+  people:   arrayOf(
     shape({
-      name:         string,
-      position:     string,
-      company:      string,
+      name:     string,
+      position: string,
+      company:  string,
       // image: // TODO:
-      testimonials: string,
+      contact:  arrayOf(
+        shape({
+          icon: string,
+          url:  string,
+        }),
+      ),
     }),
   ),
 };
 
-TestimonialsContainer.defaultProps = {
-  title:        '',
-  subtitle:     '',
-  mdx:          '',
-  testimonials: [],
+PeopleContainer.defaultProps = {
+  title:    '',
+  subtitle: '',
+  mdx:      '',
+  people:   [],
 };

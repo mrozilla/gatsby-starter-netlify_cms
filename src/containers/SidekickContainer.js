@@ -7,7 +7,19 @@ import { graphql } from 'gatsby';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { shape, string, arrayOf } from 'prop-types';
 
-import { H1, H2, Section, P, Ul, Li, Icon, Button, Link, Img, AppStore, View } from '~components';
+import { H1,
+  H2,
+  Section,
+  P,
+  Ul,
+  Li,
+  Icon,
+  Button,
+  Link,
+  Img,
+  AppStore,
+  View,
+  Map } from '~components';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // query
@@ -63,6 +75,10 @@ export const fragment = graphql`
           }
           ratio
           alt
+        }
+        map {
+          geo
+          zoom
         }
         grid {
           icon
@@ -245,7 +261,7 @@ function renderColumn(column, i) {
         `}
       >
         {column.blocks.map(
-          ({ icon, tagline, title, subtitle, mdx, image, grid, buttons, appStores }, j) => (
+          ({ icon, tagline, title, subtitle, mdx, image, map, grid, buttons, appStores }, j) => (
             <Fragment key={j}>
               {icon && (
                 <Icon
@@ -254,6 +270,8 @@ function renderColumn(column, i) {
                     margin: 0 0 1rem;
                     font-size: 5rem;
                     color: var(--color-brand-primary);
+
+                    // background-image: radial-gradient(circle closest-side, var(--color-brand-primary) 100%, transparent);
                   `}
                 />
               )}
@@ -323,6 +341,7 @@ function renderColumn(column, i) {
                   `}
                 />
               )}
+              {map && <Map center={JSON.parse(map?.geo)?.coordinates?.reverse()?.join(',')} zoom={map.zoom} />}
               {grid && (
                 <Ul
                   css={`
