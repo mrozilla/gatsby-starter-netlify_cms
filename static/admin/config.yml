@@ -321,6 +321,18 @@ collections:
                       - name: icon
                       - name: url
 
+          - name: jobs
+            label: "Jobs"
+            fields:
+              - { name: title, required: false }
+              - { name: subtitle, required: false }
+              - { name: mdx, widget: markdown, required: false }
+              - name: jobs
+                widget: list
+                fields:
+                  - name: title
+                  - name: url
+
   - label: "Posts"
     label_singular: "Blog post"
     name: posts
