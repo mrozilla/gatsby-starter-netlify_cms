@@ -55,7 +55,6 @@ export default function PeopleContainer({ title, subtitle, mdx, people }) {
         padding: var(--block-padding);
         box-shadow: var(--block-box-shadow);
         text-align: center;
-        overflow: hidden; /* TODO: see why the carousel UL stretches parent on mobile */-
       `}
     >
       {title && (
@@ -173,82 +172,6 @@ export default function PeopleContainer({ title, subtitle, mdx, people }) {
           ))}
         </Ul>
       )}
-      {/* {testimonials && (
-        <Carousel
-          visibleItems={Math.min(testimonials.length, visibleItems)}
-          loop={
-            testimonials.length > visibleItems
-              ? {
-                interval: 5000,
-              }
-              : {}
-          }
-          isControls={testimonials.length > visibleItems}
-          css={`
-            margin: 2rem 3rem 0;
-
-            & li {
-              padding: 2rem;
-            }
-
-            @media screen and (min-width: 1200px) {
-              2rem 0 0;
-            }
-          `}
-        >
-          {contact.map(item => (
-            <Fragment key={item.name}>
-              {item?.testimonial && (
-                <Blockquote
-                  css={`
-                    line-height: 3rem;
-                    margin: 0 0 2rem;
-                  `}
-                >
-                  {item?.testimonial}
-                </Blockquote>
-              )}
-              {item.image && (
-                <Img
-                  {...item.image?.src?.childImageSharp?.fluid}
-                  alt={item.name || item.image?.src}
-                  ratio={item.image?.ratio.split('/').reduce((p, c) => p / c)}
-                  css={`
-                    max-width: 8rem;
-                    margin: 0 auto 1rem;
-                    background-color: hsla(var(--hsl-text), 0.05);
-                    border-radius: 999px;
-                  `}
-                />
-              )}
-              {item.name && (
-                <P
-                  css={`
-                    line-height: 2rem;
-                    font-size: 1.75rem;
-                    font-weight: 700;
-                  `}
-                >
-                  {item.name}
-                </P>
-              )}
-              {(item.company || item.name) && (
-                <P
-                  css={`
-                    line-height: 2rem;
-                    font-size: 1.75rem;
-                    margin: 0.5rem 0 0;
-                  `}
-                >
-                  {item.position}
-                  {item.position && item.company && ', '}
-                  {item.company}
-                </P>
-              )}
-            </Fragment>
-          ))}
-        </Carousel>
-      )} */}
     </Section>
   );
 }

@@ -60,7 +60,7 @@ export default function TestimonialsContainer({ title, subtitle, mdx, testimonia
         padding: var(--block-padding);
         box-shadow: var(--block-box-shadow);
         text-align: center;
-        overflow: hidden; /* TODO: see why the carousel UL stretches parent on mobile */-
+        overflow: hidden; /* TODO: see why the carousel UL stretches parent on mobile */
       `}
     >
       {title && (
