@@ -15,3 +15,4 @@ export { default as PricingContainer } from './PricingContainer';
 export { default as BlogContainer } from './BlogContainer';
 export { default as FAQContainer } from './FAQContainer';
 export { default as PeopleContainer } from './PeopleContainer';
+export { default as JobsContainer } from './JobsContainer';

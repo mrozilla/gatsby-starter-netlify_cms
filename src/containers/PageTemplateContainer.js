@@ -17,7 +17,8 @@ import { RootContainer,
   PricingContainer,
   BlogContainer,
   FAQContainer,
-  PeopleContainer } from '~containers';
+  PeopleContainer,
+  JobsContainer } from '~containers';
 import { Main } from '~components';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -37,6 +38,7 @@ export const query = graphql`
           ...PricingFragment
           ...FAQFragment
           ...PeopleFragment
+          ...JobsFragment
         }
       }
     }
@@ -85,6 +87,10 @@ function renderBlocks(blocks) {
 
     if (block.type === 'people') {
       return <PeopleContainer key={i} {...block} />;
+    }
+
+    if (block.type === 'jobs') {
+      return <JobsContainer key={i} {...block} />;
     }
 
     if (block.type === 'mdx' || block.type === 'markdown') {
