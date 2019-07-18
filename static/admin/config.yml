@@ -194,6 +194,11 @@ collections:
                                 name: alt,
                                 name: ratio,
                               ]
+                      - name: map
+                        label: "Map"
+                        fields:
+                          - name: map
+                            widget: map
                       - name: grid
                         label: "Grid"
                         fields:
@@ -300,10 +305,10 @@ collections:
                   - name: name
                   - { name: position, required: false }
                   - { name: company, required: false }
-                  - name: mdx,
-                    label: "Description",
-                    widget: markdown,
-                    required: false,
+                  - name: mdx
+                    label: "Description"
+                    widget: markdown
+                    required: false
                   - name: image
                     widget: object
                     fields:
