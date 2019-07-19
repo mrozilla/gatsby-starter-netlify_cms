@@ -9,7 +9,7 @@ import { node } from 'prop-types';
 import HeaderContainer from './HeaderContainer';
 import FooterContainer from './FooterContainer';
 import CookieContainer from './CookieContainer';
-import { Link, Pre, Ul, P, H3 } from '~components';
+import { Link, Pre, Ul, P, H3, Ol } from '~components';
 
 import { useInactiveTab } from '~utils';
 import '~utils/style/index.css';
@@ -41,6 +41,19 @@ export default function RootContainer({ children }) {
               list-style: disc;
               padding: 0 0 0 1em;
               margin: 0 0 2rem;
+            `}
+            {...props}
+          />
+        ),
+        ol: props => (
+          <Ol
+            css={`
+              list-style: decimal;
+              padding: 0 0 0 1em;
+
+              & li {
+                margin: 1rem 0;
+              }
             `}
             {...props}
           />
