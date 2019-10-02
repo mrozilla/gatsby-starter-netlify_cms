@@ -12,7 +12,7 @@ export const Error = styled.div`
   --color: var(--color-danger);
 
   position: absolute;
-  background-color: var(--color);
+  background: var(--color);
   border-radius: 1rem;
   color: white;
   font-size: 1.5rem;

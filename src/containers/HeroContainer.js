@@ -101,7 +101,7 @@ export default function HeroContainer({
         <Link
           to={announcement.url}
           css={`
-            background-color: hsla(var(${
+            background: hsla(var(${
               backgroundImage ? '--hsl-inverse' : '--hsl-brand-primary'
             }), 0.05);
             border-radius: 999px;
@@ -179,7 +179,7 @@ export default function HeroContainer({
             margin: 4rem -0.5rem 0;
           `}
         >
-          {buttons.map(button => (
+          {buttons.map((button) => (
             <Li
               key={button.url}
               css={`

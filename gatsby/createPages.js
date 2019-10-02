@@ -28,7 +28,12 @@ exports.createPages = ({ actions: { createPage }, graphql }) => {
           }
         }
       }
-      posts: allMdx(filter: { fields: { sourceName: { eq: "posts" } } }) {
+      posts: allMdx(
+        filter: {
+          fields: { sourceName: { eq: "posts" } }
+          frontmatter: { meta: { permalink: { ne: "/blog/demo/" } } }
+        }
+      ) {
         nodes {
           frontmatter {
             meta {

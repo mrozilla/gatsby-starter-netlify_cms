@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import { FaPlayCircle, FaTimesCircle } from 'react-icons/fa';
 import { string } from 'prop-types';
 
-import { Button } from '~components/interactive/Button';
+import Button from '~components/interactive/Button';
 import { Aside } from '~components/layout/Aside';
 import { useEventListener } from '~utils';
 
@@ -25,7 +25,7 @@ export default function Video({ src, css, ...rest }) {
 
   const handleBackgroundClick = (event) => {
     if (event.target === event.currentTarget) {
-      setIsFullscreen(prev => !prev);
+      setIsFullscreen((prev) => !prev);
     }
   };
 
@@ -39,7 +39,7 @@ export default function Video({ src, css, ...rest }) {
         `}
         look="tertiary"
         {...rest}
-        onClick={() => setIsFullscreen(prev => !prev)}
+        onClick={() => setIsFullscreen((prev) => !prev)}
       >
         <FaPlayCircle
           css={`
@@ -58,7 +58,7 @@ export default function Video({ src, css, ...rest }) {
             height: 100%;
 
             padding: 1rem;
-            background-color: hsla(var(--hsl-dark), 0.75);
+            background: hsla(var(--hsl-dark), 0.75);
             z-index: var(--z-index-modal);
 
             display: grid;
@@ -100,7 +100,7 @@ export default function Video({ src, css, ...rest }) {
                 order: 2;
               }
             `}
-            onClick={() => setIsFullscreen(prev => !prev)}
+            onClick={() => setIsFullscreen((prev) => !prev)}
           >
             <FaTimesCircle
               css={`

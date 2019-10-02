@@ -22,7 +22,7 @@ export const Input = styled.input`
 
   display: block;
   width: 100%;
-  background-color: hsla(var(--hsl-text), 0.05);
+  background: hsla(var(--hsl-text), 0.05);
   line-height: 1.5em;
   padding: 2rem;
   border-radius: 0.5rem;
@@ -34,6 +34,7 @@ export const Input = styled.input`
   }
 
   &::placeholder {
+    color: inherit;
     opacity: 0.5;
   }
 
@@ -45,7 +46,7 @@ export const Input = styled.input`
       }
     }
     &:focus {
-      box-shadow: inset 0 0 0 2px var(--color-brand-primary);
+      box-shadow: inset 0 0 0 2px var(--color-primary);
       ::placeholder {
         opacity: 0.75;
       }
@@ -54,11 +55,6 @@ export const Input = styled.input`
     &:focus {
       & ~ svg {
         fill: var(--color-info);
-      }
-      & ~ ${Tooltip} {
-        visibility: visible;
-        opacity: 1;
-        transform: translateY(0);
       }
     }
   }
@@ -140,17 +136,13 @@ export const Input = styled.input`
   }
 
   /**
-   * add temporal fields placeholder, doesn't work in Firefox
+   * temporal fields styling
    */
 
   &[type^='date'],
   &[type='time'],
   &[type='month'] {
-    &::before {
-      content: attr(placeholder) ':';
-      opacity: 0.25;
-      margin: 0 1rem 0 0;
-    }
+    font-size: 1.9rem; /* fix for temporal inputs size difference */
 
     &::-webkit-calendar-picker-indicator {
       color: var(--color-info);

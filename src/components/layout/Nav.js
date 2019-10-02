@@ -46,8 +46,6 @@ Nav.List.Item = styled.li`
   font-weight: 700;
   letter-spacing: 0.05em;
 
-  ${({ padding }) => `padding: ${padding}`};
-
   @media screen and (min-width: 900px) {
     display: flex;
     align-items: center;
@@ -65,14 +63,19 @@ Nav.List.Item = styled.li`
     &:focus-within {
       ${({ isUnderline }) => isUnderline
         && css`
-          box-shadow: inset 0 -2px var(--color-brand-primary);
+          box-shadow: inset 0 -2px var(--color-primary);
         `}
 
       & > ${Nav.List} {
         visibility: visible;
 
-        background-color: var(--color-inverse);
+        background: var(--color-inverse);
         box-shadow: 0 0.5rem 1rem hsla(var(--hsl-text), 0.1);
+
+        & > ${Nav.List.Item}:hover {
+          background: hsla(var(--hsl-primary), 0.025);
+          color: var(--color-primary);
+        }
       }
     }
   }
@@ -83,14 +86,12 @@ Nav.Toggle = styled.input`
   outline: none;
 
   position: absolute;
-  top: ${({ top = 0 }) => top};
-  right: ${({ right = 0 }) => right};
   padding: 2rem;
 
   cursor: pointer;
   font-size: 2rem;
   line-height: 1;
-  color: var(--color-brand-primary);
+  color: var(--color-primary);
 
   &:checked {
     transform: rotate(90deg);

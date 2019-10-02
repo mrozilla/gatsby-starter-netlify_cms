@@ -28,7 +28,7 @@ export default function Dots({ size, amount, orientation, gap, colors, css, ...r
           css={`
             height: ${size};
             width: ${size};
-            background-color: ${colors[i]};
+            background: ${colors[i]};
             border-radius: 999px;
           `}
         />

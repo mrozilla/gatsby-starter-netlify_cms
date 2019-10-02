@@ -45,7 +45,7 @@ Table.Thead = styled.thead`
 
 Table.Tbody = styled.tbody`
   & tr:hover {
-    background-color: hsla(var(--hsl-text), 0.05);
+    background: hsla(var(--hsl-text), 0.05);
   }
 `;
 

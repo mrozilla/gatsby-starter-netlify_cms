@@ -19,7 +19,7 @@ export const Alert = styled.span`
 
   ${({ type }) => type
     && css`
-      background-color: hsla(var(--hsl-${type}), 0.05);
+      background: hsla(var(--hsl-${type}), 0.05);
       color: var(--color-${type});
     `};
 `;

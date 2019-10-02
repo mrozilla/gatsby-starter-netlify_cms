@@ -3,16 +3,18 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import React, { forwardRef } from 'react';
+import { string, oneOfType, number, bool, arrayOf, shape, func } from 'prop-types';
 
 import { Text } from '~components/primitives/Text';
 
-import { Button } from '~components/interactive/Button';
+import Button from '~components/interactive/Button';
 import { Checkbox } from '~components/interactive/Checkbox';
 import { Fieldset } from '~components/interactive/Fieldset';
 import { Radio } from '~components/interactive/Radio';
 import { Select } from '~components/interactive/Select';
 import TextInput from '~components/interactive/TextInput';
 import PasswordInput from '~components/interactive/PasswordInput';
+import TemporalInput from '~components/interactive/TemporalInput';
 import TextAreaInput from '~components/interactive/TextAreaInput';
 
 import { Label } from '~components/text/Label';
@@ -20,13 +22,13 @@ import { Legend } from '~components/text/Legend';
 import { Tooltip } from '~components/text/Tooltip';
 import { Error } from '~components/text/Error';
 
-import { Icon } from '~components/multimedia/Icon';
+import Icon from '~components/multimedia/Icon';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-export default forwardRef(
+const Input = forwardRef(
   (
     {
       type,
@@ -56,7 +58,7 @@ export default forwardRef(
         return (
           <>
             {label && <Legend>{label}</Legend>}
-            {options.map(radio => (
+            {options.map((radio) => (
               <Label
                 key={radio.value}
                 htmlFor={radio.value}
@@ -87,7 +89,7 @@ export default forwardRef(
         return (
           <>
             {label && <Legend>{label}</Legend>}
-            {options.map(checkbox => (
+            {options.map((checkbox) => (
               <Label
                 key={checkbox.value}
                 htmlFor={checkbox.value}
@@ -122,7 +124,7 @@ export default forwardRef(
                 {placeholder}
               </option>
               <optgroup label={placeholder}>
-                {options.map(option => (
+                {options.map((option) => (
                   <option key={option.value} value={option.value} selected={option.selected}>
                     {option.label}
                   </option>
@@ -177,7 +179,7 @@ export default forwardRef(
               {label}
             </Label>
             <datalist id={`datalist-${name}`}>
-              {options.map(option => (
+              {options.map((option) => (
                 <option key={option.name}>{option.name}</option>
               ))}
             </datalist>
@@ -233,6 +235,43 @@ export default forwardRef(
         return (
           <>
             <PasswordInput
+              ref={ref}
+              id={name}
+              {...{
+                type,
+                name,
+                value,
+                placeholder,
+                pattern,
+                min,
+                max,
+                step,
+                readOnly,
+                required,
+                onChange,
+              }}
+              {...rest}
+            />
+            <Label
+              htmlFor={name}
+              css={`
+                position: absolute;
+                top: 0;
+                left: 1rem;
+              `}
+            >
+              {label}
+            </Label>
+            {description && <Tooltip>{description}</Tooltip>}
+            {error && <Error>{error}</Error>}
+          </>
+        );
+      }
+
+      if (['date', 'time', 'month'].some((option) => option === type)) {
+        return (
+          <>
+            <TemporalInput
               ref={ref}
               id={name}
               {...{
@@ -329,3 +368,47 @@ export default forwardRef(
     );
   },
 );
+
+Input.propTypes = {
+  type:        string.isRequired,
+  name:        string.isRequired,
+  label:       string.isRequired,
+  placeholder: string,
+  description: string,
+  error:       string,
+  value:       oneOfType([string, number]),
+  checked:     bool,
+  options:     arrayOf(
+    shape({
+      checked: bool,
+    }),
+  ),
+  rows:     string,
+  min:      string,
+  max:      string,
+  step:     string,
+  pattern:  string,
+  readOnly: bool,
+  required: bool,
+  css:      string,
+  onChange: func,
+};
+Input.defaultProps = {
+  placeholder: '',
+  description: '',
+  error:       '',
+  value:       undefined,
+  checked:     undefined,
+  options:     [],
+  rows:        undefined,
+  min:         undefined,
+  max:         undefined,
+  step:        undefined,
+  pattern:     undefined,
+  readOnly:    undefined,
+  required:    undefined,
+  css:         '',
+  onChange:    undefined,
+};
+
+export default Input;

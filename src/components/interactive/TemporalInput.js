@@ -2,34 +2,38 @@
 // import
 // ─────────────────────────────────────────────────────────────────────────────
 
-import styled from 'styled-components';
+import React, { useState } from 'react';
+import { string } from 'prop-types';
+
+import { Input } from '~components/primitives/Input';
 
 // ─────────────────────────────────────────────────────────────────────────────
-// ul + ol
+// component
 // ─────────────────────────────────────────────────────────────────────────────
 
-export const Ul = styled.ul`
-  display: grid;
+export default function TemporalInput({ type, ...rest }) {
+  const [isPlaceholder, setIsPlaceholder] = useState(rest.value === '');
 
-  list-style: none;
+  const handlers = {
+    onFocus: () => setIsPlaceholder(false),
+    onBlur:  () => {
+      if (!rest.value) {
+        setIsPlaceholder(true);
+      }
+    },
+  };
 
-  & > li::marker {
-    color: var(--color-primary);
-  }
-`;
-
-export const Ol = styled.ol`
-  display: grid;
-
-  list-style: none;
-
-  & > li::marker {
-    color: var(--color-primary);
-  }
-`;
+  return <Input {...handlers} type={isPlaceholder ? 'text' : type} {...rest} />;
+}
 
 // ─────────────────────────────────────────────────────────────────────────────
-// li
+// propTypes
 // ─────────────────────────────────────────────────────────────────────────────
 
-export const Li = styled.li``;
+TemporalInput.propTypes = {
+  type:  string.isRequired,
+  value: string,
+};
+TemporalInput.defaultProps = {
+  value: '',
+};

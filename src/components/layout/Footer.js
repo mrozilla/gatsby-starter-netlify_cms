@@ -10,6 +10,6 @@ import styled from 'styled-components';
 
 export const Footer = styled.footer`
   display: grid;
-  background-color: var(--color-inverse);
+  background: var(--color-inverse);
   box-shadow: inset 0 2px hsla(var(--hsl-text), 0.05);
 `;
