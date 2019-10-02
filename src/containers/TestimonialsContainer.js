@@ -137,7 +137,7 @@ export default function TestimonialsContainer({ title, subtitle, mdx, testimonia
                   css={`
                     max-width: 8rem;
                     margin: 0 auto 1rem;
-                    background-color: hsla(var(--hsl-text), 0.05);
+                    background: hsla(var(--hsl-text), 0.05);
                     border-radius: 999px;
                   `}
                 />

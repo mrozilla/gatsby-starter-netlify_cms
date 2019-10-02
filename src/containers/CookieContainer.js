@@ -14,33 +14,39 @@ import { useLocalStorage } from '~utils/';
 export default function CookieContainer() {
   const [isVisible, setIsVisible] = useLocalStorage('isShowCookies', true);
 
+  if (!isVisible) return null;
+
   return (
     <Toast
-      isVisible={isVisible}
       css={`
-        background-color: var(--color-inverse);
-        animation: none;
+        background-color: var(--color-bg);
         color: var(--color-text);
-        font-size: 1.5rem;
-        bottom: 0;
-        top: auto;
+        font-size: 1.25rem;
+        bottom: auto;
+        top: 0;
+
+        @media screen and (min-width: 300px) {
+          bottom: 0;
+          top: auto;
+        }
       `}
+      isVisible
     >
-      This website uses cookies to improve the experience for you. There&apos;s even a{' '}
-      <Link to="/legal/privacy/" look="primary">
+      Yeah, we use cookies, we even have a{' '}
+      <Link to="/legal/privacy/" look="secondary">
         cookie policy
       </Link>
       <Button
         look="secondary"
         css={`
-          margin: 1rem 0 1rem 1rem;
-          padding: 1rem 2rem;
+          margin: 0 0 0 1rem;
         `}
-        onClick={() => setIsVisible(prev => !prev)}
+        onClick={() => setIsVisible(!isVisible)}
       >
-        Accept {/* <span role="img" aria-label="cookie">
+        Accept{' '}
+        <span role="img" aria-label="cookie">
           🍪
-        </span> */}
+        </span>
       </Button>
     </Toast>
   );

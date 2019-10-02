@@ -88,7 +88,7 @@ export default function JobsContainer({ title, subtitle, mdx, jobs }) {
           css={`
             margin: 4rem 0 2rem;
 
-            background-color: var(--color-inverse);
+            background: var(--color-inverse);
             border-radius: 0.5rem;
             box-shadow: inset 0 0 0 2px hsla(var(--hsl-text), 0.05);
           `}

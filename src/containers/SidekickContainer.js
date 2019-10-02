@@ -127,7 +127,7 @@ function renderHeader(item, i) {
             margin: 0 auto 2rem;
 
             font-size: 6rem;
-            color: var(--color-brand-primary);
+            color: var(--color-primary);
           `}
         />
       )}
@@ -135,7 +135,7 @@ function renderHeader(item, i) {
         <P
           as="span"
           css={`
-            color: var(--color-brand-primary);
+            color: var(--color-primary);
             text-transform: uppercase;
             letter-spacing: 0.1em;
             font-size: 1.5rem;
@@ -269,9 +269,9 @@ function renderColumn(column, i) {
                   css={`
                     margin: 0 0 1rem;
                     font-size: 5rem;
-                    color: var(--color-brand-primary);
+                    color: var(--color-primary);
 
-                    // background-image: radial-gradient(circle closest-side, var(--color-brand-primary) 100%, transparent);
+                    // background-image: radial-gradient(circle closest-side, var(--color-primary) 100%, transparent);
                   `}
                 />
               )}
@@ -279,7 +279,7 @@ function renderColumn(column, i) {
                 <P
                   as="span"
                   css={`
-                    color: var(--color-brand-primary);
+                    color: var(--color-primary);
                     text-transform: uppercase;
                     letter-spacing: 0.1em;
                     font-size: 1.5rem;
@@ -358,7 +358,7 @@ function renderColumn(column, i) {
                           css={`
                             font-size: 4rem;
                             line-height: 1;
-                            color: var(--color-brand-primary);
+                            color: var(--color-primary);
                           `}
                         />
                       )}
@@ -469,7 +469,7 @@ export default function SidekickContainer({ header, columns }) {
         text-align: center;
 
         box-shadow: var(--block-box-shadow);
-        background-color: var(--block-background-color);
+        background: var(--block-background-color);
         margin: var(--block-margin);
         padding: var(--block-padding);
       `}

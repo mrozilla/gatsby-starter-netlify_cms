@@ -115,7 +115,7 @@ export default function BlogContainer({ title, subtitle }) {
 
                   &:hover {
                     & h2 {
-                      color: var(--color-brand-primary);
+                      color: var(--color-primary);
                       text-decoration: underline;
                     }
                     & img {

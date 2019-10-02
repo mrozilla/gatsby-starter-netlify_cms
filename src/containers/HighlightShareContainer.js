@@ -46,7 +46,7 @@ export default function HighlightShareContainer({ location }) {
             grid-auto-flow: column;
             border-radius: 0.5rem;
             padding: 0 0.5rem;
-            background-color: var(--color-brand-primary);
+            background: var(--color-primary);
             box-shadow: 0 0.5rem 1rem hsla(-var(--hsl-text), 0.25);
             line-height: 3rem;
 
@@ -58,7 +58,7 @@ export default function HighlightShareContainer({ location }) {
               margin-left: -0.5rem;
               top: 100%;
               left: 50%;
-              border-color: var(--color-brand-primary) transparent transparent transparent;
+              border-color: var(--color-primary) transparent transparent transparent;
             }
           `}
         >

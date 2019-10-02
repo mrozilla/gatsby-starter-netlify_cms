@@ -120,7 +120,7 @@ export default function PeopleContainer({ title, subtitle, mdx, people }) {
                   css={`
                     max-width: 16rem;
                     margin: 0 auto 1rem;
-                    background-color: hsla(var(--hsl-text), 0.05);
+                    background: hsla(var(--hsl-text), 0.05);
                     border-radius: 999px;
                   `}
                 />
