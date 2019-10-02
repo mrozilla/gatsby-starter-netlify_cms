@@ -21,7 +21,7 @@ export const StyledToast = styled.aside`
 
   text-align: center;
   color: var(--color-inverse);
-  background-color: var(--color-brand-primary);
+  background: var(--color-primary);
 
   &[open] {
     visibility: visible;
@@ -48,6 +48,10 @@ function Toast({ isVisible = false, className, children }, ref) {
     const timeoutHelper = delay && setTimeout(() => setState({ isOpen: false }), delay);
     return () => clearTimeout(timeoutHelper);
   }, [isOpen, message, css]);
+
+  useEffect(() => {
+    setState({ isOpen: isVisible });
+  }, [isVisible]);
 
   return (
     <StyledToast className={className} css={css} open={isOpen}>

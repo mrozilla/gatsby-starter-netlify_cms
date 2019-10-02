@@ -3,33 +3,32 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import styled from 'styled-components';
+import { animation } from '~utils';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-export const Tooltip = styled.div`
-  --color: var(--color-primary); /* used to change chevron with background */
+export const Loader = styled.progress`
+  --hsl: var(--hsl-primary);
 
-  position: absolute;
-  background: var(--color);
-  border-radius: 1rem;
-  color: white;
-  font-size: 1.5rem;
-  line-height: 2rem;
-  padding: 1rem;
-  top: calc(100% + 1rem);
-  transition: 100ms;
-  z-index: var(--z-index-tooltip);
-
-  &::after {
-    content: '';
-    position: absolute;
-    border-style: solid;
-    border-width: 0.5rem;
-    bottom: 100%;
-    left: 1rem;
-
-    border-color: transparent transparent var(--color) transparent;
+  appearance: none;
+  display: inline-block;
+  &::-webkit-progress-bar {
+    background: none;
   }
+
+  width: 1em;
+  height: 1em;
+
+  border: 0.125em solid hsla(var(--hsl), 0.1);
+  border-top-color: hsla(var(--hsl), 1);
+  border-radius: 50%;
+
+  animation: ${animation({
+    to: {
+      transform: 'rotate(360deg)',
+    },
+    properties: '1s infinite',
+  })};
 `;

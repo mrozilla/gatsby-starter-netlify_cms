@@ -24,17 +24,17 @@ const StyledLink = styled.a`
   ${({ look }) => {
     if (look === 'primary') {
       return css`
-        color: var(--color-brand-primary);
-        text-decoration: underline var(--color-brand-primary);
+        color: var(--color-primary);
+        text-decoration: underline var(--color-primary);
       `;
     }
     if (look === 'secondary') {
       return css`
-        color: var(--color-brand-primary);
+        color: var(--color-primary);
         &:hover,
         &:focus,
         &:active {
-          text-decoration: underline var(--color-brand-primary);
+          text-decoration: underline var(--color-primary);
         }
       `;
     }
@@ -43,8 +43,8 @@ const StyledLink = styled.a`
         &:hover,
         &:focus,
         &:active {
-          color: var(--color-brand-primary);
-          text-decoration: underline var(--color-brand-primary);
+          color: var(--color-primary);
+          text-decoration: underline var(--color-primary);
         }
       `;
     }
@@ -52,6 +52,13 @@ const StyledLink = styled.a`
     return null;
   }};
 `;
+
+const parseLink = (link) => {
+  if (link.startsWith('www.')) return `https://${link}`;
+  if (!link.startsWith('mailto:') && link.includes('@')) return `mailto:${link}`;
+  if (!link.startsWith('tel:') && link.includes('+')) return `tel:${link}`;
+  return link;
+};
 
 // ─────────────────────────────────────────────────────────────────────────────
 // component
@@ -61,11 +68,10 @@ export default function Link({ href, to, children, ...rest }) {
   const link = href || to || '';
 
   if (['http', 'mailto:', 'tel:', 'www.'].some(t => link.includes(t))) {
-    const externalLink = link.startsWith('www.') ? `https://${link}` : link;
     return (
       <StyledLink
         as={OutboundLink}
-        href={externalLink}
+        href={parseLink(link)}
         target="_blank"
         rel="noopener noreferrer"
         {...rest}

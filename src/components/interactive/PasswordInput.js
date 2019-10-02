@@ -6,8 +6,8 @@ import React, { useState, useRef } from 'react';
 // import zxcvbn from 'zxcvbn';
 
 import { Input } from '~components/primitives/Input';
-import { Icon } from '~components/multimedia/Icon';
-import { Button } from '~components/interactive/Button';
+import Icon from '~components/multimedia/Icon';
+import Button from '~components/interactive/Button';
 import Dots from '~components/interactive/Dots';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -50,7 +50,7 @@ export default function TextInput({ onChange, type, ...rest }) {
   const handleFocus = () => inputRef.current.focus();
   const handleVisibility = () => {
     handleFocus();
-    setIsHidden(prev => !prev);
+    setIsHidden((prev) => !prev);
   };
 
   return (
@@ -68,7 +68,7 @@ export default function TextInput({ onChange, type, ...rest }) {
 
           &:hover {
             opacity: 1;
-            fill: var(--color-brand-primary);
+            color: var(--color-primary);
           }
         `}
         onClick={handleVisibility}

@@ -1,4 +1,4 @@
-export { Button } from './interactive/Button';
+export { default as Button } from './interactive/Button';
 export { Checkbox } from './interactive/Checkbox';
 export { default as Dots } from './interactive/Dots';
 export { Details, Summary } from './interactive/Details';
@@ -23,7 +23,7 @@ export { Table } from './layout/Table';
 export { default as Toast } from './layout/Toast';
 
 export { default as AppStore } from './multimedia/AppStore';
-export { Icon } from './multimedia/Icon';
+export { default as Icon } from './multimedia/Icon';
 export { default as Img } from './multimedia/Img';
 export { Logo } from './multimedia/Logo';
 export { default as Map } from './multimedia/Map';

@@ -15,7 +15,7 @@ export const Header = styled.header`
   width: 100%;
   max-height: 100vh;
 
-  background-color: var(--color-inverse);
+  background: var(--color-inverse);
   box-shadow: inset 0 -2px hsla(var(--hsl-text), 0.05);
 
   padding: 0 var(--width-outside);
