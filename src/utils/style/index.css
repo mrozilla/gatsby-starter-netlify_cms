@@ -3,21 +3,21 @@
 /* ────────────────────────────────────────────────────────────────────────── */
 
 :root {
-  --hsl-brand-primary: 211, 100%, 50%;
-  --color-brand-primary: hsl(var(--hsl-brand-primary));
-  --hsl-brand-secondary: 201, 100%, 50%;
-  --color-brand-secondary: hsl(var(--hsl-brand-secondary));
+  --hsl-primary: 211, 100%, 50%;
+  --color-primary: hsl(var(--hsl-primary));
+  --hsl-secondary: 201, 100%, 50%;
+  --color-secondary: hsl(var(--hsl-secondary));
 
   --gradient-brand: linear-gradient(
-    45deg,
-    var(--color-brand-primary),
-    var(--color-brand-secondary)
+    to top right,
+    var(--color-primary),
+    var(--color-secondary)
   );
 
   --hsl-bg: 0, 0%, 99%;
   --color-bg: hsl(var(--hsl-bg));
 
-  --hsl-text: 200, 5%, 35%;
+  --hsl-text: 211, 5%, 35%;
   --color-text: hsl(var(--hsl-text));
 
   --hsl-inverse: 0, 0%, 100%;
@@ -26,7 +26,7 @@
   --hsl-dark: 0, 0%, 5%;
   --color-dark: hsl(var(--hsl-dark));
 
-  --hsl-success: 100, 70%, 60%;
+  --hsl-success: 120, 60%, 50%;
   --color-success: hsl(var(--hsl-success));
   --hsl-info: 211, 100%, 60%;
   --color-info: hsl(var(--hsl-info));
@@ -41,10 +41,12 @@
   --z-index-modal: 1030;
 
   --width-outside: 2rem;
-  --block-padding: 10vw 0;
+  --block-padding: 10vw 0; /* intentional vw for y axis */
   /* --block-margin: 2rem 0; */
   /* --block-background-color: var(--color-inverse); */
-  --block-box-shadow: inset 0 2px 0 0 hsla(var(--hsl-text), 0.05);
+  /* --block-box-shadow: inset 0 2px 0 0 hsla(var(--hsl-text), 0.05); */
+  --border-box-shadow: inset 0 0 0 2px hsla(var(--hsl-text), 0.05);
+  --border-radius: 0.5rem;
 }
 
 @media screen and (min-width: 600px) {

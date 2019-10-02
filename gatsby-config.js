@@ -43,7 +43,7 @@ module.exports = {
       resolve: 'gatsby-source-filesystem',
       options: { path: `${__dirname}/static/assets`, name: 'assets' },
     },
-    ...['menus', 'pages', 'posts'].map(name => ({
+    ...['menus', 'pages', 'posts'].map((name) => ({
       resolve: 'gatsby-source-filesystem',
       options: { name, path: `${__dirname}/src/content/cms/${name}` },
     })),
@@ -111,7 +111,7 @@ module.exports = {
     },
     'gatsby-plugin-sharp',
     'gatsby-plugin-sitemap',
-    'gatsby-plugin-offline',
+    // 'gatsby-plugin-offline', // disabled for now
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-netlify', // keep last
   ],
