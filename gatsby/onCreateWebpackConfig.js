@@ -8,7 +8,7 @@ const path = require('path');
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-exports.onCreateWebpackConfig = ({ actions }) => {
+exports.onCreateWebpackConfig = ({ actions, plugins }) => {
   actions.setWebpackConfig({
     resolve: {
       alias: {
@@ -17,5 +17,10 @@ exports.onCreateWebpackConfig = ({ actions }) => {
         '~utils':      path.resolve(__dirname, '../src/utils'),
       },
     },
+    plugins: [
+      plugins.define({
+        __DEV__: process.env.NODE_ENV !== 'production',
+      }),
+    ],
   });
 };
