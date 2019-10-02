@@ -93,17 +93,14 @@ export default function HeaderContainer() {
                 <Nav.List.Item
                   key={item.url}
                   css={`
-                    padding: 1rem 0;
+                    padding: 3rem 0;
+
+                    & > a {
+                      padding: 1rem 3rem;
+                    }
                   `}
                 >
-                  <Button
-                    as={Link}
-                    to={item.url}
-                    look={item.look}
-                    css={`
-                      padding: 1rem 4rem;
-                    `}
-                  >
+                  <Button as={Link} to={item.url} look={item.look}>
                     {item.text}
                   </Button>
                 </Nav.List.Item>
@@ -137,7 +134,7 @@ export default function HeaderContainer() {
                     `}
                   />
                   <Nav.List>
-                    {item.links.map(link => (
+                    {item.links.map((link) => (
                       <Nav.List.Item key={link.url}>
                         <Link
                           to={link.url}

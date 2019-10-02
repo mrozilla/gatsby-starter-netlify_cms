@@ -122,7 +122,7 @@ export default function PricingContainer({ title, subtitle, mdx, pricing }) {
             text-align: initial;
           `}
         >
-          {pricing.map(item => (
+          {pricing.map((item) => (
             <Li
               key={item.title}
               css={`
@@ -132,6 +132,10 @@ export default function PricingContainer({ title, subtitle, mdx, pricing }) {
                 background: var(--color-inverse);
                 border-radius: 0.5rem;
                 box-shadow: inset 0 0 0 2px hsla(var(--hsl-text), 0.05);
+
+                & > a {
+                  margin: auto 0 0;
+                }
               `}
             >
               <H2
@@ -163,15 +167,7 @@ export default function PricingContainer({ title, subtitle, mdx, pricing }) {
                 / {frequency}
               </P>
               <MDXRenderer>{item.mdx}</MDXRenderer>
-              <Button
-                as={Link}
-                look="primary"
-                to="/pay/"
-                css={`
-                  width: 100%;
-                  margin: auto 0 0;
-                `}
-              >
+              <Button as={Link} look="primary" to="/pay/">
                 Buy
               </Button>
             </Li>

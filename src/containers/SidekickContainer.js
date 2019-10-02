@@ -7,7 +7,8 @@ import { graphql } from 'gatsby';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { shape, string, arrayOf } from 'prop-types';
 
-import { H1,
+import {
+  H1,
   H2,
   Section,
   P,
@@ -19,7 +20,8 @@ import { H1,
   Img,
   AppStore,
   View,
-  Map } from '~components';
+  Map,
+} from '~components';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // query
@@ -123,11 +125,13 @@ function renderHeader(item, i) {
         <Icon
           icon={item.icon}
           css={`
-            display: block;
             margin: 0 auto 2rem;
-
             font-size: 6rem;
-            color: var(--color-primary);
+
+            background: var(--color-primary);
+            color: var(--color-inverse);
+            clip-path: circle();
+            padding: 0.25em;
           `}
         />
       )}
@@ -197,7 +201,7 @@ function renderHeader(item, i) {
             flex-wrap: wrap;
           `}
         >
-          {item.buttons.map(button => (
+          {item.buttons.map((button) => (
             <Li
               key={button.url}
               css={`
@@ -269,9 +273,11 @@ function renderColumn(column, i) {
                   css={`
                     margin: 0 0 1rem;
                     font-size: 5rem;
-                    color: var(--color-primary);
 
-                    // background-image: radial-gradient(circle closest-side, var(--color-primary) 100%, transparent);
+                    background: var(--color-primary);
+                    color: var(--color-inverse);
+                    clip-path: circle();
+                    padding: 0.25em;
                   `}
                 />
               )}
@@ -341,7 +347,14 @@ function renderColumn(column, i) {
                   `}
                 />
               )}
-              {map && <Map center={JSON.parse(map?.geo)?.coordinates?.reverse()?.join(',')} zoom={map.zoom} />}
+              {map && (
+                <Map
+                  center={JSON.parse(map?.geo)
+                    ?.coordinates?.reverse()
+                    ?.join(',')}
+                  zoom={map.zoom}
+                />
+              )}
               {grid && (
                 <Ul
                   css={`
@@ -350,7 +363,7 @@ function renderColumn(column, i) {
                     margin: 4rem 0 0;
                   `}
                 >
-                  {grid.map(item => (
+                  {grid.map((item) => (
                     <Li key={item.title || item.icon || item.image || item.mdx}>
                       {item.icon && (
                         <Icon
@@ -358,7 +371,11 @@ function renderColumn(column, i) {
                           css={`
                             font-size: 4rem;
                             line-height: 1;
-                            color: var(--color-primary);
+
+                            background: var(--color-primary);
+                            color: var(--color-inverse);
+                            clip-path: circle();
+                            padding: 0.25em;
                           `}
                         />
                       )}
@@ -397,7 +414,7 @@ function renderColumn(column, i) {
                     : `flex-${column.textAlign}`};
                   `}
                 >
-                  {buttons.map(button => (
+                  {buttons.map((button) => (
                     <Li
                       key={button.url}
                       css={`
@@ -499,7 +516,7 @@ export default function SidekickContainer({ header, columns }) {
             @media screen and (min-width: 900px) {
               grid-template-columns: ${columns.length > 4
             ? 'repeat(auto-fit, minmax(30ch, 1fr))'
-            : columns.map(column => column.width).join(' ')};
+            : columns.map((column) => column.width).join(' ')};
             }
           `}
         >
