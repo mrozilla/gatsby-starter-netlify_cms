@@ -1,0 +1,198 @@
+/* ────────────────────────────────────────────────────────────────────────── */
+/* variables
+/* ────────────────────────────────────────────────────────────────────────── */
+
+:root {
+  --hsl-primary: 211, 100%, 50%;
+  --color-primary: hsl(var(--hsl-primary));
+  --hsl-secondary: 201, 100%, 50%;
+  --color-secondary: hsl(var(--hsl-secondary));
+
+  --gradient-brand: linear-gradient(
+    to top right,
+    var(--color-primary),
+    var(--color-secondary)
+  );
+
+  --hsl-bg: 0, 0%, 99%;
+  --color-bg: hsl(var(--hsl-bg));
+
+  --hsl-text: 211, 5%, 35%;
+  --color-text: hsl(var(--hsl-text));
+
+  --hsl-inverse: 0, 0%, 100%;
+  --color-inverse: hsl(var(--hsl-inverse));
+
+  --hsl-dark: 0, 0%, 5%;
+  --color-dark: hsl(var(--hsl-dark));
+
+  --hsl-success: 120, 60%, 50%;
+  --color-success: hsl(var(--hsl-success));
+  --hsl-info: 211, 100%, 60%;
+  --color-info: hsl(var(--hsl-info));
+  --hsl-danger: 20, 100%, 50%;
+  --color-danger: hsl(var(--hsl-danger));
+  --hsl-warning: 40, 100%, 50%;
+  --color-warning: hsl(var(--hsl-warning));
+
+  --z-index-header: 1000;
+  --z-index-tooltip: 1010;
+  --z-index-toast: 1020;
+  --z-index-modal: 1030;
+
+  --width-outside: 2rem;
+  --block-padding: 10vw 0; /* intentional vw for y axis */
+  /* --block-margin: 2rem 0; */
+  /* --block-background-color: var(--color-inverse); */
+  /* --block-box-shadow: inset 0 2px 0 0 hsla(var(--hsl-text), 0.05); */
+  --border-box-shadow: inset 0 0 0 2px hsla(var(--hsl-text), 0.05);
+  --border-radius: 0.5rem;
+}
+
+@media screen and (min-width: 600px) {
+  :root {
+    --width-outside: 10rem;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  :root {
+    --width-outside: 20rem;
+  }
+}
+@media screen and (min-width: 1200px) {
+  :root {
+    --width-outside: 30rem;
+  }
+}
+
+/* ────────────────────────────────────────────────────────────────────────── */
+/* reset
+/* ────────────────────────────────────────────────────────────────────────── */
+
+html,
+body,
+p,
+ol,
+ul,
+li,
+dl,
+dt,
+dd,
+blockquote,
+figure,
+fieldset,
+legend,
+textarea,
+button,
+input,
+select,
+pre,
+iframe,
+hr,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+/**
+ * fixes forced useragent styles
+ */
+
+button,
+input,
+select,
+textarea {
+  color: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  font-family: inherit;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+img,
+embed,
+iframe,
+object,
+audio,
+video {
+  height: auto;
+  max-width: 100%;
+}
+
+iframe {
+  border: 0;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+td,
+th {
+  padding: 0;
+  text-align: left;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 50%;
+}
+
+/* ────────────────────────────────────────────────────────────────────────── */
+/* Reboot
+/* ────────────────────────────────────────────────────────────────────────── */
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
+  font-size: 2rem;
+  line-height: 3rem;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/**
+ * removes webkit auto-filled input field styles
+ *
+ * 1. color doesn't work here, webkit fill color is required
+ * 2. background-color doesn't work here, long transition delay used instead
+ */
+
+input:-webkit-autofill {
+  -webkit-text-fill-color: var(--color-text); /* 1 */
+  transition: background-color 0s 3600s; /* 2 */
+}

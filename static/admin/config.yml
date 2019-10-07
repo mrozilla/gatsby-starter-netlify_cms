@@ -1,0 +1,356 @@
+backend:
+  name: git-gateway
+  accept_roles:
+    - admin
+    - editor
+  squash_merges: true
+site_url: https://www.example.com
+media_folder: static/assets
+public_folder: assets
+slug:
+  encoding: "ascii"
+  clean_accents: true
+
+development_overrides:
+  site_url: http://localhost:8000
+  backend:
+    name: file-system
+    api_root: "http://localhost:8000/api"
+
+collections:
+  - label: "Menus"
+    label_singular: "Menu"
+    name: menus
+    folder: src/content/cms/menus
+    create: true
+    extension: mdx
+    format: frontmatter
+    fields:
+      - name: title
+      - name: links
+        widget: list
+        types:
+          - name: link
+            fields:
+              - name: text
+              - name: url
+              - { name: badge, required: false }
+
+          - name: markdown
+            fields:
+              - name: title
+              - { name: mdx, widget: markdown }
+
+          - name: nested
+            fields:
+              - name: title
+              - name: links
+                widget: list
+                fields:
+                  - name: text
+                  - { name: url, required: false }
+                  - { name: badge, required: false }
+
+          - name: button
+            fields:
+              - name: text
+              - name: url
+
+  - label: "Pages"
+    label_singular: "Page"
+    name: pages
+    folder: src/content/cms/pages
+    create: true
+    extension: mdx
+    format: frontmatter
+    fields:
+      - name: title
+      - { name: date, widget: date }
+      - name: meta
+        widget: object
+        fields:
+          - name: title
+          - name: description
+          - name: permalink
+          - { name: ogImage, widget: image, default: /assets/og.png }
+      - name: blocks
+        label: "Blocks"
+        label_singular: "Block"
+        widget: list
+        types:
+          - name: hero
+            label: "Hero"
+            fields:
+              - name: announcement
+                widget: object
+                fields:
+                  - { name: url, required: false }
+                  - { name: title, required: false }
+                  - { name: body, required: false }
+              - name: title
+              - { name: subtitle, required: false }
+              - { name: mdx, widget: markdown, required: false }
+              - name: buttons
+                widget: list
+                fields:
+                  - name: title
+                  - name: url
+                  - name: look
+                    widget: select
+                    options: ["primary", "secondary", "tertiary"]
+              - { name: backgroundImage, widget: image, required: false }
+              - { name: video, required: false }
+
+          - name: sidekick
+            label: "Sidekick"
+            fields:
+              - name: header
+                label: "Header"
+                widget: list
+                types:
+                  - name: icon
+                    label: "Icon"
+                    fields:
+                      - name: icon
+                  - name: tagline
+                    label: "Tagline"
+                    fields:
+                      - name: tagline
+                  - name: title
+                    label: "Title"
+                    fields:
+                      - name: title
+                  - name: subtitle
+                    label: "Subtitle"
+                    fields:
+                      - name: subtitle
+                  - name: mdx
+                    label: "Mdx"
+                    fields:
+                      - { name: mdx, widget: markdown }
+                  - name: image
+                    label: "Image"
+                    fields:
+                      - name: image
+                        widget: object
+                        fields:
+                          [{ name: src, widget: image }, name: alt, name: ratio]
+                  - name: buttons
+                    label: "Buttons"
+                    fields:
+                      - name: buttons
+                        widget: list
+                        fields:
+                          - name: title
+                          - name: url
+                          - name: look
+                            widget: select
+                            options: ["primary", "secondary", "tertiary"]
+                  - name: appStores
+                    label: "App Stores"
+                    fields:
+                      - name: appStores
+                        widget: object
+                        fields: [name: ios, name: android]
+              - name: columns
+                label: "Columns"
+                label_singular: "Column"
+                widget: list
+                fields:
+                  - { name: width, default: "1fr" }
+                  - name: blocks
+                    label: "Blocks"
+                    label_singular: "Block"
+                    widget: list
+                    types:
+                      - name: icon
+                        label: "Icon"
+                        fields:
+                          - name: icon
+                      - name: tagline
+                        label: "Tagline"
+                        fields:
+                          - name: tagline
+                      - name: title
+                        label: "Title"
+                        fields:
+                          - name: title
+                      - name: subtitle
+                        label: "Subtitle"
+                        fields:
+                          - name: subtitle
+                      - name: mdx
+                        label: "Mdx"
+                        fields:
+                          - { name: mdx, widget: markdown }
+                      - name: image
+                        label: "Image"
+                        fields:
+                          - name: image
+                            widget: object
+                            fields:
+                              - { name: src, widget: image }
+                              - name: alt
+                              - name: ratio
+                      - name: map
+                        label: "Map"
+                        fields:
+                          - name: map
+                            widget: object
+                            fields:
+                              - { name: geo, widget: map }
+                              - name: zoom
+                      - name: grid
+                        label: "Grid"
+                        fields:
+                          - name: grid
+                            widget: list
+                            fields:
+                              - { name: icon, required: false }
+                              - { name: title, required: false }
+                              - { name: mdx, widget: markdown, required: false }
+                      - name: buttons
+                        label: "Buttons"
+                        fields:
+                          - name: buttons
+                            widget: list
+                            fields:
+                              - name: title
+                              - name: url
+                              - name: look
+                                widget: select
+                                options: ["primary", "secondary", "tertiary"]
+                      - name: appStores
+                        label: "App Stores"
+                        fields:
+                          - name: appStores
+                            widget: object
+                            fields: [name: ios, name: android]
+                  - { name: textAlign, required: false }
+
+          - name: testimonials
+            label: "Testimonials"
+            fields:
+              - { name: title, required: false }
+              - { name: subtitle, required: false }
+              - { name: mdx, widget: markdown, required: false }
+              - name: testimonials
+                widget: list
+                fields:
+                  - name: name
+                  - { name: position, required: false }
+                  - { name: company, required: false }
+                  - { name: testimonial, required: false }
+                  - name: image
+                    widget: object
+                    fields:
+                      [{ name: src, widget: image }, name: alt, name: ratio]
+                    required: false
+
+          - name: logos
+            label: "Logos"
+            fields:
+              - { name: title, required: false }
+              - { name: subtitle, required: false }
+              - { name: mdx, widget: markdown, required: false }
+              - name: logos
+                widget: list
+                fields:
+                  - name: name
+                  - name: url
+                  - name: image
+                    widget: object
+                    fields:
+                      [{ name: src, widget: image }, name: alt, name: ratio]
+                    required: false
+
+          - name: pricing
+            label: "Pricing"
+            fields:
+              - { name: title, required: false }
+              - { name: subtitle, required: false }
+              - { name: mdx, widget: markdown, required: false }
+              - name: pricing
+                widget: list
+                fields:
+                  - name: title
+                  - name: price
+                    widget: object
+                    fields:
+                      - { name: monthly, widget: number }
+                      - { name: yearly, widget: number }
+                  - name: currency
+                  - { name: mdx, widget: markdown, required: false }
+
+          - name: faq
+            label: "FAQ"
+            fields:
+              - { name: title, required: false }
+              - { name: subtitle, required: false }
+              - { name: mdx, widget: markdown, required: false }
+              - name: faq
+                widget: list
+                fields:
+                  - { name: title, label: "Question" }
+                  - { name: mdx, label: "Answer", widget: markdown }
+
+          - name: people
+            label: "People"
+            fields:
+              - { name: title, required: false }
+              - { name: subtitle, required: false }
+              - { name: mdx, widget: markdown, required: false }
+              - name: people
+                widget: list
+                fields:
+                  - name: name
+                  - { name: position, required: false }
+                  - { name: company, required: false }
+                  - name: mdx
+                    label: "Description"
+                    widget: markdown
+                    required: false
+                  - name: image
+                    widget: object
+                    fields:
+                      [{ name: src, widget: image }, name: alt, name: ratio]
+                    required: false
+                  - name: contact
+                    widget: list
+                    fields:
+                      - name: icon
+                      - name: url
+
+          - name: jobs
+            label: "Jobs"
+            fields:
+              - { name: title, required: false }
+              - { name: subtitle, required: false }
+              - { name: mdx, widget: markdown, required: false }
+              - name: jobs
+                widget: list
+                fields:
+                  - name: title
+                  - name: url
+
+  - label: "Posts"
+    label_singular: "Blog post"
+    name: posts
+    folder: src/content/cms/posts
+    create: true
+    extension: mdx
+    format: frontmatter
+    fields:
+      - name: title
+      - { name: subtitle, required: false }
+      - { name: date, widget: date }
+      - name: meta
+        widget: object
+        fields:
+          - name: title
+          - name: description
+          - name: permalink
+          - { name: ogImage, widget: image, default: /assets/og.png }
+      - { name: tags, required: false }
+      - { name: highlighted, widget: boolean, default: false }
+      - { name: body, widget: markdown }
