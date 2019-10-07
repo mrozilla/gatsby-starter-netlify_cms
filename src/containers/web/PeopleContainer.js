@@ -185,8 +185,17 @@ PeopleContainer.propTypes = {
       name:     string,
       position: string,
       company:  string,
-      // image: // TODO:
-      contact:  arrayOf(
+      image:    shape({
+        alt: string.isRequired,
+        src: shape({
+          childImageSharp: shape({
+            fluid: shape({
+              src: string,
+            }),
+          }),
+        }),
+      }),
+      contact: arrayOf(
         shape({
           icon: string,
           url:  string,

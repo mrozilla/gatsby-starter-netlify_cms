@@ -85,7 +85,7 @@ export default function HeroContainer({
               top: 0;
               left: 0;
               z-index: -1;
-              background-image: var(--gradient-brand);
+              background: var(--gradient-brand);
             }
 
             & > img {
@@ -102,7 +102,7 @@ export default function HeroContainer({
           to={announcement.url}
           css={`
             background: hsla(var(${
-              backgroundImage ? '--hsl-inverse' : '--hsl-brand-primary'
+              backgroundImage ? '--hsl-inverse' : '--hsl-primary'
             }), 0.05);
             border-radius: 999px;
             padding: 0.25rem 1rem 0.25rem 0.25rem;
@@ -116,7 +116,7 @@ export default function HeroContainer({
               font-size: 1.5rem;
               font-weight: 700;
               text-transform: uppercase;
-              background-image: var(--gradient-brand);
+              background: var(--gradient-brand);
               color: var(--color-inverse);
               padding: 0.25rem 0.5rem;
               margin: 0 1rem 0 0;
@@ -126,7 +126,7 @@ export default function HeroContainer({
         >
           <Text
             css={`
-              color: var(${backgroundImage ? '--color-inverse' : '--color-brand-primary'});
+              color: var(${backgroundImage ? '--color-inverse' : '--color-primary'});
             `}
           >
             {announcement.body}
@@ -179,7 +179,7 @@ export default function HeroContainer({
             margin: 4rem -0.5rem 0;
           `}
         >
-          {buttons.map((button) => (
+          {buttons.map(button => (
             <Li
               key={button.url}
               css={`
@@ -213,15 +213,21 @@ HeroContainer.propTypes = {
       look:  string.isRequired,
     }),
   ),
-  // backgroundImage: string, // TODO:
+  backgroundImage: shape({
+    childImageSharp: shape({
+      fluid: shape({
+        src: string,
+      }),
+    }),
+  }),
   video: string,
 };
 
 HeroContainer.defaultProps = {
-  announcement: null,
-  subtitle:     '',
-  mdx:          '',
-  buttons:      [],
-  // backgroundImage:    '',
-  video:        '',
+  announcement:    null,
+  subtitle:        '',
+  mdx:             '',
+  buttons:         [],
+  backgroundImage: null,
+  video:           '',
 };

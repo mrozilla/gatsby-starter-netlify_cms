@@ -180,10 +180,19 @@ TestimonialsContainer.propTypes = {
   mdx:          string,
   testimonials: arrayOf(
     shape({
-      name:         string,
-      position:     string,
-      company:      string,
-      // image: // TODO:
+      name:     string,
+      position: string,
+      company:  string,
+      image:    shape({
+        alt: string.isRequired,
+        src: shape({
+          childImageSharp: shape({
+            fluid: shape({
+              src: string,
+            }),
+          }),
+        }),
+      }),
       testimonials: string,
     }),
   ),

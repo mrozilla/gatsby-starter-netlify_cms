@@ -3,6 +3,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import React from 'react';
+import { node } from 'prop-types';
 // import Highlight, { defaultProps } from 'prism-react-renderer';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -35,3 +36,7 @@ export default function Pre({ children, ...props }) {
 
   return <pre {...props}>{children}</pre>;
 }
+
+Pre.propTypes = {
+  children: node.isRequired,
+};

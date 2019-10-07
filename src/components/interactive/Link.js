@@ -17,34 +17,36 @@ const StyledLink = styled.a`
 
   transition: all 250ms;
 
-  /* &[aria-current] {
-    font-weight: 700; /* TODO: investigate if better styling
-  } */
-
   ${({ look }) => {
     if (look === 'primary') {
       return css`
-        color: var(--color-primary);
-        text-decoration: underline var(--color-primary);
+        --color: var(--hsl-primary);
+        color: hsl(var(--color));
+        text-decoration: underline;
+        text-decoration-color: hsl(var(--color));
       `;
     }
     if (look === 'secondary') {
       return css`
-        color: var(--color-primary);
+        --color: var(--hsl-primary);
+        color: hsl(var(--color));
         &:hover,
         &:focus,
         &:active {
-          text-decoration: underline var(--color-primary);
+          text-decoration: underline;
+          text-decoration-color: hsl(var(--color));
         }
       `;
     }
     if (look === 'tertiary') {
       return css`
+        --color: var(--hsl-primary);
         &:hover,
         &:focus,
         &:active {
-          color: var(--color-primary);
-          text-decoration: underline var(--color-primary);
+          color: hsl(var(--color));
+          text-decoration: underline;
+          text-decoration-color: hsl(var(--color));
         }
       `;
     }
@@ -53,13 +55,6 @@ const StyledLink = styled.a`
   }};
 `;
 
-const parseLink = (link) => {
-  if (link.startsWith('www.')) return `https://${link}`;
-  if (!link.startsWith('mailto:') && link.includes('@')) return `mailto:${link}`;
-  if (!link.startsWith('tel:') && link.includes('+')) return `tel:${link}`;
-  return link;
-};
-
 // ─────────────────────────────────────────────────────────────────────────────
 // component
 // ─────────────────────────────────────────────────────────────────────────────
@@ -67,11 +62,12 @@ const parseLink = (link) => {
 export default function Link({ href, to, children, ...rest }) {
   const link = href || to || '';
 
-  if (['http', 'mailto:', 'tel:', 'www.'].some(t => link.includes(t))) {
+  if (['http', 'mailto:', 'tel:', 'www.'].some((t) => link.includes(t))) {
+    const externalLink = link.startsWith('www.') ? `https://${link}` : link;
     return (
       <StyledLink
         as={OutboundLink}
-        href={parseLink(link)}
+        href={externalLink}
         target="_blank"
         rel="noopener noreferrer"
         {...rest}
@@ -89,10 +85,10 @@ export default function Link({ href, to, children, ...rest }) {
 
 Link.propTypes = {
   children: node.isRequired,
-  href:     string,
-  to:       string,
+  href: string,
+  to: string,
 };
 Link.defaultProps = {
   href: null,
-  to:   null,
+  to: null,
 };

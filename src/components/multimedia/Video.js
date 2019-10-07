@@ -25,7 +25,7 @@ export default function Video({ src, css, ...rest }) {
 
   const handleBackgroundClick = (event) => {
     if (event.target === event.currentTarget) {
-      setIsFullscreen((prev) => !prev);
+      setIsFullscreen(prev => !prev);
     }
   };
 
@@ -39,7 +39,7 @@ export default function Video({ src, css, ...rest }) {
         `}
         look="tertiary"
         {...rest}
-        onClick={() => setIsFullscreen((prev) => !prev)}
+        onClick={() => setIsFullscreen(prev => !prev)}
       >
         <FaPlayCircle
           css={`
@@ -100,7 +100,7 @@ export default function Video({ src, css, ...rest }) {
                 order: 2;
               }
             `}
-            onClick={() => setIsFullscreen((prev) => !prev)}
+            onClick={() => setIsFullscreen(prev => !prev)}
           >
             <FaTimesCircle
               css={`

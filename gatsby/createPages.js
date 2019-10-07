@@ -9,8 +9,8 @@ const path = require('path');
 // ─────────────────────────────────────────────────────────────────────────────
 
 exports.createPages = ({ actions: { createPage }, graphql }) => {
-  const PageTemplateContainer = path.resolve('src/containers/PageTemplateContainer.js'); // path intentionally without '../'
-  const PostTemplateContainer = path.resolve('src/containers/PostTemplateContainer.js'); // path intentionally without '../'
+  const PageTemplateContainer = path.resolve('src/containers/general/PageTemplateContainer.js'); // path intentionally without '../'
+  const PostTemplateContainer = path.resolve('src/containers/general/PostTemplateContainer.js'); // path intentionally without '../'
 
   return graphql(`
     {

@@ -11,6 +11,7 @@ import { View } from '~components/primitives/View';
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
+/* eslint-disable max-len */
 export default function AppStore({ os, height }) {
   if (os === 'ios') {
     return (

@@ -3,6 +3,8 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import React from 'react';
+import { node } from 'prop-types';
+
 import styled from 'styled-components';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -25,6 +27,10 @@ export function Table({ children, ...rest }) {
     </div>
   );
 }
+
+Table.propTypes = {
+  children: node.isRequired,
+};
 
 // ─────────────────────────────────────────────────────────────────────────────
 // thead

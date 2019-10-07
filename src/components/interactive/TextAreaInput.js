@@ -3,6 +3,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import React from 'react';
+import { func } from 'prop-types';
 
 import { Input } from '~components/primitives/Input';
 
@@ -21,3 +22,10 @@ export default function TextAreaInput({ onChange, ...rest }) {
 
   return <Input as="textarea" onChange={handleChange} {...rest} />;
 }
+
+TextAreaInput.propTypes = {
+  onChange: func,
+};
+TextAreaInput.defaultProps = {
+  onChange: () => null,
+};

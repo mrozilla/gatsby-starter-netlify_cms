@@ -1,6 +1,4 @@
-# [mrozilla.cz](https://www.mrozilla.cz)
-
-[![Netlify Status](https://api.netlify.com/api/v1/badges/dbe2996d-402e-46ca-9aca-803a2af40cde/deploy-status)](https://app.netlify.com/sites/mrozilla/deploys)
+# [gatsby-starter-netlify_cms](https://github.com/mrozilla/gatsby-starter-netlify_cms/)
 
 Source code for [www.gatsby-starter-netlify_cms.netlify.com](https://www.gatsby-starter-netlify_cms.netlify.com). The website targets the latest version of Chrome, Safari, and Firefox. [File an issue](https://github.com/mrozilla/gatsby-starter-netlify_cms/issues) if you see I've borked something up!
 

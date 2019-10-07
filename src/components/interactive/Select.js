@@ -23,7 +23,7 @@ export const Select = styled.select`
   line-height: 1.5em;
   cursor: pointer;
   padding: 3rem 1rem 1rem;
-  border-radius: '0.5rem';
+  border-radius: 0.5rem;
 
   &:hover {
     box-shadow: var(--shadow);
@@ -44,6 +44,9 @@ export const Select = styled.select`
 
   & ~ ${Label} {
     pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 1rem;
   }
 
   &:required:invalid {
