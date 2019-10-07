@@ -20,9 +20,10 @@ export const Fieldset = styled.fieldset`
     transform: translateY(1rem);
   }
 
-  &:hover > ${Tooltip}, &:focus > ${Tooltip}, &:focus-within > ${Tooltip} {
+  &:focus > ${Tooltip}, &:focus-within > ${Tooltip} {
     visibility: visible;
     opacity: 1;
     transform: translateY(0);
+    z-index: var(--z-index-tooltip);
   }
 `;

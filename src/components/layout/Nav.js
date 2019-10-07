@@ -14,7 +14,7 @@ export const Nav = styled.nav`
 
   @media screen and (min-width: 900px) {
     grid-auto-flow: column;
-    justify-content: space-between;
+    grid-auto-columns: 1fr;
   }
 `;
 

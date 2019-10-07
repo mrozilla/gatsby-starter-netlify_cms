@@ -14,7 +14,12 @@ import { H1, Section, P, Ul, Li, Link, H2, Img } from '~components';
 
 const query = graphql`
   query {
-    posts: allMdx(filter: { fields: { sourceName: { eq: "posts" } } }) {
+    posts: allMdx(
+      filter: {
+        fields: { sourceName: { eq: "posts" } }
+        frontmatter: { meta: { permalink: { ne: "/blog/demo/" } } }
+      }
+    ) {
       nodes {
         timeToRead
         frontmatter {

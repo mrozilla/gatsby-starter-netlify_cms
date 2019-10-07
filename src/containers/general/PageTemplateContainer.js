@@ -7,7 +7,10 @@ import { graphql } from 'gatsby';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { shape, string, arrayOf } from 'prop-types';
 
-import { RootContainer,
+import {
+  RootContainer,
+  HeaderContainer,
+  FooterContainer,
   SEOContainer,
   BreadcrumbsContainer,
   HeroContainer,
@@ -18,7 +21,8 @@ import { RootContainer,
   BlogContainer,
   FAQContainer,
   PeopleContainer,
-  JobsContainer } from '~containers';
+  JobsContainer,
+} from '~containers';
 import { Main } from '~components';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -121,6 +125,7 @@ export default function PageTemplateContainer({
 }) {
   return (
     <RootContainer>
+      <HeaderContainer />
       <SEOContainer meta={meta} />
       <Main
         css={`
@@ -130,6 +135,7 @@ export default function PageTemplateContainer({
         <BreadcrumbsContainer location={location} />
         {renderBlocks(blocks)}
       </Main>
+      <FooterContainer />
     </RootContainer>
   );
 }

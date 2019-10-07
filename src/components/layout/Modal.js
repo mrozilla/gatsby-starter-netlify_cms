@@ -36,6 +36,7 @@ const ModalWrapper = styled.div`
   cursor: initial;
 
   min-width: 25vw;
+  max-width: 450px;
 
   position: relative;
 
@@ -92,11 +93,12 @@ export default function Modal({
           key={innerKey}
           css={`
             padding: ${innerPadding};
-            minwidth: ${innerMinWidth};
+            min-width: ${innerMinWidth};
           `}
         >
           {children}
           <Button
+            look="tertiary"
             css={`
               position: absolute;
               top: 0;

@@ -66,6 +66,12 @@ export const Input = styled.input`
     display: none;
   }
 
+  & ~ ${Label} {
+    position: absolute;
+    top: 0;
+    left: 1rem;
+  }
+
   & ~ ${Error} {
     visibility: hidden;
     opacity: 0;
@@ -78,10 +84,6 @@ export const Input = styled.input`
 
   &[type='select'],
   &[type='search'] {
-    &::after {
-      content: 'test';
-    }
-
     & ~ svg {
       position: absolute;
       bottom: 2rem;
@@ -127,28 +129,80 @@ export const Input = styled.input`
   }
 
   /**
-   * remove search input additional styling in webkit
+   * search input
    */
 
-  &[type='search']::-webkit-calendar-picker-indicator,
+  &[type='search']::-webkit-calendar-picker-indicator {
+    color: var(--color-primary);
+    cursor: pointer;
+  }
   &[type='search']::-webkit-search-cancel-button {
-    display: none;
+    background: var(--color-primary);
+    cursor: pointer;
   }
 
   /**
    * temporal fields styling
+   * 1. fix for temporal inputs size difference
    */
 
   &[type^='date'],
-  &[type='time'],
-  &[type='month'] {
-    font-size: 1.9rem; /* fix for temporal inputs size difference */
+  &[type='month'],
+  &[type='week'],
+  &[type='time'] {
+    font-size: 1.9rem; /* 1 */
 
     &::-webkit-calendar-picker-indicator {
       color: var(--color-info);
     }
     &::-webkit-datetime-edit-text {
       opacity: 0.5;
+    }
+  }
+
+  /**
+   * color input
+   */
+
+  &[type='color'] {
+    /* &::-webkit-color-swatch-wrapper {
+      border: none;
+      padding: 1rem;
+      height: 1rem;
+    } */
+    &::-webkit-color-swatch {
+      /* border: none; */
+      padding: 1rem;
+      /* height: 1rem; */
+    }
+  }
+
+  /**
+   * range input
+   */
+
+  &[type='range'] {
+    &::-webkit-slider-thumb {
+      appearance: none;
+      width: 2rem;
+      height: 2rem;
+      background: var(--color-inverse);
+      box-shadow: inset 0 0 0 2px hsla(var(--hsl-text), 0.2);
+      border-radius: 50%;
+      margin: -1rem 0 0;
+      cursor: pointer;
+    }
+    &:hover,
+    &:focus,
+    &:active {
+      &::-webkit-slider-thumb {
+        box-shadow: inset 0 0 0 2px hsla(var(--hsl-primary), 1);
+      }
+    }
+    &::-webkit-slider-runnable-track {
+      height: 0.25rem;
+      background: hsla(var(--hsl-text), 0.1);
+      margin: 1.5rem 0 1.25rem;
     }
   }
 `;

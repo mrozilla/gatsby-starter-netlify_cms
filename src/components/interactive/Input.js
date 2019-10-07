@@ -3,7 +3,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import React, { forwardRef } from 'react';
-import { string, oneOfType, number, bool, arrayOf, shape, func } from 'prop-types';
+import { string, arrayOf, shape } from 'prop-types';
 
 import { Text } from '~components/primitives/Text';
 
@@ -29,30 +29,7 @@ import Icon from '~components/multimedia/Icon';
 // ─────────────────────────────────────────────────────────────────────────────
 
 const Input = forwardRef(
-  (
-    {
-      type,
-      name,
-      label,
-      placeholder,
-      description,
-      error,
-      value,
-      checked,
-      options,
-      rows,
-      min,
-      max,
-      step,
-      pattern,
-      readOnly,
-      required,
-      onChange,
-      css,
-      ...rest
-    },
-    ref,
-  ) => {
+  ({ type, name, label, placeholder, description, error, options, list, ...rest }, ref) => {
     const renderInput = () => {
       if (type === 'radio') {
         return (
@@ -69,13 +46,10 @@ const Input = forwardRef(
                 <Radio
                   ref={ref}
                   id={radio.value}
-                  {...{
-                    value:   radio.value,
-                    checked: radio.checked,
-                    name,
-                    required,
-                    onChange,
-                  }}
+                  name={name}
+                  value={radio.value}
+                  checked={radio.checked}
+                  {...rest}
                 />
                 <Text>{radio.label}</Text>
               </Label>
@@ -94,19 +68,15 @@ const Input = forwardRef(
                 key={checkbox.value}
                 htmlFor={checkbox.value}
                 css={`
-                  line-height: 4rem;
+                  line-height: 4rem;p
                 `}
               >
                 <Checkbox
                   ref={ref}
                   id={checkbox.value}
-                  {...{
-                    value:   checkbox.value,
-                    checked: checkbox.checked,
-                    name,
-                    required,
-                    onChange,
-                  }}
+                  value={checkbox.value}
+                  checked={checkbox.checked}
+                  {...rest}
                 />
                 <Text>{checkbox.label}</Text>
               </Label>
@@ -119,7 +89,7 @@ const Input = forwardRef(
       if (type === 'select') {
         return (
           <>
-            <Select ref={ref} id={name} {...{ name, value, required, onChange }}>
+            <Select ref={ref} id={name} {...rest}>
               <option hidden value="">
                 {placeholder}
               </option>
@@ -131,16 +101,7 @@ const Input = forwardRef(
                 ))}
               </optgroup>
             </Select>
-            <Label
-              htmlFor={name}
-              css={`
-                position: absolute;
-                top: 0;
-                left: 1rem;
-              `}
-            >
-              {label}
-            </Label>
+            <Label htmlFor={name}>{label}</Label>
             <Icon
               icon="FaChevronDown"
               css={`
@@ -153,6 +114,7 @@ const Input = forwardRef(
               `}
             />
             {description && <Tooltip>{description}</Tooltip>}
+            {/* {error && <Error>{error}</Error>} */}
           </>
         );
       }
@@ -162,38 +124,21 @@ const Input = forwardRef(
           <>
             <TextInput
               ref={ref}
-              type="search"
               id={name}
+              type="search"
+              name={name}
+              placeholder={placeholder}
               list={`datalist-${name}`}
               autoComplete="off"
-              {...{ name, value, placeholder, options, required, onChange }}
+              {...rest}
             />
-            <Label
-              htmlFor={name}
-              css={`
-                position: absolute;
-                top: 0;
-                left: 1rem;
-              `}
-            >
-              {label}
-            </Label>
+            <Label htmlFor={name}>{label}</Label>
             <datalist id={`datalist-${name}`}>
-              {options.map((option) => (
-                <option key={option.name}>{option.name}</option>
+              {list.map((item) => (
+                <option key={item}>{item}</option>
               ))}
             </datalist>
-            <Icon
-              icon="FaChevronDown"
-              css={`
-                position: absolute;
-                top: 2.75rem;
-                right: 1rem;
-                pointer-events: none;
-                font-size: 1.75rem;
-                opacity: 0.25;
-              `}
-            />
+            {description && <Tooltip>{description}</Tooltip>}
             {error && <Error>{error}</Error>}
           </>
         );
@@ -202,29 +147,8 @@ const Input = forwardRef(
       if (type === 'textarea') {
         return (
           <>
-            <TextAreaInput
-              ref={ref}
-              id={name}
-              {...{
-                name,
-                value,
-                placeholder,
-                rows,
-                pattern,
-                required,
-                onChange,
-              }}
-            />
-            <Label
-              htmlFor={name}
-              css={`
-                position: absolute;
-                top: 0;
-                left: 1rem;
-              `}
-            >
-              {label}
-            </Label>
+            <TextAreaInput ref={ref} id={name} name={name} placeholder={placeholder} {...rest} />
+            <Label htmlFor={name}>{label}</Label>
             {description && <Tooltip>{description}</Tooltip>}
             {error && <Error>{error}</Error>}
           </>
@@ -237,68 +161,30 @@ const Input = forwardRef(
             <PasswordInput
               ref={ref}
               id={name}
-              {...{
-                type,
-                name,
-                value,
-                placeholder,
-                pattern,
-                min,
-                max,
-                step,
-                readOnly,
-                required,
-                onChange,
-              }}
+              type="password"
+              name={name}
+              placeholder={placeholder}
               {...rest}
             />
-            <Label
-              htmlFor={name}
-              css={`
-                position: absolute;
-                top: 0;
-                left: 1rem;
-              `}
-            >
-              {label}
-            </Label>
+            <Label htmlFor={name}>{label}</Label>
             {description && <Tooltip>{description}</Tooltip>}
             {error && <Error>{error}</Error>}
           </>
         );
       }
 
-      if (['date', 'time', 'month'].some((option) => option === type)) {
+      if (['date', 'datetime-local', 'month', 'week', 'time'].some((option) => option === type)) {
         return (
           <>
             <TemporalInput
               ref={ref}
               id={name}
-              {...{
-                type,
-                name,
-                value,
-                placeholder,
-                pattern,
-                min,
-                max,
-                step,
-                readOnly,
-                required,
-                onChange,
-              }}
+              type={type}
+              name={name}
+              placeholder={placeholder}
               {...rest}
             />
-            <Label
-              htmlFor={name}
-              css={`
-                position: absolute;
-                top: 0;
-                left: 1rem;
-              `}
-            >
-              {label}
-            </Label>
+            <Label htmlFor={name}>{label}</Label>
             {description && <Tooltip>{description}</Tooltip>}
             {error && <Error>{error}</Error>}
           </>
@@ -310,31 +196,12 @@ const Input = forwardRef(
           <TextInput
             ref={ref}
             id={name}
-            {...{
-              type,
-              name,
-              value,
-              placeholder,
-              pattern,
-              min,
-              max,
-              step,
-              readOnly,
-              required,
-              onChange,
-            }}
+            type={type}
+            name={name}
+            placeholder={placeholder}
             {...rest}
           />
-          <Label
-            htmlFor={name}
-            css={`
-              position: absolute;
-              top: 0;
-              left: 1rem;
-            `}
-          >
-            {label}
-          </Label>
+          <Label htmlFor={name}>{label}</Label>
           {description && <Tooltip>{description}</Tooltip>}
           {error && <Error>{error}</Error>}
         </>
@@ -359,9 +226,7 @@ const Input = forwardRef(
       <Fieldset
         css={`
           grid-area: ${name};
-          ${css}
         `}
-        {...rest}
       >
         {renderInput()}
       </Fieldset>
@@ -376,39 +241,20 @@ Input.propTypes = {
   placeholder: string,
   description: string,
   error:       string,
-  value:       oneOfType([string, number]),
-  checked:     bool,
   options:     arrayOf(
     shape({
-      checked: bool,
+      value: string.isRequired,
+      label: string.isRequired,
     }),
   ),
-  rows:     string,
-  min:      string,
-  max:      string,
-  step:     string,
-  pattern:  string,
-  readOnly: bool,
-  required: bool,
-  css:      string,
-  onChange: func,
+  list: arrayOf(string),
 };
 Input.defaultProps = {
   placeholder: '',
   description: '',
   error:       '',
-  value:       undefined,
-  checked:     undefined,
   options:     [],
-  rows:        undefined,
-  min:         undefined,
-  max:         undefined,
-  step:        undefined,
-  pattern:     undefined,
-  readOnly:    undefined,
-  required:    undefined,
-  css:         '',
-  onChange:    undefined,
+  list:        [],
 };
 
 export default Input;

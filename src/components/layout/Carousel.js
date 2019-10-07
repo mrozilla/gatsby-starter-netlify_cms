@@ -131,7 +131,7 @@ export default function Carousel({
         `}
         {...handlers}
       >
-        {Children.map(children, (child) => (
+        {Children.map(children, child => (
           <CarouselItem {...itemProps}>{child}</CarouselItem>
         ))}
       </CarouselWrapper>
@@ -173,7 +173,10 @@ Carousel.propTypes = {
     interval: number,
   }),
   isControls: bool,
-  css:        string,
+  itemProps:  shape({
+    css: string,
+  }),
+  css: string,
 };
 
 Carousel.defaultProps = {
@@ -181,5 +184,6 @@ Carousel.defaultProps = {
   gap:          '1rem',
   loop:         undefined,
   isControls:   true,
+  itemProps:    undefined,
   css:          '',
 };

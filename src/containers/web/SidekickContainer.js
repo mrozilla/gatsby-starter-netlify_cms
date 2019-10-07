@@ -128,8 +128,8 @@ function renderHeader(item, i) {
             margin: 0 auto 2rem;
             font-size: 6rem;
 
-            background: var(--color-primary);
-            color: var(--color-inverse);
+            background: hsla(var(--hsl-primary), 0.1);
+            color: var(--color-primary);
             clip-path: circle();
             padding: 0.25em;
           `}
@@ -272,10 +272,10 @@ function renderColumn(column, i) {
                   icon={icon}
                   css={`
                     margin: 0 0 1rem;
-                    font-size: 5rem;
+                    font-size: 6rem;
 
-                    background: var(--color-primary);
-                    color: var(--color-inverse);
+                    background: hsla(var(--hsl-primary), 0.1);
+                    color: var(--color-primary);
                     clip-path: circle();
                     padding: 0.25em;
                   `}
@@ -372,8 +372,8 @@ function renderColumn(column, i) {
                             font-size: 4rem;
                             line-height: 1;
 
-                            background: var(--color-primary);
-                            color: var(--color-inverse);
+                            background: hsla(var(--hsl-primary), 0.1);
+                            color: var(--color-primary);
                             clip-path: circle();
                             padding: 0.25em;
                           `}
@@ -410,8 +410,8 @@ function renderColumn(column, i) {
                     display: flex;
                     flex-wrap: wrap;
                     justify-content: ${column.textAlign === 'center'
-                    ? column.textAlign
-                    : `flex-${column.textAlign}`};
+                      ? column.textAlign
+                      : `flex-${column.textAlign}`};
                   `}
                 >
                   {buttons.map((button) => (
@@ -436,8 +436,8 @@ function renderColumn(column, i) {
                     display: flex;
                     flex-wrap: wrap;
                     justify-content: ${column.textAlign === 'center'
-                    ? column.textAlign
-                    : `flex-${column.textAlign}`};
+                      ? column.textAlign
+                      : `flex-${column.textAlign}`};
 
                     & > li {
                       margin: 0 0.5rem;
@@ -515,8 +515,8 @@ export default function SidekickContainer({ header, columns }) {
 
             @media screen and (min-width: 900px) {
               grid-template-columns: ${columns.length > 4
-            ? 'repeat(auto-fit, minmax(30ch, 1fr))'
-            : columns.map((column) => column.width).join(' ')};
+                ? 'repeat(auto-fit, minmax(30ch, 1fr))'
+                : columns.map((column) => column.width).join(' ')};
             }
           `}
         >

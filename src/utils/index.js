@@ -1,5 +1,3 @@
-export { default as mediaQuerise } from './mediaQuerise';
-
 export * from './style/animations';
 
 export { default as useInactiveTab } from './hooks/useInactiveTab';

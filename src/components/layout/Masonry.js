@@ -30,7 +30,7 @@ export default function Masonry({ columns, gap, isProvideLi, children }) {
     >
       {masonry.map((column, i) => (
         <Li
-          key={i}
+          key={i} // eslint-disable-line react/no-array-index-key
           as="li"
           css={`
             display: grid;
