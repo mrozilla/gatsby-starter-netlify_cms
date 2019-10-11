@@ -6,6 +6,7 @@ backend:
   squash_merges: true
 site_url: https://www.example.com
 media_folder: static/assets
+media_folder_relative: true
 public_folder: assets
 slug:
   encoding: "ascii"

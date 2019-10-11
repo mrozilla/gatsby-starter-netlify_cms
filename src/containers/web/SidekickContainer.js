@@ -410,8 +410,8 @@ function renderColumn(column, i) {
                     display: flex;
                     flex-wrap: wrap;
                     justify-content: ${column.textAlign === 'center'
-                      ? column.textAlign
-                      : `flex-${column.textAlign}`};
+                    ? column.textAlign
+                    : `flex-${column.textAlign}`};
                   `}
                 >
                   {buttons.map((button) => (
@@ -436,8 +436,8 @@ function renderColumn(column, i) {
                     display: flex;
                     flex-wrap: wrap;
                     justify-content: ${column.textAlign === 'center'
-                      ? column.textAlign
-                      : `flex-${column.textAlign}`};
+                    ? column.textAlign
+                    : `flex-${column.textAlign}`};
 
                     & > li {
                       margin: 0 0.5rem;
@@ -515,8 +515,8 @@ export default function SidekickContainer({ header, columns }) {
 
             @media screen and (min-width: 900px) {
               grid-template-columns: ${columns.length > 4
-                ? 'repeat(auto-fit, minmax(30ch, 1fr))'
-                : columns.map((column) => column.width).join(' ')};
+            ? 'repeat(auto-fit, minmax(30ch, 1fr))'
+            : columns.map((column) => column.width).join(' ')};
             }
           `}
         >
@@ -528,11 +528,11 @@ export default function SidekickContainer({ header, columns }) {
 }
 
 SidekickContainer.propTypes = {
-  // icon:     string,
-  // tagline:  string,
-  // title:    string,
-  // subtitle: string,
-  // mdx:      string,
+  header: arrayOf(
+    shape({
+      title: string,
+    }),
+  ),
   columns: arrayOf(
     shape({
       blocks: arrayOf(
@@ -545,10 +545,6 @@ SidekickContainer.propTypes = {
 };
 
 SidekickContainer.defaultProps = {
-  // icon:     '',
-  // tagline:  '',
-  // title:    '',
-  // subtitle: '',
-  // mdx:      '',
+  header:  [],
   columns: [],
 };
