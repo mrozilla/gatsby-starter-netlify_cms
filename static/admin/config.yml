@@ -18,6 +18,56 @@ development_overrides:
     name: file-system
     api_root: "http://localhost:8000/api"
 
+aliases:
+  - &meta
+    name: meta
+    widget: object
+    fields:
+      - name: title
+      - name: description
+      - name: permalink
+      - { name: ogImage, widget: image, default: /assets/og.png }
+  - &buttons
+    name: buttons
+    widget: list
+    fields:
+      - name: title
+      - name: url
+      - name: look
+        widget: select
+        options: ["primary", "secondary", "tertiary"]
+  - &image
+    name: image
+    widget: object
+    fields:
+      [{ name: src, widget: image }, name: alt, name: ratio]
+    required: false
+  - &icon
+    name: icon
+    label: "Icon"
+    fields:
+      - name: icon
+  - &tagline
+    name: tagline
+    label: "Tagline"
+    fields:
+      - name: tagline
+  - &title
+    name: title
+    label: "Title"
+    fields:
+      - name: title
+  - &subtitle
+    name: subtitle
+    label: "Subtitle"
+    fields:
+      - name: subtitle
+  - &mdx
+    name: mdx
+    label: "Mdx"
+    fields:
+      - { name: mdx, widget: markdown }
+
 collections:
   - label: "Menus"
     label_singular: "Menu"
@@ -67,13 +117,7 @@ collections:
     fields:
       - name: title
       - { name: date, widget: date }
-      - name: meta
-        widget: object
-        fields:
-          - name: title
-          - name: description
-          - name: permalink
-          - { name: ogImage, widget: image, default: /assets/og.png }
+      - *meta
       - name: blocks
         label: "Blocks"
         label_singular: "Block"
@@ -91,14 +135,7 @@ collections:
               - name: title
               - { name: subtitle, required: false }
               - { name: mdx, widget: markdown, required: false }
-              - name: buttons
-                widget: list
-                fields:
-                  - name: title
-                  - name: url
-                  - name: look
-                    widget: select
-                    options: ["primary", "secondary", "tertiary"]
+              - *buttons
               - { name: backgroundImage, widget: image, required: false }
               - { name: video, required: false }
 
@@ -109,44 +146,19 @@ collections:
                 label: "Header"
                 widget: list
                 types:
-                  - name: icon
-                    label: "Icon"
-                    fields:
-                      - name: icon
-                  - name: tagline
-                    label: "Tagline"
-                    fields:
-                      - name: tagline
-                  - name: title
-                    label: "Title"
-                    fields:
-                      - name: title
-                  - name: subtitle
-                    label: "Subtitle"
-                    fields:
-                      - name: subtitle
-                  - name: mdx
-                    label: "Mdx"
-                    fields:
-                      - { name: mdx, widget: markdown }
+                  - *icon
+                  - *tagline
+                  - *title
+                  - *subtitle
+                  - *mdx
                   - name: image
                     label: "Image"
                     fields:
-                      - name: image
-                        widget: object
-                        fields:
-                          [{ name: src, widget: image }, name: alt, name: ratio]
+                      - *image
                   - name: buttons
                     label: "Buttons"
                     fields:
-                      - name: buttons
-                        widget: list
-                        fields:
-                          - name: title
-                          - name: url
-                          - name: look
-                            widget: select
-                            options: ["primary", "secondary", "tertiary"]
+                      - *buttons
                   - name: appStores
                     label: "App Stores"
                     fields:
@@ -164,35 +176,15 @@ collections:
                     label_singular: "Block"
                     widget: list
                     types:
-                      - name: icon
-                        label: "Icon"
-                        fields:
-                          - name: icon
-                      - name: tagline
-                        label: "Tagline"
-                        fields:
-                          - name: tagline
-                      - name: title
-                        label: "Title"
-                        fields:
-                          - name: title
-                      - name: subtitle
-                        label: "Subtitle"
-                        fields:
-                          - name: subtitle
-                      - name: mdx
-                        label: "Mdx"
-                        fields:
-                          - { name: mdx, widget: markdown }
+                      - *icon
+                      - *tagline
+                      - *title
+                      - *subtitle
+                      - *mdx
                       - name: image
                         label: "Image"
                         fields:
-                          - name: image
-                            widget: object
-                            fields:
-                              - { name: src, widget: image }
-                              - name: alt
-                              - name: ratio
+                          - *image
                       - name: map
                         label: "Map"
                         fields:
@@ -213,14 +205,7 @@ collections:
                       - name: buttons
                         label: "Buttons"
                         fields:
-                          - name: buttons
-                            widget: list
-                            fields:
-                              - name: title
-                              - name: url
-                              - name: look
-                                widget: select
-                                options: ["primary", "secondary", "tertiary"]
+                          - *buttons
                       - name: appStores
                         label: "App Stores"
                         fields:
@@ -242,11 +227,7 @@ collections:
                   - { name: position, required: false }
                   - { name: company, required: false }
                   - { name: testimonial, required: false }
-                  - name: image
-                    widget: object
-                    fields:
-                      [{ name: src, widget: image }, name: alt, name: ratio]
-                    required: false
+                  - *image
 
           - name: logos
             label: "Logos"
@@ -257,13 +238,9 @@ collections:
               - name: logos
                 widget: list
                 fields:
-                  - name: name
+                  - name: title
                   - name: url
-                  - name: image
-                    widget: object
-                    fields:
-                      [{ name: src, widget: image }, name: alt, name: ratio]
-                    required: false
+                  - *image
 
           - name: pricing
             label: "Pricing"
@@ -311,11 +288,7 @@ collections:
                     label: "Description"
                     widget: markdown
                     required: false
-                  - name: image
-                    widget: object
-                    fields:
-                      [{ name: src, widget: image }, name: alt, name: ratio]
-                    required: false
+                  - *image
                   - name: contact
                     widget: list
                     fields:
@@ -345,13 +318,7 @@ collections:
       - name: title
       - { name: subtitle, required: false }
       - { name: date, widget: date }
-      - name: meta
-        widget: object
-        fields:
-          - name: title
-          - name: description
-          - name: permalink
-          - { name: ogImage, widget: image, default: /assets/og.png }
+      - *meta
       - { name: tags, required: false }
-      - { name: highlighted, widget: boolean, default: false }
+      - { name: promoted, widget: boolean, default: false }
       - { name: body, widget: markdown }
