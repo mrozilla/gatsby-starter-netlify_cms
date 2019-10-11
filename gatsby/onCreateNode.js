@@ -2,9 +2,7 @@
 // import
 // ─────────────────────────────────────────────────────────────────────────────
 
-const { fmImagesToRelative } = require('gatsby-remark-relative-images');
-
-// TODO: finalise for merge into gatsby-mdx/fork
+// TODO: finalise for merge into gatsby-plugin-mdx
 const mdx = require('@mdx-js/mdx');
 const babel = require('@babel/core');
 const deepMap = require('deep-map');
@@ -14,8 +12,6 @@ const deepMap = require('deep-map');
 // ─────────────────────────────────────────────────────────────────────────────
 
 exports.onCreateNode = ({ node, getNode, actions: { createNodeField } }) => {
-  fmImagesToRelative(node); // transform Netlify CMS' absolute paths to relative for gatsby-image
-
   if (node.internal.type === 'Mdx') {
     const parent = getNode(node.parent);
 
