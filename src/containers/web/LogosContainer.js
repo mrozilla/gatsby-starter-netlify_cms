@@ -21,7 +21,7 @@ export const fragment = graphql`
     subtitle
     mdx
     logos {
-      name
+      title
       url
       image {
         src {
@@ -129,21 +129,21 @@ export default function LogosContainer({ title, subtitle, mdx, logos }) {
 }
 
 LogosContainer.propTypes = {
-  title:    string,
+  title: string,
   subtitle: string,
-  mdx:      string,
-  logos:    arrayOf(
+  mdx: string,
+  logos: arrayOf(
     shape({
       name: string,
-      url:  string,
+      url: string,
       // image:
     }),
   ),
 };
 
 LogosContainer.defaultProps = {
-  title:    '',
+  title: '',
   subtitle: '',
-  mdx:      '',
-  logos:    [],
+  mdx: '',
+  logos: [],
 };

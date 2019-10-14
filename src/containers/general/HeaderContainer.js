@@ -58,11 +58,13 @@ export default function HeaderContainer() {
 
         background: var(--color-inverse);
         box-shadow: inset 0 -2px hsla(var(--hsl-text), 0.05);
-
-        padding: 0 var(--width-outside);
       `}
     >
-      <Nav>
+      <Nav
+        css={`
+          padding: 0 var(--width-outside);
+        `}
+      >
         <Link
           to="/"
           css={`
@@ -75,13 +77,15 @@ export default function HeaderContainer() {
         </Link>
         <Nav.Toggle
           css={`
-            top: 2.5rem;
-            right: -2rem;
+            right: 0;
+            padding: 2.5rem 2rem;
           `}
         />
         <Nav.List
           css={`
-            justify-self: end;
+            @media screen and (min-width: 900px) {
+              justify-self: end;
+            }
           `}
         >
           {header?.frontmatter?.links.map((item) => {
@@ -93,9 +97,8 @@ export default function HeaderContainer() {
                     look="tertiary"
                     css={`
                       display: block;
-                      padding: 1rem;
-
-                      @media screen and (min-width: 1200px) {
+                      padding: 1rem 0;
+                      @media screen and (min-width: 900px) {
                         padding: 3.5rem 2rem;
                       }
                     `}
@@ -112,10 +115,12 @@ export default function HeaderContainer() {
                 <Nav.List.Item
                   key={item.url}
                   css={`
-                    padding: 3rem 0;
-
+                    padding: 1rem 0;
                     & > a {
                       padding: 1rem 3rem;
+                    }
+                    @media screen and (min-width: 900px) {
+                      padding: 3rem 1rem;
                     }
                   `}
                 >
@@ -133,14 +138,13 @@ export default function HeaderContainer() {
                     tabIndex="0"
                     css={`
                       outline: none;
-                      padding: 1rem;
+                      padding: 1rem 0;
 
                       &:hover {
                         color: var(--color-primary);
                       }
-
-                      @media screen and (min-width: 1200px) {
-                        padding: 3.5rem 2rem;
+                      @media screen and (min-width: 900px) {
+                        padding: 3.5rem 1rem;
                       }
                     `}
                   >
@@ -148,8 +152,9 @@ export default function HeaderContainer() {
                   </H2>
                   <Nav.Toggle
                     css={`
-                      top: -1rem;
+                      top: 0;
                       right: -2rem;
+                      padding: 1.5rem 2rem;
                     `}
                   />
                   <Nav.List>
@@ -160,10 +165,11 @@ export default function HeaderContainer() {
                           look="tertiary"
                           css={`
                             display: block;
-                            padding: 1rem;
+                            padding: 1rem 0;
+                            width: 100%;
 
                             @media screen and (min-width: 1200px) {
-                              padding: 1rem 4rem;
+                              padding: 1rem 2rem;
                             }
                           `}
                         >
