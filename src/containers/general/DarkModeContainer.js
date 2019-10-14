@@ -31,10 +31,12 @@ export default function DarkModeContainer({ ...rest }) {
       },
     };
 
-    document.documentElement.style.setProperty('--hsl-text', hsl[theme].text);
-    document.documentElement.style.setProperty('--hsl-bg', hsl[theme].bg);
-    document.documentElement.style.setProperty('--hsl-dark', hsl[theme].dark);
-    document.documentElement.style.setProperty('--hsl-inverse', hsl[theme].inverse);
+    const selectedTheme = hsl[theme] || hsl.light;
+
+    document.documentElement.style.setProperty('--hsl-text', selectedTheme.text);
+    document.documentElement.style.setProperty('--hsl-bg', selectedTheme.bg);
+    document.documentElement.style.setProperty('--hsl-dark', selectedTheme.dark);
+    document.documentElement.style.setProperty('--hsl-inverse', selectedTheme.inverse);
   }, [theme]);
 
   return (
