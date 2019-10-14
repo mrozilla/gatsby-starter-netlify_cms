@@ -82,30 +82,34 @@ collections:
         widget: list
         types:
           - name: link
+            label: "Link"
             fields:
               - name: text
               - name: url
               - { name: badge, required: false }
 
-          - name: markdown
-            fields:
-              - name: title
-              - { name: mdx, widget: markdown }
-
           - name: nested
+            label: "Nested"
             fields:
               - name: title
               - name: links
                 widget: list
                 fields:
                   - name: text
-                  - { name: url, required: false }
+                  - { name: url, required: false } # intentional to allow submenus
                   - { name: badge, required: false }
 
           - name: button
+            label: "Button"
             fields:
               - name: text
               - name: url
+
+          - name: markdown
+            label: "Markdown"
+            fields:
+              - name: title
+              - { name: mdx, widget: markdown }
 
   - label: "Pages"
     label_singular: "Page"
