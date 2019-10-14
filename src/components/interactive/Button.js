@@ -165,16 +165,6 @@ const StyledButton = styled.button`
 
     return null;
   }};
-
-  ${({ grouped }) => grouped
-    && css`
-      &:not(:last-of-type) {
-        margin: 0 0 1rem;
-        @media screen and (min-width: 600px) {
-          margin: 0 1rem 0 0;
-        }
-      }
-    `};
 `;
 
 // ─────────────────────────────────────────────────────────────────────────────

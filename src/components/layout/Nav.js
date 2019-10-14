@@ -46,6 +46,10 @@ Nav.List.Item = styled.li`
   font-weight: 700;
   letter-spacing: 0.05em;
 
+  & > ${Nav.List} {
+    padding: 0 0 0 var(--width-outside);
+  }
+
   @media screen and (min-width: 900px) {
     display: flex;
     align-items: center;
@@ -68,6 +72,7 @@ Nav.List.Item = styled.li`
 
       & > ${Nav.List} {
         visibility: visible;
+        padding: 0;
 
         background: var(--color-inverse);
         box-shadow: 0 0.5rem 1rem hsla(var(--hsl-text), 0.1);
@@ -86,27 +91,27 @@ Nav.Toggle = styled.input`
   outline: none;
 
   position: absolute;
-  padding: 2rem;
 
   cursor: pointer;
   font-size: 2rem;
   line-height: 1;
   color: var(--color-primary);
 
-  &:checked {
-    transform: rotate(90deg);
-    opacity: 0.25;
+  &::after {
+    content: '☰';
+    display: block;
+  }
 
+  &:checked {
     & ~ ${Nav.List} {
       visibility: visible;
       height: auto;
-
-      padding: 0 0 2rem 2rem;
     }
-  }
 
-  &::after {
-    content: '☰';
+    &::after {
+      transform: rotate(90deg);
+      opacity: 0.25;
+    }
   }
 
   @media screen and (min-width: 900px) {
