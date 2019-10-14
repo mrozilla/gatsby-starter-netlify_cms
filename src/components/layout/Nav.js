@@ -97,18 +97,21 @@ Nav.Toggle = styled.input`
   line-height: 1;
   color: var(--color-primary);
 
-  &:checked {
-    transform: rotate(90deg);
-    opacity: 0.25;
+  &::after {
+    content: '☰';
+    display: block;
+  }
 
+  &:checked {
     & ~ ${Nav.List} {
       visibility: visible;
       height: auto;
     }
-  }
 
-  &::after {
-    content: '☰';
+    &::after {
+      transform: rotate(90deg);
+      opacity: 0.25;
+    }
   }
 
   @media screen and (min-width: 900px) {
