@@ -1,6 +1,8 @@
 # [gatsby-starter-netlify_cms](https://github.com/mrozilla/gatsby-starter-netlify_cms/)
 
-Source code for [www.gatsby-starter-netlify_cms.netlify.com](https://www.gatsby-starter-netlify_cms.netlify.com). The website targets the latest version of Chrome, Safari, and Firefox. [File an issue](https://github.com/mrozilla/gatsby-starter-netlify_cms/issues) if you see I've borked something up!
+This is a boilerplate page builder using Gatsby, Netlify CMS, and MDX. There's a lot of custom magic happening in this repo if that's what you're into. If you're looking for a fully-explained starter, have a look at the official [gatsby-starter-netlify-cms](https://github.com/netlify-templates/gatsby-starter-netlify-cms).
+
+The project targets the latest version of Chrome, Safari, and Firefox. [File an issue](https://github.com/mrozilla/gatsby-starter-netlify_cms/issues) if you see I've borked something up!
 
 ## Technologies
 
