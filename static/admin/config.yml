@@ -72,7 +72,7 @@ collections:
   - label: "Menus"
     label_singular: "Menu"
     name: menus
-    folder: src/content/cms/menus
+    folder: src/cms/menus
     create: true
     extension: mdx
     format: frontmatter
@@ -114,7 +114,7 @@ collections:
   - label: "Pages"
     label_singular: "Page"
     name: pages
-    folder: src/content/cms/pages
+    folder: src/cms/pages
     create: true
     extension: mdx
     format: frontmatter
@@ -314,7 +314,7 @@ collections:
   - label: "Posts"
     label_singular: "Blog post"
     name: posts
-    folder: src/content/cms/posts
+    folder: src/cms/posts
     create: true
     extension: mdx
     format: frontmatter

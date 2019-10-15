@@ -35,7 +35,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-netlify-cms',
       options: {
-        modulePath: `${__dirname}/src/utils/cms.js`, // Or another path if you don't want to create /src/cms/init.js
+        modulePath: `${__dirname}/src/cms/cms.js`,
         manualInit: true,
       },
     },
@@ -45,7 +45,7 @@ module.exports = {
     },
     ...['menus', 'pages', 'posts'].map((name) => ({
       resolve: 'gatsby-source-filesystem',
-      options: { name, path: `${__dirname}/src/content/cms/${name}` },
+      options: { name, path: `${__dirname}/src/cms/${name}` },
     })),
 
     'gatsby-transformer-sharp',
