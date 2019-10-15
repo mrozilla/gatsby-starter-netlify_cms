@@ -52,10 +52,6 @@ export const fragment = graphql`
         ratio
         alt
       }
-      appStores {
-        ios
-        android
-      }
     }
     columns {
       width
@@ -102,10 +98,6 @@ export const fragment = graphql`
           title
           url
           look
-        }
-        appStores {
-          ios
-          android
         }
       }
     }
@@ -199,6 +191,7 @@ function renderHeader(item, i) {
             margin: 3rem -0.5rem 0;
             display: flex;
             flex-wrap: wrap;
+            justify-content: center;
           `}
         >
           {item.buttons.map((button) => (
@@ -208,43 +201,17 @@ function renderHeader(item, i) {
                 margin: 0.5rem;
               `}
             >
-              <Button as={Link} to={button.url} look={button.look}>
-                {button.title}
-              </Button>
+              {button.look === 'appStore' || button.look === 'playStore' ? (
+                <Link to={button.url}>
+                  <AppStore store={button.look} />
+                </Link>
+              ) : (
+                <Button as={Link} to={button.url} look={button.look}>
+                  {button.title}
+                </Button>
+              )}
             </Li>
           ))}
-        </Ul>
-      )}
-      {item.appStores && (
-        <Ul
-          css={`
-            margin: 4rem -0.5rem 0;
-
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-
-            & > li {
-              margin: 0 0.5rem;
-
-              flex: 0 0 16rem;
-            }
-          `}
-        >
-          {item.appStores.ios && (
-            <Li>
-              <Link to={item.appStores.ios}>
-                <AppStore os="ios" />
-              </Link>
-            </Li>
-          )}
-          {item.appStores.android && (
-            <Li>
-              <Link to={item.appStores.android}>
-                <AppStore os="android" />
-              </Link>
-            </Li>
-          )}
         </Ul>
       )}
     </Fragment>
@@ -265,7 +232,7 @@ function renderColumn(column, i) {
         `}
       >
         {column.blocks.map(
-          ({ icon, tagline, title, subtitle, mdx, image, map, grid, buttons, appStores }, j) => (
+          ({ icon, tagline, title, subtitle, mdx, image, map, grid, buttons }, j) => (
             <Fragment key={j}>
               {icon && (
                 <Icon
@@ -421,45 +388,17 @@ function renderColumn(column, i) {
                         margin: 0.5rem;
                       `}
                     >
-                      <Button as={Link} to={button.url} look={button.look}>
-                        {button.title}
-                      </Button>
+                      {button.look === 'appStore' || button.look === 'playStore' ? (
+                        <Link to={button.url}>
+                          <AppStore store={button.look} />
+                        </Link>
+                      ) : (
+                        <Button as={Link} to={button.url} look={button.look}>
+                          {button.title}
+                        </Button>
+                      )}
                     </Li>
                   ))}
-                </Ul>
-              )}
-              {appStores && (
-                <Ul
-                  css={`
-                    margin: 4rem -0.5rem 0;
-
-                    display: flex;
-                    flex-wrap: wrap;
-                    justify-content: ${column.textAlign === 'center'
-                    ? column.textAlign
-                    : `flex-${column.textAlign}`};
-
-                    & > li {
-                      margin: 0 0.5rem;
-
-                      flex: 0 0 16rem;
-                    }
-                  `}
-                >
-                  {appStores.ios && (
-                    <Li>
-                      <Link to={appStores.ios}>
-                        <AppStore os="ios" />
-                      </Link>
-                    </Li>
-                  )}
-                  {appStores.android && (
-                    <Li>
-                      <Link to={appStores.android}>
-                        <AppStore os="android" />
-                      </Link>
-                    </Li>
-                  )}
                 </Ul>
               )}
             </Fragment>

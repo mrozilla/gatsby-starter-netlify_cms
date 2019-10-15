@@ -3,7 +3,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import React from 'react';
-import { string } from 'prop-types';
+import { oneOf, string } from 'prop-types';
 
 import { View } from '~components/primitives/View';
 
@@ -12,8 +12,8 @@ import { View } from '~components/primitives/View';
 // ─────────────────────────────────────────────────────────────────────────────
 
 /* eslint-disable max-len */
-export default function AppStore({ os, height }) {
-  if (os === 'ios') {
+export default function AppStore({ store, height }) {
+  if (store === 'appStore') {
     return (
       <View
         as="svg"
@@ -38,7 +38,7 @@ export default function AppStore({ os, height }) {
     );
   }
 
-  if (os === 'android') {
+  if (store === 'playStore') {
     return (
       <View
         as="svg"
@@ -140,7 +140,7 @@ export default function AppStore({ os, height }) {
 }
 
 AppStore.propTypes = {
-  os:     string.isRequired,
+  store:  oneOf(['appStore', 'playStore']).isRequired,
   height: string,
 };
 

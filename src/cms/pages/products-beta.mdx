@@ -17,10 +17,14 @@ blocks:
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua.
             type: subtitle
-          - appStores:
-              android: "https://example.com/android/"
-              ios: "https://example.com/ios/"
-            type: appStores
+          - buttons:
+              - look: appStore
+                title: App Store
+                url: "https://example.com/android/"
+              - look: playStore
+                title: Play Store
+                url: "https://example.com/android/"
+            type: buttons
         width: 1fr
         textAlign: end;
       - blocks:
@@ -83,9 +87,12 @@ blocks:
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua.
         type: mdx
-      - appStores:
-          android: "https://example.com/android/"
-          ios: "https://example.com/ios/"
-        type: appStores
+      - buttons:
+          - look: primary
+            title: App Store
+            url: "https://example.com/android/"
+          - look: secondary
+            title: Play Store
+            url: "https://example.com/android/"
     type: sidekick
 ---
