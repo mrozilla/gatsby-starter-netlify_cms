@@ -13,13 +13,17 @@ import { Header, H2, Link, Nav, Logo, Button, Badge } from '~components';
 
 export const fragment = graphql`
   fragment HeaderFragment on MdxFrontmatter {
+    announcement {
+      title
+      url
+      body
+    }
     links {
       title
-      text
       url
       badge
       links {
-        text
+        title
         url
         badge
       }
@@ -60,6 +64,39 @@ export default function HeaderContainer() {
         box-shadow: inset 0 -2px hsla(var(--hsl-text), 0.05);
       `}
     >
+      {header?.frontmatter?.announcement?.map(({ url, body }) => (
+        <Link
+          key={url}
+          to={url}
+          css={`
+            display: block;
+            background: hsla(var(--hsl-primary), 1);
+            padding: 2rem;
+
+            font-size: 1.75rem;
+            font-weight: 700;
+            text-align: center;
+            color: var(--color-inverse);
+
+            &::after {
+              content: '›';
+              display: inline-block;
+              margin: 0 0 0 1rem;
+              transition: transform 250ms;
+            }
+
+            &:hover {
+              background: hsla(var(--hsl-primary), 0.95);
+
+              &::after {
+                transform: translateX(0.5rem);
+              }
+            }
+          `}
+        >
+          {body}
+        </Link>
+      ))}
       <Nav
         css={`
           padding: 0 var(--width-outside);
@@ -103,7 +140,7 @@ export default function HeaderContainer() {
                       }
                     `}
                   >
-                    {item.text}
+                    {item.title}
                     {item.badge && <Badge>{item.badge}</Badge>}
                   </Link>
                 </Nav.List.Item>
@@ -125,7 +162,7 @@ export default function HeaderContainer() {
                   `}
                 >
                   <Button as={Link} to={item.url} look={item.look}>
-                    {item.text}
+                    {item.title}
                   </Button>
                 </Nav.List.Item>
               );
@@ -173,7 +210,7 @@ export default function HeaderContainer() {
                             }
                           `}
                         >
-                          {link.text}
+                          {link.title}
                           {link.badge && <Badge>{link.badge}</Badge>}
                         </Link>
                       </Nav.List.Item>
