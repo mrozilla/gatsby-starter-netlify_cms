@@ -4,8 +4,6 @@
 
 import React, { useEffect } from 'react';
 
-import { Button, Icon } from '~components';
-
 import { useLocalStorage } from '~utils';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -40,16 +38,47 @@ export default function DarkModeContainer({ ...rest }) {
   }, [theme]);
 
   return (
-    <Button
+    <input
+      type="checkbox"
       title="Toggle dark mode"
-      look="tertiary"
+      aria-label="Toggle dark mode"
       css={`
-        padding: 0;
+        --size: 1.75rem;
+
+        appearance: none;
+        outline: none;
+        cursor: pointer;
+
+        width: var(--size);
+        height: var(--size);
+        box-shadow: inset calc(var(--size) * 0.33) calc(var(--size) * -0.25) 0;
+        border-radius: 999px;
+        transition: all 500ms;
+
+        &:checked {
+          --ray-size: calc(var(--size) * -0.4);
+          --offset-orthogonal: calc(var(--size) * 0.65);
+          --offset-diagonal: calc(var(--size) * 0.45);
+
+          transform: scale(0.75);
+          box-shadow: inset 0 0 0 var(--size),
+            calc(var(--offset-orthogonal) * -1) 0 0 var(--ray-size),
+            var(--offset-orthogonal) 0 0 var(--ray-size),
+            0 calc(var(--offset-orthogonal) * -1) 0 var(--ray-size),
+            0 var(--offset-orthogonal) 0 var(--ray-size),
+            calc(var(--offset-diagonal) * -1) calc(var(--offset-diagonal) * -1) 0 var(--ray-size),
+            var(--offset-diagonal) var(--offset-diagonal) 0 var(--ray-size),
+            calc(var(--offset-diagonal) * -1) var(--offset-diagonal) 0 var(--ray-size),
+            var(--offset-diagonal) calc(var(--offset-diagonal) * -1) 0 var(--ray-size);
+        }
+
+        &:hover {
+          color: var(--color-primary);
+        }
       `}
-      onClick={() => setTheme((prev) => (prev === 'light' ? 'dark' : 'light'))}
+      checked={theme === 'dark'}
+      onChange={({ target }) => setTheme(target.checked ? 'dark' : 'light')}
       {...rest}
-    >
-      <Icon icon={theme === 'light' ? 'FaMoon' : 'FaSun'} />
-    </Button>
+    />
   );
 }

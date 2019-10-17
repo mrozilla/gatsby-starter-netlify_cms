@@ -7,7 +7,7 @@ import { useStaticQuery, graphql } from 'gatsby';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 
 import DarkModeContainer from '~containers/general/DarkModeContainer';
-import { Footer, Section, H2, Ul, Li, Link, Logo, Badge, P } from '~components';
+import { Footer, Section, H2, Ul, Li, Link, Logo, Badge, P, Icon } from '~components';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // query
@@ -22,11 +22,19 @@ const query = graphql`
           url
           title
           links {
-            text
+            title
             url
             badge
           }
           mdx
+        }
+      }
+    }
+    social: mdx(fields: { sourceName: { eq: "menus" } }, frontmatter: { title: { eq: "Social" } }) {
+      frontmatter {
+        links {
+          title
+          url
         }
       }
     }
@@ -38,7 +46,7 @@ const query = graphql`
 // ─────────────────────────────────────────────────────────────────────────────
 
 export default function FooterContainer() {
-  const { footer } = useStaticQuery(query);
+  const { footer, social } = useStaticQuery(query);
 
   const renderLinks = (item) => {
     if (item.type === 'markdown' || item.type === 'mdx') {
@@ -80,7 +88,7 @@ export default function FooterContainer() {
             `}
           >
             {item.links.map((link) => (
-              <Li key={link.url || link.text}>
+              <Li key={link.url || link.title}>
                 {link.url ? (
                   <Link
                     to={link.url}
@@ -89,7 +97,7 @@ export default function FooterContainer() {
                       font-size: 1.75rem;
                     `}
                   >
-                    {link.text}
+                    {link.title}
                     {link.badge && <Badge>{link.badge}</Badge>}
                   </Link>
                 ) : (
@@ -98,7 +106,7 @@ export default function FooterContainer() {
                       font-weight: 700;
                     `}
                   >
-                    {link.text}
+                    {link.title}
                   </H2>
                 )}
               </Li>
@@ -153,14 +161,59 @@ export default function FooterContainer() {
           padding: 2rem var(--width-outside);
           box-shadow: var(--block-box-shadow);
 
-          display: flex;
-          justify-content: space-between;
+          display: grid;
+          grid-auto-flow: column;
+          grid-gap: 1rem;
+          align-items: center;
 
-          font-size: 1.75rem;
+          @media screen and (min-width: 900px) {
+            grid-auto-columns: 1fr;
+          }
         `}
       >
-        <P>© 2019 All rights reserved</P>
-        <DarkModeContainer />
+        <P
+          css={`
+            font-size: 1.75rem;
+          `}
+        >
+          © 2019 All rights reserved
+        </P>
+        {social && (
+          <Ul
+            css={`
+              grid-auto-flow: column;
+              grid-gap: 2rem;
+
+              @media screen and (min-width: 900px) {
+                justify-content: center;
+              }
+            `}
+          >
+            {social?.frontmatter?.links?.map((link) => (
+              <Li
+                css={`
+                  display: flex;
+                  align-items: center;
+                `}
+              >
+                <Link
+                  to={link.url}
+                  look="tertiary"
+                  css={`
+                    display: inline-flex;
+                  `}
+                >
+                  <Icon icon={`Fa${link.title}`} />
+                </Link>
+              </Li>
+            ))}
+          </Ul>
+        )}
+        <DarkModeContainer
+          css={`
+            justify-self: end;
+          `}
+        />
       </Section>
     </Footer>
   );

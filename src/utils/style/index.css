@@ -5,7 +5,7 @@
 :root {
   --hsl-primary: 211, 100%, 50%;
   --color-primary: hsl(var(--hsl-primary));
-  --hsl-secondary: 201, 100%, 50%;
+  --hsl-secondary: 211, 100%, 50%;
   --color-secondary: hsl(var(--hsl-secondary));
 
   --gradient-brand: linear-gradient(

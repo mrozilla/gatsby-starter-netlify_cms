@@ -35,7 +35,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-netlify-cms',
       options: {
-        modulePath: `${__dirname}/src/utils/cms.js`, // Or another path if you don't want to create /src/cms/init.js
+        modulePath: `${__dirname}/src/cms/cms.js`,
         manualInit: true,
       },
     },
@@ -45,7 +45,7 @@ module.exports = {
     },
     ...['menus', 'pages', 'posts'].map((name) => ({
       resolve: 'gatsby-source-filesystem',
-      options: { name, path: `${__dirname}/src/content/cms/${name}` },
+      options: { name, path: `${__dirname}/src/cms/${name}` },
     })),
 
     'gatsby-transformer-sharp',
@@ -113,6 +113,19 @@ module.exports = {
     'gatsby-plugin-sitemap',
     // 'gatsby-plugin-offline', // disabled for now
     'gatsby-plugin-react-helmet',
-    'gatsby-plugin-netlify', // keep last
+    {
+      resolve: 'gatsby-plugin-netlify',
+      options: {
+        mergeSecurityHeaders: false,
+        headers:              {
+          '/*': [
+            'X-Frame-Options: DENY',
+            'X-XSS-Protection: 1; mode=block',
+            'X-Content-Type-Options: nosniff',
+            'Referrer-Policy: strict-origin-when-cross-origin',
+          ],
+        },
+      },
+    }, // keep last
   ],
 };
