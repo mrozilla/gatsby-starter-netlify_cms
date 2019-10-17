@@ -101,15 +101,17 @@ export default function HeroContainer({
         <Link
           to={announcement.url}
           css={`
-            background: hsla(var(${
-              backgroundImage ? '--hsl-inverse' : '--hsl-primary'
-            }), 0.05);
+            background: hsla(var(${backgroundImage ? '--hsl-inverse' : '--hsl-primary'}), 0.05);
             border-radius: 999px;
-            padding: 0.25rem 1rem 0.25rem 0.25rem;
+            padding: 0.5rem 1rem 0.5rem 0.5rem;
             display: inline-flex;
             align-items: center;
             line-height: 1;
             margin: 0 0 4rem;
+
+            &:hover {
+              background: hsla(var(${backgroundImage ? '--hsl-inverse' : '--hsl-primary'}), 0.1);
+            }
 
             &::before {
               content: "${announcement.title}";
@@ -179,7 +181,7 @@ export default function HeroContainer({
             margin: 4rem -0.5rem 0;
           `}
         >
-          {buttons.map(button => (
+          {buttons.map((button) => (
             <Li
               key={button.url}
               css={`

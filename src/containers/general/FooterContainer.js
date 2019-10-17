@@ -22,7 +22,7 @@ const query = graphql`
           url
           title
           links {
-            text
+            title
             url
             badge
           }
@@ -33,7 +33,7 @@ const query = graphql`
     social: mdx(fields: { sourceName: { eq: "menus" } }, frontmatter: { title: { eq: "Social" } }) {
       frontmatter {
         links {
-          text
+          title
           url
         }
       }
@@ -88,7 +88,7 @@ export default function FooterContainer() {
             `}
           >
             {item.links.map((link) => (
-              <Li key={link.url || link.text}>
+              <Li key={link.url || link.title}>
                 {link.url ? (
                   <Link
                     to={link.url}
@@ -97,7 +97,7 @@ export default function FooterContainer() {
                       font-size: 1.75rem;
                     `}
                   >
-                    {link.text}
+                    {link.title}
                     {link.badge && <Badge>{link.badge}</Badge>}
                   </Link>
                 ) : (
@@ -106,7 +106,7 @@ export default function FooterContainer() {
                       font-weight: 700;
                     `}
                   >
-                    {link.text}
+                    {link.title}
                   </H2>
                 )}
               </Li>
@@ -203,7 +203,7 @@ export default function FooterContainer() {
                     display: inline-flex;
                   `}
                 >
-                  <Icon icon={`Fa${link.text}`} />
+                  <Icon icon={`Fa${link.title}`} />
                 </Link>
               </Li>
             ))}

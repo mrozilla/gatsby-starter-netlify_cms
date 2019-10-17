@@ -4,7 +4,7 @@ backend:
     - admin
     - editor
   squash_merges: true
-site_url: https://www.example.com
+site_url: https://www.example.com # TODO:
 media_folder: static/assets
 media_folder_relative: true
 public_folder: assets
@@ -50,12 +50,18 @@ collections:
     format: frontmatter
     fields:
       - name: title
+      - name: announcement
+        widget: list
+        fields:
+          - name: title
+          - name: url
+          - name: body
       - name: links
         widget: list
         types:
           - name: link
             label: "Link"
-            fields: [name: text, name: url , { name: badge, required: false }]
+            fields: [name: title, name: url , { name: badge, required: false }]
 
           - name: nested
             label: "Nested"
@@ -63,7 +69,7 @@ collections:
               - name: title
               - name: links
                 widget: list
-                fields: [name: text, { name: url, required: false }, { name: badge, required: false }]
+                fields: [name: title, { name: url, required: false }, { name: badge, required: false }]
 
           - name: button
             label: "Button"
