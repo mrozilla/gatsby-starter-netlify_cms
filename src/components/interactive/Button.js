@@ -49,12 +49,15 @@ const StyledButton = styled.button`
   ${({ look }) => {
     if (look === 'primary') {
       return css`
-        background: var(--gradient-brand);
+        background: hsla(var(--hsl-primary), 1);
         color: var(--color-inverse) !important;
+        box-shadow: inset 0 0 0 2px hsla(var(--color), 1);
 
         &:not(:disabled):hover,
         &:not(:disabled):focus {
-          box-shadow: 0 0.5rem 0.5rem hsla(var(--hsl-text), 0.1);
+          background: hsla(var(--hsl-primary), 0.9);
+          box-shadow: inset 0 0 0 2px hsla(var(--color), 1),
+            0 0.5rem 0.5rem hsla(var(--hsl-text), 0.1);
         }
 
         & > ${Loader} {
