@@ -109,8 +109,12 @@ export default function HeroContainer({
             line-height: 1;
             margin: 0 0 4rem;
 
-            &:hover {
+            &:hover, &:focus {
               background: hsla(var(${backgroundImage ? '--hsl-inverse' : '--hsl-primary'}), 0.1);
+              transform: translateY(-2px);
+            }
+            &:active {
+              transform: translateY(1px);
             }
 
             &::before {
