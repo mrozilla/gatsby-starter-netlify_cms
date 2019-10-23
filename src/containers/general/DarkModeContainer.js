@@ -16,15 +16,15 @@ export default function DarkModeContainer({ ...rest }) {
   useEffect(() => {
     const hsl = {
       light: {
-        text:    '200, 5%, 35%',
-        bg:      '0, 0%, 99%',
-        dark:    '0, 0%, 5%',
+        text: '200, 5%, 35%',
+        bg: '0, 0%, 99%',
+        dark: '0, 0%, 5%',
         inverse: '0, 0%, 100%',
       },
       dark: {
-        text:    '200, 5%, 60%',
-        bg:      '0, 0%, 10%',
-        dark:    '0, 0%, 95%',
+        text: '200, 5%, 60%',
+        bg: '0, 0%, 10%',
+        dark: '0, 0%, 95%',
         inverse: '0, 0%, 5%',
       },
     };
@@ -72,7 +72,8 @@ export default function DarkModeContainer({ ...rest }) {
             var(--offset-diagonal) calc(var(--offset-diagonal) * -1) 0 var(--ray-size);
         }
 
-        &:hover {
+        &:hover,
+        &:focus {
           color: var(--color-primary);
         }
       `}
