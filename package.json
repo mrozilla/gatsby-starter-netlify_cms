@@ -7,13 +7,23 @@
   "repository": "https://github.com/mrozilla/gatsby-starter-netlify_cms",
   "bugs": "https://github.com/mrozilla/gatsby-starter-netlify_cms/issues",
   "author": "Jan Hruby <jan@mrozilla.cz>",
+  "scripts": {
+    "start:gatsby": "gatsby develop",
+    "start": "yarn start:gatsby",
+    "build:gatsby": "gatsby build",
+    "build": "yarn build:gatsby",
+    "serve": "gatsby serve",
+    "lint": "eslint 'src/**/*.js'",
+    "bump": "yarn upgrade-interactive --latest",
+    "purge": "rm -rf node_modules && yarn"
+  },
   "dependencies": {
     "@mdx-js/react": "^1.5.1",
-    "@mrozilla/gatsby-theme-netlify_cms": "0.0.2",
+    "@mrozilla/gatsby-theme-netlify_cms": "0.0.3",
     "gatsby": "2.17.7",
     "gatsby-plugin-google-analytics": "2.1.23",
     "gatsby-plugin-manifest": "2.2.26",
-    "gatsby-plugin-netlify": "2.1.22",
+    "gatsby-plugin-netlify": "2.1.23",
     "gatsby-plugin-react-helmet": "3.1.13",
     "gatsby-plugin-robots-txt": "^1.5.0",
     "gatsby-plugin-sitemap": "2.2.19",
@@ -39,15 +49,5 @@
     "eslint-plugin-react": "^7.16.0",
     "http-proxy-middleware": "^0.20.0",
     "prettier": "^1.18.2"
-  },
-  "scripts": {
-    "start:gatsby": "gatsby develop",
-    "start": "yarn start:gatsby",
-    "build:gatsby": "gatsby build",
-    "build": "yarn build:gatsby",
-    "serve": "gatsby serve",
-    "lint": "eslint 'src/**/*.js'",
-    "bump": "yarn upgrade-interactive --latest",
-    "purge": "rm -rf node_modules && yarn"
   }
 }
