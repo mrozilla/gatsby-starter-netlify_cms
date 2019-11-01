@@ -25,42 +25,13 @@ module.exports = {
       '/.netlify/functions/',
       proxy({
         target:      'http://localhost:34567',
-        pathRewrite: {
-          '/.netlify/functions/': '',
-        },
+        pathRewrite: { '/.netlify/functions/': '' },
       }),
     );
   },
   plugins: [
-    {
-      resolve: 'gatsby-plugin-netlify-cms',
-      options: {
-        modulePath: `${__dirname}/src/cms/cms.js`,
-        manualInit: true,
-      },
-    },
-    {
-      resolve: 'gatsby-source-filesystem',
-      options: { path: `${__dirname}/static/assets`, name: 'assets' },
-    },
-    ...['menus', 'pages', 'posts'].map((name) => ({
-      resolve: 'gatsby-source-filesystem',
-      options: { name, path: `${__dirname}/src/cms/${name}` },
-    })),
+    { resolve: '@mrozilla/gatsby-theme-netlify_cms' },
 
-    'gatsby-transformer-sharp',
-
-    {
-      resolve: 'gatsby-plugin-mdx',
-      options: {
-        gatsbyRemarkPlugins: [
-          {
-            resolve: 'gatsby-remark-images',
-            options: { maxWidth: 590 },
-          },
-        ],
-      },
-    },
     {
       resolve: 'gatsby-plugin-google-analytics',
       options: {
@@ -109,10 +80,8 @@ module.exports = {
         displayName: NODE_ENV === 'development',
       },
     },
-    'gatsby-plugin-sharp',
-    'gatsby-plugin-sitemap',
-    // 'gatsby-plugin-offline', // disabled for now
-    'gatsby-plugin-react-helmet',
+    { resolve: 'gatsby-plugin-sitemap' },
+    { resolve: 'gatsby-plugin-react-helmet' },
     {
       resolve: 'gatsby-plugin-netlify',
       options: {
