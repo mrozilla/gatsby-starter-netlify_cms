@@ -41,7 +41,7 @@
   --z-index-modal: 1030;
 
   --width-outside: 2rem;
-  --block-padding: 10vw 0; /* intentional vw for y axis */
+  --block-padding: 8vw 0; /* intentional vw for y axis */
   /* --block-margin: 2rem 0; */
   /* --block-background-color: var(--color-inverse); */
   /* --block-box-shadow: inset 0 2px 0 0 hsla(var(--hsl-text), 0.05); */
