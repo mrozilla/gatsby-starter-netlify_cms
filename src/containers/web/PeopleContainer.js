@@ -7,7 +7,7 @@ import { graphql } from 'gatsby';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { shape, string, arrayOf } from 'prop-types';
 
-import { H1, Section, P, Ul, Li, Img, Link, Icon } from '~components';
+import { Section, Header, BlockHeader, P, Ul, Li, Img, Link, Icon } from '~components';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // query
@@ -16,9 +16,9 @@ import { H1, Section, P, Ul, Li, Img, Link, Icon } from '~components';
 export const fragment = graphql`
   fragment PeopleFragment on MdxFrontmatterBlocks {
     type
-    title
-    subtitle
-    mdx
+    header {
+      ...BlockHeaderFragment
+    }
     people {
       name
       position
@@ -47,7 +47,7 @@ export const fragment = graphql`
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-export default function PeopleContainer({ title, subtitle, mdx, people }) {
+export default function PeopleContainer({ header, people }) {
   return (
     <Section
       css={`
@@ -57,44 +57,18 @@ export default function PeopleContainer({ title, subtitle, mdx, people }) {
         text-align: center;
       `}
     >
-      {title && (
-        <H1
+      {header && (
+        <Header
           css={`
-            font-size: 3rem;
-            line-height: 1;
-            font-weight: 700;
-            max-width: 20ch;
-            margin: 0 auto;
-
-            & ~ p {
-              margin: 2rem auto 0;
+            & > p {
               max-width: 60ch;
-            }
-
-            @media screen and (min-width: 1200px) {
-              font-size: 4rem;
+              margin: 2rem auto;
             }
           `}
         >
-          {title}
-        </H1>
+          <BlockHeader header={header} />
+        </Header>
       )}
-      {subtitle && (
-        <P
-          css={`
-            font-size: 2.5rem;
-            line-height: 2.5rem;
-            margin: 2rem 0;
-
-            @media screen and (min-width: 1200px) {
-              line-height: 3rem;
-            }
-          `}
-        >
-          {subtitle}
-        </P>
-      )}
-      {mdx && <MDXRenderer>{mdx}</MDXRenderer>}
       {people && (
         <Ul
           css={`
@@ -105,7 +79,7 @@ export default function PeopleContainer({ title, subtitle, mdx, people }) {
             max-width: 100rem;
           `}
         >
-          {people.map(person => (
+          {people.map((person) => (
             <Li
               css={`
                 font-size: 1.5rem;
@@ -158,7 +132,7 @@ export default function PeopleContainer({ title, subtitle, mdx, people }) {
                     grid-gap: 0.5rem;
                   `}
                 >
-                  {person.contact.map(contact => (
+                  {person.contact.map((contact) => (
                     <Li>
                       <Link look="primary" to={contact.url}>
                         <Icon icon={contact.icon} />
@@ -177,10 +151,8 @@ export default function PeopleContainer({ title, subtitle, mdx, people }) {
 }
 
 PeopleContainer.propTypes = {
-  title:    string,
-  subtitle: string,
-  mdx:      string,
-  people:   arrayOf(
+  header: BlockHeader.propTypes.header,
+  people: arrayOf(
     shape({
       name:     string,
       position: string,
@@ -206,8 +178,6 @@ PeopleContainer.propTypes = {
 };
 
 PeopleContainer.defaultProps = {
-  title:    '',
-  subtitle: '',
-  mdx:      '',
-  people:   [],
+  header: [],
+  people: [],
 };
