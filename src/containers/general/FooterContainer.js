@@ -15,7 +15,10 @@ import { Footer, Section, H2, Ul, Li, Link, Logo, Badge, P, Icon } from '~compon
 
 const query = graphql`
   query {
-    footer: mdx(fields: { sourceName: { eq: "menus" } }, frontmatter: { title: { eq: "Footer" } }) {
+    footer: mdx(
+      fileAbsolutePath: { regex: "/cms/menus/" }
+      frontmatter: { title: { eq: "Footer" } }
+    ) {
       frontmatter {
         links {
           type
@@ -30,7 +33,10 @@ const query = graphql`
         }
       }
     }
-    social: mdx(fields: { sourceName: { eq: "menus" } }, frontmatter: { title: { eq: "Social" } }) {
+    social: mdx(
+      fileAbsolutePath: { regex: "/cms/menus/" }
+      frontmatter: { title: { eq: "Social" } }
+    ) {
       frontmatter {
         links {
           title
@@ -191,6 +197,7 @@ export default function FooterContainer() {
           >
             {social?.frontmatter?.links?.map((link) => (
               <Li
+                key={link.url}
                 css={`
                   display: flex;
                   align-items: center;

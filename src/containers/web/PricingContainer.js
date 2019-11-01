@@ -7,7 +7,7 @@ import { graphql } from 'gatsby';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { shape, string, arrayOf } from 'prop-types';
 
-import { Section, Header, H1, P, Ul, Li, Link, H2, Text, Button } from '~components';
+import { Section, BlockHeader, Header, P, Ul, Li, Link, H2, Text, Button } from '~components';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // query
@@ -16,9 +16,29 @@ import { Section, Header, H1, P, Ul, Li, Link, H2, Text, Button } from '~compone
 export const fragment = graphql`
   fragment PricingFragment on MdxFrontmatterBlocks {
     type
-    title
-    subtitle
-    mdx
+    header {
+      icon
+      tagline
+      title
+      subtitle
+      mdx
+      buttons {
+        title
+        url
+        look
+      }
+      image {
+        src {
+          childImageSharp {
+            fluid(maxWidth: 900) {
+              ...GatsbyImageSharpFluid_withWebp
+            }
+          }
+        }
+        ratio
+        alt
+      }
+    }
     pricing {
       title
       price {
@@ -35,7 +55,7 @@ export const fragment = graphql`
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-export default function PricingContainer({ title, subtitle, mdx, pricing }) {
+export default function PricingContainer({ header, pricing }) {
   const [frequency, setFrequency] = useState('monthly');
 
   return (
@@ -52,40 +72,7 @@ export default function PricingContainer({ title, subtitle, mdx, pricing }) {
           text-align: center;
         `}
       >
-        {title && (
-          <H1
-            css={`
-              font-size: 3rem;
-              line-height: 1;
-              font-weight: 700;
-              max-width: 20ch;
-              margin: 0 auto;
-
-              @media screen and (min-width: 1200px) {
-                font-size: 4rem;
-              }
-            `}
-          >
-            {title}
-          </H1>
-        )}
-        {subtitle && (
-          <P
-            css={`
-              font-size: 2.5rem;
-              line-height: 2.5rem;
-              max-width: 50ch;
-              margin: 2rem auto 2rem;
-
-              @media screen and (min-width: 1200px) {
-                line-height: 3rem;
-              }
-            `}
-          >
-            {subtitle}
-          </P>
-        )}
-        {mdx && <MDXRenderer>{mdx}</MDXRenderer>}
+        {header && <BlockHeader header={header} />}
         {pricing && (
           <Ul
             css={`
@@ -186,10 +173,8 @@ export default function PricingContainer({ title, subtitle, mdx, pricing }) {
 }
 
 PricingContainer.propTypes = {
-  title:    string,
-  subtitle: string,
-  mdx:      string,
-  pricing:  arrayOf(
+  header:  BlockHeader.propTypes.header,
+  pricing: arrayOf(
     shape({
       name: string,
       url:  string,
@@ -199,8 +184,6 @@ PricingContainer.propTypes = {
 };
 
 PricingContainer.defaultProps = {
-  title:    '',
-  subtitle: '',
-  mdx:      '',
-  pricing:  [],
+  header:  [],
+  pricing: [],
 };

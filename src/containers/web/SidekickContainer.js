@@ -2,26 +2,10 @@
 // import
 // ─────────────────────────────────────────────────────────────────────────────
 
-import React, { Fragment } from 'react';
+import React from 'react';
 import { graphql } from 'gatsby';
-import { MDXRenderer } from 'gatsby-plugin-mdx';
-import { shape, string, arrayOf } from 'prop-types';
 
-import {
-  H1,
-  H2,
-  Section,
-  P,
-  Ul,
-  Li,
-  Icon,
-  Button,
-  Link,
-  Img,
-  AppStore,
-  View,
-  Map,
-} from '~components';
+import { Header, BlockHeader, Section, Ul, BlockColumns } from '~components';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // query
@@ -31,387 +15,13 @@ export const fragment = graphql`
   fragment SidekickFragment on MdxFrontmatterBlocks {
     type
     header {
-      icon
-      tagline
-      title
-      subtitle
-      mdx
-      buttons {
-        title
-        url
-        look
-      }
-      image {
-        src {
-          childImageSharp {
-            fluid(maxWidth: 900) {
-              ...GatsbyImageSharpFluid_withWebp
-            }
-          }
-        }
-        ratio
-        alt
-      }
+      ...BlockHeaderFragment
     }
     columns {
-      width
-      textAlign
-      blocks {
-        type
-        icon
-        tagline
-        title
-        subtitle
-        mdx
-        image {
-          src {
-            childImageSharp {
-              fluid(maxWidth: 600) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
-            }
-          }
-          ratio
-          alt
-        }
-        map {
-          geo
-          zoom
-        }
-        grid {
-          icon
-          title
-          mdx
-          image {
-            src {
-              childImageSharp {
-                fluid(maxWidth: 300) {
-                  ...GatsbyImageSharpFluid_withWebp
-                }
-              }
-            }
-            ratio
-            alt
-          }
-        }
-        buttons {
-          title
-          url
-          look
-        }
-      }
+      ...BlockColumnsFragment
     }
   }
 `;
-
-// ─────────────────────────────────────────────────────────────────────────────
-// helpers
-// ─────────────────────────────────────────────────────────────────────────────
-
-function renderHeader(item, i) {
-  /* eslint-disable react/no-array-index-key */
-
-  return (
-    <Fragment key={i}>
-      {item.icon && (
-        <Icon
-          icon={item.icon}
-          css={`
-            margin: 0 auto 2rem;
-            font-size: 6rem;
-
-            background: hsla(var(--hsl-primary), 0.1);
-            color: var(--color-primary);
-            clip-path: circle();
-            padding: 0.25em;
-          `}
-        />
-      )}
-      {item.tagline && (
-        <P
-          as="span"
-          css={`
-            color: var(--color-primary);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            font-size: 1.5rem;
-            font-weight: 700;
-          `}
-        >
-          {item.tagline}
-        </P>
-      )}
-      {item.title && (
-        <H1
-          css={`
-            margin: 1rem auto 2rem;
-            max-width: 30ch;
-
-            font-size: 3rem;
-            line-height: 1;
-            font-weight: 700;
-
-            @media screen and (min-width: 1200px) {
-              font-size: 4rem;
-            }
-          `}
-        >
-          {item.title}
-        </H1>
-      )}
-      {item.subtitle && (
-        <P
-          css={`
-            margin: 2rem auto 0;
-            max-width: 50ch;
-
-            font-size: 2.5rem;
-            line-height: 3rem;
-          `}
-        >
-          {item.subtitle}
-        </P>
-      )}
-      {item.mdx && <MDXRenderer>{item.mdx}</MDXRenderer>}
-      {item.image && (
-        <Img
-          {...item.image.src?.childImageSharp?.fluid}
-          alt={item.image.alt}
-          ratio={item.image.ratio.split('/').reduce((p, c) => p / c)}
-          css={`
-            &:not(:last-child) {
-              margin: 0 0 2rem;
-            }
-          `}
-        />
-      )}
-      {item.buttons && (
-        <Ul
-          css={`
-            margin: 3rem -0.5rem 0;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-          `}
-        >
-          {item.buttons.map((button) => (
-            <Li
-              key={button.url}
-              css={`
-                margin: 0.5rem;
-              `}
-            >
-              {button.look === 'appStore' || button.look === 'playStore' ? (
-                <Link to={button.url}>
-                  <AppStore store={button.look} />
-                </Link>
-              ) : (
-                <Button as={Link} to={button.url} look={button.look}>
-                  {button.title}
-                </Button>
-              )}
-            </Li>
-          ))}
-        </Ul>
-      )}
-    </Fragment>
-  );
-
-  /* eslint-enable */
-}
-
-function renderColumn(column, i) {
-  /* eslint-disable react/no-array-index-key */
-
-  if (column.blocks) {
-    return (
-      <Li
-        key={i}
-        css={`
-          text-align: ${column.textAlign};
-        `}
-      >
-        {column.blocks.map(
-          ({ icon, tagline, title, subtitle, mdx, image, map, grid, buttons }, j) => (
-            <Fragment key={j}>
-              {icon && (
-                <Icon
-                  icon={icon}
-                  css={`
-                    margin: 0 0 1rem;
-                    font-size: 6rem;
-
-                    background: hsla(var(--hsl-primary), 0.1);
-                    color: var(--color-primary);
-                    clip-path: circle();
-                    padding: 0.25em;
-                  `}
-                />
-              )}
-              {tagline && (
-                <P
-                  as="span"
-                  css={`
-                    color: var(--color-primary);
-                    text-transform: uppercase;
-                    letter-spacing: 0.1em;
-                    font-size: 1.5rem;
-                    font-weight: 700;
-                  `}
-                >
-                  {tagline}
-                </P>
-              )}
-              {title && (
-                <H2
-                  css={`
-                    margin: 1rem 0;
-                    max-width: 30ch;
-
-                    font-size: 3rem;
-                    line-height: 1;
-                    font-weight: 700;
-
-                    &:not(:first-of-type) {
-                      margin: 6rem 0 1rem;
-                    }
-
-                    @media screen and (min-width: 1200px) {
-                      font-size: 4rem;
-                    }
-                  `}
-                >
-                  {title}
-                </H2>
-              )}
-              {subtitle && (
-                <P
-                  css={`
-                    margin: 2rem 0;
-                    max-width: 50ch;
-
-                    font-size: 2.5rem;
-                    line-height: 3rem;
-
-                    &:not(:first-of-type) {
-                      margin: 6rem 0 2rem;
-                    }
-                  `}
-                >
-                  {subtitle}
-                </P>
-              )}
-              {mdx && <MDXRenderer>{mdx}</MDXRenderer>}
-              {image && (
-                <Img
-                  {...image.src?.childImageSharp?.fluid}
-                  alt={image.alt}
-                  ratio={image.ratio.split('/').reduce((p, c) => p / c)}
-                  css={`
-                    &:not(:last-child) {
-                      margin: 0 0 2rem;
-                    }
-                  `}
-                />
-              )}
-              {map && (
-                <Map
-                  center={JSON.parse(map?.geo)
-                    ?.coordinates?.reverse()
-                    ?.join(',')}
-                  zoom={map.zoom}
-                />
-              )}
-              {grid && (
-                <Ul
-                  css={`
-                    grid-template-columns: repeat(auto-fit, minmax(20ch, 1fr));
-                    grid-gap: 2rem;
-                    margin: 4rem 0 0;
-                  `}
-                >
-                  {grid.map((item) => (
-                    <Li key={item.title || item.icon || item.image || item.mdx}>
-                      {item.icon && (
-                        <Icon
-                          icon={item.icon}
-                          css={`
-                            font-size: 4rem;
-                            line-height: 1;
-
-                            background: hsla(var(--hsl-primary), 0.1);
-                            color: var(--color-primary);
-                            clip-path: circle();
-                            padding: 0.25em;
-                          `}
-                        />
-                      )}
-                      {item.image && (
-                        <Img
-                          {...item.image?.src?.childImageSharp?.fluid}
-                          alt={item.title}
-                          ratio={image.ratio.split('/').reduce((p, c) => p / c)}
-                          css={`
-                            margin: 0 25%;
-                          `}
-                        />
-                      )}
-                      {item.title && (
-                        <H2
-                          css={`
-                            font-weight: 700;
-                          `}
-                        >
-                          {item.title}
-                        </H2>
-                      )}
-                      {item.mdx && <MDXRenderer>{item.mdx}</MDXRenderer>}
-                    </Li>
-                  ))}
-                </Ul>
-              )}
-              {buttons && (
-                <Ul
-                  css={`
-                    margin: 3rem -0.5rem 0;
-                    display: flex;
-                    flex-wrap: wrap;
-                    justify-content: ${column.textAlign === 'center'
-                    ? column.textAlign
-                    : `flex-${column.textAlign}`};
-                  `}
-                >
-                  {buttons.map((button) => (
-                    <Li
-                      key={button.url}
-                      css={`
-                        margin: 0.5rem;
-                      `}
-                    >
-                      {button.look === 'appStore' || button.look === 'playStore' ? (
-                        <Link to={button.url}>
-                          <AppStore store={button.look} />
-                        </Link>
-                      ) : (
-                        <Button as={Link} to={button.url} look={button.look}>
-                          {button.title}
-                        </Button>
-                      )}
-                    </Li>
-                  ))}
-                </Ul>
-              )}
-            </Fragment>
-          ),
-        )}
-      </Li>
-    );
-  }
-
-  return null;
-
-  /* eslint-enable */
-}
 
 // ─────────────────────────────────────────────────────────────────────────────
 // component
@@ -431,8 +41,7 @@ export default function SidekickContainer({ header, columns }) {
       `}
     >
       {header && (
-        <View
-          as="header"
+        <Header
           css={`
             & > p {
               max-width: 60ch;
@@ -440,8 +49,8 @@ export default function SidekickContainer({ header, columns }) {
             }
           `}
         >
-          {header.map(renderHeader)}
-        </View>
+          <BlockHeader header={header} />
+        </Header>
       )}
       {columns && (
         <Ul
@@ -459,7 +68,7 @@ export default function SidekickContainer({ header, columns }) {
             }
           `}
         >
-          {columns.map(renderColumn)}
+          <BlockColumns columns={columns} />
         </Ul>
       )}
     </Section>
@@ -467,20 +76,8 @@ export default function SidekickContainer({ header, columns }) {
 }
 
 SidekickContainer.propTypes = {
-  header: arrayOf(
-    shape({
-      title: string,
-    }),
-  ),
-  columns: arrayOf(
-    shape({
-      blocks: arrayOf(
-        shape({
-          type: string.isRequired,
-        }),
-      ),
-    }),
-  ),
+  header:  BlockHeader.propTypes.header,
+  columns: BlockColumns.propTypes.columns,
 };
 
 SidekickContainer.defaultProps = {

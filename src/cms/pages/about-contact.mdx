@@ -7,14 +7,18 @@ meta:
   permalink: /about/contact/
   title: Contact
 blocks:
-  - buttons:
-      - look: primary
-        title: Primary
-        url: 'mailto:example@example.com'
-    mdx: >-
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua.
-    title: Short headline that just fits
+  - header:
+      - title: Short headline that just fits
+        type: title
+      - mdx: >-
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+          tempor incididunt ut labore et dolore magna aliqua.
+        type: mdx
+      - buttons:
+        - look: primary
+          title: Primary
+          url: 'mailto:example@example.com'
+        type: buttons
     type: hero
 ---
 

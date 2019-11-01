@@ -4,10 +4,9 @@
 
 import React from 'react';
 import { graphql } from 'gatsby';
-import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { shape, string, arrayOf } from 'prop-types';
 
-import { H1, Section, P, Ul, Li, View, Link, Button } from '~components';
+import { Section, Header, BlockHeader, H1, P, Ul, Li, Link, Button } from '~components';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // query
@@ -16,9 +15,29 @@ import { H1, Section, P, Ul, Li, View, Link, Button } from '~components';
 export const fragment = graphql`
   fragment JobsFragment on MdxFrontmatterBlocks {
     type
-    title
-    subtitle
-    mdx
+    header {
+      icon
+      tagline
+      title
+      subtitle
+      mdx
+      buttons {
+        title
+        url
+        look
+      }
+      image {
+        src {
+          childImageSharp {
+            fluid(maxWidth: 900) {
+              ...GatsbyImageSharpFluid_withWebp
+            }
+          }
+        }
+        ratio
+        alt
+      }
+    }
     jobs {
       title
       url
@@ -30,7 +49,7 @@ export const fragment = graphql`
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-export default function JobsContainer({ title, subtitle, mdx, jobs }) {
+export default function JobsContainer({ header, jobs }) {
   return (
     <Section
       css={`
@@ -40,49 +59,18 @@ export default function JobsContainer({ title, subtitle, mdx, jobs }) {
         box-shadow: var(--block-box-shadow);
       `}
     >
-      <View
-        as="header"
-        css={`
-          & > p {
-            max-width: 60ch;
-            margin: 2rem 0;
-          }
-        `}
-      >
-        {title && (
-          <H1
-            css={`
-              font-size: 3rem;
-              line-height: 1;
-              font-weight: 700;
-              max-width: 20ch;
-
-              @media screen and (min-width: 1200px) {
-                font-size: 4rem;
-              }
-            `}
-          >
-            {title}
-          </H1>
-        )}
-        {subtitle && (
-          <P
-            css={`
-              font-size: 2.5rem;
-              line-height: 2.5rem;
-              max-width: 50ch;
-              margin: 2rem 0;
-
-              @media screen and (min-width: 1200px) {
-                line-height: 3rem;
-              }
-            `}
-          >
-            {subtitle}
-          </P>
-        )}
-        {mdx && <MDXRenderer>{mdx}</MDXRenderer>}
-      </View>
+      {header && (
+        <Header
+          css={`
+            & > p {
+              max-width: 60ch;
+              margin: 2rem auto;
+            }
+          `}
+        >
+          <BlockHeader header={header} />
+        </Header>
+      )}
       {jobs && (
         <Ul
           css={`
@@ -93,7 +81,7 @@ export default function JobsContainer({ title, subtitle, mdx, jobs }) {
             box-shadow: inset 0 0 0 2px hsla(var(--hsl-text), 0.05);
           `}
         >
-          {jobs.map(item => (
+          {jobs.map((item) => (
             <Li
               key={item.title}
               css={`
@@ -139,10 +127,8 @@ export default function JobsContainer({ title, subtitle, mdx, jobs }) {
 }
 
 JobsContainer.propTypes = {
-  title:    string,
-  subtitle: string,
-  mdx:      string,
-  jobs:     arrayOf(
+  header: BlockHeader.propTypes.header,
+  jobs:   arrayOf(
     shape({
       title: string,
       url:   string,
@@ -151,8 +137,6 @@ JobsContainer.propTypes = {
 };
 
 JobsContainer.defaultProps = {
-  title:    '',
-  subtitle: '',
-  mdx:      '',
-  jobs:     [],
+  header: [],
+  jobs:   [],
 };

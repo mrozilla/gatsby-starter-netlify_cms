@@ -4,10 +4,9 @@
 
 import React, { useState, Fragment } from 'react';
 import { graphql } from 'gatsby';
-import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { shape, string, arrayOf } from 'prop-types';
 
-import { H1, Section, P, Img, Carousel, Blockquote } from '~components';
+import { Section, Header, BlockHeader, P, Img, Carousel, Blockquote } from '~components';
 import { useEventListener } from '~utils';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -17,9 +16,29 @@ import { useEventListener } from '~utils';
 export const fragment = graphql`
   fragment TestimonialsFragment on MdxFrontmatterBlocks {
     type
-    title
-    subtitle
-    mdx
+    header {
+      icon
+      tagline
+      title
+      subtitle
+      mdx
+      buttons {
+        title
+        url
+        look
+      }
+      image {
+        src {
+          childImageSharp {
+            fluid(maxWidth: 900) {
+              ...GatsbyImageSharpFluid_withWebp
+            }
+          }
+        }
+        ratio
+        alt
+      }
+    }
     testimonials {
       name
       position
@@ -44,7 +63,7 @@ export const fragment = graphql`
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-export default function TestimonialsContainer({ title, subtitle, mdx, testimonials }) {
+export default function TestimonialsContainer({ header, testimonials }) {
   const [visibleItems, setVisibleItems] = useState(
     document && document.body.clientWidth < 600 ? 1 : 3,
   );
@@ -63,45 +82,26 @@ export default function TestimonialsContainer({ title, subtitle, mdx, testimonia
         overflow: hidden; /* TODO: see why the carousel UL stretches parent on mobile */
       `}
     >
-      {title && (
-        <H1
+      {header && (
+        <Header
           css={`
-            font-size: 3rem;
-            line-height: 1;
-            font-weight: 700;
-
-            @media screen and (min-width: 1200px) {
-              font-size: 4rem;
+            & > p {
+              max-width: 60ch;
+              margin: 2rem auto;
             }
           `}
         >
-          {title}
-        </H1>
+          <BlockHeader header={header} />
+        </Header>
       )}
-      {subtitle && (
-        <P
-          css={`
-            font-size: 2.5rem;
-            line-height: 2.5rem;
-            margin: 2rem 0;
-
-            @media screen and (min-width: 1200px) {
-              line-height: 3rem;
-            }
-          `}
-        >
-          {subtitle}
-        </P>
-      )}
-      {mdx && <MDXRenderer>{mdx}</MDXRenderer>}
       {testimonials && (
         <Carousel
           visibleItems={Math.min(testimonials.length, visibleItems)}
           loop={
             testimonials.length > visibleItems
               ? {
-                interval: 5000,
-              }
+                  interval: 5000,
+                }
               : {}
           }
           isControls={testimonials.length > visibleItems}
@@ -117,7 +117,7 @@ export default function TestimonialsContainer({ title, subtitle, mdx, testimonia
             }
           `}
         >
-          {testimonials.map(item => (
+          {testimonials.map((item) => (
             <Fragment key={item.name}>
               {item?.testimonial && (
                 <Blockquote
@@ -175,15 +175,13 @@ export default function TestimonialsContainer({ title, subtitle, mdx, testimonia
 }
 
 TestimonialsContainer.propTypes = {
-  title:        string,
-  subtitle:     string,
-  mdx:          string,
+  header: BlockHeader.propTypes.header,
   testimonials: arrayOf(
     shape({
-      name:     string,
+      name: string,
       position: string,
-      company:  string,
-      image:    shape({
+      company: string,
+      image: shape({
         alt: string.isRequired,
         src: shape({
           childImageSharp: shape({
@@ -199,8 +197,6 @@ TestimonialsContainer.propTypes = {
 };
 
 TestimonialsContainer.defaultProps = {
-  title:        '',
-  subtitle:     '',
-  mdx:          '',
+  header: [],
   testimonials: [],
 };

@@ -16,7 +16,7 @@ exports.createPages = ({ actions: { createPage }, graphql }) => {
     {
       pages: allMdx(
         filter: {
-          fields: { sourceName: { eq: "pages" } }
+          fileAbsolutePath: { regex: "/cms/pages/" }
           frontmatter: { meta: { permalink: { ne: "/demo/" } } }
         }
       ) {
@@ -30,7 +30,7 @@ exports.createPages = ({ actions: { createPage }, graphql }) => {
       }
       posts: allMdx(
         filter: {
-          fields: { sourceName: { eq: "posts" } }
+          fileAbsolutePath: { regex: "/cms/posts/" }
           frontmatter: { meta: { permalink: { ne: "/blog/demo/" } } }
         }
       ) {

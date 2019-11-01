@@ -20,7 +20,7 @@ blocks:
           - buttons:
               - look: appStore
                 title: App Store
-                url: "https://example.com/android/"
+                url: "https://example.com/ios/"
               - look: playStore
                 title: Play Store
                 url: "https://example.com/android/"
@@ -54,10 +54,18 @@ blocks:
       - blocks:
           - image:
               alt: Illustration
-              ratio: 2/3
+              ratio: 3/4
               src: ../../../static/assets/illustration.png
             type: image
+          - buttons:
+              - look: appStore
+                title: App Store
+                url: "https://example.com/ios/"
+              - look: playStore
+                title: Play Store
+                url: "https://example.com/android/"
         width: 2fr
+        textAlign: center
       - blocks:
           - title: Short headline
             type: title
@@ -88,11 +96,12 @@ blocks:
           eiusmod tempor incididunt ut labore et dolore magna aliqua.
         type: mdx
       - buttons:
-          - look: primary
+          - look: appStore
             title: App Store
-            url: "https://example.com/android/"
-          - look: secondary
+            url: "https://example.com/ios/"
+          - look: playStore
             title: Play Store
             url: "https://example.com/android/"
+        type: buttons
     type: sidekick
 ---
