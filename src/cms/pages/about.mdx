@@ -7,19 +7,30 @@ meta:
   permalink: /about/
   title: About
 blocks:
-  - buttons:
-      - look: primary
-        title: Primary
-        url: /about/jobs/
-      - look: secondary
-        title: Secondary
-        url: /about/contact/
-    subtitle: >-
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua.
-    title: About
+  - header:
+      - title: About
+        type: title
+      - subtitle: >-
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+          tempor incididunt ut labore et dolore magna aliqua.
+        type: subtitle
+      - buttons:
+          - look: primary
+            title: Primary
+            url: /about/jobs/
+          - look: secondary
+            title: Secondary
+            url: /about/contact/
+        type: buttons
     type: hero
-  - people:
+  - header:
+      - title: Short headline
+        type: title
+      - subtitle: >-
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+          tempor incididunt ut labore et dolore magna aliqua.
+        type: subtitle
+    people:
       - contact:
           - icon: FaTwitter
             url: 'https://example.com/'
@@ -92,10 +103,6 @@ blocks:
         mdx: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
         name: John Doe
         position: CEO
-    subtitle: >-
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua.
-    title: Short headline
     type: people
   - columns:
       - blocks:

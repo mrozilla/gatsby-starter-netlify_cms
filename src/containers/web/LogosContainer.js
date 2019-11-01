@@ -4,10 +4,9 @@
 
 import React from 'react';
 import { graphql } from 'gatsby';
-import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { shape, string, arrayOf } from 'prop-types';
 
-import { H1, Section, P, Ul, Li, Link, Img } from '~components';
+import { Section, Header, BlockHeader, P, Ul, Li, Link, Img } from '~components';
 import { useOnScreen } from '~utils';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -17,9 +16,9 @@ import { useOnScreen } from '~utils';
 export const fragment = graphql`
   fragment LogosFragment on MdxFrontmatterBlocks {
     type
-    title
-    subtitle
-    mdx
+    header {
+      ...BlockHeaderFragment
+    }
     logos {
       title
       url
@@ -42,7 +41,7 @@ export const fragment = graphql`
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-export default function LogosContainer({ title, subtitle, mdx, logos }) {
+export default function LogosContainer({ header, logos }) {
   const [ref, isIntersecting] = useOnScreen({ rootMargin: '-25%' });
 
   return (
@@ -55,37 +54,18 @@ export default function LogosContainer({ title, subtitle, mdx, logos }) {
         text-align: center;
       `}
     >
-      {title && (
-        <H1
+      {header && (
+        <Header
           css={`
-            font-size: 3rem;
-            line-height: 1;
-            font-weight: 700;
-
-            @media screen and (min-width: 1200px) {
-              font-size: 4rem;
+            & > p {
+              max-width: 60ch;
+              margin: 2rem auto;
             }
           `}
         >
-          {title}
-        </H1>
+          <BlockHeader header={header} />
+        </Header>
       )}
-      {subtitle && (
-        <P
-          css={`
-            font-size: 2.5rem;
-            line-height: 2.5rem;
-            margin: 2rem 0;
-
-            @media screen and (min-width: 1200px) {
-              line-height: 3rem;
-            }
-          `}
-        >
-          {subtitle}
-        </P>
-      )}
-      {mdx && <MDXRenderer>{mdx}</MDXRenderer>}
       {logos && (
         <Ul
           css={`
@@ -129,21 +109,17 @@ export default function LogosContainer({ title, subtitle, mdx, logos }) {
 }
 
 LogosContainer.propTypes = {
-  title: string,
-  subtitle: string,
-  mdx: string,
-  logos: arrayOf(
+  header: BlockHeader.propTypes.header,
+  logos:  arrayOf(
     shape({
       name: string,
-      url: string,
+      url:  string,
       // image:
     }),
   ),
 };
 
 LogosContainer.defaultProps = {
-  title: '',
-  subtitle: '',
-  mdx: '',
-  logos: [],
+  header: [],
+  logos:  [],
 };

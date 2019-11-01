@@ -7,18 +7,22 @@ meta:
   permalink: /
   title: Home
 blocks:
-  - announcement:
-      body: Lorem ipsum dolor sit amet
-      title: Hot
-      url: /blog/
-    buttons:
-      - look: primary
-        title: Primary CTA
-        url: /signup/
-    subtitle: >-
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua.
-    title: Long headline that can wrap on two lines
+  - header:
+      - body: Lorem ipsum dolor sit amet
+        title: Hot
+        type: announcement
+        url: /blog/
+      - title: Long headline that can wrap on two lines
+        type: title
+      - subtitle: >-
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        type: subtitle
+      - buttons:
+          - look: primary
+            title: Primary CTA
+            url: /signup/
+        type: buttons
     type: hero
   - columns:
       - blocks:
@@ -78,14 +82,15 @@ blocks:
             type: buttons
         width: 1fr
     header:
-      - title: Long headline that could wrap on two lines
-        type: title
       - subtitle: >-
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua.
         type: subtitle
     type: sidekick
-  - logos:
+  - header:
+      - subtitle: Short headline that just fits
+        type: subtitle
+    logos:
       - image:
           alt: Logo
           ratio: 3/1
@@ -140,7 +145,6 @@ blocks:
           src: ../../../static/assets/logo.png
         title: Doe Capital
         url: 'https://www.example.com/9/'
-    subtitle: Short headline that just fits
     type: logos
   - columns:
       - blocks:
@@ -200,13 +204,16 @@ blocks:
             type: image
         width: 1fr
     type: sidekick
-  - testimonials:
+  - header:
+      - title: Short headline that just fits
+        type: title
+    testimonials:
       - company: Doe Capital
         image:
           alt: John Doe
           ratio: 1/1
           src: ../../../static/assets/portrait.png
-        name: John Doe
+        name: John Doe 1
         position: CEO
         testimonial: >-
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -216,7 +223,7 @@ blocks:
           alt: John Doe
           ratio: 1/1
           src: ../../../static/assets/portrait.png
-        name: John Doe
+        name: John Doe 2
         position: CEO
         testimonial: >-
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -226,14 +233,16 @@ blocks:
           alt: John Doe
           ratio: 1/1
           src: ../../../static/assets/portrait.png
-        name: John Doe
+        name: John Doe 3
         position: CEO
         testimonial: >-
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua.
-    title: Short headline that just fits
     type: testimonials
-  - pricing:
+  - header:
+      - title: Long headline that would wrap on two lines
+        type: title
+    pricing:
       - currency: EUR
         mdx: |-
           Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -264,7 +273,6 @@ blocks:
           monthly: 29
           yearly: 299
         title: Gold
-    title: Long headline that would wrap on two lines
     type: pricing
 ---
 

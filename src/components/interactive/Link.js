@@ -3,9 +3,10 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import React from 'react';
-import { string, node } from 'prop-types';
 import { Link as GatsbyLink } from 'gatsby';
 import { OutboundLink } from 'gatsby-plugin-google-analytics';
+import { string, node, bool } from 'prop-types';
+
 import styled, { css } from 'styled-components';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -59,7 +60,7 @@ const StyledLink = styled.a`
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-export default function Link({ href, to, children, ...rest }) {
+export default function Link({ href, to, children, isLoading, ...rest }) {
   const link = href || to || '';
 
   if (['http', 'mailto:', 'tel:', 'www.'].some((t) => link.includes(t))) {
@@ -84,11 +85,13 @@ export default function Link({ href, to, children, ...rest }) {
 }
 
 Link.propTypes = {
-  children: node.isRequired,
-  href: string,
-  to: string,
+  children:  node.isRequired,
+  href:      string,
+  to:        string,
+  isLoading: bool,
 };
 Link.defaultProps = {
-  href: null,
-  to: null,
+  href:      null,
+  to:        null,
+  isLoading: undefined,
 };
