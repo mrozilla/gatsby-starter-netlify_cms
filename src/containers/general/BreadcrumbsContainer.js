@@ -19,7 +19,7 @@ export default function BreadcrumbsContainer({ location, separator }) {
 
   const { pages } = useStaticQuery(graphql`
     query {
-      pages: allMdx(filter: { fields: { sourceName: { eq: "pages" } } }) {
+      pages: allMdx(filter: { fileAbsolutePath: { regex: "/cms/pages/" } }) {
         nodes {
           frontmatter {
             meta {
@@ -39,7 +39,7 @@ export default function BreadcrumbsContainer({ location, separator }) {
       }
 
       const pathname = `${acc[i - 1].url}${item}${item === '/' ? '' : '/'}`;
-      const title = pages.nodes.find(page => page.frontmatter.meta.permalink === pathname)
+      const title = pages.nodes.find((page) => page.frontmatter.meta.permalink === pathname)
         ?.frontmatter.meta.title;
       return [
         ...acc,
@@ -79,10 +79,10 @@ export default function BreadcrumbsContainer({ location, separator }) {
         `}
       >
         {breadcrumbs.map(
-          page => page.title && (
-          <Li
-            key={page.url}
-            css={`
+          (page) => page.title && (
+              <Li
+                key={page.url}
+                css={`
               transition: opacity 250ms;
 
               &:not(:last-child) {
@@ -99,16 +99,16 @@ export default function BreadcrumbsContainer({ location, separator }) {
                 opacity: 1;
               }
             `}
-          >
-            {page.url === location.pathname ? (
-              page.title
-            ) : (
-              <Link to={`${page.url}`} look="tertiary">
-                {page.title}
-              </Link>
-            )}
-          </Li>
-          ),
+              >
+                {page.url === location.pathname ? (
+                  page.title
+                ) : (
+                  <Link to={`${page.url}`} look="tertiary">
+                    {page.title}
+                  </Link>
+                )}
+              </Li>
+            ),
         )}
       </Ol>
     </View>

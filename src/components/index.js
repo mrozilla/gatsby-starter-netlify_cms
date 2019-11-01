@@ -68,3 +68,7 @@ export { Tooltip } from './text/Tooltip';
 // ─────────────────────────────────────────────────────────────────────────────
 // composites
 // ─────────────────────────────────────────────────────────────────────────────
+
+export { default as HeroHeader } from './composites/web/HeroHeader';
+export { default as BlockHeader } from './composites/web/BlockHeader';
+export { default as BlockColumns } from './composites/web/BlockColumns';

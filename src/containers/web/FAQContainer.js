@@ -7,7 +7,7 @@ import { graphql } from 'gatsby';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { shape, string, arrayOf } from 'prop-types';
 
-import { H1, Section, P, Ul, Li, Details, Summary, View } from '~components';
+import { Section, Header, BlockHeader, Ul, Li, Details, Summary } from '~components';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // query
@@ -16,9 +16,9 @@ import { H1, Section, P, Ul, Li, Details, Summary, View } from '~components';
 export const fragment = graphql`
   fragment FAQFragment on MdxFrontmatterBlocks {
     type
-    title
-    subtitle
-    mdx
+    header {
+      ...BlockHeaderFragment
+    }
     faq {
       title
       mdx
@@ -30,7 +30,7 @@ export const fragment = graphql`
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-export default function FAQContainer({ title, subtitle, mdx, faq }) {
+export default function FAQContainer({ header, faq }) {
   return (
     <Section
       css={`
@@ -40,41 +40,18 @@ export default function FAQContainer({ title, subtitle, mdx, faq }) {
         box-shadow: var(--block-box-shadow);
       `}
     >
-      <View as="header">
-        {title && (
-          <H1
-            css={`
-              font-size: 3rem;
-              line-height: 1;
-              font-weight: 700;
-              max-width: 20ch;
-
-              @media screen and (min-width: 1200px) {
-                font-size: 4rem;
-              }
-            `}
-          >
-            {title}
-          </H1>
-        )}
-        {subtitle && (
-          <P
-            css={`
-              font-size: 2.5rem;
-              line-height: 2.5rem;
-              max-width: 50ch;
-              margin: 2rem 0 2rem;
-
-              @media screen and (min-width: 1200px) {
-                line-height: 3rem;
-              }
-            `}
-          >
-            {subtitle}
-          </P>
-        )}
-        {mdx && <MDXRenderer>{mdx}</MDXRenderer>}
-      </View>
+      {header && (
+        <Header
+          css={`
+            & > p {
+              max-width: 60ch;
+              margin: 2rem auto;
+            }
+          `}
+        >
+          <BlockHeader header={header} />
+        </Header>
+      )}
       {faq && (
         <Ul
           css={`
@@ -111,10 +88,8 @@ export default function FAQContainer({ title, subtitle, mdx, faq }) {
 }
 
 FAQContainer.propTypes = {
-  title:    string,
-  subtitle: string,
-  mdx:      string,
-  faq:      arrayOf(
+  header: BlockHeader.propTypes.header,
+  faq:    arrayOf(
     shape({
       title: string,
       mdx:   string,
@@ -123,8 +98,6 @@ FAQContainer.propTypes = {
 };
 
 FAQContainer.defaultProps = {
-  title:    '',
-  subtitle: '',
-  mdx:      '',
-  faq:      [],
+  header: [],
+  faq:    [],
 };

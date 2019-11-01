@@ -16,7 +16,7 @@ const query = graphql`
   query {
     posts: allMdx(
       filter: {
-        fields: { sourceName: { eq: "posts" } }
+        fileAbsolutePath: { regex: "/cms/posts/" }
         frontmatter: { meta: { permalink: { ne: "/blog/demo/" } } }
       }
     ) {

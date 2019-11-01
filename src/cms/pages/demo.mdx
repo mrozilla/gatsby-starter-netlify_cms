@@ -7,18 +7,23 @@ meta:
   permalink: /demo/
   title: Demo
 blocks:
-  - announcement:
-      body: Lorem ipsum dolor sit amet
-      title: Demo
-      url: /demo/
-    buttons:
-      - look: primary
+  - backgroundImage: ../../../static/assets/illustration.png
+    header:
+      - body: Lorem ipsum dolor sit amet
         title: Demo
         url: /demo/
-    backgroundImage: ../../../static/assets/illustration.png
-    mdx: Lorem ipsum dolor sit amet
-    subtitle: Demo
-    title: Demo
+        type: announcement
+      - title: Demo
+        type: title
+      - subtitle: Demo
+        type: subtitle
+      - mdx: Lorem ipsum dolor sit amet
+        type: mdx
+      - buttons:
+          - look: primary
+            title: Demo
+            url: /demo/
+        type: buttons
     type: hero
     video: /demo/
   - columns:
@@ -81,6 +86,26 @@ blocks:
     type: sidekick
   - mdx: Demo
     subtitle: Demo
+  - header:
+      - icon: FaEye
+        type: icon
+      - image:
+          src: ../../../static/assets/illustration.png
+          ratio: 1/1
+          alt: Demo
+      - tagline: Demo
+        type: tagline
+      - title: Demo
+        type: title
+      - subtitle: Demo
+        type: subtitle
+      - mdx: Demo
+        type: mdx
+      - buttons:
+          - look: primary
+            title: Demo
+            url: /demo/
+        type: buttons
     testimonials:
       - company: Demo
         image:
@@ -90,20 +115,55 @@ blocks:
         name: Demo
         position: Demo
         testimonial: Demo
-    title: Demo
     type: testimonials
-  - logos:
+  - header:
+      - icon: FaEye
+        type: icon
+      - image:
+          src: ../../../static/assets/illustration.png
+          ratio: 1/1
+          alt: Demo
+      - tagline: Demo
+        type: tagline
+      - title: Demo
+        type: title
+      - subtitle: Demo
+        type: subtitle
+      - mdx: Demo
+        type: mdx
+      - buttons:
+          - look: primary
+            title: Demo
+            url: /demo/
+        type: buttons
+    logos:
       - image:
           src: ../../../static/assets/logo.png
           ratio: 3/1
           alt: Demo
         title: Demo
         url: Demo
-    mdx: Demo
-    subtitle: Demo
-    title: Demo
     type: logos
-  - mdx: Demo
+  - header:
+      - icon: FaEye
+        type: icon
+      - image:
+          src: ../../../static/assets/illustration.png
+          ratio: 1/1
+          alt: Demo
+      - tagline: Demo
+        type: tagline
+      - title: Demo
+        type: title
+      - subtitle: Demo
+        type: subtitle
+      - mdx: Demo
+        type: mdx
+      - buttons:
+          - look: primary
+            title: Demo
+            url: /demo/
+        type: buttons
     pricing:
       - currency: EUR
         mdx: Demo
@@ -111,16 +171,30 @@ blocks:
           monthly: 99
           yearly: 999
         title: Demo
-    subtitle: Demo
-    title: Demo
     type: pricing
-  - faq:
+  - header:
+      - icon: FaEye
+        type: icon
+      - image:
+          src: ../../../static/assets/illustration.png
+          ratio: 1/1
+          alt: Demo
+      - tagline: Demo
+        type: tagline
+      - title: Demo
+        type: title
+      - subtitle: Demo
+        type: subtitle
+      - mdx: Demo
+        type: mdx
+      - buttons:
+          - look: primary
+            title: Demo
+            url: /demo/
+        type: buttons
+    faq:
       - mdx: Demo
         title: Demo
-    subtitle: >-
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua.
-    title: Short headline that just fits
     type: faq
   - people:
       - company: Demo
