@@ -2,7 +2,7 @@
 // import
 // ─────────────────────────────────────────────────────────────────────────────
 
-import config from 'gatsby-theme-netlify_cms/src/config';
+import config from '@mrozilla/gatsby-theme-netlify_cms/src/config';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // adjustments
