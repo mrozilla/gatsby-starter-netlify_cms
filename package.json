@@ -20,8 +20,8 @@
   "dependencies": {
     "@mdx-js/react": "^1.5.1",
     "@mrozilla/gatsby-theme-netlify_cms": "0.0.3",
-    "gatsby": "2.17.7",
-    "gatsby-plugin-google-analytics": "2.1.23",
+    "gatsby": "2.17.9",
+    "gatsby-plugin-google-analytics": "2.1.24",
     "gatsby-plugin-manifest": "2.2.26",
     "gatsby-plugin-netlify": "2.1.23",
     "gatsby-plugin-react-helmet": "3.1.13",
