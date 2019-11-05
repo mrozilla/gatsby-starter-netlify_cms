@@ -23,27 +23,27 @@ import { Text } from '~components/primitives/Text';
 
 export const query = graphql`
   fragment BlockHeaderFragment on MdxFrontmatterBlocksHeader {
-      icon
-      tagline
+    icon
+    tagline
+    title
+    subtitle
+    mdx
+    buttons {
       title
-      subtitle
-      mdx
-      buttons {
-        title
-        url
-        look
-      }
-      image {
-        src {
-          childImageSharp {
-            fluid(maxWidth: 900) {
-              ...GatsbyImageSharpFluid_withWebp
-            }
+      url
+      look
+    }
+    image {
+      src {
+        childImageSharp {
+          fluid(maxWidth: 900) {
+            ...GatsbyImageSharpFluid_withWebp
           }
         }
-        ratio
-        alt
       }
+      ratio
+      alt
+    }
   }
 `;
 
