@@ -17,7 +17,7 @@ const query = graphql`
     posts: allMdx(
       filter: {
         fileAbsolutePath: { regex: "/cms/posts/" }
-        frontmatter: { meta: { permalink: { ne: "/blog/demo/" } } }
+        frontmatter: { meta: { permalink: { ne: "/blog/default/" } } }
       }
     ) {
       nodes {
