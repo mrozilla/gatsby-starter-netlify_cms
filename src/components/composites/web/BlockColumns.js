@@ -86,7 +86,7 @@ export default function BlockColumns({ columns }) {
         text-align: ${column.textAlign};
       `}
     >
-      {column.blocks.map(
+      {column?.blocks?.map(
         ({ icon, tagline, title, subtitle, mdx, image, map, grid, buttons }, j) => (
           // eslint-disable-next-line react/no-array-index-key
           <Fragment key={j}>
