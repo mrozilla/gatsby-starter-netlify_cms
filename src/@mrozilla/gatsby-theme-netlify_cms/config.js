@@ -2,11 +2,21 @@
 // import
 // ─────────────────────────────────────────────────────────────────────────────
 
+import React from 'react';
+import { registerPreviewTemplate } from '@mrozilla/gatsby-theme-netlify_cms';
 import config from '@mrozilla/gatsby-theme-netlify_cms/src/config';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // adjustments
 // ─────────────────────────────────────────────────────────────────────────────
+
+// e.g. register a preview template
+
+// function PagePreviewTemplate() {
+//   return <div>Page preview template test</div>;
+// }
+
+// registerPreviewTemplate('pages', PagePreviewTemplate);
 
 // e.g. add a new block type
 
@@ -17,7 +27,10 @@ import config from '@mrozilla/gatsby-theme-netlify_cms/src/config';
 //         ...collection,
 //         fields: collection.fields.map((field) => {
 //           if (field.name === 'blocks') {
-//             return { ...field, types: [...field.types, { name: 'New', fields: [{name: 'title'}] }] };
+//             return {
+//               ...field,
+//               types: [...field.types, { name: 'New', fields: [{ name: 'title' }] }],
+//             };
 //           }
 //           return field;
 //         }),
