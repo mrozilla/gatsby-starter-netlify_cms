@@ -8,7 +8,7 @@ const path = require('path');
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-exports.createPages = ({ actions: { createPage }, graphql }) => {
+module.exports = ({ actions: { createPage }, graphql }) => {
   const PageTemplateContainer = path.resolve('src/containers/general/PageTemplateContainer.js'); // path intentionally without '../'
   const PostTemplateContainer = path.resolve('src/containers/general/PostTemplateContainer.js'); // path intentionally without '../'
 
