@@ -18,13 +18,13 @@ const {
 module.exports = {
   siteMetadata: {
     siteTitle: 'Example', // TODO: update default
-    siteUrl:   NETLIFY_ENV === 'production' ? NETLIFY_PRODUCTION_URL : NETLIFY_DEPLOY_URL,
+    siteUrl: NETLIFY_ENV === 'production' ? NETLIFY_PRODUCTION_URL : NETLIFY_DEPLOY_URL,
   },
   developMiddleware: (app) => {
     app.use(
       '/.netlify/functions/',
       proxy({
-        target:      'http://localhost:34567',
+        target: 'http://localhost:34567',
         pathRewrite: { '/.netlify/functions/': '' },
       }),
     );
@@ -36,40 +36,40 @@ module.exports = {
       resolve: 'gatsby-plugin-google-analytics',
       options: {
         trackingId: process.env.GATSBY_GA_TRACKING_ID,
-        head:       true,
-        anonymize:  true,
+        head: true,
+        anonymize: true,
         respectDNT: true,
       },
     },
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
-        name:             'Example', // TODO: update default
-        short_name:       'Example', // TODO: update default
-        start_url:        '/',
+        name: 'Example', // TODO: update default
+        short_name: 'Example', // TODO: update default
+        start_url: '/',
         background_color: '#ffffff',
-        theme_color:      '#007bff', // TODO: update default
-        display:          'minimal-ui',
-        icon:             'static/assets/favicon.png', // TODO: update default
+        theme_color: '#007bff', // TODO: update default
+        display: 'minimal-ui',
+        icon: 'static/assets/favicon.png', // TODO: update default
       },
     },
     {
       resolve: 'gatsby-plugin-robots-txt',
       options: {
         resolveEnv: () => process.env.CONTEXT,
-        env:        {
+        env: {
           production: {
             policy: [{ userAgent: '*' }],
           },
           'branch-deploy': {
-            policy:  [{ userAgent: '*', disallow: ['/'] }],
+            policy: [{ userAgent: '*', disallow: ['/'] }],
             sitemap: null,
-            host:    null,
+            host: null,
           },
           'deploy-preview': {
-            policy:  [{ userAgent: '*', disallow: ['/'] }],
+            policy: [{ userAgent: '*', disallow: ['/'] }],
             sitemap: null,
-            host:    null,
+            host: null,
           },
         },
       },
@@ -86,7 +86,7 @@ module.exports = {
       resolve: 'gatsby-plugin-netlify',
       options: {
         mergeSecurityHeaders: false,
-        headers:              {
+        headers: {
           '/*': [
             'X-Frame-Options: DENY',
             'X-XSS-Protection: 1; mode=block',

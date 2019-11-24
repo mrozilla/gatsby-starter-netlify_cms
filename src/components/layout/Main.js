@@ -15,11 +15,11 @@ export const Main = styled.main`
   grid-area: main;
   animation: ${animation({
     from: {
-      opacity:   0,
+      opacity: 0,
       transform: 'scale(0.99)',
     },
     to: {
-      opacity:   1,
+      opacity: 1,
       transform: 'scale(1)',
     },
     properties: '500ms',

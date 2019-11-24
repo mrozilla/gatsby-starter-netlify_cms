@@ -2,8 +2,8 @@
 // import
 // ─────────────────────────────────────────────────────────────────────────────
 
-import React from 'react';
-import { registerPreviewTemplate } from '@mrozilla/gatsby-theme-netlify_cms';
+// import React from 'react';
+// import { registerPreviewTemplate } from '@mrozilla/gatsby-theme-netlify_cms';
 import config from '@mrozilla/gatsby-theme-netlify_cms/src/config';
 
 // ─────────────────────────────────────────────────────────────────────────────

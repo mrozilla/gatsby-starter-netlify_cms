@@ -22,7 +22,7 @@ export default function RootContainer({ children }) {
   return (
     <MDXProvider
       components={{
-        a:  (props) => <Link look="primary" {...props} />,
+        a: (props) => <Link look="primary" {...props} />,
         h3: (props) => (
           <H3
             css={`

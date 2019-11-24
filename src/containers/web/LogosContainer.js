@@ -6,7 +6,7 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import { shape, string, arrayOf } from 'prop-types';
 
-import { Section, Header, BlockHeader, P, Ul, Li, Link, Img } from '~components';
+import { Section, Header, BlockHeader, Ul, Li, Link, Img } from '~components';
 import { useOnScreen } from '~utils';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -110,10 +110,10 @@ export default function LogosContainer({ header, logos }) {
 
 LogosContainer.propTypes = {
   header: BlockHeader.propTypes.header,
-  logos:  arrayOf(
+  logos: arrayOf(
     shape({
       name: string,
-      url:  string,
+      url: string,
       // image:
     }),
   ),
@@ -121,5 +121,5 @@ LogosContainer.propTypes = {
 
 LogosContainer.defaultProps = {
   header: [],
-  logos:  [],
+  logos: [],
 };

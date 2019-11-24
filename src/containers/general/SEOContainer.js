@@ -60,7 +60,7 @@ export default function SEOContainer({ meta: { title, description, permalink, og
         { name: 'twitter:description', content: description },
         { name: 'twitter:creator', content: '@mrozilla' },
         {
-          name:    'twitter:image',
+          name: 'twitter:image',
           content: `${siteUrl}${ogImage?.childImageSharp?.resize?.src}`,
         },
 
@@ -69,14 +69,14 @@ export default function SEOContainer({ meta: { title, description, permalink, og
         { property: 'og:url', content: `${siteUrl}${permalink}` },
         {
           property: 'og:image',
-          content:  `${siteUrl}${ogImage?.childImageSharp?.resize?.src}`,
+          content: `${siteUrl}${ogImage?.childImageSharp?.resize?.src}`,
         },
         { property: 'og:description', content: description },
         { property: 'fb:app_id', content: process.env.GATSBY_FB_APP_ID },
       ]}
       link={[
         {
-          rel:  'canonical',
+          rel: 'canonical',
           href: `${siteUrl}${permalink}`,
         },
       ]}
@@ -87,10 +87,10 @@ export default function SEOContainer({ meta: { title, description, permalink, og
 
 SEOContainer.propTypes = {
   meta: shape({
-    title:       string.isRequired,
+    title: string.isRequired,
     description: string.isRequired,
-    permalink:   string.isRequired,
-    ogImage:     shape({
+    permalink: string.isRequired,
+    ogImage: shape({
       childImageSharp: shape({
         resize: shape({
           src: string.isRequired,

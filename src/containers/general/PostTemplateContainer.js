@@ -97,11 +97,14 @@ export default function PostTemplateContainer({
               itemProp="datePublished"
               css={`
                 font-size: 2rem;
+
+                &::after {
+                  content: ' · ';
+                }
               `}
             >
               {date}
             </Text>
-            {' · '}
             <Text
               css={`
                 font-size: 2rem;

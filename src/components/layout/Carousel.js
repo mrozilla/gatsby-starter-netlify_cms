@@ -104,7 +104,7 @@ export default function Carousel({
       if (event.buttons > 0) {
         event.preventDefault();
         ref.current.scrollTo({
-          left:     initScrollX + initMouseX - event.clientX,
+          left: initScrollX + initMouseX - event.clientX,
           behavior: 'smooth',
         });
       }
@@ -131,7 +131,7 @@ export default function Carousel({
         `}
         {...handlers}
       >
-        {Children.map(children, child => (
+        {Children.map(children, (child) => (
           <CarouselItem {...itemProps}>{child}</CarouselItem>
         ))}
       </CarouselWrapper>
@@ -166,14 +166,14 @@ export default function Carousel({
 }
 
 Carousel.propTypes = {
-  children:     node.isRequired,
+  children: node.isRequired,
   visibleItems: number,
-  gap:          string,
-  loop:         shape({
+  gap: string,
+  loop: shape({
     interval: number,
   }),
   isControls: bool,
-  itemProps:  shape({
+  itemProps: shape({
     css: string,
   }),
   css: string,
@@ -181,9 +181,9 @@ Carousel.propTypes = {
 
 Carousel.defaultProps = {
   visibleItems: 4,
-  gap:          '1rem',
-  loop:         undefined,
-  isControls:   true,
-  itemProps:    undefined,
-  css:          '',
+  gap: '1rem',
+  loop: undefined,
+  isControls: true,
+  itemProps: undefined,
+  css: '',
 };

@@ -152,8 +152,8 @@ export default function PricingContainer({ header, pricing }) {
                   `}
                 >
                   {new Intl.NumberFormat('en-GB', {
-                    style:                 'currency',
-                    currency:              item.currency,
+                    style: 'currency',
+                    currency: item.currency,
                     maximumFractionDigits: 0,
                     minimumFractionDigits: 0,
                   }).format(item.price[frequency])}
@@ -173,17 +173,17 @@ export default function PricingContainer({ header, pricing }) {
 }
 
 PricingContainer.propTypes = {
-  header:  BlockHeader.propTypes.header,
+  header: BlockHeader.propTypes.header,
   pricing: arrayOf(
     shape({
       name: string,
-      url:  string,
+      url: string,
       // image:
     }),
   ),
 };
 
 PricingContainer.defaultProps = {
-  header:  [],
+  header: [],
   pricing: [],
 };

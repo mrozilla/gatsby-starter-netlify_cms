@@ -45,11 +45,11 @@ const ModalWrapper = styled.div`
   box-shadow: var(--border-box-shadow);
   animation: ${animation({
     from: {
-      opacity:   0,
+      opacity: 0,
       transform: 'scale(0.99)',
     },
     to: {
-      opacity:   1,
+      opacity: 1,
       transform: 'scale(1)',
     },
     properties: '500ms',
@@ -117,19 +117,19 @@ export default function Modal({
 }
 
 Modal.propTypes = {
-  innerKey:      string,
-  isOpen:        bool.isRequired,
-  children:      node.isRequired,
-  outerPadding:  string,
-  innerPadding:  string,
+  innerKey: string,
+  isOpen: bool.isRequired,
+  children: node.isRequired,
+  outerPadding: string,
+  innerPadding: string,
   innerMinWidth: string,
-  onClose:       func,
+  onClose: func,
 };
 
 Modal.defaultProps = {
-  innerKey:      null,
-  outerPadding:  '5vmin',
-  innerPadding:  '4rem',
+  innerKey: null,
+  outerPadding: '5vmin',
+  innerPadding: '4rem',
   innerMinWidth: null,
-  onClose:       () => {},
+  onClose: () => {},
 };

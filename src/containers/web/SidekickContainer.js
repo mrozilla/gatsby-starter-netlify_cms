@@ -76,11 +76,11 @@ export default function SidekickContainer({ header, columns }) {
 }
 
 SidekickContainer.propTypes = {
-  header:  BlockHeader.propTypes.header,
+  header: BlockHeader.propTypes.header,
   columns: BlockColumns.propTypes.columns,
 };
 
 SidekickContainer.defaultProps = {
-  header:  [],
+  header: [],
   columns: [],
 };
