@@ -35,9 +35,9 @@ export const StyledToast = styled.aside`
 
 const Toast = forwardRef(({ isVisible, className, children }, ref) => {
   const [{ isOpen, message, css, delay }, setState] = useState({
-    isOpen:  isVisible,
+    isOpen: isVisible,
     message: '',
-    delay:   0,
+    delay: 0,
   });
 
   useImperativeHandle(ref, () => ({
@@ -64,7 +64,7 @@ const Toast = forwardRef(({ isVisible, className, children }, ref) => {
 Toast.propTypes = {
   isVisible: bool,
   className: string,
-  children:  node.isRequired,
+  children: node.isRequired,
 };
 Toast.defaultProps = {
   isVisible: false,

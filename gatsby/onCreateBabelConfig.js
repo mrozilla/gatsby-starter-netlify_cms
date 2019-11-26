@@ -6,7 +6,7 @@
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-exports.onCreateBabelConfig = ({ actions }) => {
+module.exports = ({ actions }) => {
   actions.setBabelPlugin({
     name: '@babel/plugin-proposal-optional-chaining',
   });

@@ -8,7 +8,7 @@ const path = require('path');
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-exports.createPages = ({ actions: { createPage }, graphql }) => {
+module.exports = ({ actions: { createPage }, graphql }) => {
   const PageTemplateContainer = path.resolve('src/containers/general/PageTemplateContainer.js'); // path intentionally without '../'
   const PostTemplateContainer = path.resolve('src/containers/general/PostTemplateContainer.js'); // path intentionally without '../'
 
@@ -17,7 +17,7 @@ exports.createPages = ({ actions: { createPage }, graphql }) => {
       pages: allMdx(
         filter: {
           fileAbsolutePath: { regex: "/cms/pages/" }
-          frontmatter: { meta: { permalink: { ne: "/demo/" } } }
+          frontmatter: { meta: { permalink: { ne: "/default/" } } }
         }
       ) {
         nodes {
@@ -31,7 +31,7 @@ exports.createPages = ({ actions: { createPage }, graphql }) => {
       posts: allMdx(
         filter: {
           fileAbsolutePath: { regex: "/cms/posts/" }
-          frontmatter: { meta: { permalink: { ne: "/blog/demo/" } } }
+          frontmatter: { meta: { permalink: { ne: "/blog/default/" } } }
         }
       ) {
         nodes {

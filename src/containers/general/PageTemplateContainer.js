@@ -61,42 +61,15 @@ function renderBlocks(blocks) {
   return blocks.map((block, i) => {
     /* eslint-disable react/no-array-index-key */
 
-    if (block.type === 'hero') {
-      return <HeroContainer key={i} {...block} />;
-    }
-
-    if (block.type === 'sidekick') {
-      return <SidekickContainer key={i} {...block} />;
-    }
-
-    if (block.type === 'testimonials') {
-      return <TestimonialsContainer key={i} {...block} />;
-    }
-
-    if (block.type === 'logos') {
-      return <LogosContainer key={i} {...block} />;
-    }
-
-    if (block.type === 'pricing') {
-      return <PricingContainer key={i} {...block} />;
-    }
-
-    if (block.type === 'blog') {
-      return <BlogContainer key={i} {...block} />;
-    }
-
-    if (block.type === 'faq') {
-      return <FAQContainer key={i} {...block} />;
-    }
-
-    if (block.type === 'people') {
-      return <PeopleContainer key={i} {...block} />;
-    }
-
-    if (block.type === 'jobs') {
-      return <JobsContainer key={i} {...block} />;
-    }
-
+    if (block.type === 'hero') return <HeroContainer key={i} {...block} />;
+    if (block.type === 'sidekick') return <SidekickContainer key={i} {...block} />;
+    if (block.type === 'testimonials') return <TestimonialsContainer key={i} {...block} />;
+    if (block.type === 'logos') return <LogosContainer key={i} {...block} />;
+    if (block.type === 'pricing') return <PricingContainer key={i} {...block} />;
+    if (block.type === 'blog') return <BlogContainer key={i} {...block} />;
+    if (block.type === 'faq') return <FAQContainer key={i} {...block} />;
+    if (block.type === 'people') return <PeopleContainer key={i} {...block} />;
+    if (block.type === 'jobs') return <JobsContainer key={i} {...block} />;
     if (block.type === 'mdx' || block.type === 'markdown') {
       return (
         <MDXRenderer key={block.mdx} components={{ wrapper: Fragment }}>

@@ -62,6 +62,11 @@ function renderAnnouncement({ url, title, body }) {
     </Link>
   );
 }
+renderAnnouncement.propTypes = {
+  url: string.isRequired,
+  title: string.isRequired,
+  body: string.isRequired,
+};
 
 function renderIcon({ icon }) {
   return (
@@ -79,6 +84,9 @@ function renderIcon({ icon }) {
     />
   );
 }
+renderIcon.propTypes = {
+  icon: string.isRequired,
+};
 
 function renderTagline({ tagline }) {
   return (
@@ -96,6 +104,9 @@ function renderTagline({ tagline }) {
     </P>
   );
 }
+renderTagline.propTypes = {
+  tagline: string.isRequired,
+};
 
 function renderTitle({ title }) {
   return (
@@ -116,6 +127,9 @@ function renderTitle({ title }) {
     </H1>
   );
 }
+renderTitle.propTypes = {
+  title: string.isRequired,
+};
 
 function renderSubtitle({ subtitle }) {
   return (
@@ -135,6 +149,9 @@ function renderSubtitle({ subtitle }) {
     </P>
   );
 }
+renderSubtitle.propTypes = {
+  subtitle: string.isRequired,
+};
 
 function renderImage({ image }) {
   return (
@@ -150,6 +167,13 @@ function renderImage({ image }) {
     />
   );
 }
+renderImage.propTypes = {
+  image: shape({
+    // src: object
+    alt: string.isRequired,
+    ratio: string.isRequired,
+  }).isRequired,
+};
 
 function renderButtons({ buttons }) {
   return (
@@ -182,6 +206,15 @@ function renderButtons({ buttons }) {
     </Ul>
   );
 }
+renderButtons.propTypes = {
+  buttons: arrayOf(
+    shape({
+      url: string.isRequired,
+      look: string.isRequired,
+      title: string.isRequired,
+    }),
+  ).isRequired,
+};
 
 // ─────────────────────────────────────────────────────────────────────────────
 // component
@@ -209,17 +242,17 @@ HeroHeader.propTypes = {
   header: arrayOf(
     shape({
       announcement: shape({
-        url:   string,
+        url: string,
         title: string,
-        body:  string,
+        body: string,
       }),
       subtitle: string,
-      mdx:      string,
-      buttons:  arrayOf(
+      mdx: string,
+      buttons: arrayOf(
         shape({
           title: string.isRequired,
-          url:   string.isRequired,
-          look:  string.isRequired,
+          url: string.isRequired,
+          look: string.isRequired,
         }),
       ),
     }),

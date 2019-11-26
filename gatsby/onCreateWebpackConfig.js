@@ -8,7 +8,7 @@ const path = require('path');
 // component
 // ─────────────────────────────────────────────────────────────────────────────
 
-exports.onCreateWebpackConfig = ({ actions, plugins }) => {
+module.exports = ({ actions, plugins }) => {
   actions.setWebpackConfig({
     resolve: {
       alias: {

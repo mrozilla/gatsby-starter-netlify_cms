@@ -94,7 +94,7 @@ export default function HeroContainer({ backgroundImage, video, header }) {
 }
 
 HeroContainer.propTypes = {
-  header:          HeroHeader.propTypes.header,
+  header: HeroHeader.propTypes.header,
   backgroundImage: shape({
     childImageSharp: shape({
       fluid: shape({
@@ -106,7 +106,7 @@ HeroContainer.propTypes = {
 };
 
 HeroContainer.defaultProps = {
-  header:          [],
+  header: [],
   backgroundImage: null,
-  video:           '',
+  video: '',
 };

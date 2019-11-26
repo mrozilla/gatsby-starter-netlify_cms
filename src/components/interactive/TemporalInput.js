@@ -16,7 +16,7 @@ export default function TemporalInput({ type, value, ...rest }) {
 
   const handlers = {
     onFocus: () => setIsPlaceholder(false),
-    onBlur:  () => {
+    onBlur: () => {
       if (!value) {
         setIsPlaceholder(true);
       }
@@ -31,7 +31,7 @@ export default function TemporalInput({ type, value, ...rest }) {
 // ─────────────────────────────────────────────────────────────────────────────
 
 TemporalInput.propTypes = {
-  type:  string.isRequired,
+  type: string.isRequired,
   value: string,
 };
 TemporalInput.defaultProps = {

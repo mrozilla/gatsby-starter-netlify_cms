@@ -51,7 +51,7 @@ export default function Map({ center, zoom }) {
 
 Map.propTypes = {
   center: string.isRequired,
-  zoom:   string,
+  zoom: string,
 };
 
 Map.defaultProps = {

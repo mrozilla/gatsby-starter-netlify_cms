@@ -154,10 +154,10 @@ PeopleContainer.propTypes = {
   header: BlockHeader.propTypes.header,
   people: arrayOf(
     shape({
-      name:     string,
+      name: string,
       position: string,
-      company:  string,
-      image:    shape({
+      company: string,
+      image: shape({
         alt: string.isRequired,
         src: shape({
           childImageSharp: shape({
@@ -170,7 +170,7 @@ PeopleContainer.propTypes = {
       contact: arrayOf(
         shape({
           icon: string,
-          url:  string,
+          url: string,
         }),
       ),
     }),

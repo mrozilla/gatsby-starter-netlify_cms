@@ -17,7 +17,7 @@ const query = graphql`
     posts: allMdx(
       filter: {
         fileAbsolutePath: { regex: "/cms/posts/" }
-        frontmatter: { meta: { permalink: { ne: "/blog/demo/" } } }
+        frontmatter: { meta: { permalink: { ne: "/blog/default/" } } }
       }
     ) {
       nodes {
@@ -183,11 +183,11 @@ export default function BlogContainer({ title, subtitle }) {
 }
 
 BlogContainer.propTypes = {
-  title:    string,
+  title: string,
   subtitle: string,
 };
 
 BlogContainer.defaultProps = {
-  title:    '',
+  title: '',
   subtitle: '',
 };

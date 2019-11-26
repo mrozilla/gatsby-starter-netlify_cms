@@ -85,13 +85,13 @@ export default function Link({ href, to, children, isLoading, ...rest }) {
 }
 
 Link.propTypes = {
-  children:  node.isRequired,
-  href:      string,
-  to:        string,
+  children: node.isRequired,
+  href: string,
+  to: string,
   isLoading: bool,
 };
 Link.defaultProps = {
-  href:      null,
-  to:        null,
+  href: null,
+  to: null,
   isLoading: undefined,
 };

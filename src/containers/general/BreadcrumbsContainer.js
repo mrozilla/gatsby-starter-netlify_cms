@@ -51,7 +51,7 @@ export default function BreadcrumbsContainer({ location, separator }) {
     },
     [
       {
-        url:   '/',
+        url: '/',
         title: 'Home',
       },
     ],
@@ -78,8 +78,9 @@ export default function BreadcrumbsContainer({ location, separator }) {
           font-size: 1.5rem;
         `}
       >
-        {breadcrumbs.map(
-          (page) => page.title && (
+        {breadcrumbs.map((page) => {
+          if (page.title) {
+            return (
               <Li
                 key={page.url}
                 css={`
@@ -108,8 +109,11 @@ export default function BreadcrumbsContainer({ location, separator }) {
                   </Link>
                 )}
               </Li>
-            ),
-        )}
+            );
+          }
+
+          return null;
+        })}
       </Ol>
     </View>
   );

@@ -89,15 +89,15 @@ export default function FAQContainer({ header, faq }) {
 
 FAQContainer.propTypes = {
   header: BlockHeader.propTypes.header,
-  faq:    arrayOf(
+  faq: arrayOf(
     shape({
       title: string,
-      mdx:   string,
+      mdx: string,
     }),
   ),
 };
 
 FAQContainer.defaultProps = {
   header: [],
-  faq:    [],
+  faq: [],
 };

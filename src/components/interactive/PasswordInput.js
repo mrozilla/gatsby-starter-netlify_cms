@@ -96,9 +96,9 @@ export default function PasswordInput({ type, onChange, ...rest }) {
 
 PasswordInput.propTypes = {
   onChange: func,
-  type:     string,
+  type: string,
 };
 PasswordInput.defaultProps = {
   onChange: () => null,
-  type:     'password',
+  type: 'password',
 };
