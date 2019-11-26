@@ -189,11 +189,11 @@ export default function Button({ loading, children, ...rest }) {
 }
 
 Button.propTypes = {
-  loading:  bool,
+  loading: bool,
   children: node.isRequired,
-  type:     string,
+  type: string,
 };
 Button.defaultProps = {
   loading: false,
-  type:    'button',
+  type: 'button',
 };

@@ -183,11 +183,11 @@ export default function BlogContainer({ title, subtitle }) {
 }
 
 BlogContainer.propTypes = {
-  title:    string,
+  title: string,
   subtitle: string,
 };
 
 BlogContainer.defaultProps = {
-  title:    '',
+  title: '',
   subtitle: '',
 };

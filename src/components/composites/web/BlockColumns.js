@@ -267,7 +267,7 @@ export default function BlockColumns({ columns }) {
 BlockColumns.propTypes = {
   columns: arrayOf(
     shape({
-      blocks:    arrayOf(shape({ type: string.isRequired })),
+      blocks: arrayOf(shape({ type: string.isRequired })),
       textAlign: string,
     }),
   ),

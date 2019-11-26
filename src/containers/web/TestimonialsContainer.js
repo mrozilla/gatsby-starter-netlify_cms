@@ -100,8 +100,8 @@ export default function TestimonialsContainer({ header, testimonials }) {
           loop={
             testimonials.length > visibleItems
               ? {
-                  interval: 5000,
-                }
+                interval: 5000,
+              }
               : {}
           }
           isControls={testimonials.length > visibleItems}

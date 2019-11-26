@@ -235,13 +235,13 @@ const Input = forwardRef(
 );
 
 Input.propTypes = {
-  type:        string.isRequired,
-  name:        string.isRequired,
-  label:       string.isRequired,
+  type: string.isRequired,
+  name: string.isRequired,
+  label: string.isRequired,
   placeholder: string,
   description: string,
-  error:       string,
-  options:     arrayOf(
+  error: string,
+  options: arrayOf(
     shape({
       value: string.isRequired,
       label: string.isRequired,
@@ -252,9 +252,9 @@ Input.propTypes = {
 Input.defaultProps = {
   placeholder: '',
   description: '',
-  error:       '',
-  options:     [],
-  list:        [],
+  error: '',
+  options: [],
+  list: [],
 };
 
 export default Input;

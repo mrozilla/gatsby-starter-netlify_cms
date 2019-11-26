@@ -128,15 +128,15 @@ export default function JobsContainer({ header, jobs }) {
 
 JobsContainer.propTypes = {
   header: BlockHeader.propTypes.header,
-  jobs:   arrayOf(
+  jobs: arrayOf(
     shape({
       title: string,
-      url:   string,
+      url: string,
     }),
   ),
 };
 
 JobsContainer.defaultProps = {
   header: [],
-  jobs:   [],
+  jobs: [],
 };

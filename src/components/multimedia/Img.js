@@ -108,30 +108,30 @@ export default function Img({
 }
 
 Img.propTypes = {
-  src:        string,
-  srcSet:     string,
+  src: string,
+  srcSet: string,
   srcSetWebp: string,
-  sizes:      string,
-  base64:     string,
-  tracedSVG:  string,
-  loading:    string,
-  alt:        string.isRequired,
-  ratio:      number,
-  imgProps:   shape({
+  sizes: string,
+  base64: string,
+  tracedSVG: string,
+  loading: string,
+  alt: string.isRequired,
+  ratio: number,
+  imgProps: shape({
     isZoom: bool,
   }),
 };
 
 Img.defaultProps = {
-  src:        "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E",
-  srcSet:     '',
+  src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E",
+  srcSet: '',
   srcSetWebp: '',
-  sizes:      '',
-  base64:     '',
-  tracedSVG:  '',
-  loading:    'lazy',
-  ratio:      1,
-  imgProps:   {
+  sizes: '',
+  base64: '',
+  tracedSVG: '',
+  loading: 'lazy',
+  ratio: 1,
+  imgProps: {
     isZoom: false,
   },
 };

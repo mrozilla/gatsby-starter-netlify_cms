@@ -38,7 +38,7 @@ export default function CookieContainer() {
           margin: 1rem 0 1rem 1rem;
           padding: 1rem 2rem;
         `}
-        onClick={() => setIsVisible(prev => !prev)}
+        onClick={() => setIsVisible((prev) => !prev)}
       >
         Accept {/* <span role="img" aria-label="cookie">
           🍪

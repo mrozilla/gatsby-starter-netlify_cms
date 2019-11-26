@@ -1,15 +1,3 @@
-// ─────────────────────────────────────────────────────────────────────────────
-// import
-// ─────────────────────────────────────────────────────────────────────────────
-
-const { onCreateBabelConfig } = require('./gatsby/onCreateBabelConfig');
-const { onCreateWebpackConfig } = require('./gatsby/onCreateWebpackConfig');
-const { createPages } = require('./gatsby/createPages');
-
-// ─────────────────────────────────────────────────────────────────────────────
-// component
-// ─────────────────────────────────────────────────────────────────────────────
-
-exports.onCreateBabelConfig = onCreateBabelConfig; // babel
-exports.onCreateWebpackConfig = onCreateWebpackConfig; // aliases
-exports.createPages = createPages; // automatic pages
+exports.onCreateBabelConfig = require('./gatsby/onCreateBabelConfig'); // babel
+exports.onCreateWebpackConfig = require('./gatsby/onCreateWebpackConfig'); // aliases
+exports.createPages = require('./gatsby/createPages'); // automatic pages

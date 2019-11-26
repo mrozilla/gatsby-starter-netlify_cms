@@ -140,7 +140,7 @@ export default function AppStore({ store, height }) {
 }
 
 AppStore.propTypes = {
-  store:  oneOf(['appStore', 'playStore']).isRequired,
+  store: oneOf(['appStore', 'playStore']).isRequired,
   height: string,
 };
 

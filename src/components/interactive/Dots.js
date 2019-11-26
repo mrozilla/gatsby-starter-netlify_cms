@@ -38,19 +38,19 @@ export default function Dots({ size, amount, orientation, gap, colors, css, ...r
 }
 
 Dots.propTypes = {
-  size:        string,
-  amount:      number,
+  size: string,
+  amount: number,
   orientation: string,
-  gap:         string,
-  colors:      arrayOf(string),
-  css:         string,
+  gap: string,
+  colors: arrayOf(string),
+  css: string,
 };
 
 Dots.defaultProps = {
-  size:        '0.5rem',
-  amount:      3,
+  size: '0.5rem',
+  amount: 3,
   orientation: 'row',
-  gap:         '0.25rem',
-  colors:      [],
-  css:         '',
+  gap: '0.25rem',
+  colors: [],
+  css: '',
 };

@@ -15,6 +15,18 @@ export default function HighlightShareContainer({ location }) {
   const [selectedText, selectedTextPosition] = useSelection();
   const share = useSocialShare({ text: selectedText, url: location.href });
 
+  const animationConfig = {
+    from: {
+      opacity: '0',
+      transform: 'translateY(-0.5rem)',
+    },
+    to: {
+      opacity: '1',
+      transform: 'translateY(0)',
+    },
+    properties: '250ms',
+  };
+
   return (
     selectedText && (
       <Aside
@@ -26,17 +38,7 @@ export default function HighlightShareContainer({ location }) {
           top: calc(${selectedTextPosition.top + window.pageYOffset}px - 5rem);
           left: ${selectedTextPosition.left}px;
           width: ${selectedTextPosition.width}px;
-          animation: ${animation({
-          from: {
-            opacity:   '0',
-            transform: 'translateY(-0.5rem)',
-          },
-          to: {
-            opacity:   '1',
-            transform: 'translateY(0)',
-          },
-          properties: '250ms',
-        })};
+          animation: ${animation(animationConfig)};
         `}
       >
         <Ul
