@@ -20,7 +20,7 @@
   "dependencies": {
     "@mdx-js/react": "^1.5.1",
     "@mrozilla/gatsby-theme-netlify_cms": "0.0.7",
-    "gatsby": "2.18.4",
+    "gatsby": "4.25.7",
     "gatsby-plugin-google-analytics": "2.1.29",
     "gatsby-plugin-manifest": "2.2.30",
     "gatsby-plugin-mdx": "^1.0.58",
